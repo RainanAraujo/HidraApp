@@ -7,9 +7,10 @@ import {
   StatusBar,
   TextInput,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
-import LoginBarTop from '../assets/images/loginBarWithHidra.svg';
+import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 export default function Login({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
@@ -19,7 +20,7 @@ export default function Login({navigation}) {
       <View style={styles.loginBarContainer}>
         <Text style={styles.textAcess}>Acesso Híbrido</Text>
         <View>
-          <LoginBarTop width={'100%'} style={styles.loginBarTop} />
+          <Image source={LoginBarTop} style={styles.loginBarTop} />
           <View style={styles.loginBar}>
             <TextInput
               style={styles.emailInput}
@@ -73,8 +74,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   loginBarTop: {
-    marginBottom: -10,
     padding: 0,
+    width: 393,
+    height: 290,
+    margin: 0,
   },
   loginBar: {
     backgroundColor: '#ffffff',
