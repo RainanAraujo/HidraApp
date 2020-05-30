@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   loginBarTop: {
-    margin: 0,
+    marginBottom: -10,
     padding: 0,
-    height: 280,
+    height: 290,
     width: 393,
   },
   loginBar: {
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   emailInput: {
+    marginTop: 10,
     backgroundColor: '#EDF6FF',
     height: 50,
     width: 300,
