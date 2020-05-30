@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -8,9 +8,28 @@ import {
   TextInput,
   SafeAreaView,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.svg';
-export default function Login({navigation}) {
+
+export default function Login({ navigation }) {
+
+  const [Form, setForm] = useState({
+    email: '',
+    pass: ''
+  });
+
+  function Login(form) {
+    if (form.email != null && form.pass != null) {
+      auth().signInWithEmailAndPassword(form.email.trim(), form.pass.trim()).then(res => {
+        navigation.navigate('Home');
+        console.log(res);
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#3251B2"></StatusBar>
@@ -26,16 +45,21 @@ export default function Login({navigation}) {
               placeholder="Email"
               keyboardType="email-address"
               textContentType="emailAddress"
+              value={Form.email}
+              onChangeText={str => setForm({ ...Form, email: str })}
             />
             <TextInput
               style={styles.passwordInput}
               placeholder="Senha"
               secureTextEntry={true}
+              value={Form.pass}
+              onChangeText={str => setForm({ ...Form, pass: str })}
             />
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.loginButton}
-              onPress={() => navigation.navigate('Home')}>
+              onPress={() => Login(Form)}
+            >
               <Text style={styles.textButton}>Login</Text>
             </TouchableOpacity>
             <Text style={styles.textPasswordRequest}>

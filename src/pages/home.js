@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-native';
 import IconHidra from '../assets/images/iconHidra.png';
-import {Avatar} from 'react-native-elements';
+
 export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
@@ -19,18 +19,6 @@ export default function Home() {
       <View style={styles.profileContainer}>
         <Text style={styles.textWelcome}>Olá Híbrido!</Text>
         <View>
-          <View style={styles.avatar}>
-            <Avatar
-              rounded
-              source={{
-                uri:
-                  'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
-              }}
-              size="xlarge"
-              containerStyle={{borderWidth: 5, borderColor: '#ffffff'}}
-            />
-          </View>
-
           <View style={styles.card}>
             <Image style={styles.iconHidra} source={IconHidra} />
 
@@ -47,12 +35,6 @@ export default function Home() {
                 <Text style={styles.subTitleText}>12 Anos</Text>
               </View>
             </View>
-          </View>
-          <View>
-            <TouchableOpacity activeOpacity={0.7} style={styles.qrCodeButton}>
-              <Image />
-            </TouchableOpacity>
-            <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
           </View>
         </View>
         <TouchableOpacity activeOpacity={0.7} style={styles.scanButton}>
@@ -94,11 +76,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginRight: 5,
   },
-  avatar: {
-    alignItems: 'center',
-    marginBottom: -30,
-    zIndex: 1,
-  },
   scanButton: {
     marginTop: 30,
     backgroundColor: '#2343A9',
@@ -108,21 +85,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  qrCodeButton: {
-    marginTop: -30,
-    backgroundColor: '#ffffff',
-    height: 80,
-    width: 80,
-    borderRadius: 50,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  qrCodeText: {
-    fontSize: 10,
-    fontFamily: 'Nunito-Regular',
-    alignSelf: 'center',
   },
   textButton: {
     color: '#ffffff',
