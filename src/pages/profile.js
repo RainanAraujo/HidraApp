@@ -29,10 +29,9 @@ export default function Profile() {
                   'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
               }}
               size="xlarge"
-              containerStyle={{borderWidth: 5, borderColor: '#ffffff'}}
+              containerStyle={{borderWidth: 5, borderColor: '#38B124'}}
             />
           </View>
-
           <View style={styles.card}>
             <Image style={styles.iconHidra} source={IconHidra} />
 
