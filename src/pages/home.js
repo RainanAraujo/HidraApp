@@ -48,6 +48,12 @@ export default function Home() {
               </View>
             </View>
           </View>
+          <View>
+            <TouchableOpacity activeOpacity={0.7} style={styles.qrCodeButton}>
+              <Image />
+            </TouchableOpacity>
+            <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
+          </View>
         </View>
         <TouchableOpacity activeOpacity={0.7} style={styles.scanButton}>
           <Text style={styles.textButton}>Escanear Híbrido</Text>
@@ -102,6 +108,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  qrCodeButton: {
+    marginTop: -30,
+    backgroundColor: '#ffffff',
+    height: 80,
+    width: 80,
+    borderRadius: 50,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  qrCodeText: {
+    fontSize: 10,
+    fontFamily: 'Nunito-Regular',
+    alignSelf: 'center',
   },
   textButton: {
     color: '#ffffff',
