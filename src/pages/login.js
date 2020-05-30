@@ -1,0 +1,123 @@
+import React from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  StatusBar,
+  TextInput,
+  SafeAreaView,
+} from 'react-native';
+import CircleEffectBack from '../assets/images/circleEffectBack.svg';
+import LoginBarTop from '../assets/images/loginBarWithHidra.svg';
+export default function Login({navigation}) {
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#3251B2"></StatusBar>
+      <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
+
+      <View style={styles.loginBarContainer}>
+        <Text style={styles.textAcess}>Acesso Híbrido</Text>
+        <View>
+          <LoginBarTop width={'100%'} style={styles.loginBarTop} />
+          <View style={styles.loginBar}>
+            <TextInput
+              style={styles.emailInput}
+              placeholder="Email"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+            />
+            <TextInput
+              style={styles.passwordInput}
+              placeholder="Senha"
+              secureTextEntry={true}
+            />
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.loginButton}
+              onPress={() => navigation.navigate('Home')}>
+              <Text style={styles.textButton}>Login</Text>
+            </TouchableOpacity>
+            <Text style={styles.textPasswordRequest}>
+              Acaso esquecer sua senha entre em contato com o diretor da
+              atlética
+            </Text>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#2242A7',
+  },
+  circleEffectBack: {
+    justifyContent: 'flex-start',
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: 0,
+  },
+  textAcess: {
+    color: '#ffffff',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 36,
+    marginTop: 10,
+    alignSelf: 'center',
+  },
+  loginBarContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  loginBarTop: {
+    marginBottom: -10,
+    padding: 0,
+  },
+  loginBar: {
+    backgroundColor: '#ffffff',
+    bottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emailInput: {
+    backgroundColor: '#EDF6FF',
+    height: 50,
+    width: 300,
+    borderRadius: 50,
+    paddingHorizontal: 20,
+  },
+  passwordInput: {
+    marginTop: 10,
+    backgroundColor: '#EDF6FF',
+    height: 50,
+    width: 300,
+    borderRadius: 50,
+    paddingHorizontal: 20,
+  },
+  loginButton: {
+    marginTop: 30,
+    backgroundColor: '#2343A9',
+    height: 50,
+    width: 300,
+    borderRadius: 50,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textButton: {
+    color: '#ffffff',
+    fontFamily: 'Nunito-SemiBold',
+    fontSize: 18,
+  },
+  textPasswordRequest: {
+    color: '#484D55',
+    marginTop: 50,
+    marginBottom: 10,
+    fontFamily: 'Nunito-Regular',
+    fontSize: 10,
+  },
+});
