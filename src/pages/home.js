@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-native';
 import IconHidra from '../assets/images/iconHidra.png';
-
+import {Avatar} from 'react-native-elements';
 export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
@@ -19,6 +19,18 @@ export default function Home() {
       <View style={styles.profileContainer}>
         <Text style={styles.textWelcome}>Olá Híbrido!</Text>
         <View>
+          <View style={styles.avatar}>
+            <Avatar
+              rounded
+              source={{
+                uri:
+                  'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
+              }}
+              size="xlarge"
+              containerStyle={{borderWidth: 5, borderColor: '#ffffff'}}
+            />
+          </View>
+
           <View style={styles.card}>
             <Image style={styles.iconHidra} source={IconHidra} />
 
@@ -75,6 +87,11 @@ const styles = StyleSheet.create({
     right: 0,
     marginTop: 5,
     marginRight: 5,
+  },
+  avatar: {
+    alignItems: 'center',
+    marginBottom: -30,
+    zIndex: 1,
   },
   scanButton: {
     marginTop: 30,
