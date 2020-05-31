@@ -9,11 +9,14 @@ import {
   SafeAreaView,
   Image,
   ImageBackground,
+  TouchableHighlight,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
+import {InAppNotificationProvider} from 'react-native-in-app-notification';
+
 export default function Login({navigation}) {
   const [Form, setForm] = useState({
     email: '',
@@ -39,50 +42,66 @@ export default function Login({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#3251B2"></StatusBar>
-      <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
+      <InAppNotificationProvider>
+        <>
+          <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
 
-      <View style={styles.loginContainer}>
-        <Text style={styles.textAcess}>Acesso Híbrido</Text>
+          <View style={styles.loginContainer}>
+            <Text style={styles.textAcess}>Acesso Híbrido</Text>
 
-        {/* <View style={styles.loginContainerPush}>
-          <ImageBackground source={LoginBarTop} style={styles.loginBarPush}>
-            <Text style={styles.loginText}>Faça o login em sua conta</Text>
-          </ImageBackground>
-  </View>*/}
-        <View>
-          <Image source={Hidra} style={styles.hidraImage} />
-          <ImageBackground source={LoginBarTop} style={styles.loginBarTop}>
+            {/* <View style={styles.loginContainerPush}>
+    <ImageBackground source={LoginBarTop} style={styles.loginBarPush}>
+      <Text style={styles.loginText}>Faça o login em sua conta</Text>
+    </ImageBackground>
+</View>*/}
             <View>
-              <TextInput
-                style={styles.emailInput}
-                placeholder="Email"
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                value={Form.email}
-                onChangeText={(str) => setForm({...Form, email: str})}
-              />
-              <TextInput
-                style={styles.passwordInput}
-                placeholder="Senha"
-                secureTextEntry={true}
-                value={Form.pass}
-                onChangeText={(str) => setForm({...Form, pass: str})}
-              />
-            </View>
+              <Image source={Hidra} style={styles.hidraImage} />
+              <ImageBackground source={LoginBarTop} style={styles.loginBarTop}>
+                <View>
+                  <TouchableHighlight
+                    style={{backgroundColor: '#000000'}}
+                    activeOpacity={0.7}
+                    onPress={() => {
+                      InAppNotificationProvider.showNotification({
+                        title: 'You pressed it!',
+                        message: 'The notification has been triggered',
+                      });
+                    }}>
+                    <Text style={styles.textButton}>Teste Notification</Text>
+                  </TouchableHighlight>
+                  <TextInput
+                    style={styles.emailInput}
+                    placeholder="Email"
+                    keyboardType="email-address"
+                    textContentType="emailAddress"
+                    value={Form.email}
+                    onChangeText={(str) => setForm({...Form, email: str})}
+                  />
+                  <TextInput
+                    style={styles.passwordInput}
+                    placeholder="Senha"
+                    secureTextEntry={true}
+                    value={Form.pass}
+                    onChangeText={(str) => setForm({...Form, pass: str})}
+                  />
+                </View>
 
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={styles.loginButton}
-              onPress={() => Login(Form)}>
-              <Text style={styles.textButton}>Login</Text>
-            </TouchableOpacity>
-            <Text style={styles.textPasswordRequest}>
-              Acaso esquecer sua senha entre em contato com o diretor da
-              atlética
-            </Text>
-          </ImageBackground>
-        </View>
-      </View>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={styles.loginButton}
+                  onPress={() => Login(Form)}>
+                  <Text style={styles.textButton}>Login</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.textPasswordRequest}>
+                  Acaso esquecer sua senha entre em contato com o diretor da
+                  atlética
+                </Text>
+              </ImageBackground>
+            </View>
+          </View>
+        </>
+      </InAppNotificationProvider>
     </SafeAreaView>
   );
 }

@@ -12,7 +12,6 @@ import {
   Modal,
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import {RNCamera} from 'react-native-camera';
 import NoobCard from '../assets/images/noobCard.png';
 import VeteranCard from '../assets/images/veteranCard.png';
 import MonitorCard from '../assets/images/monitorCard.png';
