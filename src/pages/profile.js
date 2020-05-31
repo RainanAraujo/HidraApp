@@ -11,6 +11,8 @@ import {
   ImageBackground,
   Modal,
 } from 'react-native';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import {RNCamera} from 'react-native-camera';
 import NoobCard from '../assets/images/noobCard.png';
 import VeteranCard from '../assets/images/veteranCard.png';
 import MonitorCard from '../assets/images/monitorCard.png';
@@ -19,6 +21,24 @@ import {Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default function Profile(data) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [scanQrVisible, setScanQrVisible] = useState(false);
+  function QrScan() {
+    return (
+      <QRCodeScanner
+        showMarker={true}
+        bottomContent={
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.scanClose}
+            onPress={() => {
+              setScanQrVisible(!scanQrVisible);
+            }}>
+            <Icon name="times" color="#ffffff" size={17} />
+          </TouchableOpacity>
+        }
+      />
+    );
+  }
   function ModalQr() {
     return (
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
@@ -67,58 +87,70 @@ export default function Profile(data) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <ModalQr />
-      <View style={styles.profileContainer}>
-        <Text style={styles.textWelcome}>Olá Híbrido!</Text>
-        <View>
-          <View style={styles.avatar}>
-            <Avatar
-              rounded
-              source={{
-                uri:
-                  'https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4',
-              }}
-              size={123}
-              containerStyle={{
-                borderWidth: 5,
-                borderColor: getPostStyle(data.since, data.post).color,
-              }}
-            />
-          </View>
-          <View style={styles.card}>
-            <ImageBackground
-              source={getPostStyle(data.since, data.post).card}
-              style={styles.cardBackground}
-              resizeMode="contain">
-              <Text style={styles.nameText}>{data.name}</Text>
-              <Text style={styles.titleText}>Curso:</Text>
-              <Text style={styles.subTitleText}>{data.course}</Text>
-              <View style={styles.inforCardRow}>
-                <View>
-                  <Text style={styles.titleText}>Ano de associação:</Text>
-                  <Text style={styles.subTitleText}>{data.since}</Text>
-                </View>
-                <View>
-                  <Text style={styles.titleText}>Idade</Text>
-                  <Text style={styles.subTitleText}>{data.age} Anos</Text>
-                </View>
+      {scanQrVisible ? (
+        <QrScan />
+      ) : (
+        <>
+          <ModalQr />
+          <View style={styles.profileContainer}>
+            <Text style={styles.textWelcome}>Olá Híbrido!</Text>
+            <View>
+              <View style={styles.avatar}>
+                <Avatar
+                  rounded
+                  source={{
+                    uri:
+                      'https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4',
+                  }}
+                  size={123}
+                  containerStyle={{
+                    borderWidth: 5,
+                    borderColor: getPostStyle(data.since, data.post).color,
+                  }}
+                />
               </View>
-            </ImageBackground>
-          </View>
-          <View>
+              <View style={styles.card}>
+                <ImageBackground
+                  source={getPostStyle(data.since, data.post).card}
+                  style={styles.cardBackground}
+                  resizeMode="contain">
+                  <Text style={styles.nameText}>{data.name}</Text>
+                  <Text style={styles.titleText}>Curso:</Text>
+                  <Text style={styles.subTitleText}>{data.course}</Text>
+                  <View style={styles.inforCardRow}>
+                    <View>
+                      <Text style={styles.titleText}>Ano de associação:</Text>
+                      <Text style={styles.subTitleText}>{data.since}</Text>
+                    </View>
+                    <View>
+                      <Text style={styles.titleText}>Idade</Text>
+                      <Text style={styles.subTitleText}>{data.age} Anos</Text>
+                    </View>
+                  </View>
+                </ImageBackground>
+              </View>
+              <View>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={styles.qrCodeButton}
+                  onPress={() => {
+                    setModalVisible(true);
+                  }}></TouchableOpacity>
+                <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
+              </View>
+            </View>
             <TouchableOpacity
               activeOpacity={0.7}
-              style={styles.qrCodeButton}
+              style={styles.scanButton}
               onPress={() => {
-                setModalVisible(true);
-              }}></TouchableOpacity>
-            <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
+                setScanQrVisible(true);
+              }}>
+              <Text style={styles.textButton}>Escanear Híbrido</Text>
+              <Icon name="camera" color="#ffffff" size={20} />
+            </TouchableOpacity>
           </View>
-        </View>
-        <TouchableOpacity activeOpacity={0.7} style={styles.scanButton}>
-          <Text style={styles.textButton}>Escanear Híbrido</Text>
-        </TouchableOpacity>
-      </View>
+        </>
+      )}
     </SafeAreaView>
   );
 }
@@ -161,9 +193,10 @@ const styles = StyleSheet.create({
     height: 50,
     width: 300,
     borderRadius: 50,
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
   },
   scanClose: {
     marginTop: 30,
