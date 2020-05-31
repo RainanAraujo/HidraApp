@@ -14,20 +14,19 @@ import NoobCard from '../assets/images/noobCard.png';
 import VeteranCard from '../assets/images/veteranCard.png';
 import MonitorCard from '../assets/images/monitorCard.png';
 import MainCard from '../assets/images/mainCard.png';
-import { Avatar } from 'react-native-elements';
+import {Avatar} from 'react-native-elements';
 
 export default function Profile(data) {
-
   function getPostStyle(since, post) {
     var postStyle = {};
 
     if (post == 'monitor') {
-      postStyle.color = '#E8D213';
+      postStyle.color = '#2D2C2B';
       postStyle.width = 360;
       postStyle.height = 365;
-      postStyle.card = SupervisorCard;
+      postStyle.card = MonitorCard;
     } else if (post == 'director') {
-      postStyle.color = '#2D2C2B';
+      postStyle.color = '#97007F';
       postStyle.width = 350;
       postStyle.height = 375;
       postStyle.card = MainCard;
