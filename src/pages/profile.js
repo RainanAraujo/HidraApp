@@ -12,16 +12,16 @@ import {
 } from 'react-native';
 import NoobCard from '../assets/images/noobCard.png';
 import VeteranCard from '../assets/images/veteranCard.png';
-import SupervisorCard from '../assets/images/supervisorCard.png';
+import MonitorCard from '../assets/images/monitorCard.png';
 import MainCard from '../assets/images/mainCard.png';
 import {Avatar} from 'react-native-elements';
 
 export default function Profile(data) {
   function getColorPost(since, post) {
     if (post == 'monitor') {
-      return '#E8D213';
-    } else if (post == 'director') {
       return '#2D2C2B';
+    } else if (post == 'director') {
+      return '#97007F';
     } else {
       var years = new Date().getFullYear() - since;
       if (years >= 1) {
@@ -52,7 +52,7 @@ export default function Profile(data) {
 
   function getCardPost(since, post) {
     if (post == 'monitor') {
-      return SupervisorCard;
+      return MonitorCard;
     } else if (post == 'director') {
       return MainCard;
     } else {
@@ -76,7 +76,7 @@ export default function Profile(data) {
               rounded
               source={{
                 uri:
-                  'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
+                  'https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4',
               }}
               size={123}
               containerStyle={{
