@@ -6,15 +6,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
-  TextInput,
   SafeAreaView,
-  ImageBackground,
   Image,
 } from 'react-native';
 import IconHidra from '../assets/images/iconHidra.png';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 
-export default function Profile() {
+export default function Profile(data) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
@@ -29,23 +27,23 @@ export default function Profile() {
                   'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
               }}
               size="xlarge"
-              containerStyle={{borderWidth: 5, borderColor: '#38B124'}}
+              containerStyle={{ borderWidth: 5, borderColor: '#38B124' }}
             />
           </View>
           <View style={styles.card}>
             <Image style={styles.iconHidra} source={IconHidra} />
 
-            <Text style={styles.nameText}>Nego Ney de Arruda Brito</Text>
+            <Text style={styles.nameText}>{data.name}</Text>
             <Text style={styles.titleText}>Curso:</Text>
-            <Text style={styles.subTitleText}>Ciência da Computação</Text>
+            <Text style={styles.subTitleText}>{data.course}</Text>
             <View style={styles.inforCardRow}>
               <View>
                 <Text style={styles.titleText}>Ano de associação:</Text>
-                <Text style={styles.subTitleText}>2020</Text>
+                <Text style={styles.subTitleText}>{data.since}</Text>
               </View>
               <View>
                 <Text style={styles.titleText}>Idade</Text>
-                <Text style={styles.subTitleText}>12 Anos</Text>
+                <Text style={styles.subTitleText}>{data.age} Anos</Text>
               </View>
             </View>
           </View>
