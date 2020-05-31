@@ -25,7 +25,7 @@ export default function Profile(data) {
       postStyle.color = '#E8D213';
       postStyle.width = 360;
       postStyle.height = 365;
-      postStyle.card = SupervisorCard;
+      postStyle.card = MonitorCard;
     } else if (post == 'director') {
       postStyle.color = '#2D2C2B';
       postStyle.width = 350;
