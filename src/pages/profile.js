@@ -14,55 +14,37 @@ import NoobCard from '../assets/images/noobCard.png';
 import VeteranCard from '../assets/images/veteranCard.png';
 import MonitorCard from '../assets/images/monitorCard.png';
 import MainCard from '../assets/images/mainCard.png';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 
 export default function Profile(data) {
-  function getColorPost(since, post) {
-    if (post == 'monitor') {
-      return '#2D2C2B';
-    } else if (post == 'director') {
-      return '#97007F';
-    } else {
-      var years = new Date().getFullYear() - since;
-      if (years >= 1) {
-        return '#2242A7';
-      } else {
-        return '#38B124';
-      }
-    }
-  }
-  function getWidthPost(post) {
-    if (post == 'monitor') {
-      return 360;
-    } else if (post == 'director') {
-      return 350;
-    } else {
-      return 350;
-    }
-  }
-  function getHeightPost(post) {
-    if (post == 'monitor') {
-      return 365;
-    } else if (post == 'director') {
-      return 375;
-    } else {
-      return 345;
-    }
-  }
 
-  function getCardPost(since, post) {
+  function getPostStyle(since, post) {
+    var postStyle = {};
+
     if (post == 'monitor') {
-      return MonitorCard;
+      postStyle.color = '#E8D213';
+      postStyle.width = 360;
+      postStyle.height = 365;
+      postStyle.card = SupervisorCard;
     } else if (post == 'director') {
-      return MainCard;
+      postStyle.color = '#2D2C2B';
+      postStyle.width = 350;
+      postStyle.height = 375;
+      postStyle.card = MainCard;
     } else {
+      postStyle.width = 350;
+      postStyle.height = 345;
       var years = new Date().getFullYear() - since;
       if (years >= 1) {
-        return VeteranCard;
+        postStyle.color = '#2242A7';
+        postStyle.card = VeteranCard;
       } else {
-        return NoobCard;
+        postStyle.color = '#38B124';
+        postStyle.card = NoobCard;
       }
     }
+    console.log(postStyle);
+    return postStyle;
   }
 
   return (
@@ -81,18 +63,18 @@ export default function Profile(data) {
               size={123}
               containerStyle={{
                 borderWidth: 5,
-                borderColor: getColorPost(data.since, data.post),
+                borderColor: getPostStyle(data.since, data.post).color,
               }}
             />
           </View>
           <View
             style={{
               ...styles.card,
-              width: getWidthPost(data.post),
-              height: getHeightPost(data.post),
+              width: getPostStyle(data.since, data.post).width,
+              height: getPostStyle(data.since, data.post).height,
             }}>
             <ImageBackground
-              source={getCardPost(data.since, data.post)}
+              source={getPostStyle(data.since, data.post).card}
               style={styles.cardBackground}>
               <Text style={styles.nameText}>{data.name}</Text>
               <Text style={styles.titleText}>Curso:</Text>
