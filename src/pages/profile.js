@@ -8,23 +8,59 @@ import {
   StatusBar,
   SafeAreaView,
   Image,
+  ImageBackground,
 } from 'react-native';
-import IconHidra from '../assets/images/iconHidra.png';
-import { Avatar } from 'react-native-elements';
+import NoobCard from '../assets/images/noobCard.png';
+import VeteranCard from '../assets/images/veteranCard.png';
+import SupervisorCard from '../assets/images/supervisorCard.png';
+import MainCard from '../assets/images/mainCard.png';
+import {Avatar} from 'react-native-elements';
 
 export default function Profile(data) {
-
-  function getPostColor(since, post) {
-    if (post == "monitor") {
-      return '#E8D213'
-    } else if (post == "director") {
-      return '#2D2C2B'
+  function getColorPost(since, post) {
+    if (post == 'monitor') {
+      return '#E8D213';
+    } else if (post == 'director') {
+      return '#2D2C2B';
     } else {
       var years = new Date().getFullYear() - since;
-      if (years > 1) {
-        return '#2242A7'
+      if (years >= 1) {
+        return '#2242A7';
       } else {
-        return '#38B124'
+        return '#38B124';
+      }
+    }
+  }
+  function getWidthPost(post) {
+    if (post == 'monitor') {
+      return 360;
+    } else if (post == 'director') {
+      return 350;
+    } else {
+      return 350;
+    }
+  }
+  function getHeightPost(post) {
+    if (post == 'monitor') {
+      return 365;
+    } else if (post == 'director') {
+      return 375;
+    } else {
+      return 345;
+    }
+  }
+
+  function getCardPost(since, post) {
+    if (post == 'monitor') {
+      return SupervisorCard;
+    } else if (post == 'director') {
+      return MainCard;
+    } else {
+      var years = new Date().getFullYear() - since;
+      if (years >= 1) {
+        return VeteranCard;
+      } else {
+        return NoobCard;
       }
     }
   }
@@ -42,26 +78,36 @@ export default function Profile(data) {
                 uri:
                   'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
               }}
-              size="xlarge"
-              containerStyle={{ borderWidth: 5, borderColor: getPostColor(data.since, data.post) }}
+              size={123}
+              containerStyle={{
+                borderWidth: 5,
+                borderColor: getColorPost(data.since, data.post),
+              }}
             />
           </View>
-          <View style={{ ...styles.card, backgroundColor: getPostColor(data.since, data.post) }}>
-            <Image style={styles.iconHidra} source={IconHidra} />
-
-            <Text style={styles.nameText}>{data.name}</Text>
-            <Text style={styles.titleText}>Curso:</Text>
-            <Text style={styles.subTitleText}>{data.course}</Text>
-            <View style={styles.inforCardRow}>
-              <View>
-                <Text style={styles.titleText}>Ano de associação:</Text>
-                <Text style={styles.subTitleText}>{data.since}</Text>
+          <View
+            style={{
+              ...styles.card,
+              width: getWidthPost(data.post),
+              height: getHeightPost(data.post),
+            }}>
+            <ImageBackground
+              source={getCardPost(data.since, data.post)}
+              style={styles.cardBackground}>
+              <Text style={styles.nameText}>{data.name}</Text>
+              <Text style={styles.titleText}>Curso:</Text>
+              <Text style={styles.subTitleText}>{data.course}</Text>
+              <View style={styles.inforCardRow}>
+                <View>
+                  <Text style={styles.titleText}>Ano de associação:</Text>
+                  <Text style={styles.subTitleText}>{data.since}</Text>
+                </View>
+                <View>
+                  <Text style={styles.titleText}>Idade</Text>
+                  <Text style={styles.subTitleText}>{data.age} Anos</Text>
+                </View>
               </View>
-              <View>
-                <Text style={styles.titleText}>Idade</Text>
-                <Text style={styles.subTitleText}>{data.age} Anos</Text>
-              </View>
-            </View>
+            </ImageBackground>
           </View>
           <View>
             <TouchableOpacity activeOpacity={0.7} style={styles.qrCodeButton}>
@@ -97,21 +143,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   card: {
-    backgroundColor: '#38B124',
-    width: 320,
-    height: 200,
-    borderRadius: 20,
-    paddingTop: 20,
+    paddingTop: 55,
   },
-  iconHidra: {
-    position: 'absolute',
-    right: 0,
-    marginTop: 5,
-    marginRight: 5,
+  cardBackground: {
+    flex: 1,
+    justifyContent: 'center',
   },
   avatar: {
     alignItems: 'center',
-    marginBottom: -30,
+    marginBottom: -155,
     zIndex: 1,
   },
   scanButton: {
@@ -164,7 +204,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontFamily: 'Nunito-Bold',
     fontSize: 18,
-    marginTop: 10,
+    marginTop: 40,
     marginLeft: 20,
   },
 });
