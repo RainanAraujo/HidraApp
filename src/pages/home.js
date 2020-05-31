@@ -4,6 +4,7 @@ import Profile from './profile';
 import Partnerships from './partnerships';
 import Settings from './settings';
 import firestore from '@react-native-firebase/firestore';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const Tab = createMaterialTopTabNavigator();
 
 export default function Home({ navigation, route }) {
@@ -26,10 +27,54 @@ export default function Home({ navigation, route }) {
 
   return (
     <>
-      <Tab.Navigator tabBarPosition="bottom">
-        <Tab.Screen name="Perfil" component={() => Profile(data)} />
-        <Tab.Screen name="Parcerias" component={Partnerships} />
-        <Tab.Screen name="Definições" component={Settings} />
+      <Tab.Navigator
+        tabBarPosition="bottom"
+        tabBarOptions={{
+          showIcon: true,
+          showLabel: false,
+          indicatorStyle: {
+            backgroundColor: '#ffffff',
+          },
+        }}>
+        <Tab.Screen
+          name="Perfil"
+          component={()=>Profile(data)}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <Icon
+                name="user-circle"
+                size={20}
+                color={focused ? '#141414' : '#A4A4A4'}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Parcerias"
+          component={Partnerships}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <Icon
+                name="users"
+                size={20}
+                color={focused ? '#141414' : '#A4A4A4'}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Definições"
+          component={Settings}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <Icon
+                name="cog"
+                size={20}
+                color={focused ? '#141414' : '#A4A4A4'}
+              />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </>
   );

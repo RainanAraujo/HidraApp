@@ -15,9 +15,9 @@ import {
 import {Avatar} from 'react-native-elements';
 const DATA = [
   {
-    name: 'Nome do estabelecimento',
-    neighborhood: 'Bairro',
-    road: 'Rua',
+    name: 'JR Cabelos',
+    neighborhood: 'Avenida Semfim',
+    road: 'Rua da dona Neide',
     of: '15,00',
     per: '10,00',
   },
@@ -40,12 +40,13 @@ export default function Profile() {
                 }}
                 size="large"
               />
+              <View>
+                <Text style={styles.textInfo}>{item.name}</Text>
+                <Text style={styles.textInfo}>{item.neighborhood}</Text>
+                <Text style={styles.textInfo}>{item.road}</Text>
+              </View>
             </View>
-            <View>
-              <Text style={styles.textInfo}>{item.name}</Text>
-              <Text style={styles.textInfo}>{item.neighborhood}</Text>
-              <Text style={styles.textInfo}>{item.road}</Text>
-            </View>
+
             <View style={styles.pricesContent}>
               <Text style={styles.textPriceBefore}> De {item.of}R$ por</Text>
               <Text style={styles.textPriceAfter}>{item.per}R$</Text>
@@ -79,7 +80,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   avatar: {
+    flexDirection: 'row',
     marginLeft: 10,
+    alignItems: 'center',
   },
   textInfo: {
     color: '#484D55',
