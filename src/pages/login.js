@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -13,7 +13,7 @@ import auth from '@react-native-firebase/auth';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 
-export default function Login({ navigation }) {
+export default function Login({navigation}) {
   const [Form, setForm] = useState({
     email: '',
     pass: '',
@@ -25,7 +25,7 @@ export default function Login({ navigation }) {
         .signInWithEmailAndPassword(form.email.trim(), form.pass.trim())
         .then((res) => {
           navigation.navigate('Home', {
-            userID: res.user.uid
+            userID: res.user.uid,
           });
           console.log(res);
         })
@@ -51,14 +51,14 @@ export default function Login({ navigation }) {
               keyboardType="email-address"
               textContentType="emailAddress"
               value={Form.email}
-              onChangeText={(str) => setForm({ ...Form, email: str })}
+              onChangeText={(str) => setForm({...Form, email: str})}
             />
             <TextInput
               style={styles.passwordInput}
               placeholder="Senha"
               secureTextEntry={true}
               value={Form.pass}
-              onChangeText={(str) => setForm({ ...Form, pass: str })}
+              onChangeText={(str) => setForm({...Form, pass: str})}
             />
             <TouchableOpacity
               activeOpacity={0.7}
@@ -101,9 +101,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   loginBarTop: {
-    marginBottom: -10,
-    padding: 0,
-    height: 290,
     width: 393,
   },
   loginBar: {
