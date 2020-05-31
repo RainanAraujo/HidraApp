@@ -22,17 +22,13 @@ export default function Profile(data) {
 
     if (post == 'monitor') {
       postStyle.color = '#2D2C2B';
-      postStyle.width = 360;
-      postStyle.height = 365;
+
       postStyle.card = MonitorCard;
     } else if (post == 'director') {
       postStyle.color = '#97007F';
-      postStyle.width = 350;
-      postStyle.height = 375;
+
       postStyle.card = MainCard;
     } else {
-      postStyle.width = 350;
-      postStyle.height = 345;
       var years = new Date().getFullYear() - since;
       if (years >= 1) {
         postStyle.color = '#2242A7';
@@ -66,15 +62,11 @@ export default function Profile(data) {
               }}
             />
           </View>
-          <View
-            style={{
-              ...styles.card,
-              width: getPostStyle(data.since, data.post).width,
-              height: getPostStyle(data.since, data.post).height,
-            }}>
+          <View style={styles.card}>
             <ImageBackground
               source={getPostStyle(data.since, data.post).card}
-              style={styles.cardBackground}>
+              style={styles.cardBackground}
+              resizeMode="contain">
               <Text style={styles.nameText}>{data.name}</Text>
               <Text style={styles.titleText}>Curso:</Text>
               <Text style={styles.subTitleText}>{data.course}</Text>
@@ -125,6 +117,8 @@ const styles = StyleSheet.create({
   },
   card: {
     paddingTop: 55,
+    aspectRatio: 4 / 5,
+    width: '90%',
   },
   cardBackground: {
     flex: 1,
@@ -132,7 +126,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     alignItems: 'center',
-    marginBottom: -155,
+    marginBottom: -200,
     zIndex: 1,
   },
   scanButton: {

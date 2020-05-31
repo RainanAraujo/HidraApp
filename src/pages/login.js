@@ -8,11 +8,12 @@ import {
   TextInput,
   SafeAreaView,
   Image,
+  ImageBackground,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.png';
-
+import Hidra from '../assets/images/hidra.png';
 export default function Login({navigation}) {
   const [Form, setForm] = useState({
     email: '',
@@ -40,26 +41,30 @@ export default function Login({navigation}) {
       <StatusBar barStyle="light-content" backgroundColor="#3251B2"></StatusBar>
       <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
 
-      <View style={styles.loginBarContainer}>
+      <View style={styles.loginContainer}>
         <Text style={styles.textAcess}>Acesso Híbrido</Text>
+
         <View>
-          <Image style={styles.loginBarTop} source={LoginBarTop} />
-          <View style={styles.loginBar}>
-            <TextInput
-              style={styles.emailInput}
-              placeholder="Email"
-              keyboardType="email-address"
-              textContentType="emailAddress"
-              value={Form.email}
-              onChangeText={(str) => setForm({...Form, email: str})}
-            />
-            <TextInput
-              style={styles.passwordInput}
-              placeholder="Senha"
-              secureTextEntry={true}
-              value={Form.pass}
-              onChangeText={(str) => setForm({...Form, pass: str})}
-            />
+          <Image source={Hidra} style={styles.hidraImage} />
+          <ImageBackground source={LoginBarTop} style={styles.loginBarTop}>
+            <View>
+              <TextInput
+                style={styles.emailInput}
+                placeholder="Email"
+                keyboardType="email-address"
+                textContentType="emailAddress"
+                value={Form.email}
+                onChangeText={(str) => setForm({...Form, email: str})}
+              />
+              <TextInput
+                style={styles.passwordInput}
+                placeholder="Senha"
+                secureTextEntry={true}
+                value={Form.pass}
+                onChangeText={(str) => setForm({...Form, pass: str})}
+              />
+            </View>
+
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.loginButton}
@@ -70,7 +75,7 @@ export default function Login({navigation}) {
               Acaso esquecer sua senha entre em contato com o diretor da
               atlética
             </Text>
-          </View>
+          </ImageBackground>
         </View>
       </View>
     </SafeAreaView>
@@ -95,21 +100,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center',
   },
-  loginBarContainer: {
+  loginContainer: {
+    paddingTop: 20,
     flex: 1,
     display: 'flex',
     justifyContent: 'space-between',
   },
   loginBarTop: {
-    width: 393,
-  },
-  loginBar: {
-    backgroundColor: '#ffffff',
-    bottom: 0,
-    display: 'flex',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 50,
+    width: 393,
+    height: 400,
   },
+  hidraImage: {marginBottom: -100},
   emailInput: {
     marginTop: 10,
     backgroundColor: '#EDF6FF',
