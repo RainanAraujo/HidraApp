@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -14,7 +14,7 @@ import auth from '@react-native-firebase/auth';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [Form, setForm] = useState({
     email: '',
     pass: '',
@@ -59,14 +59,14 @@ export default function Login({navigation}) {
                 keyboardType="email-address"
                 textContentType="emailAddress"
                 value={Form.email}
-                onChangeText={(str) => setForm({...Form, email: str})}
+                onChangeText={(str) => setForm({ ...Form, email: str })}
               />
               <TextInput
                 style={styles.passwordInput}
                 placeholder="Senha"
                 secureTextEntry={true}
                 value={Form.pass}
-                onChangeText={(str) => setForm({...Form, pass: str})}
+                onChangeText={(str) => setForm({ ...Form, pass: str })}
               />
             </View>
 
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     width: 393,
     height: 400,
   },
-  hidraImage: {marginBottom: -100},
+  hidraImage: { marginBottom: -100 },
   emailInput: {
     marginTop: 10,
     backgroundColor: '#EDF6FF',
