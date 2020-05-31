@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 import {
   Text,
@@ -12,36 +12,65 @@ import {
   Modal,
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import { RNCamera } from 'react-native-camera';
+import {RNCamera} from 'react-native-camera';
 import QRCode from 'react-native-qrcode-svg';
 import firestore from '@react-native-firebase/firestore';
 import NoobCard from '../assets/images/noobCard.png';
 import VeteranCard from '../assets/images/veteranCard.png';
 import MonitorCard from '../assets/images/monitorCard.png';
 import MainCard from '../assets/images/mainCard.png';
-import { Avatar } from 'react-native-elements';
+import {Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
 export default function Profile(data) {
-
   const [modalVisible, setModalVisible] = useState(false);
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [scannedQrVisible, setScaneedQrVisible] = useState(false);
   const [scannedData, setScaneedData] = useState({});
 
-
   function QrScan() {
     return (
       <>
-        <Modal animationType="fade" transparent={true} visible={scannedQrVisible} >
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={scannedQrVisible}>
           <View style={styles.modalContainer}>
-            <View style={styles.modalView}>
-              <Text>{scannedData.name}</Text>
-              <Text>{scannedData.course}</Text>
-              <Text>{scannedData.age}</Text>
-              <Text>{scannedData.since}</Text>
-              <Text>{scannedData.post}</Text>
+            <View style={styles.avatar}>
+              <Avatar
+                rounded
+                source={{
+                  uri:
+                    'https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4',
+                }}
+                size={123}
+                containerStyle={{
+                  borderWidth: 5,
+                  borderColor: getPostStyle(data.since, data.post).color,
+                }}
+              />
+            </View>
+            <View style={styles.card}>
+              <ImageBackground
+                source={getPostStyle(data.since, data.post).card}
+                style={styles.cardBackground}
+                resizeMode="contain">
+                <Text style={styles.nameText}>{scannedData.name}</Text>
+                <Text style={styles.titleText}>Curso:</Text>
+                <Text style={styles.subTitleText}>{scannedData.course}</Text>
+                <View style={styles.inforCardRow}>
+                  <View>
+                    <Text style={styles.titleText}>Ano de associação:</Text>
+                    <Text style={styles.subTitleText}>{scannedData.since}</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.titleText}>Idade</Text>
+                    <Text style={styles.subTitleText}>
+                      {scannedData.age}Anos
+                    </Text>
+                  </View>
+                </View>
+              </ImageBackground>
             </View>
             <TouchableOpacity
               activeOpacity={0.7}
@@ -55,22 +84,23 @@ export default function Profile(data) {
             </TouchableOpacity>
           </View>
         </Modal>
-        {scannedQrVisible ? null : < QRCodeScanner
-          onRead={QRScanned}
-          showMarker={true}
-          reactivate={false}
-          bottomContent={
-            <TouchableOpacity
-              activeOpacity={0.7}
-
-              style={styles.scanClose}
-              onPress={() => {
-                setScanQrVisible(!scanQrVisible);
-              }}>
-              <Icon name="times" color="#ffffff" size={17} />
-            </TouchableOpacity>
-          }
-        />}
+        {scannedQrVisible ? null : (
+          <QRCodeScanner
+            onRead={QRScanned}
+            showMarker={true}
+            reactivate={false}
+            bottomContent={
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.scanClose}
+                onPress={() => {
+                  setScanQrVisible(!scanQrVisible);
+                }}>
+                <Icon name="times" color="#ffffff" size={17} />
+              </TouchableOpacity>
+            }
+          />
+        )}
       </>
     );
   }
@@ -80,7 +110,7 @@ export default function Profile(data) {
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
         <View style={styles.modalContainer}>
           <View style={styles.modalView}>
-            <QRCode value={data.qrcode} />
+            <QRCode value={data.qrcode} size={200} />
           </View>
           <TouchableOpacity
             activeOpacity={0.7}
@@ -95,17 +125,18 @@ export default function Profile(data) {
     );
   }
 
-  QRScanned = e => {
+  QRScanned = (e) => {
     console.log(e.data);
     firestore()
       .collection('users')
       .doc(e.data)
       .get()
-      .then(data => {
+      .then((data) => {
         setScaneedData(data.data());
         setScaneedQrVisible(true);
-      }).catch(error => { });
-  }
+      })
+      .catch((error) => {});
+  };
 
   function getPostStyle(since, post) {
     var postStyle = {};
@@ -138,67 +169,67 @@ export default function Profile(data) {
       {scanQrVisible ? (
         <QrScan />
       ) : (
-          <>
-            <ModalQr />
-            <View style={styles.profileContainer}>
-              <Text style={styles.textWelcome}>Olá Híbrido!</Text>
-              <View>
-                <View style={styles.avatar}>
-                  <Avatar
-                    rounded
-                    source={{
-                      uri:
-                        'https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4',
-                    }}
-                    size={123}
-                    containerStyle={{
-                      borderWidth: 5,
-                      borderColor: getPostStyle(data.since, data.post).color,
-                    }}
-                  />
-                </View>
-                <View style={styles.card}>
-                  <ImageBackground
-                    source={getPostStyle(data.since, data.post).card}
-                    style={styles.cardBackground}
-                    resizeMode="contain">
-                    <Text style={styles.nameText}>{data.name}</Text>
-                    <Text style={styles.titleText}>Curso:</Text>
-                    <Text style={styles.subTitleText}>{data.course}</Text>
-                    <View style={styles.inforCardRow}>
-                      <View>
-                        <Text style={styles.titleText}>Ano de associação:</Text>
-                        <Text style={styles.subTitleText}>{data.since}</Text>
-                      </View>
-                      <View>
-                        <Text style={styles.titleText}>Idade</Text>
-                        <Text style={styles.subTitleText}>{data.age} Anos</Text>
-                      </View>
-                    </View>
-                  </ImageBackground>
-                </View>
-                <View>
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    style={styles.qrCodeButton}
-                    onPress={() => {
-                      setModalVisible(true);
-                    }}></TouchableOpacity>
-                  <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
-                </View>
+        <>
+          <ModalQr />
+          <View style={styles.profileContainer}>
+            <Text style={styles.textWelcome}>Olá Híbrido!</Text>
+            <View>
+              <View style={styles.avatar}>
+                <Avatar
+                  rounded
+                  source={{
+                    uri:
+                      'https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4',
+                  }}
+                  size={123}
+                  containerStyle={{
+                    borderWidth: 5,
+                    borderColor: getPostStyle(data.since, data.post).color,
+                  }}
+                />
               </View>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                style={styles.scanButton}
-                onPress={() => {
-                  setScanQrVisible(true);
-                }}>
-                <Text style={styles.textButton}>Escanear Híbrido</Text>
-                <Icon name="camera" color="#ffffff" size={20} />
-              </TouchableOpacity>
+              <View style={styles.card}>
+                <ImageBackground
+                  source={getPostStyle(data.since, data.post).card}
+                  style={styles.cardBackground}
+                  resizeMode="contain">
+                  <Text style={styles.nameText}>{data.name}</Text>
+                  <Text style={styles.titleText}>Curso:</Text>
+                  <Text style={styles.subTitleText}>{data.course}</Text>
+                  <View style={styles.inforCardRow}>
+                    <View>
+                      <Text style={styles.titleText}>Ano de associação:</Text>
+                      <Text style={styles.subTitleText}>{data.since}</Text>
+                    </View>
+                    <View>
+                      <Text style={styles.titleText}>Idade</Text>
+                      <Text style={styles.subTitleText}>{data.age} Anos</Text>
+                    </View>
+                  </View>
+                </ImageBackground>
+              </View>
+              <View>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={styles.qrCodeButton}
+                  onPress={() => {
+                    setModalVisible(true);
+                  }}></TouchableOpacity>
+                <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
+              </View>
             </View>
-          </>
-        )}
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.scanButton}
+              onPress={() => {
+                setScanQrVisible(true);
+              }}>
+              <Text style={styles.textButton}>Escanear Híbrido</Text>
+              <Icon name="camera" color="#ffffff" size={20} />
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
     </SafeAreaView>
   );
 }
