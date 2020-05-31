@@ -14,7 +14,8 @@ export default function Home({ navigation, route }) {
     course: "",
     age: 0,
     since: 0,
-    qrcode: "null"
+    qrcode: "null",
+    post: ""
   });
 
   useEffect(() => {
@@ -38,9 +39,9 @@ export default function Home({ navigation, route }) {
         }}>
         <Tab.Screen
           name="Perfil"
-          component={()=>Profile(data)}
+          component={() => Profile(data)}
           options={{
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <Icon
                 name="user-circle"
                 size={20}
@@ -53,7 +54,7 @@ export default function Home({ navigation, route }) {
           name="Parcerias"
           component={Partnerships}
           options={{
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <Icon
                 name="users"
                 size={20}
@@ -66,7 +67,7 @@ export default function Home({ navigation, route }) {
           name="Definições"
           component={Settings}
           options={{
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <Icon
                 name="cog"
                 size={20}
