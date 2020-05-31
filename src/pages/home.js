@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React, {useEffect, useState} from 'react';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Profile from './profile';
 import Partnerships from './partnerships';
 import Settings from './settings';
@@ -7,23 +7,27 @@ import firestore from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const Tab = createMaterialTopTabNavigator();
 
-export default function Home({ navigation, route }) {
-
+export default function Home({navigation, route}) {
   const [data, setData] = useState({
-    name: "",
-    course: "",
+    name: '',
+    course: '',
     age: 0,
     since: 0,
-    qrcode: "null",
-    post: ""
+    qrcode: 'null',
+    post: '',
   });
 
   useEffect(() => {
-    firestore().collection("users").doc(route.params.userID).get().then(data => {
-      setData({ ...data.data(), qrcode: route.params.userID });
-    }).catch(error => {
-      console.log(error)
-    });
+    firestore()
+      .collection('users')
+      .doc(route.params.userID)
+      .get()
+      .then((data) => {
+        setData({...data.data(), qrcode: route.params.userID});
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -41,7 +45,7 @@ export default function Home({ navigation, route }) {
           name="Perfil"
           component={() => Profile(data)}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Icon
                 name="user-circle"
                 size={20}
@@ -54,7 +58,7 @@ export default function Home({ navigation, route }) {
           name="Parcerias"
           component={Partnerships}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Icon
                 name="users"
                 size={20}
@@ -67,7 +71,7 @@ export default function Home({ navigation, route }) {
           name="Definições"
           component={Settings}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Icon
                 name="cog"
                 size={20}

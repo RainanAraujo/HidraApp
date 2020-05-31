@@ -44,6 +44,11 @@ export default function Login({navigation}) {
       <View style={styles.loginContainer}>
         <Text style={styles.textAcess}>Acesso Híbrido</Text>
 
+        {/* <View style={styles.loginContainerPush}>
+          <ImageBackground source={LoginBarTop} style={styles.loginBarPush}>
+            <Text style={styles.loginText}>Faça o login em sua conta</Text>
+          </ImageBackground>
+  </View>*/}
         <View>
           <Image source={Hidra} style={styles.hidraImage} />
           <ImageBackground source={LoginBarTop} style={styles.loginBarTop}>
@@ -151,5 +156,21 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontFamily: 'Nunito-Regular',
     fontSize: 10,
+  },
+  loginContainerPush: {
+    marginBottom: -230,
+    bottom: 0,
+    position: 'absolute',
+    zIndex: 1,
+  },
+  loginBarPush: {
+    width: 393,
+    height: 400,
+    alignItems: 'center',
+    paddingTop: 100,
+  },
+  loginText: {
+    fontFamily: 'Nunito-Regular',
+    fontSize: 18,
   },
 });

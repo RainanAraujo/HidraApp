@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
   Text,
@@ -9,14 +9,36 @@ import {
   SafeAreaView,
   Image,
   ImageBackground,
+  Modal,
 } from 'react-native';
 import NoobCard from '../assets/images/noobCard.png';
 import VeteranCard from '../assets/images/veteranCard.png';
 import MonitorCard from '../assets/images/monitorCard.png';
 import MainCard from '../assets/images/mainCard.png';
 import {Avatar} from 'react-native-elements';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 export default function Profile(data) {
+  const [modalVisible, setModalVisible] = useState(false);
+  function ModalQr() {
+    return (
+      <Modal animationType="fade" transparent={true} visible={modalVisible}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalView}>
+            <Text>QR CODE AQUI</Text>
+          </View>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.scanClose}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+            }}>
+            <Icon name="times" color="#ffffff" size={17} />
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    );
+  }
+
   function getPostStyle(since, post) {
     var postStyle = {};
 
@@ -45,6 +67,7 @@ export default function Profile(data) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <ModalQr />
       <View style={styles.profileContainer}>
         <Text style={styles.textWelcome}>Olá Híbrido!</Text>
         <View>
@@ -83,9 +106,12 @@ export default function Profile(data) {
             </ImageBackground>
           </View>
           <View>
-            <TouchableOpacity activeOpacity={0.7} style={styles.qrCodeButton}>
-              <Image />
-            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.qrCodeButton}
+              onPress={() => {
+                setModalVisible(true);
+              }}></TouchableOpacity>
             <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
           </View>
         </View>
@@ -139,8 +165,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  scanClose: {
+    marginTop: 30,
+    backgroundColor: 'red',
+    height: 50,
+    width: 50,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   qrCodeButton: {
-    marginTop: -30,
+    marginTop: -70,
     backgroundColor: '#ffffff',
     height: 80,
     width: 80,
@@ -181,5 +216,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 40,
     marginLeft: 20,
+  },
+  modalContainer: {
+    backgroundColor: '#ffffff75',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
