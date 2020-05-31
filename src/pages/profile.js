@@ -13,6 +13,22 @@ import IconHidra from '../assets/images/iconHidra.png';
 import { Avatar } from 'react-native-elements';
 
 export default function Profile(data) {
+
+  function getPostColor(since, post) {
+    if (post == "monitor") {
+      return '#E8D213'
+    } else if (post == "director") {
+      return '#2D2C2B'
+    } else {
+      var years = new Date().getFullYear() - since;
+      if (years > 1) {
+        return '#2242A7'
+      } else {
+        return '#38B124'
+      }
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
@@ -27,10 +43,10 @@ export default function Profile(data) {
                   'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
               }}
               size="xlarge"
-              containerStyle={{ borderWidth: 5, borderColor: '#38B124' }}
+              containerStyle={{ borderWidth: 5, borderColor: getPostColor(data.since, data.post) }}
             />
           </View>
-          <View style={styles.card}>
+          <View style={{ ...styles.card, backgroundColor: getPostColor(data.since, data.post) }}>
             <Image style={styles.iconHidra} source={IconHidra} />
 
             <Text style={styles.nameText}>{data.name}</Text>
