@@ -51,7 +51,6 @@ export default function Profile(data) {
               ASSOCIADO
             </Text>
             <Card
-              style={{ width: '90%' }}
               avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
               data={scannedData}
             />
