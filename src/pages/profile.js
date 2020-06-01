@@ -36,6 +36,15 @@ export default function Profile(data) {
           transparent={true}
           visible={scannedQrVisible}>
           <View style={styles.modalContainer}>
+            <Text
+              style={{
+                ...styles.textWelcome,
+                color: '#519918',
+                marginBottom: 30,
+                fontFamily: 'Nunito-Bold',
+              }}>
+              ASSOCIADO
+            </Text>
             <View style={styles.avatar}>
               <Avatar
                 rounded
@@ -46,13 +55,13 @@ export default function Profile(data) {
                 size={123}
                 containerStyle={{
                   borderWidth: 5,
-                  borderColor: getPostStyle(data.since, data.post).color,
+                  borderColor: getPostStyle(data.since, scannedData.post).color,
                 }}
               />
             </View>
             <View style={styles.card}>
               <ImageBackground
-                source={getPostStyle(data.since, data.post).card}
+                source={getPostStyle(data.since, scannedData.post).card}
                 style={styles.cardBackground}
                 resizeMode="contain">
                 <Text style={styles.nameText}>{scannedData.name}</Text>
