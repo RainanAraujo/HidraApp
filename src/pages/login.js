@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -12,12 +12,13 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import DropdownAlert from 'react-native-dropdownalert';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [Form, setForm] = useState({
     email: '',
@@ -26,17 +27,35 @@ export default function Login({navigation}) {
   const [alert, setAlert] = useState({});
 
   function Login(form) {
+
+    setLoading(true);
     if (form.email && form.pass) {
       auth()
         .signInWithEmailAndPassword(form.email.trim(), form.pass.trim())
         .then((res) => {
-          navigation.navigate('Home', {
-            userID: res.user.uid,
-          });
+          firestore()
+            .collection('users')
+            .doc(res.user.uid)
+            .get()
+            .then((data) => {
+              setLoading(false);
+              navigation.navigate('Home', {
+                data: { ...data.data(), qrcode: res.user.uid },
+              });
+            })
+            .catch((error) => {
+              setLoading(false);
+              alert.alertWithType('error', 'Erro', 'Não foi possivel carregar dados do usuário');
+            });
         })
         .catch((error) => {
+          console.log(error)
+          setLoading(false);
           alert.alertWithType('error', 'Erro', 'Login Inválido');
         });
+    } else {
+      setLoading(false);
+      alert.alertWithType('error', 'Erro', 'Login Inválido');
     }
   }
 
@@ -67,14 +86,14 @@ export default function Login({navigation}) {
                     keyboardType="email-address"
                     textContentType="emailAddress"
                     value={Form.email}
-                    onChangeText={(str) => setForm({...Form, email: str})}
+                    onChangeText={(str) => setForm({ ...Form, email: str })}
                   />
                   <TextInput
                     style={styles.passwordInput}
                     placeholder="Senha"
                     secureTextEntry={true}
                     value={Form.pass}
-                    onChangeText={(str) => setForm({...Form, pass: str})}
+                    onChangeText={(str) => setForm({ ...Form, pass: str })}
                   />
                 </View>
 
@@ -86,8 +105,8 @@ export default function Login({navigation}) {
                   {loading ? (
                     <ActivityIndicator size="large" color="#ffffff" />
                   ) : (
-                    <Text style={styles.textButton}>Login</Text>
-                  )}
+                      <Text style={styles.textButton}>Login</Text>
+                    )}
                 </TouchableOpacity>
 
                 <Text style={styles.textPasswordRequest}>
@@ -134,7 +153,7 @@ const styles = StyleSheet.create({
     width: 393,
     height: 400,
   },
-  hidraImage: {marginBottom: -100},
+  hidraImage: { marginBottom: -100 },
   emailInput: {
     marginTop: 10,
     backgroundColor: '#EDF6FF',

@@ -3,7 +3,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Profile from './profile';
 import Partnerships from './partnerships';
 import Settings from './settings';
-import firestore from '@react-native-firebase/firestore';
 import DropdownAlert from 'react-native-dropdownalert';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const Tab = createMaterialTopTabNavigator();
@@ -18,24 +17,8 @@ export default function Home({ navigation, route }) {
     post: '',
   });
 
-  const [alert, setAlert] = useState({});
-
-  useEffect(() => {
-    firestore()
-      .collection('users')
-      .doc(route.params.userID)
-      .get()
-      .then((data) => {
-        setData({ ...data.data(), qrcode: route.params.userID });
-      })
-      .catch((error) => {
-        alert.alertWithType('error', 'Erro', 'Não foi possivel carregar dados do usuário');
-      });
-  }, []);
-
   return (
     <>
-      <DropdownAlert closeInterval={1000} ref={ref => setAlert(ref)} />
       <Tab.Navigator
         tabBarPosition="bottom"
         tabBarOptions={{
@@ -47,7 +30,7 @@ export default function Home({ navigation, route }) {
         }}>
         <Tab.Screen
           name="Perfil"
-          component={() => Profile(data)}
+          component={() => Profile(route.params.data)}
           options={{
             tabBarIcon: ({ focused }) => (
               <Icon
