@@ -9,7 +9,7 @@ import {
   SafeAreaView,
   Image,
   ImageBackground,
-  TouchableHighlight,
+  ActivityIndicator,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import DropdownAlert from 'react-native-dropdownalert';
@@ -18,6 +18,7 @@ import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
 
 export default function Login({navigation}) {
+  const [loading, setLoading] = useState(false);
   const [Form, setForm] = useState({
     email: '',
     pass: '',
@@ -80,8 +81,13 @@ export default function Login({navigation}) {
                 <TouchableOpacity
                   activeOpacity={0.7}
                   style={styles.loginButton}
+                  disabled={loading}
                   onPress={() => Login(Form)}>
-                  <Text style={styles.textButton}>Login</Text>
+                  {loading ? (
+                    <ActivityIndicator size="large" color="#ffffff" />
+                  ) : (
+                    <Text style={styles.textButton}>Login</Text>
+                  )}
                 </TouchableOpacity>
 
                 <Text style={styles.textPasswordRequest}>
