@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -17,14 +17,12 @@ import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
 
-export default function Login({ navigation }) {
-
+export default function Login({navigation}) {
   const [Form, setForm] = useState({
     email: '',
     pass: '',
   });
   const [alert, setAlert] = useState({});
-
 
   function Login(form) {
     if (form.email && form.pass) {
@@ -42,57 +40,60 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#3251B2"></StatusBar>
-      <>
-        <DropdownAlert closeInterval={1000} ref={ref => setAlert(ref)} />
-        <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#3251B2" />
+      <SafeAreaView style={styles.container}>
+        <>
+          <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
+          <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
 
-        <View style={styles.loginContainer}>
-          <Text style={styles.textAcess}>Acesso Híbrido</Text>
+          <View style={styles.loginContainer}>
+            <Text style={styles.textAcess}>Acesso Híbrido</Text>
 
-          {/* <View style={styles.loginContainerPush}>
+            {/* <View style={styles.loginContainerPush}>
     <ImageBackground source={LoginBarTop} style={styles.loginBarPush}>
       <Text style={styles.loginText}>Faça o login em sua conta</Text>
     </ImageBackground>
 </View>*/}
-          <View>
-            <Image source={Hidra} style={styles.hidraImage} />
-            <ImageBackground source={LoginBarTop} style={styles.loginBarTop}>
-              <View>
-                <TextInput
-                  style={styles.emailInput}
-                  placeholder="Email"
-                  keyboardType="email-address"
-                  textContentType="emailAddress"
-                  value={Form.email}
-                  onChangeText={(str) => setForm({ ...Form, email: str })}
-                />
-                <TextInput
-                  style={styles.passwordInput}
-                  placeholder="Senha"
-                  secureTextEntry={true}
-                  value={Form.pass}
-                  onChangeText={(str) => setForm({ ...Form, pass: str })}
-                />
-              </View>
+            <View>
+              <Image source={Hidra} style={styles.hidraImage} />
+              <ImageBackground source={LoginBarTop} style={styles.loginBarTop}>
+                <View>
+                  <TextInput
+                    style={styles.emailInput}
+                    autoCapitalize="none"
+                    placeholder="Email"
+                    keyboardType="email-address"
+                    textContentType="emailAddress"
+                    value={Form.email}
+                    onChangeText={(str) => setForm({...Form, email: str})}
+                  />
+                  <TextInput
+                    style={styles.passwordInput}
+                    placeholder="Senha"
+                    secureTextEntry={true}
+                    value={Form.pass}
+                    onChangeText={(str) => setForm({...Form, pass: str})}
+                  />
+                </View>
 
-              <TouchableOpacity
-                activeOpacity={0.7}
-                style={styles.loginButton}
-                onPress={() => Login(Form)}>
-                <Text style={styles.textButton}>Login</Text>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={styles.loginButton}
+                  onPress={() => Login(Form)}>
+                  <Text style={styles.textButton}>Login</Text>
+                </TouchableOpacity>
 
-              <Text style={styles.textPasswordRequest}>
-                Acaso esquecer sua senha entre em contato com o diretor da
-                atlética
+                <Text style={styles.textPasswordRequest}>
+                  Acaso esquecer sua senha entre em contato com o diretor da
+                  atlética
                 </Text>
-            </ImageBackground>
+              </ImageBackground>
+            </View>
           </View>
-        </View>
-      </>
-    </SafeAreaView>
+        </>
+      </SafeAreaView>
+    </>
   );
 }
 
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     width: 393,
     height: 400,
   },
-  hidraImage: { marginBottom: -100 },
+  hidraImage: {marginBottom: -100},
   emailInput: {
     marginTop: 10,
     backgroundColor: '#EDF6FF',
