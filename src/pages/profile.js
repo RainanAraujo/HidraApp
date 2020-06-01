@@ -20,6 +20,7 @@ import NoobCard from '../assets/images/noobCard.png';
 import VeteranCard from '../assets/images/veteranCard.png';
 import MonitorCard from '../assets/images/monitorCard.png';
 import MainCard from '../assets/images/mainCard.png';
+import Card from '../components/card';
 import iconHidra from '../assets/images/iconHidra.png';
 import {Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -49,42 +50,15 @@ export default function Profile(data) {
               }}>
               ASSOCIADO
             </Text>
-            <View style={styles.avatar}>
-              <Avatar
-                rounded
-                source={{
-                  uri:
-                    'https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4',
-                }}
-                size={123}
-                containerStyle={{
-                  borderWidth: 5,
-                  borderColor: getPostStyle(data.since, scannedData.post).color,
-                }}
-              />
-            </View>
-            <View style={styles.card}>
-              <ImageBackground
-                source={getPostStyle(data.since, scannedData.post).card}
-                style={styles.cardBackground}
-                resizeMode="contain">
-                <Text style={styles.nameText}>{scannedData.name}</Text>
-                <Text style={styles.titleText}>Curso:</Text>
-                <Text style={styles.subTitleText}>{scannedData.course}</Text>
-                <View style={styles.inforCardRow}>
-                  <View>
-                    <Text style={styles.titleText}>Ano de associação:</Text>
-                    <Text style={styles.subTitleText}>{scannedData.since}</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.titleText}>Idade</Text>
-                    <Text style={styles.subTitleText}>
-                      {scannedData.age}Anos
-                    </Text>
-                  </View>
-                </View>
-              </ImageBackground>
-            </View>
+            <Card
+              avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
+              color={getPostStyle(data.since, scannedData.post).color}
+              cardImage={getPostStyle(data.since, scannedData.post).card}
+              name={scannedData.name}
+              course={scannedData.course}
+              since={scannedData.since}
+              age={scannedData.age}
+            />
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.scanClose}
