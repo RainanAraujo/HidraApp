@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -18,9 +18,9 @@ import DropdownAlert from 'react-native-dropdownalert';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
-import {PanGestureHandler, State} from 'react-native-gesture-handler';
+import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import ApresentationImage from '../assets/images/apresentationImage.png';
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   let offset = 0;
   const [loading, setLoading] = useState(false);
 
@@ -38,12 +38,12 @@ export default function Login({navigation}) {
         },
       },
     ],
-    {useNativeDriver: true},
+    { useNativeDriver: true },
   );
   function onHandlerStateChange(event) {
     if (event.nativeEvent.oldState === State.ACTIVE) {
       let opened = false;
-      const {translationY} = event.nativeEvent;
+      const { translationY } = event.nativeEvent;
       offset += translationY;
       if (translationY <= -100) {
         opened = true;
@@ -66,7 +66,7 @@ export default function Login({navigation}) {
   }
 
   useEffect(() => {
-    if (auth().currentUser != null || true) {
+    if (auth().currentUser != null) {
       setLoading(true);
       loadUserMenu(auth().currentUser.uid);
     }
@@ -80,7 +80,7 @@ export default function Login({navigation}) {
       .then((data) => {
         setLoading(false);
         navigation.navigate('Home', {
-          data: {...data.data(), qrcode: userID},
+          data: { ...data.data(), qrcode: userID },
         });
       })
       .catch((error) => {
@@ -166,17 +166,17 @@ export default function Login({navigation}) {
                   {loading ? (
                     <ActivityIndicator size="large" color="#2343A9" />
                   ) : (
-                    <Animated.Text
-                      style={{
-                        ...styles.loginText,
-                        opacity: translateY.interpolate({
-                          inputRange: [-200, 0, 300],
-                          outputRange: [0, 1, 1],
-                        }),
-                      }}>
-                      Arraste e o faça Login
-                    </Animated.Text>
-                  )}
+                      <Animated.Text
+                        style={{
+                          ...styles.loginText,
+                          opacity: translateY.interpolate({
+                            inputRange: [-200, 0, 300],
+                            outputRange: [0, 1, 1],
+                          }),
+                        }}>
+                        Arraste e o faça Login
+                      </Animated.Text>
+                    )}
                   <Animated.View
                     style={{
                       marginTop: 40,
@@ -194,14 +194,14 @@ export default function Login({navigation}) {
                         keyboardType="email-address"
                         textContentType="emailAddress"
                         value={Form.email}
-                        onChangeText={(str) => setForm({...Form, email: str})}
+                        onChangeText={(str) => setForm({ ...Form, email: str })}
                       />
                       <TextInput
                         style={styles.passwordInput}
                         placeholder="Senha"
                         secureTextEntry={true}
                         value={Form.pass}
-                        onChangeText={(str) => setForm({...Form, pass: str})}
+                        onChangeText={(str) => setForm({ ...Form, pass: str })}
                       />
                     </View>
 
@@ -213,8 +213,8 @@ export default function Login({navigation}) {
                       {loading ? (
                         <ActivityIndicator size="large" color="#ffffff" />
                       ) : (
-                        <Text style={styles.textButton}>Login</Text>
-                      )}
+                          <Text style={styles.textButton}>Login</Text>
+                        )}
                     </TouchableOpacity>
                   </Animated.View>
                 </ImageBackground>
