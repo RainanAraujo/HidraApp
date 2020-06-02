@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 import {
   Text,
@@ -12,19 +12,19 @@ import {
   Image,
   FlatList,
   CameraRoll,
-  ToastAndroid
+  ToastAndroid,
 } from 'react-native';
 
-import { Divider } from 'react-native-elements';
+import {Divider} from 'react-native-elements';
 import ToggleSwitch from 'toggle-switch-react-native';
 import auth from '@react-native-firebase/auth';
 
-export default function Settings({ data, navigation }) {
-
+export default function Settings({data, navigation}) {
   const [defaultToggle, setDefaultToggle] = useState(false);
 
   function logout() {
-    auth().signOut()
+    auth()
+      .signOut()
       .then(() => navigation.navigate('Login'));
   }
 
@@ -32,35 +32,34 @@ export default function Settings({ data, navigation }) {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
 
-      <TouchableOpacity
-        onPress
-        style={styles.button}>
+      <TouchableOpacity onPress style={styles.button}>
         <Text style={styles.textButton}>Baixar Código QR</Text>
       </TouchableOpacity>
-      <Divider style={{ backgroundColor: '#898989' }} />
+      <Divider style={{backgroundColor: '#898989'}} />
 
-      <View style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
+        }}>
         <Text style={styles.textButton}>Notificações</Text>
         <View>
           <ToggleSwitch
             isOn={defaultToggle}
             onColor="#38B124"
             offColor="#ecf0f1"
-            onToggle={(defaultToggle) => {
-              defaultToggle ? setDefaultToggle(true) : setDefaultToggle(false);
+            onToggle={() => {
+              defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
             }}
           />
         </View>
-      </View>
-      <Divider style={{ backgroundColor: '#898989' }} />
+      </TouchableOpacity>
+      <Divider style={{backgroundColor: '#898989'}} />
 
-      <TouchableOpacity
-        onPress={logout}
-        style={styles.button}
-      >
+      <TouchableOpacity onPress={logout} style={styles.button}>
         <Text style={styles.textExitButton}>Sair</Text>
       </TouchableOpacity>
-      <Divider style={{ backgroundColor: '#898989' }} />
+      <Divider style={{backgroundColor: '#898989'}} />
     </SafeAreaView>
   );
 }
