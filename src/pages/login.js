@@ -237,7 +237,7 @@ export default function Login({navigation}) {
                         },
                       ],
                     }}>
-                    <View style={{alignSelf: 'center'}}>
+                    <View style={{alignItems: 'center'}}>
                       <TextInput
                         style={styles.emailInput}
                         autoCapitalize="none"
@@ -355,12 +355,13 @@ const styles = StyleSheet.create({
   },
   loginContainerPush: {
     marginBottom: -230,
+    width: '100%',
     bottom: 0,
     position: 'absolute',
     zIndex: 1,
   },
   loginBarPush: {
-    width: 393,
+    width: '100%',
     height: 400,
     alignItems: 'center',
     paddingTop: 90,
