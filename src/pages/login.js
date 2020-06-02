@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -26,32 +26,47 @@ export default function Login({ navigation }) {
   });
   const [alert, setAlert] = useState({});
 
-  function Login(form) {
+  useEffect(() => {
+    if (auth().currentUser != null || true) {
+      setLoading(true);
+      loadUserMenu(auth().currentUser.uid);
+    }
+  }, []);
 
+  function loadUserMenu(userID) {
+    firestore()
+      .collection('users')
+      .doc(userID)
+      .get()
+      .then((data) => {
+        setLoading(false);
+        navigation.navigate('Home', {
+          data: { ...data.data(), qrcode: userID },
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        alert.alertWithType('error', 'Erro', 'Não foi possivel carregar dados do usuário');
+      });
+  }
+
+  function Login(form) {
     setLoading(true);
     if (form.email && form.pass) {
       auth()
         .signInWithEmailAndPassword(form.email.trim(), form.pass.trim())
         .then((res) => {
-          firestore()
-            .collection('users')
-            .doc(res.user.uid)
-            .get()
-            .then((data) => {
-              setLoading(false);
-              navigation.navigate('Home', {
-                data: { ...data.data(), qrcode: res.user.uid },
-              });
-            })
-            .catch((error) => {
-              setLoading(false);
-              alert.alertWithType('error', 'Erro', 'Não foi possivel carregar dados do usuário');
-            });
+          loadUserMenu(res.user.uid);
         })
         .catch((error) => {
-          console.log(error)
           setLoading(false);
-          alert.alertWithType('error', 'Erro', 'Login Inválido');
+          if (error.code == 'auth/network-request-failed') {
+            alert.alertWithType('error', 'Erro', 'Erro na Rede');
+          } else if (error.code == 'auth/invalid-email') {
+            alert.alertWithType('error', 'Erro', 'Email Inválido');
+          } else {
+            alert.alertWithType('error', 'Erro', 'Login Inválido');
+          }
         });
     } else {
       setLoading(false);
