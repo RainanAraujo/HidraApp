@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -10,6 +10,7 @@ import {
   Image,
   ImageBackground,
   ActivityIndicator,
+  Animated,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -17,14 +18,52 @@ import DropdownAlert from 'react-native-dropdownalert';
 import CircleEffectBack from '../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
-
-export default function Login({ navigation }) {
+import {PanGestureHandler, State} from 'react-native-gesture-handler';
+import ApresentationImage from '../assets/images/apresentationImage.png';
+export default function Login({navigation}) {
+  let offset = 0;
   const [loading, setLoading] = useState(false);
+
   const [Form, setForm] = useState({
     email: '',
     pass: '',
   });
   const [alert, setAlert] = useState({});
+  const translateY = new Animated.Value(0);
+  const animatedEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          translationY: translateY,
+        },
+      },
+    ],
+    {useNativeDriver: true},
+  );
+  function onHandlerStateChange(event) {
+    if (event.nativeEvent.oldState === State.ACTIVE) {
+      let opened = false;
+      const {translationY} = event.nativeEvent;
+      offset += translationY;
+      if (translationY <= -100) {
+        opened = true;
+      } else {
+        translateY.setValue(offset);
+        translateY.setOffset(0);
+        offset = 0;
+      }
+
+      Animated.timing(translateY, {
+        toValue: opened ? -230 : 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start(() => {
+        offset = opened ? -230 : 0;
+        translateY.setOffset(offset);
+        translateY.setValue(0);
+      });
+    }
+  }
 
   useEffect(() => {
     if (auth().currentUser != null || true) {
@@ -41,12 +80,16 @@ export default function Login({ navigation }) {
       .then((data) => {
         setLoading(false);
         navigation.navigate('Home', {
-          data: { ...data.data(), qrcode: userID },
+          data: {...data.data(), qrcode: userID},
         });
       })
       .catch((error) => {
         setLoading(false);
-        alert.alertWithType('error', 'Erro', 'Não foi possivel carregar dados do usuário');
+        alert.alertWithType(
+          'error',
+          'Erro',
+          'Não foi possivel carregar dados do usuário',
+        );
       });
   }
 
@@ -85,51 +128,108 @@ export default function Login({ navigation }) {
           <View style={styles.loginContainer}>
             <Text style={styles.textAcess}>Acesso Híbrido</Text>
 
-            {/* <View style={styles.loginContainerPush}>
-    <ImageBackground source={LoginBarTop} style={styles.loginBarPush}>
-      <Text style={styles.loginText}>Faça o login em sua conta</Text>
-    </ImageBackground>
-</View>*/}
-            <View>
-              <Image source={Hidra} style={styles.hidraImage} />
-              <ImageBackground source={LoginBarTop} style={styles.loginBarTop}>
-                <View>
-                  <TextInput
-                    style={styles.emailInput}
-                    autoCapitalize="none"
-                    placeholder="Email"
-                    keyboardType="email-address"
-                    textContentType="emailAddress"
-                    value={Form.email}
-                    onChangeText={(str) => setForm({ ...Form, email: str })}
-                  />
-                  <TextInput
-                    style={styles.passwordInput}
-                    placeholder="Senha"
-                    secureTextEntry={true}
-                    value={Form.pass}
-                    onChangeText={(str) => setForm({ ...Form, pass: str })}
-                  />
-                </View>
+            <Animated.View
+              style={{
+                alignItems: 'center',
+                opacity: translateY.interpolate({
+                  inputRange: [-200, 0, 300],
+                  outputRange: [0, 1, 1],
+                }),
+              }}>
+              <Image source={ApresentationImage} />
+              <Text style={styles.textApresentation}>
+                Aplicação feita para os associados da Atlética Hidra do
+                Instituto Federal de Educação, Ciência e Tecnologia do Maranhão
+                - Campus Caxias
+              </Text>
+            </Animated.View>
 
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={styles.loginButton}
-                  disabled={loading}
-                  onPress={() => Login(Form)}>
+            <PanGestureHandler
+              onGestureEvent={animatedEvent}
+              onHandlerStateChange={onHandlerStateChange}>
+              <Animated.View
+                style={{
+                  ...styles.loginContainerPush,
+                  transform: [
+                    {
+                      translateY: translateY.interpolate({
+                        inputRange: [-230, 0, 300],
+                        outputRange: [-230, 0, 50],
+                        extrapolate: 'clamp',
+                      }),
+                    },
+                  ],
+                }}>
+                <ImageBackground
+                  source={LoginBarTop}
+                  style={styles.loginBarPush}>
                   {loading ? (
-                    <ActivityIndicator size="large" color="#ffffff" />
+                    <ActivityIndicator size="large" color="#2343A9" />
                   ) : (
-                      <Text style={styles.textButton}>Login</Text>
-                    )}
-                </TouchableOpacity>
+                    <Animated.Text
+                      style={{
+                        ...styles.loginText,
+                        opacity: translateY.interpolate({
+                          inputRange: [-200, 0, 300],
+                          outputRange: [0, 1, 1],
+                        }),
+                      }}>
+                      Arraste e o faça Login
+                    </Animated.Text>
+                  )}
+                  <Animated.View
+                    style={{
+                      marginTop: 40,
+                      opacity: translateY.interpolate({
+                        inputRange: [-230, 0, 0],
+                        outputRange: [1, 0, 0],
+                        extrapolate: 'clamp',
+                      }),
+                    }}>
+                    <View>
+                      <TextInput
+                        style={styles.emailInput}
+                        autoCapitalize="none"
+                        placeholder="Email"
+                        keyboardType="email-address"
+                        textContentType="emailAddress"
+                        value={Form.email}
+                        onChangeText={(str) => setForm({...Form, email: str})}
+                      />
+                      <TextInput
+                        style={styles.passwordInput}
+                        placeholder="Senha"
+                        secureTextEntry={true}
+                        value={Form.pass}
+                        onChangeText={(str) => setForm({...Form, pass: str})}
+                      />
+                    </View>
 
-                <Text style={styles.textPasswordRequest}>
-                  Acaso esquecer sua senha entre em contato com o diretor da
-                  atlética
-                </Text>
-              </ImageBackground>
-            </View>
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.loginButton}
+                      disabled={loading}
+                      onPress={() => Login(Form)}>
+                      {loading ? (
+                        <ActivityIndicator size="large" color="#ffffff" />
+                      ) : (
+                        <Text style={styles.textButton}>Login</Text>
+                      )}
+                    </TouchableOpacity>
+                  </Animated.View>
+                </ImageBackground>
+              </Animated.View>
+            </PanGestureHandler>
+            <Animated.Image
+              source={Hidra}
+              style={{
+                ...styles.hidraImage,
+                opacity: translateY.interpolate({
+                  inputRange: [-230, -200, 0],
+                  outputRange: [1, 0, 0],
+                }),
+              }}
+            />
           </View>
         </>
       </SafeAreaView>
@@ -161,16 +261,20 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
   },
-  loginBarTop: {
+  hidraImageContainer: {
     justifyContent: 'space-around',
-    alignItems: 'center',
     paddingTop: 50,
     width: 393,
     height: 400,
   },
-  hidraImage: { marginBottom: -100 },
+  hidraImage: {
+    transform: [
+      {
+        translateY: -300,
+      },
+    ],
+  },
   emailInput: {
-    marginTop: 10,
     backgroundColor: '#EDF6FF',
     height: 50,
     width: 300,
@@ -217,10 +321,21 @@ const styles = StyleSheet.create({
     width: 393,
     height: 400,
     alignItems: 'center',
-    paddingTop: 100,
+    paddingTop: 90,
   },
   loginText: {
+    marginTop: 90,
+    position: 'absolute',
     fontFamily: 'Nunito-Regular',
     fontSize: 18,
+  },
+  textApresentation: {
+    fontFamily: 'Nunito-Regular',
+    fontSize: 18,
+    color: '#ffffff',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginHorizontal: 30,
+    marginTop: 20,
   },
 });

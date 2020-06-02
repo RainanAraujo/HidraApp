@@ -35,14 +35,6 @@ export default function Profile({ data, navigation }) {
   const [modalApesentation, setModalApresentation] = useState(true);
   const [scannedData, setScaneedData] = useState({});
   const [alert, setAlert] = useState({});
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  React.useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 1000,
-    }).start();
-  }, []);
 
   function QrScan() {
     return (
@@ -134,7 +126,11 @@ export default function Profile({ data, navigation }) {
           }
         })
         .catch((error) => {
-          alert.alertWithType('error', 'Erro', 'Não foi possivel carregar dados do usuário');
+          alert.alertWithType(
+            'error',
+            'Erro',
+            'Não foi possivel carregar dados do usuário',
+          );
           setScanQrVisible(false);
         });
     } else {
@@ -179,7 +175,7 @@ export default function Profile({ data, navigation }) {
             <ModalQr />
 
             <View style={styles.profileContainer}>
-              <Animated.Text style={{ ...styles.textWelcome, opacity: fadeAnim }}>
+              <Animated.Text style={styles.textWelcome}>
                 Olá Híbrido!
             </Animated.Text>
               <View>
