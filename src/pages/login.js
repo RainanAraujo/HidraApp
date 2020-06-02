@@ -45,7 +45,7 @@ export default function Login({navigation}) {
       let opened = false;
       const {translationY} = event.nativeEvent;
       offset += translationY;
-      if (translationY <= -100) {
+      if (translationY <= -70) {
         opened = true;
       } else {
         translateY.setValue(offset);
@@ -133,8 +133,18 @@ export default function Login({navigation}) {
                 alignItems: 'center',
                 opacity: translateY.interpolate({
                   inputRange: [-230, 0, 0],
-                  outputRange: [0, 1, 0],
+                  outputRange: [0, 1, 1],
+                  extrapolate: 'clamp',
                 }),
+                transform: [
+                  {
+                    translateY: translateY.interpolate({
+                      inputRange: [-230, 0, 0],
+                      outputRange: [-50, 0, 0],
+                      extrapolate: 'clamp',
+                    }),
+                  },
+                ],
               }}>
               <Image source={ApresentationImage} />
               <Text style={styles.textApresentation}>
@@ -179,12 +189,21 @@ export default function Login({navigation}) {
                   )}
                   <Animated.View
                     style={{
-                      marginTop: 40,
+                      marginTop: 90,
                       opacity: translateY.interpolate({
                         inputRange: [-230, 0, 0],
                         outputRange: [1, 0, 0],
                         extrapolate: 'clamp',
                       }),
+                      transform: [
+                        {
+                          translateY: translateY.interpolate({
+                            inputRange: [-230, 0, 0],
+                            outputRange: [-70, 0, 0],
+                            extrapolate: 'clamp',
+                          }),
+                        },
+                      ],
                     }}>
                     <View style={styles.formContainer}>
                       <TextInput
