@@ -16,7 +16,7 @@ import {Divider} from 'react-native-elements';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 export default function Settings() {
-  const [defaultToggle, setDefaultToggle] = useState(false);
+  const [defaultToggle, setDefaultToggle] = useState(true);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
@@ -26,19 +26,23 @@ export default function Settings() {
       </TouchableOpacity>
       <Divider style={{backgroundColor: '#898989'}} />
 
-      <View style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
+        }}>
         <Text style={styles.textButton}>Notificações</Text>
         <View>
           <ToggleSwitch
             isOn={defaultToggle}
             onColor="#38B124"
             offColor="#ecf0f1"
-            onToggle={(defaultToggle) => {
-              defaultToggle ? setDefaultToggle(true) : setDefaultToggle(false);
+            onToggle={() => {
+              defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
             }}
           />
         </View>
-      </View>
+      </TouchableOpacity>
       <Divider style={{backgroundColor: '#898989'}} />
 
       <TouchableOpacity style={styles.button}>
