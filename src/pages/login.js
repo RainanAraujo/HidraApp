@@ -237,7 +237,7 @@ export default function Login({navigation}) {
                         },
                       ],
                     }}>
-                    <View style={styles.formContainer}>
+                    <View style={{alignSelf: 'center'}}>
                       <TextInput
                         style={styles.emailInput}
                         autoCapitalize="none"
