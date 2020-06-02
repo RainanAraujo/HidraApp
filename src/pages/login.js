@@ -197,7 +197,16 @@ export default function Login({navigation}) {
                   source={LoginBarTop}
                   style={styles.loginBarPush}>
                   {loading ? (
-                    <ActivityIndicator size="large" color="#2343A9" />
+                    <Animated.View
+                      style={{
+                        opacity: translateY.interpolate({
+                          inputRange: [-230, 0, 0],
+                          outputRange: [0, 1, 0],
+                          extrapolate: 'clamp',
+                        }),
+                      }}>
+                      <ActivityIndicator size="large" color="#2343A9" />
+                    </Animated.View>
                   ) : (
                     <Animated.Text
                       style={{
