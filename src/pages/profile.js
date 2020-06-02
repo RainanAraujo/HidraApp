@@ -27,7 +27,7 @@ import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import QrCodeExemple from '../assets/images/qrCodeExemple.png';
 
-export default function Profile(data) {
+export default function Profile({ data, navigation }) {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [scanQrVisible, setScanQrVisible] = useState(false);

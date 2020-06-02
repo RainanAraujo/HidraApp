@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
   Text,
@@ -11,20 +11,33 @@ import {
   ImageBackground,
   Image,
   FlatList,
+  CameraRoll,
+  ToastAndroid
 } from 'react-native';
-import {Divider} from 'react-native-elements';
-import ToggleSwitch from 'toggle-switch-react-native';
 
-export default function Settings() {
+import { Divider } from 'react-native-elements';
+import ToggleSwitch from 'toggle-switch-react-native';
+import auth from '@react-native-firebase/auth';
+
+export default function Settings({ data, navigation }) {
+
   const [defaultToggle, setDefaultToggle] = useState(false);
+
+  function logout() {
+    auth().signOut()
+      .then(() => navigation.navigate('Login'));
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        onPress
+        style={styles.button}>
         <Text style={styles.textButton}>Baixar Código QR</Text>
       </TouchableOpacity>
-      <Divider style={{backgroundColor: '#898989'}} />
+      <Divider style={{ backgroundColor: '#898989' }} />
 
       <View style={styles.button}>
         <Text style={styles.textButton}>Notificações</Text>
@@ -39,12 +52,15 @@ export default function Settings() {
           />
         </View>
       </View>
-      <Divider style={{backgroundColor: '#898989'}} />
+      <Divider style={{ backgroundColor: '#898989' }} />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        onPress={logout}
+        style={styles.button}
+      >
         <Text style={styles.textExitButton}>Sair</Text>
       </TouchableOpacity>
-      <Divider style={{backgroundColor: '#898989'}} />
+      <Divider style={{ backgroundColor: '#898989' }} />
     </SafeAreaView>
   );
 }
