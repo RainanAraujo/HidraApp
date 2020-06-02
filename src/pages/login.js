@@ -20,16 +20,17 @@ import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import ApresentationImage from '../assets/images/apresentationImage.png';
+import {set} from 'react-native-reanimated';
 export default function Login({navigation}) {
+  const [value, setValue] = useState(0);
+  const translateY = new Animated.Value(value);
   let offset = 0;
   const [loading, setLoading] = useState(false);
-
   const [Form, setForm] = useState({
     email: '',
     pass: '',
   });
   const [alert, setAlert] = useState({});
-  const translateY = new Animated.Value(0);
   const animatedEvent = Animated.event(
     [
       {
@@ -44,9 +45,11 @@ export default function Login({navigation}) {
     if (event.nativeEvent.oldState === State.ACTIVE) {
       let opened = false;
       const {translationY} = event.nativeEvent;
+
       offset += translationY;
       if (translationY <= -70) {
         opened = true;
+        setValue(-230);
       } else {
         translateY.setValue(offset);
         translateY.setOffset(0);
@@ -126,7 +129,17 @@ export default function Login({navigation}) {
           <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
 
           <View style={styles.loginContainer}>
-            <Text style={styles.textAcess}>Acesso Híbrido</Text>
+            <Animated.Text
+              style={{
+                ...styles.textAcess,
+                opacity: translateY.interpolate({
+                  inputRange: [-230, 0, 0],
+                  outputRange: [0, 1, 1],
+                  extrapolate: 'clamp',
+                }),
+              }}>
+              Olá!
+            </Animated.Text>
 
             <Animated.View
               style={{
@@ -170,6 +183,16 @@ export default function Login({navigation}) {
                     },
                   ],
                 }}>
+                <Animated.Image
+                  source={Hidra}
+                  style={{
+                    ...styles.hidraImage,
+                    opacity: translateY.interpolate({
+                      inputRange: [-230, -200, 0],
+                      outputRange: [1, 0, 0],
+                    }),
+                  }}
+                />
                 <ImageBackground
                   source={LoginBarTop}
                   style={styles.loginBarPush}>
@@ -184,7 +207,7 @@ export default function Login({navigation}) {
                           outputRange: [0, 1, 1],
                         }),
                       }}>
-                      Arraste e o faça Login
+                      Arraste para fazer Login
                     </Animated.Text>
                   )}
                   <Animated.View
@@ -213,6 +236,7 @@ export default function Login({navigation}) {
                         keyboardType="email-address"
                         textContentType="emailAddress"
                         value={Form.email}
+                        returnKeyType="next"
                         onChangeText={(str) => setForm({...Form, email: str})}
                       />
                       <TextInput
@@ -239,16 +263,7 @@ export default function Login({navigation}) {
                 </ImageBackground>
               </Animated.View>
             </PanGestureHandler>
-            <Animated.Image
-              source={Hidra}
-              style={{
-                ...styles.hidraImage,
-                opacity: translateY.interpolate({
-                  inputRange: [-230, -200, 0],
-                  outputRange: [1, 0, 0],
-                }),
-              }}
-            />
+            <View></View>
           </View>
         </>
       </SafeAreaView>
@@ -271,14 +286,13 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontFamily: 'Nunito-Regular',
     fontSize: 36,
-    marginTop: 10,
     alignSelf: 'center',
   },
   loginContainer: {
     paddingTop: 20,
     flex: 1,
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
   hidraImageContainer: {
     justifyContent: 'space-around',
@@ -289,7 +303,7 @@ const styles = StyleSheet.create({
   hidraImage: {
     transform: [
       {
-        translateY: -300,
+        translateY: 100,
       },
     ],
   },
