@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import {
   Text,
@@ -13,7 +13,7 @@ import {
   Animated,
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import {RNCamera} from 'react-native-camera';
+import { RNCamera } from 'react-native-camera';
 import DropdownAlert from 'react-native-dropdownalert';
 import QRCode from 'react-native-qrcode-svg';
 import firestore from '@react-native-firebase/firestore';
@@ -23,11 +23,12 @@ import MonitorCard from '../assets/images/monitorCard.png';
 import MainCard from '../assets/images/mainCard.png';
 import Card from '../components/card';
 import iconHidra from '../assets/images/iconHidra.png';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import QrCodeExemple from '../assets/images/qrCodeExemple.png';
 
-export default function Profile(data) {
+export default function Profile({ data, navigation }) {
+
   const [modalVisible, setModalVisible] = useState(false);
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [scannedQrVisible, setScaneedQrVisible] = useState(false);
@@ -170,46 +171,46 @@ export default function Profile(data) {
       {scanQrVisible ? (
         <QrScan />
       ) : (
-        <>
-          <ModalQr />
+          <>
+            <ModalQr />
 
-          <View style={styles.profileContainer}>
-            <Animated.Text style={styles.textWelcome}>
-              Olá Híbrido!
+            <View style={styles.profileContainer}>
+              <Animated.Text style={styles.textWelcome}>
+                Olá Híbrido!
             </Animated.Text>
-            <View>
-              <Card
-                avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
-                data={data}
-              />
               <View>
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={styles.qrCodeButton}
-                  onPress={() => {
-                    setModalVisible(true);
-                  }}>
-                  <Image
-                    source={QrCodeExemple}
-                    style={{width: 50, height: 50}}
-                  />
-                </TouchableOpacity>
-                <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
+                <Card
+                  avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
+                  data={data}
+                />
+                <View>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={styles.qrCodeButton}
+                    onPress={() => {
+                      setModalVisible(true);
+                    }}>
+                    <Image
+                      source={QrCodeExemple}
+                      style={{ width: 50, height: 50 }}
+                    />
+                  </TouchableOpacity>
+                  <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
+                </View>
               </View>
-            </View>
 
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={styles.scanButton}
-              onPress={() => {
-                setScanQrVisible(true);
-              }}>
-              <Text style={styles.textButton}>Escanear Híbrido</Text>
-              <Icon name="camera" color="#ffffff" size={20} />
-            </TouchableOpacity>
-          </View>
-        </>
-      )}
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.scanButton}
+                onPress={() => {
+                  setScanQrVisible(true);
+                }}>
+                <Text style={styles.textButton}>Escanear Híbrido</Text>
+                <Icon name="camera" color="#ffffff" size={20} />
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
     </SafeAreaView>
   );
 }
