@@ -13,27 +13,42 @@ import {
   FlatList,
   CameraRoll,
   ToastAndroid,
+  Modal,
 } from 'react-native';
 
 import {Divider} from 'react-native-elements';
 import ToggleSwitch from 'toggle-switch-react-native';
 import auth from '@react-native-firebase/auth';
+import {set} from 'react-native-reanimated';
 
 export default function Settings({data, navigation}) {
   const [defaultToggle, setDefaultToggle] = useState(false);
-
+  const [modalVisible, setModalVisible] = useState(false);
   function logout() {
     auth()
       .signOut()
       .then(() => navigation.navigate('Login'));
   }
+  function ModalPassword() {
+    return (
+      <Modal animationType="fade" transparent={true} visible={modalVisible}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalView}></View>
+        </View>
+      </Modal>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-
-      <TouchableOpacity onPress style={styles.button}>
-        <Text style={styles.textButton}>Baixar Código QR</Text>
+      <ModalPassword />
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(true);
+        }}
+        style={styles.button}>
+        <Text style={styles.textButton}>Alterar Senha</Text>
       </TouchableOpacity>
       <Divider style={{backgroundColor: '#898989'}} />
 
@@ -87,5 +102,24 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: 'Nunito-Regular',
     fontSize: 18,
+  },
+  modalContainer: {
+    backgroundColor: '#ffffff75',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
   },
 });
