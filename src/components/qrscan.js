@@ -70,7 +70,7 @@ export default function QrScan(props) {
     <>
       <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
       {scannedQrVisible ? (
-        <Modal animationType="fade" transparent={true} visible={true}>
+        <Modal animationType="fade" visible={true}>
           <View style={styles.modalContainer}>
             <Text
               style={{
@@ -120,7 +120,6 @@ export default function QrScan(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
   },
   profileContainer: {
     flex: 1,
