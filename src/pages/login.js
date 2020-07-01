@@ -20,7 +20,7 @@ import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import ApresentationImage from '../assets/images/apresentationImage.png';
-import Qrscan from '../components/qrscan';
+import QrScan from '../components/qrscan';
 import Icon from 'react-native-vector-icons/Feather';
 import QrCodeExemple from '../assets/images/qrCodeExemple.png';
 export default function Login({navigation}) {
@@ -128,7 +128,7 @@ export default function Login({navigation}) {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#3251B2" />
       {scanQrVisible ? (
-        <QrScan />
+        <QrScan setScanQrState={setScanQrVisible} scanQrState={scanQrVisible} />
       ) : (
         <>
           <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
@@ -136,9 +136,14 @@ export default function Login({navigation}) {
           <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
 
           <View style={styles.loginContainer}>
-            <TouchableOpacity style={styles.scanButton}>
+            <TouchableOpacity
+              style={styles.scanButton}
+              onPress={() => {
+                setScanQrVisible(true);
+              }}>
               <Image source={QrCodeExemple} style={{width: 30, height: 30}} />
             </TouchableOpacity>
+
             <Animated.Text
               style={{
                 ...styles.textAcess,
