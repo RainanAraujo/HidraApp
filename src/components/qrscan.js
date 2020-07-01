@@ -127,13 +127,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
   },
-  textWelcome: {
-    color: '#484D55',
-    fontFamily: 'Nunito-Regular',
-    fontSize: 36,
-    marginTop: 10,
-    alignSelf: 'center',
-  },
+
   card: {
     paddingTop: 55,
     aspectRatio: 4 / 5,
@@ -148,17 +142,7 @@ const styles = StyleSheet.create({
     marginBottom: -200,
     zIndex: 1,
   },
-  scanButton: {
-    marginTop: 30,
-    backgroundColor: '#2343A9',
-    height: 50,
-    width: 300,
-    borderRadius: 50,
-    paddingHorizontal: 30,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
-  },
+
   scanClose: {
     marginTop: 30,
     backgroundColor: 'red',
@@ -168,16 +152,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  downloadScanButton: {
-    marginTop: 30,
-    backgroundColor: '#38B124',
-    height: 50,
-    width: 50,
-    marginLeft: 20,
-    borderRadius: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   qrCodeButton: {
     marginTop: -40,
     backgroundColor: '#ffffff',
@@ -193,11 +168,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Regular',
     alignSelf: 'center',
   },
-  textButton: {
-    color: '#ffffff',
-    fontFamily: 'Nunito-SemiBold',
-    fontSize: 18,
-  },
+
   titleText: {
     color: '#ffffff',
     fontFamily: 'Nunito-SemiBold',
@@ -242,5 +213,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  textWelcome: {
+    color: '#484D55',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 36,
+    marginTop: 10,
+    alignSelf: 'center',
   },
 });

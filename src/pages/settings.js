@@ -15,7 +15,7 @@ import {
   ToastAndroid,
   Modal,
 } from 'react-native';
-
+import ChangePasswordModal from '../components/changePassword';
 import {Divider} from 'react-native-elements';
 import ToggleSwitch from 'toggle-switch-react-native';
 import auth from '@react-native-firebase/auth';
@@ -23,6 +23,7 @@ import DropdownAlert from 'react-native-dropdownalert';
 import Icon from 'react-native-vector-icons/Feather';
 
 export default function Settings({data, navigation}) {
+  const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
   const [defaultToggle, setDefaultToggle] = useState(false);
   const [alert, setAlert] = useState({});
   const [PasswordVisible, setPasswordVisible] = useState(false);
@@ -51,58 +52,53 @@ export default function Settings({data, navigation}) {
       });
   }
 
-  function ModalPassword() {
-    return (
-      <Modal animationType="fade" transparent={true} visible={PasswordVisible}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalView}></View>
-        </View>
-      </Modal>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
-      <ModalPassword />
-      <TouchableOpacity
-        onPress={() => setPasswordVisible(true)}
-        style={styles.button}>
-        <View style={styles.iconAdjustWithName}>
-          <Icon name="lock" size={20} />
-          <Text style={styles.textButton}>Alterar Senha</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
-        }}>
+      {modalPasswordVisible ? (
+        <ChangePasswordModal onClose={() => setModalPasswordVisible(false)} />
+      ) : (
         <>
-          <View style={styles.iconAdjustWithName}>
-            <Icon name="bell" size={20} />
-            <Text style={styles.textButton}>Notificações</Text>
-          </View>
-          <View>
-            <ToggleSwitch
-              isOn={defaultToggle}
-              onColor="#38B124"
-              offColor="#ecf0f1"
-              onToggle={() => {
-                defaultToggle
-                  ? setDefaultToggle(false)
-                  : setDefaultToggle(true);
-              }}
-            />
-          </View>
-        </>
-      </TouchableOpacity>
+          <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
+          <TouchableOpacity
+            onPress={() => setModalPasswordVisible(true)}
+            style={styles.button}>
+            <View style={styles.iconAdjustWithName}>
+              <Icon name="lock" size={20} />
+              <Text style={styles.textButton}>Alterar Senha</Text>
+            </View>
+          </TouchableOpacity>
 
-      <TouchableOpacity onPress={Logout} style={styles.button}>
-        <Text style={styles.textExitButton}>Sair</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
+            }}>
+            <>
+              <View style={styles.iconAdjustWithName}>
+                <Icon name="bell" size={20} />
+                <Text style={styles.textButton}>Notificações</Text>
+              </View>
+              <View>
+                <ToggleSwitch
+                  isOn={defaultToggle}
+                  onColor="#38B124"
+                  offColor="#ecf0f1"
+                  onToggle={() => {
+                    defaultToggle
+                      ? setDefaultToggle(false)
+                      : setDefaultToggle(true);
+                  }}
+                />
+              </View>
+            </>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={Logout} style={styles.button}>
+            <Text style={styles.textExitButton}>Sair</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </SafeAreaView>
   );
 }
