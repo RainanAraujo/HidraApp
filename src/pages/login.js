@@ -23,6 +23,7 @@ import ApresentationImage from '../assets/images/apresentationImage.png';
 import QrScan from '../components/qrscan';
 import Icon from 'react-native-vector-icons/Feather';
 import QrCodeExemple from '../assets/images/qrCodeExemple.png';
+
 export default function Login({navigation}) {
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [value, setValue] = useState(0);
@@ -128,12 +129,14 @@ export default function Login({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#3251B2" />
+      <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
       {scanQrVisible ? (
-        <QrScan setScanQrState={setScanQrVisible} scanQrState={scanQrVisible} />
+        <QrScan
+          onError={(msg) => alert.alertWithType('error', 'Erro', msg)}
+          onClose={() => setScanQrVisible(false)}
+        />
       ) : (
         <>
-          <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
-
           <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
 
           <View style={styles.loginContainer}>

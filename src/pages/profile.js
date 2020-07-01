@@ -100,9 +100,7 @@ export default function Profile({data, navigation}) {
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.scanClose}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}>
+              onPress={() => setModalVisible(!modalVisible)}>
               <Icon name="times" color="#ffffff" size={17} />
             </TouchableOpacity>
             <TouchableOpacity

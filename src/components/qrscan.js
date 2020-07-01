@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet, Modal} from 'react-native';
+import DropdownAlert from 'react-native-dropdownalert';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import firestore from '@react-native-firebase/firestore';
 import NoobCard from '../assets/images/noobCard.png';
@@ -9,7 +10,7 @@ import MainCard from '../assets/images/mainCard.png';
 import Card from '../components/card';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function QrScan({data, navigation}, props) {
+export default function QrScan(props) {
   const [scannedQrVisible, setScaneedQrVisible] = useState(false);
   const [scannedData, setScaneedData] = useState({});
   const [alert, setAlert] = useState({});
@@ -25,21 +26,18 @@ export default function QrScan({data, navigation}, props) {
             setScaneedData(data.data());
             setScaneedQrVisible(true);
           } else {
-            alert.alertWithType('error', 'Erro', 'Codigo inválido');
-            props.setScanQrState(false);
+            props.onError('Codigo inválido');
+            props.onClose();
           }
         })
         .catch((error) => {
-          alert.alertWithType(
-            'error',
-            'Erro',
-            'Não foi possivel carregar dados do usuário',
-          );
-          props.setScanQrState(false);
+          console.log(error);
+          props.onError('Não foi possivel carregar dados do usuário');
+          props.onClose();
         });
     } else {
-      alert.alertWithType('error', 'Erro', 'Codigo inválido');
-      props.setScanQrState(false);
+      props.onError('Codigo inválido');
+      props.onClose();
     }
   };
 
@@ -70,34 +68,35 @@ export default function QrScan({data, navigation}, props) {
 
   return (
     <>
-      <Modal animationType="fade" transparent={true} visible={scannedQrVisible}>
-        <View style={styles.modalContainer}>
-          <Text
-            style={{
-              ...styles.textWelcome,
-              color: '#519918',
-              marginBottom: 30,
-              fontFamily: 'Nunito-Bold',
-            }}>
-            ASSOCIADO
-          </Text>
-          <Card
-            avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
-            data={scannedData}
-          />
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.scanClose}
-            onPress={() => {
-              setScaneedQrVisible(false);
-              props.setScanQrState(false);
-              setScaneedData({});
-            }}>
-            <Icon name="times" color="#ffffff" size={17} />
-          </TouchableOpacity>
-        </View>
-      </Modal>
-      {scannedQrVisible ? null : (
+      <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
+      {scannedQrVisible ? (
+        <Modal animationType="fade" transparent={true} visible={true}>
+          <View style={styles.modalContainer}>
+            <Text
+              style={{
+                ...styles.textWelcome,
+                color: '#519918',
+                marginBottom: 30,
+                fontFamily: 'Nunito-Bold',
+              }}>
+              ASSOCIADO
+            </Text>
+            <Card
+              avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
+              data={scannedData}
+            />
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.scanClose}
+              onPress={() => {
+                setScaneedQrVisible(false);
+                setScaneedData({});
+              }}>
+              <Icon name="times" color="#ffffff" size={17} />
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      ) : (
         <QRCodeScanner
           onRead={QRScanned}
           showMarker={true}
@@ -107,7 +106,7 @@ export default function QrScan({data, navigation}, props) {
               activeOpacity={0.7}
               style={styles.scanClose}
               onPress={() => {
-                props.setScanQrState(!props.scanQrState);
+                props.onClose();
               }}>
               <Icon name="times" color="#ffffff" size={17} />
             </TouchableOpacity>
