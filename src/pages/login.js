@@ -30,6 +30,7 @@ export default function Login({navigation}) {
     email: '',
     pass: '',
   });
+
   const [alert, setAlert] = useState({});
   const animatedEvent = Animated.event(
     [
@@ -41,6 +42,7 @@ export default function Login({navigation}) {
     ],
     {useNativeDriver: true},
   );
+
   function onHandlerStateChange(event) {
     if (event.nativeEvent.oldState === State.ACTIVE) {
       let opened = false;

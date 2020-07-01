@@ -19,19 +19,40 @@ import {
 import {Divider} from 'react-native-elements';
 import ToggleSwitch from 'toggle-switch-react-native';
 import auth from '@react-native-firebase/auth';
-import {set} from 'react-native-reanimated';
+import DropdownAlert from 'react-native-dropdownalert';
 
 export default function Settings({data, navigation}) {
   const [defaultToggle, setDefaultToggle] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  function logout() {
+  const [alert, setAlert] = useState({});
+  const [PasswordVisible, setPasswordVisible] = useState(false);
+
+  function Logout() {
     auth()
       .signOut()
       .then(() => navigation.navigate('Login'));
   }
+
+  function ChangePassword(oldPassword, newPassword) {
+    this.reauthenticate(oldPassword)
+      .then(() => {
+        var user = firebase.auth().currentUser;
+        user
+          .updatePassword(newPassword)
+          .then(() => {
+            alert.alertWithType('success', 'Sucesso', 'Senha Alterada');
+          })
+          .catch((error) => {
+            alert.alertWithType('error', 'Erro', 'Erro ao Trocar Senha');
+          });
+      })
+      .catch((error) => {
+        alert.alertWithType('error', 'Erro', 'Senha Incorreta');
+      });
+  }
+
   function ModalPassword() {
     return (
-      <Modal animationType="fade" transparent={true} visible={modalVisible}>
+      <Modal animationType="fade" transparent={true} visible={PasswordVisible}>
         <View style={styles.modalContainer}>
           <View style={styles.modalView}></View>
         </View>
@@ -42,11 +63,10 @@ export default function Settings({data, navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
       <ModalPassword />
       <TouchableOpacity
-        onPress={() => {
-          setModalVisible(true);
-        }}
+        onPress={() => setPasswordVisible(true)}
         style={styles.button}>
         <Text style={styles.textButton}>Alterar Senha</Text>
       </TouchableOpacity>
@@ -71,7 +91,7 @@ export default function Settings({data, navigation}) {
       </TouchableOpacity>
       <Divider style={{backgroundColor: '#898989'}} />
 
-      <TouchableOpacity onPress={logout} style={styles.button}>
+      <TouchableOpacity onPress={Logout} style={styles.button}>
         <Text style={styles.textExitButton}>Sair</Text>
       </TouchableOpacity>
       <Divider style={{backgroundColor: '#898989'}} />
