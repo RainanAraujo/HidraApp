@@ -33,6 +33,7 @@ export default function Login({navigation}) {
     email: '',
     pass: '',
   });
+
   const [alert, setAlert] = useState({});
   const animatedEvent = Animated.event(
     [
