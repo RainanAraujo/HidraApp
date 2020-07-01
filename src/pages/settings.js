@@ -20,6 +20,7 @@ import {Divider} from 'react-native-elements';
 import ToggleSwitch from 'toggle-switch-react-native';
 import auth from '@react-native-firebase/auth';
 import {set} from 'react-native-reanimated';
+import Icon from 'react-native-vector-icons/Feather';
 
 export default function Settings({data, navigation}) {
   const [defaultToggle, setDefaultToggle] = useState(false);
@@ -48,7 +49,10 @@ export default function Settings({data, navigation}) {
           setModalVisible(true);
         }}
         style={styles.button}>
-        <Text style={styles.textButton}>Alterar Senha</Text>
+        <View style={styles.iconAdjustWithName}>
+          <Icon name="lock" size={20} />
+          <Text style={styles.textButton}>Alterar Senha</Text>
+        </View>
       </TouchableOpacity>
       <Divider style={{backgroundColor: '#898989'}} />
 
@@ -57,17 +61,24 @@ export default function Settings({data, navigation}) {
         onPress={() => {
           defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
         }}>
-        <Text style={styles.textButton}>Notificações</Text>
-        <View>
-          <ToggleSwitch
-            isOn={defaultToggle}
-            onColor="#38B124"
-            offColor="#ecf0f1"
-            onToggle={() => {
-              defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
-            }}
-          />
-        </View>
+        <>
+          <View style={styles.iconAdjustWithName}>
+            <Icon name="bell" size={20} />
+            <Text style={styles.textButton}>Notificações</Text>
+          </View>
+          <View>
+            <ToggleSwitch
+              isOn={defaultToggle}
+              onColor="#38B124"
+              offColor="#ecf0f1"
+              onToggle={() => {
+                defaultToggle
+                  ? setDefaultToggle(false)
+                  : setDefaultToggle(true);
+              }}
+            />
+          </View>
+        </>
       </TouchableOpacity>
       <Divider style={{backgroundColor: '#898989'}} />
 
@@ -94,6 +105,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   textButton: {
+    marginLeft: 8,
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
     fontSize: 18,
@@ -121,5 +133,9 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
+  },
+  iconAdjustWithName: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

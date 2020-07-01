@@ -44,19 +44,6 @@ export default function Home({navigation, route}) {
             ),
           }}
         />
-        <Tab.Screen
-          name="Parcerias"
-          component={Partnerships}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <Icon
-                name="dollar-sign"
-                size={20}
-                color={focused ? '#141414' : '#A4A4A4'}
-              />
-            ),
-          }}
-        />
 
         <Tab.Screen
           name="Membros"
@@ -65,6 +52,19 @@ export default function Home({navigation, route}) {
             tabBarIcon: ({focused}) => (
               <Icon
                 name="users"
+                size={20}
+                color={focused ? '#141414' : '#A4A4A4'}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Parcerias"
+          component={Partnerships}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <Icon
+                name="dollar-sign"
                 size={20}
                 color={focused ? '#141414' : '#A4A4A4'}
               />
