@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React, {useEffect, useState} from 'react';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Profile from './profile';
 import Partnerships from './partnerships';
+import Members from './members';
 import Settings from './settings';
 import DropdownAlert from 'react-native-dropdownalert';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 const Tab = createMaterialTopTabNavigator();
 
-export default function Home({ navigation, route }) {
+export default function Home({navigation, route}) {
   const [data, setData] = useState({
     name: '',
     course: '',
@@ -30,11 +31,13 @@ export default function Home({ navigation, route }) {
         }}>
         <Tab.Screen
           name="Perfil"
-          component={() => Profile({ data: route.params.data, navigation: navigation })}
+          component={() =>
+            Profile({data: route.params.data, navigation: navigation})
+          }
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Icon
-                name="user-circle"
+                name="home"
                 size={20}
                 color={focused ? '#141414' : '#A4A4A4'}
               />
@@ -45,7 +48,21 @@ export default function Home({ navigation, route }) {
           name="Parcerias"
           component={Partnerships}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
+              <Icon
+                name="dollar-sign"
+                size={20}
+                color={focused ? '#141414' : '#A4A4A4'}
+              />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name="Membros"
+          component={Members}
+          options={{
+            tabBarIcon: ({focused}) => (
               <Icon
                 name="users"
                 size={20}
@@ -56,11 +73,13 @@ export default function Home({ navigation, route }) {
         />
         <Tab.Screen
           name="Definições"
-          component={() => Settings({ data: route.params.data, navigation: navigation })}
+          component={() =>
+            Settings({data: route.params.data, navigation: navigation})
+          }
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Icon
-                name="cog"
+                name="settings"
                 size={20}
                 color={focused ? '#141414' : '#A4A4A4'}
               />
