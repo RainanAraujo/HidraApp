@@ -25,6 +25,11 @@ export default function Home({navigation, route}) {
         tabBarOptions={{
           showIcon: true,
           showLabel: false,
+          style: {
+            backgroundColor: '#F9F9F9',
+            borderTopColor: '#F6F6F6',
+            borderTopWidth: 1,
+          },
           indicatorStyle: {
             backgroundColor: '#ffffff',
           },

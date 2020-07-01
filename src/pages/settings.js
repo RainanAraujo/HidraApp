@@ -54,7 +54,6 @@ export default function Settings({data, navigation}) {
           <Text style={styles.textButton}>Alterar Senha</Text>
         </View>
       </TouchableOpacity>
-      <Divider style={{backgroundColor: '#898989'}} />
 
       <TouchableOpacity
         style={styles.button}
@@ -80,12 +79,10 @@ export default function Settings({data, navigation}) {
           </View>
         </>
       </TouchableOpacity>
-      <Divider style={{backgroundColor: '#898989'}} />
 
       <TouchableOpacity onPress={logout} style={styles.button}>
         <Text style={styles.textExitButton}>Sair</Text>
       </TouchableOpacity>
-      <Divider style={{backgroundColor: '#898989'}} />
     </SafeAreaView>
   );
 }
