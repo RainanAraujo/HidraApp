@@ -20,8 +20,11 @@ import LoginBarTop from '../assets/images/loginBarWithHidra.png';
 import Hidra from '../assets/images/hidra.png';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import ApresentationImage from '../assets/images/apresentationImage.png';
-import {set} from 'react-native-reanimated';
+import Qrscan from '../components/qrscan';
+import Icon from 'react-native-vector-icons/Feather';
+import QrCodeExemple from '../assets/images/qrCodeExemple.png';
 export default function Login({navigation}) {
+  const [scanQrVisible, setScanQrVisible] = useState(false);
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
   let offset = 0;
@@ -123,14 +126,20 @@ export default function Login({navigation}) {
   }
 
   return (
-    <>
+    <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#3251B2" />
-      <SafeAreaView style={styles.container}>
+      {scanQrVisible ? (
+        <QrScan />
+      ) : (
         <>
           <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
+
           <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
 
           <View style={styles.loginContainer}>
+            <TouchableOpacity style={styles.scanButton}>
+              <Image source={QrCodeExemple} style={{width: 30, height: 30}} />
+            </TouchableOpacity>
             <Animated.Text
               style={{
                 ...styles.textAcess,
@@ -277,8 +286,8 @@ export default function Login({navigation}) {
             <View></View>
           </View>
         </>
-      </SafeAreaView>
-    </>
+      )}
+    </SafeAreaView>
   );
 }
 
@@ -382,5 +391,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 30,
     marginTop: 20,
+  },
+  scanButton: {
+    position: 'absolute',
+    right: 20,
+    top: 30,
+    backgroundColor: '#FFFFFF',
+    height: 60,
+    width: 60,
+    borderRadius: 50,
+    paddingHorizontal: 3,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
 });
