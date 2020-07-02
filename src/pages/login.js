@@ -140,14 +140,6 @@ export default function Login({navigation}) {
           <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
 
           <View style={styles.loginContainer}>
-            <TouchableOpacity
-              style={styles.scanButton}
-              onPress={() => {
-                setScanQrVisible(true);
-              }}>
-              <Image source={QrCodeExemple} style={{width: 30, height: 30}} />
-            </TouchableOpacity>
-
             <Animated.Text
               style={{
                 ...styles.textAcess,
@@ -235,7 +227,8 @@ export default function Login({navigation}) {
                           outputRange: [0, 1, 1],
                         }),
                       }}>
-                      Arraste para fazer Login
+                      ARRASTE <Icon name="arrow-up" color="#000" size={20} />{' '}
+                      PARA FAZER LOGIN
                     </Animated.Text>
                   )}
                   <Animated.View
@@ -286,6 +279,15 @@ export default function Login({navigation}) {
                       ) : (
                         <Text style={styles.textButton}>Login</Text>
                       )}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.scanButton}
+                      onPress={() => {
+                        setScanQrVisible(true);
+                      }}>
+                      <Text style={styles.textButton}>Escanear Híbrido</Text>
+                      <Icon name="camera" color="#ffffff" size={20} />
                     </TouchableOpacity>
                   </Animated.View>
                 </ImageBackground>
@@ -351,8 +353,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   loginButton: {
-    marginTop: 30,
-    backgroundColor: '#2343A9',
+    marginTop: 10,
+    backgroundColor: '#519918',
     height: 50,
     width: 300,
     borderRadius: 50,
@@ -401,15 +403,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   scanButton: {
-    position: 'absolute',
-    right: 20,
-    top: 30,
-    backgroundColor: '#FFFFFF',
-    height: 60,
-    width: 60,
+    marginTop: 30,
+    backgroundColor: '#2343A9',
+    height: 50,
+    width: 300,
     borderRadius: 50,
-    paddingHorizontal: 3,
+    paddingHorizontal: 30,
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    flexDirection: 'row',
   },
 });
