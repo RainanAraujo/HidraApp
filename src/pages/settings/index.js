@@ -26,30 +26,6 @@ export default function Settings({data, navigation}) {
   const [alert, setAlert] = useState({});
   const [PasswordVisible, setPasswordVisible] = useState(false);
 
-  function Logout() {
-    auth()
-      .signOut()
-      .then(() => navigation.navigate('Login'));
-  }
-
-  function ChangePassword(oldPassword, newPassword) {
-    this.reauthenticate(oldPassword)
-      .then(() => {
-        var user = firebase.auth().currentUser;
-        user
-          .updatePassword(newPassword)
-          .then(() => {
-            alert.alertWithType('success', 'Sucesso', 'Senha Alterada');
-          })
-          .catch((error) => {
-            alert.alertWithType('error', 'Erro', 'Erro ao Trocar Senha');
-          });
-      })
-      .catch((error) => {
-        alert.alertWithType('error', 'Erro', 'Senha Incorreta');
-      });
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
@@ -92,7 +68,7 @@ export default function Settings({data, navigation}) {
             </>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={Logout} style={styles.button}>
+          <TouchableOpacity onPress={} style={styles.button}>
             <Text style={styles.textExitButton}>Sair</Text>
           </TouchableOpacity>
         </>
