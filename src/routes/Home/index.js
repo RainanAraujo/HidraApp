@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Profile from '../../pages/profile';
-import Partnerships from '../../pages/partnerships';
-import Members from '../../pages/members';
-import Settings from '../../pages/settings';
+import Profile from '../../pages/Profile';
+import Partnerships from '../../pages/Partnerships';
+import Members from '../../pages/Members';
+import Settings from '../../pages/Settings';
 import Icon from 'react-native-vector-icons/Feather';
 import {styles} from './styles';
 
