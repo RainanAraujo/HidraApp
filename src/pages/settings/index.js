@@ -4,7 +4,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  StyleSheet,
   StatusBar,
   TextInput,
   SafeAreaView,
@@ -15,8 +14,7 @@ import {
   ToastAndroid,
   Modal,
 } from 'react-native';
-import ChangePasswordModal from '../components/changePassword';
-import {Divider} from 'react-native-elements';
+import ChangePasswordModal from '../../components/changePassword';
 import ToggleSwitch from 'toggle-switch-react-native';
 import auth from '@react-native-firebase/auth';
 import DropdownAlert from 'react-native-dropdownalert';

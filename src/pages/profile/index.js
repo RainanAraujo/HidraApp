@@ -14,13 +14,13 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import DropdownAlert from 'react-native-dropdownalert';
 import QRCode from 'react-native-qrcode-svg';
 import firestore from '@react-native-firebase/firestore';
-import NoobCard from '../assets/images/noobCard.png';
-import VeteranCard from '../assets/images/veteranCard.png';
-import MonitorCard from '../assets/images/monitorCard.png';
-import MainCard from '../assets/images/mainCard.png';
-import Card from '../components/card';
+import NoobCard from '../../assets/images/noobCard.png';
+import VeteranCard from '../../assets/images/veteranCard.png';
+import MonitorCard from '../../assets/images/monitorCard.png';
+import MainCard from '../../assets/images/mainCard.png';
+import Card from '../../components/card';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import QrCodeExemple from '../assets/images/qrCodeExemple.png';
+import QrCodeExemple from '../../assets/images/qrCodeExemple.png';
 
 export default function Profile({data, navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
