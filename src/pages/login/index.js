@@ -23,18 +23,13 @@ import QrScan from '../components/qrscan';
 import Icon from 'react-native-vector-icons/Feather';
 import TextInput from '../components/TextInput/index';
 import LoginBar from '../components/LoginBar/index';
+import styles from './styles';
+
 export default function Login({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#3251B2" />
+      <StatusBar barStyle="light-content" style={styles.StatusBar} />
       <LoginBar />
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#2242A7',
-  },
-});

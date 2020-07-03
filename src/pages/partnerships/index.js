@@ -1,18 +1,8 @@
 import React from 'react';
-
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  StatusBar,
-  TextInput,
-  SafeAreaView,
-  ImageBackground,
-  Image,
-  FlatList,
-} from 'react-native';
+import {Text, View, StatusBar, SafeAreaView, FlatList} from 'react-native';
 import {Avatar} from 'react-native-elements';
+import styles from './styles';
+
 const DATA = [
   {
     name: 'JR Cabelos',
@@ -22,6 +12,7 @@ const DATA = [
     per: '10,00',
   },
 ];
+
 export default function Profile() {
   return (
     <SafeAreaView style={styles.container}>
@@ -58,53 +49,3 @@ export default function Profile() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  grid: {
-    flexDirection: 'row',
-    marginHorizontal: 10,
-    marginBottom: 10,
-    height: 100,
-    width: 350,
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-    borderRadius: 10,
-    margin: 20,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.25,
-    shadowRadius: 2.84,
-    elevation: 2,
-  },
-  avatar: {
-    flexDirection: 'row',
-    marginLeft: 10,
-    alignItems: 'center',
-  },
-  textInfo: {
-    color: '#484D55',
-    fontFamily: 'Nunito-Regular',
-    marginBottom: 3,
-    marginLeft: 10,
-  },
-  textPriceBefore: {
-    color: '#FC1818',
-    fontFamily: 'Nunito-Regular',
-    fontSize: 9,
-  },
-  textPriceAfter: {
-    color: '#38B124',
-    fontFamily: 'Nunito-Regular',
-    fontSize: 17,
-  },
-  pricesContent: {
-    alignSelf: 'flex-end',
-    marginRight: 10,
-    marginBottom: 10,
-  },
-});
