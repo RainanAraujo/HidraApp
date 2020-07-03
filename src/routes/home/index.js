@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Profile from './profile';
-import Partnerships from './partnerships';
-import Members from './members';
-import Settings from './settings';
-import DropdownAlert from 'react-native-dropdownalert';
+import Profile from '../../pages/profile';
+import Partnerships from '../../pages/partnerships';
+import Members from '../../pages/members';
+import Settings from '../../pages/settings';
 import Icon from 'react-native-vector-icons/Feather';
+import {styles} from './styles';
+
 const Tab = createMaterialTopTabNavigator();
 
 export default function Home({navigation, route}) {
@@ -25,11 +26,7 @@ export default function Home({navigation, route}) {
         tabBarOptions={{
           showIcon: true,
           showLabel: false,
-          style: {
-            backgroundColor: '#F9F9F9',
-            borderTopColor: '#F6F6F6',
-            borderTopWidth: 1,
-          },
+          style: styles.tabBarOptions,
           indicatorStyle: {
             backgroundColor: '#ffffff',
           },
@@ -44,7 +41,11 @@ export default function Home({navigation, route}) {
               <Icon
                 name="home"
                 size={20}
-                color={focused ? '#141414' : '#A4A4A4'}
+                color={
+                  focused
+                    ? styles.componentSelected
+                    : styles.componentNotSelected
+                }
               />
             ),
           }}
@@ -58,7 +59,11 @@ export default function Home({navigation, route}) {
               <Icon
                 name="users"
                 size={20}
-                color={focused ? '#141414' : '#A4A4A4'}
+                color={
+                  focused
+                    ? styles.componentSelected
+                    : styles.componentNotSelected
+                }
               />
             ),
           }}
@@ -71,7 +76,11 @@ export default function Home({navigation, route}) {
               <Icon
                 name="dollar-sign"
                 size={20}
-                color={focused ? '#141414' : '#A4A4A4'}
+                color={
+                  focused
+                    ? styles.componentSelected
+                    : styles.componentNotSelected
+                }
               />
             ),
           }}
@@ -86,7 +95,11 @@ export default function Home({navigation, route}) {
               <Icon
                 name="settings"
                 size={20}
-                color={focused ? '#141414' : '#A4A4A4'}
+                color={
+                  focused
+                    ? styles.componentSelected
+                    : styles.componentNotSelected
+                }
               />
             ),
           }}
