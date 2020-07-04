@@ -5,25 +5,15 @@ import {
   View,
   TouchableOpacity,
   StatusBar,
-  TextInput,
   SafeAreaView,
-  ImageBackground,
-  Image,
-  FlatList,
-  CameraRoll,
-  ToastAndroid,
-  Modal,
 } from 'react-native';
-import ChangePasswordModal from '../../components/changePassword';
+import ChangePasswordModal from '../../components/ChangePassword';
 import ToggleSwitch from 'toggle-switch-react-native';
-import auth from '@react-native-firebase/auth';
-import DropdownAlert from 'react-native-dropdownalert';
 import Icon from 'react-native-vector-icons/Feather';
 
 export default function Settings({data, navigation}) {
   const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
   const [defaultToggle, setDefaultToggle] = useState(false);
-  const [alert, setAlert] = useState({});
   const [PasswordVisible, setPasswordVisible] = useState(false);
 
   return (
@@ -33,7 +23,6 @@ export default function Settings({data, navigation}) {
         <ChangePasswordModal onClose={() => setModalPasswordVisible(false)} />
       ) : (
         <>
-          <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
           <TouchableOpacity
             onPress={() => setModalPasswordVisible(true)}
             style={styles.button}>

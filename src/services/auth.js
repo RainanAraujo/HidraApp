@@ -1,10 +1,10 @@
 import auth from '@react-native-firebase/auth';
 
-export function Logout() {
+export const Logout = () => {
   auth().signOut();
-}
+};
 
-export function ChangePassword(oldPassword, newPassword) {
+export const ChangePassword = (oldPassword, newPassword) => {
   this.reauthenticate(oldPassword)
     .then(() => {
       var user = firebase.auth().currentUser;
@@ -20,9 +20,9 @@ export function ChangePassword(oldPassword, newPassword) {
     .catch((error) => {
       return {status: 'error', msg: 'Senha Incorreta'};
     });
-}
+};
 
-export function Login(email, pass) {
+export const Login = (email, pass) => {
   if (email && pass) {
     auth()
       .signInWithEmailAndPassword(email.trim(), pass.trim())
@@ -53,4 +53,4 @@ export function Login(email, pass) {
       msg: 'Login Inválido',
     };
   }
-}
+};
