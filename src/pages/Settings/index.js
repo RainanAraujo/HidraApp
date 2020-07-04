@@ -68,7 +68,7 @@ export default function Settings({data, navigation}) {
             </>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={} style={styles.button}>
+          <TouchableOpacity style={styles.button}>
             <Text style={styles.textExitButton}>Sair</Text>
           </TouchableOpacity>
         </>

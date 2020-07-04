@@ -24,7 +24,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import TextInput from '../TextInput/index';
 import {styles} from './styles';
 
-export default function loginBar() {
+export default function loginBar({}) {
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
