@@ -8,6 +8,26 @@ const styles = StyleSheet.create({
   statusBar: {
     backgroundColor: '#3251B2',
   },
+  circleEffectBack: {
+    justifyContent: 'flex-start',
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: 0,
+  },
+  loginContainer: {
+    paddingTop: 20,
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+
+  containerPush: {
+    marginBottom: -230,
+    width: '100%',
+    bottom: 0,
+    position: 'absolute',
+    zIndex: 1,
+  },
 });
 
 export default styles;

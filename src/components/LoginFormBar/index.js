@@ -5,7 +5,7 @@ import Hidra from '../../assets/images/hidra.png';
 import Icon from 'react-native-vector-icons/Feather';
 import LoginForm from '../LoginForm';
 import styles from './styles';
-
+import Button from '../Button';
 export default function LoginFormBar({translateY, loading}) {
   return (
     <>
@@ -63,6 +63,12 @@ export default function LoginFormBar({translateY, loading}) {
             ],
           }}>
           <LoginForm />
+          <Button
+            text={'Escanear Híbrido'}
+            iconName={'camera'}
+            backgroundColor={styles.buttonScan.backgroundColor}
+            marginTop={20}
+          />
         </Animated.View>
       </ImageBackground>
     </>

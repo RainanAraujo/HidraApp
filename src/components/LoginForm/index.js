@@ -27,12 +27,6 @@ export default function LoginForm({email, pass}) {
         text={'Login'}
         backgroundColor={styles.buttonLogin.backgroundColor}
       />
-      <Button
-        text={'Escanear Híbrido'}
-        iconName={'camera'}
-        backgroundColor={styles.buttonScan.backgroundColor}
-        marginTop={20}
-      />
     </>
   );
 }
