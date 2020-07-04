@@ -23,10 +23,7 @@ export default function LoginForm({email, pass}) {
           onChangeText={(str) => setForm({...Form, pass: str})}
         />
 
-        <Button
-          text={'Login'}
-          backgroundColor={styles.buttonLogin.backgroundColor}
-        />
+        <Button text={'Login'} style={styles.buttonLogin} />
       </View>
     </>
   );

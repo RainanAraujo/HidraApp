@@ -28,6 +28,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
   },
+  textHeader: {
+    color: '#ffffff',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 36,
+    alignSelf: 'center',
+  },
 });
 
 export default styles;

@@ -6,7 +6,6 @@ import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import QRScanner from '../../components/QRScanner';
 import styles from './styles';
-import HeaderLogin from '../../components/HeaderLogin';
 import AppApresentation from '../../components/AppApresentation';
 import LoginFormBar from '../../components/LoginFormBar';
 
@@ -81,8 +80,19 @@ export default function Login() {
       ) : (
         <>
           <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
+
           <View style={styles.loginContainer}>
-            <HeaderLogin translateY={translateY} />
+            <Animated.Text
+              style={{
+                ...styles.textHeader,
+                opacity: translateY.interpolate({
+                  inputRange: [-230, 0, 0],
+                  outputRange: [0, 1, 1],
+                  extrapolate: 'clamp',
+                }),
+              }}>
+              Olá!
+            </Animated.Text>
             <AppApresentation translateY={translateY} />
             <PanGestureHandler
               onGestureEvent={animatedEvent}
