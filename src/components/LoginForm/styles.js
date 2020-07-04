@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  buttonLoginColor: {
+  buttonLogin: {
     backgroundColor: '#519918',
   },
-  buttonScanColor: {
+  buttonScan: {
     backgroundColor: '#2343A9',
   },
 });

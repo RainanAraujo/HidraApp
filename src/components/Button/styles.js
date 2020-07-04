@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     flexDirection: 'row',
   },
-  text: {color: '#000', fontFamily: 'Nunito-SemiBold', fontSize: 18},
+  text: {color: '#fff', fontFamily: 'Nunito-SemiBold', fontSize: 18},
   iconColor: {
-    color: '#ffffff',
+    color: '#fff',
   },
 });
 

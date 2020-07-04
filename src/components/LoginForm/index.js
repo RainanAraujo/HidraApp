@@ -23,11 +23,15 @@ export default function LoginForm({email, pass}) {
           onChangeText={(str) => setForm({...Form, pass: str})}
         />
       </View>
-      <Button text={'Login'} backgroundColor={styles.buttonLoginColor} />
+      <Button
+        text={'Login'}
+        backgroundColor={styles.buttonLogin.backgroundColor}
+      />
       <Button
         text={'Escanear Híbrido'}
         iconName={'camera'}
-        backgroundColor={styles.buttonScanColor}
+        backgroundColor={styles.buttonScan.backgroundColor}
+        marginTop={20}
       />
     </>
   );
