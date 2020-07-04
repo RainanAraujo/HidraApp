@@ -8,9 +8,6 @@ const styles = StyleSheet.create({
       },
     ],
   },
-  buttonScan: {
-    backgroundColor: '#2343A9',
-  },
   headerBarPush: {
     width: '100%',
     height: 400,

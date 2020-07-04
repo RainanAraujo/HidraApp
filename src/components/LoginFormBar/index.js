@@ -3,10 +3,9 @@ import {ImageBackground, ActivityIndicator, Animated} from 'react-native';
 import LoginBarTop from '../../assets/images/loginBarWithHidra.png';
 import Hidra from '../../assets/images/hidra.png';
 import Icon from 'react-native-vector-icons/Feather';
-import LoginForm from '../LoginForm';
 import styles from './styles';
-import Button from '../Button';
-export default function LoginFormBar({translateY, loading}) {
+
+export default function LoginFormBar({translateY, loading, children}) {
   return (
     <>
       <Animated.Image
@@ -66,12 +65,7 @@ export default function LoginFormBar({translateY, loading}) {
               },
             ],
           }}>
-          <LoginForm />
-          <Button
-            text={'Escanear Híbrido'}
-            iconName={'camera'}
-            style={styles.buttonScan}
-          />
+          {children}
         </Animated.View>
       </ImageBackground>
     </>

@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+  buttonScan: {
+    backgroundColor: '#2343A9',
+  },
   container: {
     flex: 1,
     backgroundColor: '#2242A7',

@@ -7,21 +7,20 @@ import styles from './styles';
 import Card from '../Card';
 
 export default function QRScanner({onError, onClose}) {
-  const [scannedQrVisible, setScaneedQrVisible] = useState(false);
   const [scannedData, setScaneedData] = useState({});
 
-  onScan = (data) => {
-    res = getUserData(data);
-    if (res.status === 'error') {
-      onError(res.msg);
-    } else {
-      setScaneedData(res.data);
+  onScan = async (data) => {
+    try {
+      res = await getUserData(data);
+      setScaneedData(res);
+    } catch (error) {
+      onError(error.msg);
     }
   };
 
   return (
     <>
-      {scannedQrVisible ? (
+      {Object.keys(scannedData).length ? (
         <Modal animationType="fade" visible={true}>
           <View style={styles.modalContainer}>
             <Text style={styles.textTitle}>ASSOCIADO</Text>
@@ -33,7 +32,6 @@ export default function QRScanner({onError, onClose}) {
               activeOpacity={0.7}
               style={styles.scanClose}
               onPress={() => {
-                setScaneedQrVisible(false);
                 setScaneedData({});
               }}>
               <Icon name="times" color={styles.icons.color} size={17} />
