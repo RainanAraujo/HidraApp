@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
+
 import {View, Animated, StatusBar, SafeAreaView} from 'react-native';
-import auth from '@react-native-firebase/auth';
-import DropdownAlert from 'react-native-dropdownalert';
 import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
-import QRScanner from '../../components/QRScanner';
-import styles from './styles';
 import AppApresentation from '../../components/AppApresentation';
 import LoginFormBar from '../../components/LoginFormBar';
+import DropdownAlert from 'react-native-dropdownalert';
+import QRScanner from '../../components/QRScanner';
+import LoginForm from '../../components/LoginForm';
+import Button from '../../components/Button';
+import auth from '@react-native-firebase/auth';
+import styles from './styles';
 
 export default function Login() {
   let offset = 0;
@@ -110,7 +113,15 @@ export default function Login() {
                     },
                   ],
                 }}>
-                <LoginFormBar translateY={translateY} loading={loading} />
+                <LoginFormBar translateY={translateY} loading={loading}>
+                  <LoginForm />
+                  <Button
+                    text={'Escanear Híbrido'}
+                    iconName={'camera'}
+                    style={styles.buttonScan}
+                    onPress={() => setScanQrVisible(true)}
+                  />
+                </LoginFormBar>
               </Animated.View>
             </PanGestureHandler>
             <View></View>
