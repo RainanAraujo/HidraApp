@@ -18,7 +18,7 @@ import NoobCard from '../../assets/images/noobCard.png';
 import VeteranCard from '../../assets/images/veteranCard.png';
 import MonitorCard from '../../assets/images/monitorCard.png';
 import MainCard from '../../assets/images/mainCard.png';
-import Card from '../../components/card';
+import Card from '../../components/Card';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import QrCodeExemple from '../../assets/images/qrCodeExemple.png';
 
