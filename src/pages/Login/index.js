@@ -3,7 +3,13 @@ import React, {useState, useEffect} from 'react';
 import {View, Animated, StatusBar, SafeAreaView} from 'react-native';
 import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
+<<<<<<< HEAD
 import AppApresentation from '../../components/AppApresentation';
+=======
+import QRScanner from '../../components/QRScanner';
+import styles from './styles';
+import AppPresentation from '../../components/AppPresentation';
+>>>>>>> 0b3a1d76545918d1930293598c806fae7508dedf
 import LoginFormBar from '../../components/LoginFormBar';
 import DropdownAlert from 'react-native-dropdownalert';
 import QRScanner from '../../components/QRScanner';
@@ -96,7 +102,7 @@ export default function Login() {
               }}>
               Olá!
             </Animated.Text>
-            <AppApresentation translateY={translateY} />
+            <AppPresentation translateY={translateY} />
             <PanGestureHandler
               onGestureEvent={animatedEvent}
               onHandlerStateChange={onHandlerStateChange}>
