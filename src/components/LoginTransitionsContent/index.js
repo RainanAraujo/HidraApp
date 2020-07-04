@@ -2,17 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
-  TouchableOpacity,
-  StyleSheet,
-  StatusBar,
-  SafeAreaView,
   Image,
   ImageBackground,
   ActivityIndicator,
   Animated,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 import DropdownAlert from 'react-native-dropdownalert';
 import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
 import LoginBarTop from '../../assets/images/loginBarWithHidra.png';
@@ -77,54 +72,8 @@ export default function loginTransitionsContent({}) {
   useEffect(() => {
     if (auth().currentUser != null) {
       setLoading(true);
-      loadUserMenu(auth().currentUser.uid);
     }
   }, []);
-
-  function loadUserMenu(userID) {
-    firestore()
-      .collection('users')
-      .doc(userID)
-      .get()
-      .then((data) => {
-        setLoading(false);
-        navigation.navigate('Home', {
-          data: {...data.data(), qrcode: userID},
-        });
-      })
-      .catch((error) => {
-        setLoading(false);
-        alert.alertWithType(
-          'error',
-          'Erro',
-          'Não foi possivel carregar dados do usuário',
-        );
-      });
-  }
-
-  function Login(form) {
-    setLoading(true);
-    if (form.email && form.pass) {
-      auth()
-        .signInWithEmailAndPassword(form.email.trim(), form.pass.trim())
-        .then((res) => {
-          loadUserMenu(res.user.uid);
-        })
-        .catch((error) => {
-          setLoading(false);
-          if (error.code == 'auth/network-request-failed') {
-            alert.alertWithType('error', 'Erro', 'Erro na Rede');
-          } else if (error.code == 'auth/invalid-email') {
-            alert.alertWithType('error', 'Erro', 'Email Inválido');
-          } else {
-            alert.alertWithType('error', 'Erro', 'Login Inválido');
-          }
-        });
-    } else {
-      setLoading(false);
-      alert.alertWithType('error', 'Erro', 'Login Inválido');
-    }
-  }
 
   return (
     <>
