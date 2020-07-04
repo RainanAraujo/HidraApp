@@ -66,7 +66,7 @@ export default function LoginFormBar({translateY, loading}) {
           <Button
             text={'Escanear Híbrido'}
             iconName={'camera'}
-            backgroundColor={styles.buttonScan.backgroundColor}
+            style={styles.buttonScan}
           />
         </Animated.View>
       </ImageBackground>

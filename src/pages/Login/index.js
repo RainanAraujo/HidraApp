@@ -6,7 +6,7 @@ import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import QRScanner from '../../components/QRScanner';
 import styles from './styles';
-import AppApresentation from '../../components/AppApresentation';
+import AppPresentation from '../../components/AppPresentation';
 import LoginFormBar from '../../components/LoginFormBar';
 
 export default function Login() {
@@ -93,7 +93,7 @@ export default function Login() {
               }}>
               Olá!
             </Animated.Text>
-            <AppApresentation translateY={translateY} />
+            <AppPresentation translateY={translateY} />
             <PanGestureHandler
               onGestureEvent={animatedEvent}
               onHandlerStateChange={onHandlerStateChange}>
