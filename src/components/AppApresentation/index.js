@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, Image, Animated} from 'react-native';
 import styles from './styles';
 import ApresentationImage from '../../assets/images/apresentationImage.png';
-export default function ApresetationContainer({translateY}) {
+export default function AppApresetation({translateY}) {
   return (
     <Animated.View
       style={{

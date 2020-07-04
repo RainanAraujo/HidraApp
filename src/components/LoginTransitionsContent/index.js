@@ -7,7 +7,7 @@ import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import QRScanner from '../QRScanner';
 import styles from './styles';
 import HeaderLogin from '../HeaderLogin';
-import ApresentationContainer from '../ApresentationContainer';
+import AppApresentation from '../AppApresentation';
 import LoginFormBar from '../LoginFormBar';
 
 export default function loginTransitionsContent({}) {
@@ -79,7 +79,7 @@ export default function loginTransitionsContent({}) {
           <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
           <View style={styles.loginContainer}>
             <HeaderLogin translateY={translateY} />
-            <ApresentationContainer translateY={translateY} />
+            <AppApresentation translateY={translateY} />
             <PanGestureHandler
               onGestureEvent={animatedEvent}
               onHandlerStateChange={onHandlerStateChange}>
