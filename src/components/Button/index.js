@@ -1,8 +1,14 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import {styles} from './styles';
-
-export default function Button({disabled, onPress, text, backgroundColor}) {
+import styles from './styles';
+import Icon from 'react-native-vector-icons/Feather';
+export default function Button({
+  disabled,
+  onPress,
+  text,
+  backgroundColor,
+  iconName,
+}) {
   return (
     <>
       <TouchableOpacity
@@ -11,11 +17,12 @@ export default function Button({disabled, onPress, text, backgroundColor}) {
         disabled={disabled}
         onPress={onPress}>
         <Text style={styles.text}>{text}</Text>
+        {iconName ? (
+          <Icon name={iconName} color={styles.iconColor} size={20} />
+        ) : (
+          <></>
+        )}
       </TouchableOpacity>
-
-      {
-        //} <Icon name="camera" color="#ffffff" size={20} />
-      }
     </>
   );
 }

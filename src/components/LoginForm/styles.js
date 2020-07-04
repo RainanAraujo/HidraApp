@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   buttonLoginColor: {
     backgroundColor: '#519918',
   },
@@ -8,3 +8,5 @@ export const styles = StyleSheet.create({
     backgroundColor: '#2343A9',
   },
 });
+
+export default styles;

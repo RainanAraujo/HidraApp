@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     height: 50,
     width: 300,
@@ -10,5 +10,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     flexDirection: 'row',
   },
-  text: {color: '#fff', fontFamily: 'Nunito-SemiBold', fontSize: 18},
+  text: {color: '#000', fontFamily: 'Nunito-SemiBold', fontSize: 18},
+  iconColor: {
+    color: '#ffffff',
+  },
 });
+
+export default styles;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import Button from '../Button';
-import {styles} from './styles';
+import styles from './styles';
 import TextInput from '../TextInput/index';
 
 export default function LoginForm({email, pass}) {
@@ -26,6 +26,7 @@ export default function LoginForm({email, pass}) {
       <Button text={'Login'} backgroundColor={styles.buttonLoginColor} />
       <Button
         text={'Escanear Híbrido'}
+        iconName={'camera'}
         backgroundColor={styles.buttonScanColor}
       />
     </>
