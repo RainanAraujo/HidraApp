@@ -9,12 +9,13 @@ import Card from '../Card';
 export default function QRScanner({onError, onClose}) {
   const [scannedData, setScaneedData] = useState({});
 
-  onScan = async (data) => {
+  const onScan = async (data) => {
     try {
-      res = await getUserData(data);
+      let res = await getUserData(data);
       setScaneedData(res);
     } catch (error) {
-      onError(error.msg);
+      onError(error.message);
+      onClose();
     }
   };
 

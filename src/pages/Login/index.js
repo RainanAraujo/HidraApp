@@ -1,35 +1,29 @@
 import React, {useState, useEffect} from 'react';
 
-import {View, Animated, StatusBar, SafeAreaView} from 'react-native';
 import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
-<<<<<<< HEAD
-import AppApresentation from '../../components/AppApresentation';
-=======
-import QRScanner from '../../components/QRScanner';
-import styles from './styles';
+import {View, Animated, StatusBar, SafeAreaView} from 'react-native';
 import AppPresentation from '../../components/AppPresentation';
->>>>>>> 0b3a1d76545918d1930293598c806fae7508dedf
+import {getCurrentUser, signIn} from '../../services/auth';
 import LoginFormBar from '../../components/LoginFormBar';
 import DropdownAlert from 'react-native-dropdownalert';
-import QRScanner from '../../components/QRScanner';
+import {useSelector, useDispatch} from 'react-redux';
 import LoginForm from '../../components/LoginForm';
+import QRScanner from '../../components/QRScanner';
+import {getUserData} from '../../services/store';
 import Button from '../../components/Button';
-import auth from '@react-native-firebase/auth';
 import styles from './styles';
 
-export default function Login() {
-  let offset = 0;
+export default function Login({navigation, route}) {
+  const userData = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
+
   const [scanQrVisible, setScanQrVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState({});
+
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
-  const [loading, setLoading] = useState(false);
-  const [Form, setForm] = useState({
-    email: '',
-    pass: '',
-  });
-
-  const [alert, setAlert] = useState({});
   const animatedEvent = Animated.event(
     [
       {
@@ -40,6 +34,7 @@ export default function Login() {
     ],
     {useNativeDriver: true},
   );
+  let offset = 0;
 
   function onHandlerStateChange(event) {
     if (event.nativeEvent.oldState === State.ACTIVE) {
@@ -68,9 +63,27 @@ export default function Login() {
     }
   }
 
+  const onSubmitForm = async (email, pass) => {
+    try {
+      let uid = await signIn(email, pass);
+      let newUserData = {...getUserData(uid), uid: uid};
+      dispatch({type: 'SET_USER_DATA', newUserData});
+      navigation.navigate('Home');
+    } catch (error) {
+      alert.alertWithType('error', 'Erro', error.message);
+    }
+  };
+
   useEffect(() => {
-    if (auth().currentUser != null) {
-      setLoading(true);
+    try {
+      if (getCurrentUser()) {
+        setLoading(true);
+        let uid = getCurrentUser().uid;
+        let newUserData = {...getUserData(uid), uid: uid};
+        dispatch({type: 'SET_USER_DATA', newUserData});
+      }
+    } catch (error) {
+      alert.alertWithType('error', 'Erro', error.message);
     }
   }, []);
 
@@ -120,7 +133,7 @@ export default function Login() {
                   ],
                 }}>
                 <LoginFormBar translateY={translateY} loading={loading}>
-                  <LoginForm />
+                  <LoginForm onSubmit={onSubmitForm} />
                   <Button
                     text={'Escanear Híbrido'}
                     iconName={'camera'}

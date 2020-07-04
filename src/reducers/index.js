@@ -1,10 +1,16 @@
 import {createStore} from 'redux';
-import React, {useState} from 'react';
 
-const INITIAL_STATE = {valueTranslation: 0};
+const INITIAL_STATE = {userData: {}};
 
 function reducer(state = INITIAL_STATE, action) {
-  return state;
+  switch (action.type) {
+    case 'SET_USER_DATA':
+      return {...state, userData: action.data};
+    case 'RESET_USER_DATA':
+      return {...state, userData: {}};
+    default:
+      return state;
+  }
 }
 
 const store = createStore(reducer);
