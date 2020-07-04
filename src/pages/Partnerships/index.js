@@ -16,7 +16,10 @@ const DATA = [
 export default function Profile() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={styles.statusBar.backgroundColor}
+      />
       <FlatList
         contentContainerStyle={{paddingTop: 20}}
         data={DATA}

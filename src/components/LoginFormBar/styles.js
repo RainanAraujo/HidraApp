@@ -21,6 +21,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Regular',
     fontSize: 18,
   },
+  ActivityIndicator: {
+    color: '#2343A9',
+  },
+  IconUp: {
+    color: '#000',
+  },
 });
 
 export default styles;

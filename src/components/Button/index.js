@@ -18,7 +18,10 @@ export default function Button({
         disabled={disabled}
         onPress={onPress}>
         {loading ? (
-          <ActivityIndicator size="large" color="#fff" />
+          <ActivityIndicator
+            size="large"
+            color={styles.ActivityIndicator.color}
+          />
         ) : (
           <>
             <Text style={styles.text}>{text}</Text>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Modal} from 'react-native';
+import {Text, View, TouchableOpacity, Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {getUserData} from '../../services/store';
@@ -24,15 +24,7 @@ export default function QRScanner({onError, onClose}) {
       {Object.keys(scannedData).length ? (
         <Modal animationType="fade" visible={true}>
           <View style={styles.modalContainer}>
-            <Text
-              style={{
-                ...styles.textWelcome,
-                color: '#519918',
-                marginBottom: 30,
-                fontFamily: 'Nunito-Bold',
-              }}>
-              ASSOCIADO
-            </Text>
+            <Text style={styles.textTitle}>ASSOCIADO</Text>
             <Card
               avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
               data={scannedData}
@@ -43,7 +35,7 @@ export default function QRScanner({onError, onClose}) {
               onPress={() => {
                 setScaneedData({});
               }}>
-              <Icon name="times" color="#ffffff" size={17} />
+              <Icon name="times" color={styles.icons.color} size={17} />
             </TouchableOpacity>
           </View>
         </Modal>
@@ -57,7 +49,7 @@ export default function QRScanner({onError, onClose}) {
               activeOpacity={0.7}
               style={styles.scanClose}
               onPress={() => onClose()}>
-              <Icon name="times" color="#ffffff" size={17} />
+              <Icon name="times" color={styles.icons.color} size={17} />
             </TouchableOpacity>
           }
         />
