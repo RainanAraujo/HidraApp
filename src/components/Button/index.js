@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/Feather';
 export default function Button({
@@ -9,6 +9,7 @@ export default function Button({
   backgroundColor,
   iconName,
   marginTop,
+  loading,
 }) {
   return (
     <>
@@ -17,11 +18,17 @@ export default function Button({
         style={{...styles.button, backgroundColor, marginTop}}
         disabled={disabled}
         onPress={onPress}>
-        <Text style={styles.text}>{text}</Text>
-        {iconName ? (
-          <Icon name={iconName} color={styles.iconColor.color} size={20} />
+        {loading ? (
+          <ActivityIndicator size="large" color="#fff" />
         ) : (
-          <></>
+          <>
+            <Text style={styles.text}>{text}</Text>
+            {iconName ? (
+              <Icon name={iconName} color={styles.iconColor.color} size={20} />
+            ) : (
+              <></>
+            )}
+          </>
         )}
       </TouchableOpacity>
     </>

@@ -1,29 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  Image,
-  ImageBackground,
-  ActivityIndicator,
-  Animated,
-} from 'react-native';
+import {View, Animated} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import DropdownAlert from 'react-native-dropdownalert';
 import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
-import LoginBarTop from '../../assets/images/loginBarWithHidra.png';
-import Hidra from '../../assets/images/hidra.png';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
-import ApresentationImage from '../../assets/images/apresentationImage.png';
 import QRScanner from '../QRScanner';
-import Icon from 'react-native-vector-icons/Feather';
-import LoginForm from '../LoginForm';
-import {styles} from './styles';
+import styles from './styles';
+import HeaderLogin from '../HeaderLogin';
+import ApresentationContainer from '../ApresentationContainer';
+import LoginFormBar from '../LoginFormBar';
 
 export default function loginTransitionsContent({}) {
+  let offset = 0;
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
-  let offset = 0;
   const [loading, setLoading] = useState(false);
   const [Form, setForm] = useState({
     email: '',
@@ -86,52 +77,15 @@ export default function loginTransitionsContent({}) {
       ) : (
         <>
           <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
-
           <View style={styles.loginContainer}>
-            <Animated.Text
-              style={{
-                ...styles.textAcess,
-                opacity: translateY.interpolate({
-                  inputRange: [-230, 0, 0],
-                  outputRange: [0, 1, 1],
-                  extrapolate: 'clamp',
-                }),
-              }}>
-              Olá!
-            </Animated.Text>
-
-            <Animated.View
-              style={{
-                alignItems: 'center',
-                opacity: translateY.interpolate({
-                  inputRange: [-230, 0, 0],
-                  outputRange: [0, 1, 1],
-                  extrapolate: 'clamp',
-                }),
-                transform: [
-                  {
-                    translateY: translateY.interpolate({
-                      inputRange: [-230, 0, 0],
-                      outputRange: [-50, 0, 0],
-                      extrapolate: 'clamp',
-                    }),
-                  },
-                ],
-              }}>
-              <Image source={ApresentationImage} />
-              <Text style={styles.textApresentation}>
-                Aplicação feita para os associados da Atlética Hidra do
-                Instituto Federal de Educação, Ciência e Tecnologia do Maranhão
-                - Campus Caxias
-              </Text>
-            </Animated.View>
-
+            <HeaderLogin translateY={translateY} />
+            <ApresentationContainer translateY={translateY} />
             <PanGestureHandler
               onGestureEvent={animatedEvent}
               onHandlerStateChange={onHandlerStateChange}>
               <Animated.View
                 style={{
-                  ...styles.loginContainerPush,
+                  ...styles.containerPush,
                   transform: [
                     {
                       translateY: translateY.interpolate({
@@ -142,64 +96,7 @@ export default function loginTransitionsContent({}) {
                     },
                   ],
                 }}>
-                <Animated.Image
-                  source={Hidra}
-                  style={{
-                    ...styles.hidraImage,
-                    opacity: translateY.interpolate({
-                      inputRange: [-230, -200, 0],
-                      outputRange: [1, 0, 0],
-                    }),
-                  }}
-                />
-                <ImageBackground
-                  source={LoginBarTop}
-                  style={styles.loginBarPush}>
-                  {loading ? (
-                    <Animated.View
-                      style={{
-                        opacity: translateY.interpolate({
-                          inputRange: [-230, 0, 0],
-                          outputRange: [0, 1, 0],
-                          extrapolate: 'clamp',
-                        }),
-                      }}>
-                      <ActivityIndicator size="large" color="#2343A9" />
-                    </Animated.View>
-                  ) : (
-                    <Animated.Text
-                      style={{
-                        ...styles.loginText,
-                        opacity: translateY.interpolate({
-                          inputRange: [-200, 0, 300],
-                          outputRange: [0, 1, 1],
-                        }),
-                      }}>
-                      ARRASTE <Icon name="arrow-up" color="#000" size={20} />{' '}
-                      PARA FAZER LOGIN
-                    </Animated.Text>
-                  )}
-                  <Animated.View
-                    style={{
-                      marginTop: 90,
-                      opacity: translateY.interpolate({
-                        inputRange: [-230, 0, 0],
-                        outputRange: [1, 0, 0],
-                        extrapolate: 'clamp',
-                      }),
-                      transform: [
-                        {
-                          translateY: translateY.interpolate({
-                            inputRange: [-230, 0, 0],
-                            outputRange: [-70, 0, 0],
-                            extrapolate: 'clamp',
-                          }),
-                        },
-                      ],
-                    }}>
-                    <LoginForm />
-                  </Animated.View>
-                </ImageBackground>
+                <LoginFormBar translateY={translateY} loading={loading} />
               </Animated.View>
             </PanGestureHandler>
             <View></View>
