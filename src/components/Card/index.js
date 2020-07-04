@@ -3,10 +3,10 @@ import React from 'react';
 import {Text, View, ImageBackground} from 'react-native';
 
 import {Avatar} from 'react-native-elements';
-import NoobCard from '../assets/images/noobCard.png';
-import VeteranCard from '../assets/images/veteranCard.png';
-import MonitorCard from '../assets/images/monitorCard.png';
-import MainCard from '../assets/images/mainCard.png';
+import NoobCard from '../../assets/images/noobCard.png';
+import VeteranCard from '../../assets/images/veteranCard.png';
+import MonitorCard from '../../assets/images/monitorCard.png';
+import MainCard from '../../assets/images/mainCard.png';
 import styles from './styles';
 
 export default function Card(props) {
