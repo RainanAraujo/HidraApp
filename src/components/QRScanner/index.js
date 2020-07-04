@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Modal} from 'react-native';
+import {Text, View, TouchableOpacity, Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {getUserData} from '../../services/store';
