@@ -19,7 +19,7 @@ import LoginBarTop from '../../assets/images/loginBarWithHidra.png';
 import Hidra from '../../assets/images/hidra.png';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import ApresentationImage from '../../assets/images/apresentationImage.png';
-import QrScan from '../qrscan';
+import QRScanner from '../QRScanner';
 import Icon from 'react-native-vector-icons/Feather';
 import TextInput from '../TextInput/index';
 import {styles} from './styles';
@@ -130,7 +130,7 @@ export default function loginBar({}) {
     <>
       <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
       {scanQrVisible ? (
-        <QrScan
+        <QRScanner
           onError={(msg) => alert.alertWithType('error', 'Erro', msg)}
           onClose={() => setScanQrVisible(false)}
         />

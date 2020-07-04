@@ -5,16 +5,9 @@ import {
   View,
   TouchableOpacity,
   StatusBar,
-  TextInput,
   SafeAreaView,
-  ImageBackground,
-  Image,
-  FlatList,
-  CameraRoll,
-  ToastAndroid,
-  Modal,
 } from 'react-native';
-import ChangePasswordModal from '../../components/changePassword';
+import ChangePasswordModal from '../../components/ChangePassword';
 import ToggleSwitch from 'toggle-switch-react-native';
 import Icon from 'react-native-vector-icons/Feather';
 

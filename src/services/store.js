@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 
-export function getUserData(userID) {
+export const getUserData = (userID) => {
   if (!userID.includes('/')) {
     firestore()
       .collection('users')
@@ -31,4 +31,4 @@ export function getUserData(userID) {
       msg: 'Codigo inválido',
     };
   }
-}
+};
