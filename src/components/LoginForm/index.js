@@ -7,7 +7,7 @@ import TextInput from '../TextInput/index';
 export default function LoginForm({email, pass}) {
   return (
     <>
-      <View style={{alignItems: 'center'}}>
+      <View style={styles.content}>
         <TextInput
           autoCapitalize="none"
           placeholder="Email"
@@ -22,11 +22,12 @@ export default function LoginForm({email, pass}) {
           value={pass}
           onChangeText={(str) => setForm({...Form, pass: str})}
         />
+
+        <Button
+          text={'Login'}
+          backgroundColor={styles.buttonLogin.backgroundColor}
+        />
       </View>
-      <Button
-        text={'Login'}
-        backgroundColor={styles.buttonLogin.backgroundColor}
-      />
     </>
   );
 }
