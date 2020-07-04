@@ -29,7 +29,10 @@ export default function LoginFormBar({translateY, loading}) {
                 extrapolate: 'clamp',
               }),
             }}>
-            <ActivityIndicator size="large" color="#2343A9" />
+            <ActivityIndicator
+              size="large"
+              color={styles.ActivityIndicator.color}
+            />
           </Animated.View>
         ) : (
           <Animated.Text
@@ -40,8 +43,9 @@ export default function LoginFormBar({translateY, loading}) {
                 outputRange: [0, 1, 1],
               }),
             }}>
-            ARRASTE <Icon name="arrow-up" color="#000" size={20} /> PARA FAZER
-            LOGIN
+            ARRASTE{' '}
+            <Icon name="arrow-up" color={styles.IconUp.color} size={20} /> PARA
+            FAZER LOGIN
           </Animated.Text>
         )}
         <Animated.View

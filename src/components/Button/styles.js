@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   iconColor: {
     color: '#fff',
   },
+  ActivityIndicator: {
+    color: '#fff',
+  },
 });
 
 export default styles;
