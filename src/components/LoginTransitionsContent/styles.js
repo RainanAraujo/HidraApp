@@ -32,20 +32,7 @@ export const styles = StyleSheet.create({
       },
     ],
   },
-  loginButton: {
-    backgroundColor: '#519918',
-    height: 50,
-    width: 300,
-    borderRadius: 50,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textButton: {
-    color: '#ffffff',
-    fontFamily: 'Nunito-SemiBold',
-    fontSize: 18,
-  },
+
   textPasswordRequest: {
     color: '#484D55',
     marginTop: 50,
@@ -80,16 +67,5 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 30,
     marginTop: 20,
-  },
-  scanButton: {
-    marginTop: 30,
-    backgroundColor: '#2343A9',
-    height: 50,
-    width: 300,
-    borderRadius: 50,
-    paddingHorizontal: 30,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
   },
 });

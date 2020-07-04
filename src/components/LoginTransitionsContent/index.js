@@ -21,10 +21,10 @@ import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import ApresentationImage from '../../assets/images/apresentationImage.png';
 import QrScan from '../qrscan';
 import Icon from 'react-native-vector-icons/Feather';
-import TextInput from '../TextInput/index';
+import LoginForm from '../LoginForm';
 import {styles} from './styles';
 
-export default function loginBar({}) {
+export default function loginTransitionsContent({}) {
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
@@ -248,43 +248,7 @@ export default function loginBar({}) {
                         },
                       ],
                     }}>
-                    <View style={{alignItems: 'center'}}>
-                      <TextInput
-                        autoCapitalize="none"
-                        placeholder="Email"
-                        keyboardType="email-address"
-                        textContentType="emailAddress"
-                        value={Form.email}
-                        onChangeText={(str) => setForm({...Form, email: str})}
-                      />
-                      <TextInput
-                        placeholder="Senha"
-                        secureTextEntry={true}
-                        value={Form.pass}
-                        onChangeText={(str) => setForm({...Form, pass: str})}
-                      />
-                    </View>
-
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      style={styles.loginButton}
-                      disabled={loading}
-                      onPress={() => Login(Form)}>
-                      {loading ? (
-                        <ActivityIndicator size="large" color="#ffffff" />
-                      ) : (
-                        <Text style={styles.textButton}>Login</Text>
-                      )}
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      style={styles.scanButton}
-                      onPress={() => {
-                        setScanQrVisible(true);
-                      }}>
-                      <Text style={styles.textButton}>Escanear Híbrido</Text>
-                      <Icon name="camera" color="#ffffff" size={20} />
-                    </TouchableOpacity>
+                    <LoginForm />
                   </Animated.View>
                 </ImageBackground>
               </Animated.View>
