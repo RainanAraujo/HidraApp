@@ -2,7 +2,7 @@ import React from 'react';
 import {ImageBackground, ActivityIndicator, Animated} from 'react-native';
 import LoginBarTop from '../../assets/images/loginBarWithHidra.png';
 import Hidra from '../../assets/images/hidra.png';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/dist/Feather';
 import styles from './styles';
 
 export default function LoginFormBar({translateY, loading, children}) {

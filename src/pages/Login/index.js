@@ -6,15 +6,16 @@ import {View, Animated, StatusBar, SafeAreaView} from 'react-native';
 import AppPresentation from '../../components/AppPresentation';
 import {getCurrentUser, signIn} from '../../services/auth';
 import LoginFormBar from '../../components/LoginFormBar';
-import DropdownAlert from 'react-native-dropdownalert';
+import {StackActions} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import QRScanner from '../../components/QRScanner';
 import {getUserData} from '../../services/store';
 import Button from '../../components/Button';
+import Alerts from '../../utils/alerts';
 import styles from './styles';
 
-export default function Login({navigation, route}) {
+export default function Login({navigation}) {
   const dispatch = useDispatch();
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -61,42 +62,51 @@ export default function Login({navigation, route}) {
   }
 
   const loadProfileData = async (uid) => {
-    setLoading(true);
     let newUserData = {...(await getUserData(uid)), uid: uid};
     dispatch({type: 'SET_USER_DATA', data: newUserData});
-    navigation.navigate('Home');
+    navigation.jumpTo('Home');
   };
 
   const onSubmitForm = async (email, pass) => {
     try {
+      setLoading(true);
       let uid = await signIn(email, pass);
       await loadProfileData(uid);
     } catch (error) {
-      alert.alertWithType('error', 'Erro', error.message);
+      Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
+      setLoading(false);
     }
   };
 
-  useEffect(async () => {
-    try {
-      if (getCurrentUser()) {
-        let uid = getCurrentUser().uid;
-        await loadProfileData(uid);
+  useEffect(() => {
+    navigation.addListener('focus', async () => {
+      try {
+        console.log('loading');
+        if (getCurrentUser() != null) {
+          setLoading(true);
+          let uid = getCurrentUser().uid;
+          await loadProfileData(uid);
+        } else {
+          setLoading(false);
+        }
+      } catch (error) {
+        Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
+        setLoading(false);
       }
-    } catch (error) {
-      alert.alertWithType('error', 'Erro', error.message);
-    }
-  }, []);
+    });
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
       <StatusBar
         barStyle="light-content"
         backgroundColor={styles.statusBar.backgroundColor}
       />
       {scanQrVisible ? (
         <QRScanner
-          onError={(msg) => alert.alertWithType('error', 'Erro', msg)}
+          onError={(msg) =>
+            Alerts.getDropDown().alertWithType('error', 'Erro', msg)
+          }
           onClose={() => setScanQrVisible(false)}
         />
       ) : (

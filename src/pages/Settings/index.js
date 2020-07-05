@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import ChangePasswordModal from '../../components/ChangePassword';
 import ToggleSwitch from 'toggle-switch-react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/dist/Feather';
 import {signOut} from '../../services/auth';
 import {getUserData} from '../../services/store';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
+
 export default function Settings({data, navigation}) {
   const dispatch = useDispatch();
   const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
