@@ -66,10 +66,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   post: {
-    alignSelf: 'flex-start',
-    height: 5,
+    height: 6,
     width: 20,
     borderRadius: 50,
+    marginBottom: 15,
   },
 });
 
