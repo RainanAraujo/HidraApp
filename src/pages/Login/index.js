@@ -6,7 +6,6 @@ import {View, Animated, StatusBar, SafeAreaView} from 'react-native';
 import AppPresentation from '../../components/AppPresentation';
 import {getCurrentUser, signIn} from '../../services/auth';
 import LoginFormBar from '../../components/LoginFormBar';
-import {StackActions} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import QRScanner from '../../components/QRScanner';
@@ -19,7 +18,6 @@ export default function Login({navigation}) {
   const dispatch = useDispatch();
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({});
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
   const animatedEvent = Animated.event(
@@ -79,12 +77,11 @@ export default function Login({navigation}) {
   };
 
   useEffect(() => {
-    navigation.addListener('focus', async () => {
+    (async () => {
       try {
-        console.log('loading');
         if (getCurrentUser() != null) {
           setLoading(true);
-          let uid = getCurrentUser().uid;
+          let uid = await getCurrentUser().uid;
           await loadProfileData(uid);
         } else {
           setLoading(false);
@@ -93,8 +90,8 @@ export default function Login({navigation}) {
         Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
         setLoading(false);
       }
-    });
-  }, [navigation]);
+    })();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

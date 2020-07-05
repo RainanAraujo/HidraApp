@@ -7,6 +7,7 @@ export const signOut = () => {
     auth()
       .signOut()
       .then(() => {
+        //auth().currentUser.delete();
         resolve();
       })
       .catch(() => {
