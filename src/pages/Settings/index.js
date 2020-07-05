@@ -27,6 +27,10 @@ export default function Settings({data, navigation}) {
         <ChangePasswordModal onClose={() => setModalPasswordVisible(false)} />
       ) : (
         <>
+          <View style={styles.titleContent}>
+            <Text style={styles.textTitle}>Ajustes</Text>
+            <Text style={styles.textSubTitle}>Isso é auto-explicativo.</Text>
+          </View>
           <TouchableOpacity
             onPress={() => setModalPasswordVisible(true)}
             style={styles.button}>

@@ -12,10 +12,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textWelcome: {
-    color: '#484D55',
+    color: '#2242A7',
     fontFamily: 'Nunito-Regular',
     fontSize: 36,
-    marginTop: 10,
     alignSelf: 'center',
   },
 

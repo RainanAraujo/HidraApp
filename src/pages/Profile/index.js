@@ -6,7 +6,6 @@ import {
   StatusBar,
   SafeAreaView,
   Image,
-  Animated,
 } from 'react-native';
 import QrCodeExemple from '../../assets/images/qrCodeExemple.png';
 import DropdownAlert from 'react-native-dropdownalert';
@@ -35,10 +34,9 @@ export default function Profile() {
             modalVisible={modalVisible}
             onClose={() => setModalVisible(false)}
           />
+
           <View style={styles.profileContainer}>
-            <Animated.Text style={styles.textWelcome}>
-              Olá Híbrido!
-            </Animated.Text>
+            <Text style={styles.textWelcome}>Olá, Híbrido</Text>
             <View>
               <Card
                 avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"

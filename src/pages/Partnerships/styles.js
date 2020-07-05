@@ -51,6 +51,21 @@ const styles = StyleSheet.create({
   statusBar: {
     backgroundColor: '#fff',
   },
+  textTitle: {
+    color: '#2242A7',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 36,
+    alignSelf: 'flex-start',
+    marginTop: 20,
+    marginLeft: 20,
+  },
+  textSubTitle: {
+    color: '#484D55',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 15,
+    alignSelf: 'flex-start',
+    marginLeft: 20,
+  },
 });
 
 export default styles;

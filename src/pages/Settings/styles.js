@@ -48,6 +48,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  textTitle: {
+    color: '#2242A7',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 36,
+    alignSelf: 'flex-start',
+    marginTop: 10,
+    marginLeft: 20,
+  },
+  textSubTitle: {
+    color: '#484D55',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 15,
+    alignSelf: 'flex-start',
+    marginLeft: 20,
+  },
+  titleContent: {
+    marginBottom: 20,
+  },
 });
 
 export default styles;

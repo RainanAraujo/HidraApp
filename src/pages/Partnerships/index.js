@@ -20,6 +20,12 @@ export default function Profile() {
         barStyle="dark-content"
         backgroundColor={styles.statusBar.backgroundColor}
       />
+      <View style={styles.titleContent}>
+        <Text style={styles.textTitle}>Parcerias</Text>
+        <Text style={styles.textSubTitle}>
+          Confira as promoções de nossos parceiros.
+        </Text>
+      </View>
       <FlatList
         contentContainerStyle={{paddingTop: 20}}
         data={DATA}
