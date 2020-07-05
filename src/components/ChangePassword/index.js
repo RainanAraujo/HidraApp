@@ -8,7 +8,6 @@ import {
   StatusBar,
 } from 'react-native';
 import styles from './styles';
-
 export default function ChangePassword(props) {
   return (
     <Modal animationType="slide" visible={true} statusBarTranslucent={true}>
