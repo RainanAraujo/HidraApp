@@ -14,8 +14,9 @@ import {signOut} from '../../services/auth';
 import {getUserData} from '../../services/store';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
+import {Assets} from '@react-navigation/stack';
 
-export default function Settings({data, navigation}) {
+export default function Settings({navigation}) {
   const dispatch = useDispatch();
   const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
   const [defaultToggle, setDefaultToggle] = useState(false);
@@ -68,9 +69,10 @@ export default function Settings({data, navigation}) {
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => {
-              signOut(navigation.navigate('Login'));
+            onPress={async () => {
+              await signOut();
               dispatch({type: 'SET_USER_DATA', data: {}});
+              navigation.replace('Login');
             }}>
             <Text style={styles.textExitButton}>Sair</Text>
           </TouchableOpacity>
