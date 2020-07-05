@@ -11,42 +11,46 @@ import styles from './styles';
 
 export default function ChangePassword(props) {
   return (
-    <>
-      <Modal animationType="fade" visible={true} statusBarTranslucent={true}>
-        <StatusBar barStyle="dark-content" />
-        <View style={styles.modalContainer}>
-          <Text style={styles.textTitle}>Altere sua Senha</Text>
+    <Modal animationType="slide" visible={true} statusBarTranslucent={true}>
+      <StatusBar barStyle="dark-content" />
+      <View style={styles.modalContainer}>
+        <Text style={styles.textTitle}>Altere sua Senha</Text>
+        <View style={styles.form}>
           <View style={{alignItems: 'center'}}>
             <TextInput
               style={styles.Input}
               placeholder="Senha Atual"
               secureTextEntry={true}
+              autoCompleteType="off"
             />
             <TextInput
               style={styles.Input}
               placeholder="Nova senha"
               secureTextEntry={true}
+              autoCompleteType="off"
             />
             <TextInput
               style={styles.Input}
               placeholder="Repita a nova senha"
               secureTextEntry={true}
+              autoCompleteType="off"
             />
           </View>
           <View style={styles.butons}>
+            <TouchableOpacity style={styles.butonAcept}>
+              <Text style={styles.textButonAccept}>Alterar</Text>
+            </TouchableOpacity>
             <TouchableOpacity
               style={styles.butonCancel}
               onPress={() => {
                 props.onClose();
               }}>
-              <Text style={styles.textButons}>Cancelar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.butonAcept}>
-              <Text style={styles.textButons}>Alterar</Text>
+              <Text style={styles.textButonClose}>Cancelar</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </Modal>
-    </>
+        <View />
+      </View>
+    </Modal>
   );
 }

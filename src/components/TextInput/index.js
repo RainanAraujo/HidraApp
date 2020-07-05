@@ -10,6 +10,7 @@ export default function textInput({
   onChangeText,
   autoCapitalize,
   secureTextEntry,
+  autoCompleteType,
 }) {
   return (
     <TextInput
@@ -21,6 +22,7 @@ export default function textInput({
       value={value}
       secureTextEntry={secureTextEntry}
       onChangeText={onChangeText}
+      autoCompleteType={autoCompleteType}
     />
   );
 }

@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
   },
   ActivityIndicator: {
     color: '#2343A9',
+    position: 'absolute',
+    alignSelf: 'center',
   },
   IconUp: {
     color: '#000',

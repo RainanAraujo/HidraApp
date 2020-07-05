@@ -16,11 +16,9 @@ import styles from './styles';
 
 export default function Login({navigation, route}) {
   const dispatch = useDispatch();
-
   const [scanQrVisible, setScanQrVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({});
-
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
   const animatedEvent = Animated.event(
@@ -136,7 +134,7 @@ export default function Login({navigation, route}) {
                   ],
                 }}>
                 <LoginFormBar translateY={translateY} loading={loading}>
-                  <LoginForm onSubmit={onSubmitForm} />
+                  <LoginForm onSubmit={onSubmitForm} loading={loading} />
                   <Button
                     text={'Escanear Híbrido'}
                     iconName={'camera'}

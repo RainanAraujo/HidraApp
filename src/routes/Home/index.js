@@ -10,15 +10,6 @@ import {styles} from './styles';
 const Tab = createMaterialTopTabNavigator();
 
 export default function Home({navigation, route}) {
-  const [data, setData] = useState({
-    name: '',
-    course: '',
-    age: 0,
-    since: 0,
-    qrcode: 'null',
-    post: '',
-  });
-
   return (
     <>
       <Tab.Navigator

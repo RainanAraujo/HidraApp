@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 
-import TextInput from '../TextInput/index';
+import TextInput from '../TextInput';
 import {View} from 'react-native';
 import Button from '../Button';
 import styles from './styles';
 
-export default function LoginForm({style, onSubmit}) {
+export default function LoginForm({style, onSubmit, loading}) {
   const [Form, setForm] = useState({email: '', pass: ''});
 
   return (
@@ -29,6 +29,7 @@ export default function LoginForm({style, onSubmit}) {
         <Button
           text="Login"
           style={styles.buttonLogin}
+          loading={loading}
           onPress={() => onSubmit(Form.email, Form.pass)}
         />
       </View>

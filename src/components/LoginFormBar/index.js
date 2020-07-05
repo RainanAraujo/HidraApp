@@ -29,6 +29,7 @@ export default function LoginFormBar({translateY, loading, children}) {
               }),
             }}>
             <ActivityIndicator
+              style={styles.ActivityIndicator}
               size="large"
               color={styles.ActivityIndicator.color}
             />

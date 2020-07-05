@@ -10,8 +10,12 @@ import {
 import ChangePasswordModal from '../../components/ChangePassword';
 import ToggleSwitch from 'toggle-switch-react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import {signOut} from '../../services/auth';
+import {getUserData} from '../../services/store';
 import styles from './styles';
+import {useDispatch} from 'react-redux';
 export default function Settings({data, navigation}) {
+  const dispatch = useDispatch();
   const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
   const [defaultToggle, setDefaultToggle] = useState(false);
   const [PasswordVisible, setPasswordVisible] = useState(false);
@@ -57,7 +61,12 @@ export default function Settings({data, navigation}) {
             </>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              signOut(navigation.navigate('Login'));
+              dispatch({type: 'SET_USER_DATA', data: {}});
+            }}>
             <Text style={styles.textExitButton}>Sair</Text>
           </TouchableOpacity>
         </>

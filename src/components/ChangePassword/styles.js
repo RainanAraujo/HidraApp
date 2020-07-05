@@ -3,33 +3,40 @@ import {StyleSheet} from 'react-native';
 export default styles = StyleSheet.create({
   butons: {
     width: '70%',
-    flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  textButons: {
+  textButonAccept: {
     color: '#fff',
     fontFamily: 'Nunito-Regular',
     fontSize: 20,
     alignSelf: 'center',
   },
+  textButonClose: {
+    color: '#D10E29',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 20,
+    alignSelf: 'center',
+  },
   butonCancel: {
-    backgroundColor: '#D10E29',
     height: 50,
-    width: 120,
+    width: '100%',
     borderRadius: 10,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#D10E29',
   },
   butonAcept: {
     backgroundColor: '#519918',
     height: 50,
-    width: 120,
+    width: '100%',
     borderRadius: 10,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 10,
   },
   modalContainer: {
     backgroundColor: '#ffffff75',
@@ -52,5 +59,9 @@ export default styles = StyleSheet.create({
     borderRadius: 50,
     paddingHorizontal: 20,
     marginBottom: 20,
+  },
+  form: {
+    alignItems: 'center',
+    width: '100%',
   },
 });

@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   buttonScan: {
+    marginTop: 20,
     backgroundColor: '#2343A9',
   },
   container: {
