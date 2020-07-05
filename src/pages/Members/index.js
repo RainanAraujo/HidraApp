@@ -88,6 +88,7 @@ export default function Members() {
                   </Text>
                 </View>
               </View>
+              <View style={{...styles.post, backgroundColor: '#2242A7'}} />
             </View>
 
             <Divider style={styles.divider} />

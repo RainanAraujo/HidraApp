@@ -65,6 +65,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#DBDBDB',
     marginLeft: 10,
   },
+  post: {
+    alignSelf: 'flex-start',
+    height: 5,
+    width: 20,
+    borderRadius: 50,
+  },
 });
 
 export default styles;

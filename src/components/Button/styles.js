@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   button: {
     height: 50,
     width: 300,
-    borderRadius: 10,
+    borderRadius: 30,
     paddingHorizontal: 30,
     alignItems: 'center',
     justifyContent: 'space-evenly',

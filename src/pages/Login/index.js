@@ -61,14 +61,15 @@ export default function Login({navigation, route}) {
   }
 
   const loadProfileData = async (uid) => {
-    setLoading(true);
     let newUserData = {...(await getUserData(uid)), uid: uid};
     dispatch({type: 'SET_USER_DATA', data: newUserData});
+    setLoading(false);
     navigation.navigate('Home');
   };
 
   const onSubmitForm = async (email, pass) => {
     try {
+      setLoading(true);
       let uid = await signIn(email, pass);
       await loadProfileData(uid);
     } catch (error) {
@@ -78,7 +79,8 @@ export default function Login({navigation, route}) {
 
   useEffect(async () => {
     try {
-      if (getCurrentUser()) {
+      if (getCurrentUser() != null) {
+        setLoading(true);
         let uid = getCurrentUser().uid;
         await loadProfileData(uid);
       }
