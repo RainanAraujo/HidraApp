@@ -74,7 +74,7 @@ export default function Members() {
       </View>
 
       <FlatList
-        contentContainerStyle={{paddingTop: 20}}
+        ItemSeparatorComponent={() => <Divider style={styles.divider} />}
         data={DATA}
         renderItem={({item}) => (
           <>
@@ -99,8 +99,6 @@ export default function Members() {
               </View>
               <View style={{...styles.post, backgroundColor: item.post}} />
             </View>
-
-            <Divider style={styles.divider} />
           </>
         )}
         keyExtractor={(item) => item.name}

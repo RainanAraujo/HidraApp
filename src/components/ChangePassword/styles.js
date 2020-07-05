@@ -21,7 +21,7 @@ export default styles = StyleSheet.create({
   butonCancel: {
     height: 50,
     width: '100%',
-    borderRadius: 10,
+    borderRadius: 50,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
@@ -32,7 +32,7 @@ export default styles = StyleSheet.create({
     backgroundColor: '#519918',
     height: 50,
     width: '100%',
-    borderRadius: 10,
+    borderRadius: 50,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
