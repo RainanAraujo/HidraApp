@@ -33,9 +33,7 @@ export default function Home({navigation, route}) {
         }}>
         <Tab.Screen
           name="Perfil"
-          component={() =>
-            Profile({data: route.params.data, navigation: navigation})
-          }
+          component={Profile}
           options={{
             tabBarIcon: ({focused}) => (
               <Icon
@@ -87,9 +85,7 @@ export default function Home({navigation, route}) {
         />
         <Tab.Screen
           name="Definições"
-          component={() =>
-            Settings({data: route.params.data, navigation: navigation})
-          }
+          component={Settings}
           options={{
             tabBarIcon: ({focused}) => (
               <Icon

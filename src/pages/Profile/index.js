@@ -10,24 +10,28 @@ import {
   Animated,
 } from 'react-native';
 
+import QrCodeExemple from '../../assets/images/qrCodeExemple.png';
+import VeteranCard from '../../assets/images/veteranCard.png';
+import MonitorCard from '../../assets/images/monitorCard.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import firestore from '@react-native-firebase/firestore';
+import NoobCard from '../../assets/images/noobCard.png';
+import MainCard from '../../assets/images/mainCard.png';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import DropdownAlert from 'react-native-dropdownalert';
 import QRCode from 'react-native-qrcode-svg';
-import firestore from '@react-native-firebase/firestore';
-import NoobCard from '../../assets/images/noobCard.png';
-import VeteranCard from '../../assets/images/veteranCard.png';
-import MonitorCard from '../../assets/images/monitorCard.png';
-import MainCard from '../../assets/images/mainCard.png';
 import Card from '../../components/Card';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import QrCodeExemple from '../../assets/images/qrCodeExemple.png';
+import {useSelector} from 'react-redux';
 
-export default function Profile({data, navigation}) {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [scanQrVisible, setScanQrVisible] = useState(false);
+export default function Profile() {
   const [scannedQrVisible, setScaneedQrVisible] = useState(false);
-  const [modalApesentation, setModalApresentation] = useState(true);
+  const [scanQrVisible, setScanQrVisible] = useState(false);
+  const userData = useSelector((state) => state);
+  const [modalVisible, setModalVisible] = useState(false);
   const [scannedData, setScaneedData] = useState({});
+
+  console.log(userData);
+
   const [alert, setAlert] = useState({});
 
   function QrScan() {
@@ -89,7 +93,7 @@ export default function Profile({data, navigation}) {
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
         <View style={styles.modalContainer}>
           <View style={styles.modalView}>
-            <QRCode value={data.qrcode} size={200} />
+            <QRCode value={userData.userData.uid} size={200} />
           </View>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
@@ -108,35 +112,6 @@ export default function Profile({data, navigation}) {
       </Modal>
     );
   }
-
-  QRScanned = (e) => {
-    if (!e.data.includes('/')) {
-      firestore()
-        .collection('users')
-        .doc(e.data)
-        .get()
-        .then((data) => {
-          if (data.exists) {
-            setScaneedData(data.data());
-            setScaneedQrVisible(true);
-          } else {
-            alert.alertWithType('error', 'Erro', 'Codigo inválido');
-            setScanQrVisible(false);
-          }
-        })
-        .catch((error) => {
-          alert.alertWithType(
-            'error',
-            'Erro',
-            'Não foi possivel carregar dados do usuário',
-          );
-          setScanQrVisible(false);
-        });
-    } else {
-      alert.alertWithType('error', 'Erro', 'Codigo inválido');
-      setScanQrVisible(false);
-    }
-  };
 
   function getPostStyle(since, post) {
     var postStyle = {};
@@ -180,7 +155,7 @@ export default function Profile({data, navigation}) {
             <View>
               <Card
                 avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
-                data={data}
+                data={userData.userData}
               />
               <View>
                 <TouchableOpacity

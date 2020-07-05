@@ -15,7 +15,6 @@ import Button from '../../components/Button';
 import styles from './styles';
 
 export default function Login({navigation, route}) {
-  const userData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
 
   const [scanQrVisible, setScanQrVisible] = useState(false);
@@ -63,24 +62,27 @@ export default function Login({navigation, route}) {
     }
   }
 
+  const loadProfileData = async (uid) => {
+    setLoading(true);
+    let newUserData = {...(await getUserData(uid)), uid: uid};
+    dispatch({type: 'SET_USER_DATA', data: newUserData});
+    navigation.navigate('Home');
+  };
+
   const onSubmitForm = async (email, pass) => {
     try {
       let uid = await signIn(email, pass);
-      let newUserData = {...getUserData(uid), uid: uid};
-      dispatch({type: 'SET_USER_DATA', newUserData});
-      navigation.navigate('Home');
+      await loadProfileData(uid);
     } catch (error) {
       alert.alertWithType('error', 'Erro', error.message);
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     try {
       if (getCurrentUser()) {
-        setLoading(true);
         let uid = getCurrentUser().uid;
-        let newUserData = {...getUserData(uid), uid: uid};
-        dispatch({type: 'SET_USER_DATA', newUserData});
+        await loadProfileData(uid);
       }
     } catch (error) {
       alert.alertWithType('error', 'Erro', error.message);
