@@ -22,7 +22,7 @@ import DropdownAlert from 'react-native-dropdownalert';
 import QRCode from 'react-native-qrcode-svg';
 import Card from '../../components/Card';
 import {useSelector} from 'react-redux';
-
+import styles from './styles';
 export default function Profile() {
   const [scannedQrVisible, setScaneedQrVisible] = useState(false);
   const [scanQrVisible, setScanQrVisible] = useState(false);

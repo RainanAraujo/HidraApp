@@ -10,7 +10,7 @@ import {
 import ChangePasswordModal from '../../components/ChangePassword';
 import ToggleSwitch from 'toggle-switch-react-native';
 import Icon from 'react-native-vector-icons/Feather';
-
+import styles from './styles';
 export default function Settings({data, navigation}) {
   const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
   const [defaultToggle, setDefaultToggle] = useState(false);

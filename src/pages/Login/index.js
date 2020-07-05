@@ -120,7 +120,8 @@ export default function Login({navigation, route}) {
             <AppPresentation translateY={translateY} />
             <PanGestureHandler
               onGestureEvent={animatedEvent}
-              onHandlerStateChange={onHandlerStateChange}>
+              onHandlerStateChange={onHandlerStateChange}
+              enabled={!loading}>
               <Animated.View
                 style={{
                   ...styles.containerPush,
