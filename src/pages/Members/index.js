@@ -7,38 +7,47 @@ const DATA = [
   {
     name: 'Rainan Araújo',
     personalTitle: 'Passa rodo no baile',
+    post: '#2242A7',
   },
   {
     name: 'Pedro Lucas',
     personalTitle: 'Passa rodo no baile',
+    post: '#2242A7',
   },
   {
     name: 'Gustavo Enzo',
     personalTitle: 'Passa rodo no baile',
+    post: '#2D2C2B',
   },
   {
     name: 'Vinicios Castro',
     personalTitle: 'Passa rodo no baile',
+    post: '#97007F',
   },
   {
     name: 'Gabriel Salem',
     personalTitle: 'Passa rodo no baile',
+    post: '#97007F',
   },
   {
     name: 'Thiago Franco',
     personalTitle: 'Passa rodo no baile',
+    post: '#2D2C2B',
   },
   {
     name: 'Josué Santos',
     personalTitle: 'Passa rodo no baile',
+    post: '#2242A7',
   },
   {
     name: 'Rodrigo Salgado',
     personalTitle: 'Passa rodo no baile',
+    post: '#2242A7',
   },
   {
     name: 'Pikashu',
     personalTitle: 'Passa rodo no baile',
+    post: '#38B124',
   },
 ];
 
@@ -65,7 +74,7 @@ export default function Members() {
       </View>
 
       <FlatList
-        contentContainerStyle={{paddingTop: 20}}
+        ItemSeparatorComponent={() => <Divider style={styles.divider} />}
         data={DATA}
         renderItem={({item}) => (
           <>
@@ -88,9 +97,8 @@ export default function Members() {
                   </Text>
                 </View>
               </View>
+              <View style={{...styles.post, backgroundColor: item.post}} />
             </View>
-
-            <Divider style={styles.divider} />
           </>
         )}
         keyExtractor={(item) => item.name}

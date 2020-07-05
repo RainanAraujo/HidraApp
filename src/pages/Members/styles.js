@@ -65,6 +65,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#DBDBDB',
     marginLeft: 10,
   },
+  post: {
+    height: 6,
+    width: 20,
+    borderRadius: 50,
+    marginBottom: 15,
+    marginRight: 10,
+  },
 });
 
 export default styles;
