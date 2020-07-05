@@ -64,12 +64,7 @@ export default function Login({navigation}) {
   const loadProfileData = async (uid) => {
     let newUserData = {...(await getUserData(uid)), uid: uid};
     dispatch({type: 'SET_USER_DATA', data: newUserData});
-<<<<<<< HEAD
-    navigation.jumpTo('Home');
-=======
-    setLoading(false);
-    navigation.navigate('Home');
->>>>>>> adfa8ab4c4d9c2233d3263d92ef88704638e5f3d
+    navigation.replace('Home');
   };
 
   const onSubmitForm = async (email, pass) => {
@@ -83,7 +78,6 @@ export default function Login({navigation}) {
     }
   };
 
-<<<<<<< HEAD
   useEffect(() => {
     navigation.addListener('focus', async () => {
       try {
@@ -98,14 +92,6 @@ export default function Login({navigation}) {
       } catch (error) {
         Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
         setLoading(false);
-=======
-  useEffect(async () => {
-    try {
-      if (getCurrentUser() != null) {
-        setLoading(true);
-        let uid = getCurrentUser().uid;
-        await loadProfileData(uid);
->>>>>>> adfa8ab4c4d9c2233d3263d92ef88704638e5f3d
       }
     });
   }, [navigation]);

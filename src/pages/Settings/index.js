@@ -18,7 +18,9 @@ import {useDispatch} from 'react-redux';
 export default function Settings({data, navigation}) {
   const dispatch = useDispatch();
   const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
-  const [defaultToggle, setDefaultToggle] = useState(false);
+
+  const [ToggleDarkMode, setToggleDarkMode] = useState(false);
+  const [ToggleNotification, setToggleNotification] = useState(false);
   const [PasswordVisible, setPasswordVisible] = useState(false);
 
   return (
@@ -40,11 +42,52 @@ export default function Settings({data, navigation}) {
               <Text style={styles.textButton}>Alterar Senha</Text>
             </View>
           </TouchableOpacity>
-
+          <TouchableOpacity style={styles.button}>
+            <View style={styles.iconAdjustWithName}>
+              <Icon name="user" size={20} />
+              <Text style={styles.textButton}>Alterar foto de perfil</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <View style={styles.iconAdjustWithName}>
+              <Icon name="phone" size={20} />
+              <Text style={styles.textButton}>Adicionar contato</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled={true}
+            style={styles.button}
+            onPress={() => {
+              ToggleDarkMode
+                ? setToggleDarkMode(false)
+                : setToggleDarkMode(true);
+            }}>
+            <>
+              <View style={styles.iconAdjustWithName}>
+                <Icon name="moon" size={20} />
+                <Text style={styles.textButton}>Modo escuro (Em Breve)</Text>
+              </View>
+              <View>
+                <ToggleSwitch
+                  disabled={true}
+                  isOn={ToggleDarkMode}
+                  onColor="#38B124"
+                  offColor="#ecf0f1"
+                  onToggle={() => {
+                    ToggleDarkMode
+                      ? setToggleDarkMode(false)
+                      : setToggleDarkMode(true);
+                  }}
+                />
+              </View>
+            </>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              defaultToggle ? setDefaultToggle(false) : setDefaultToggle(true);
+              ToggleNotification
+                ? setToggleNotification(false)
+                : setToggleNotification(true);
             }}>
             <>
               <View style={styles.iconAdjustWithName}>
@@ -53,13 +96,13 @@ export default function Settings({data, navigation}) {
               </View>
               <View>
                 <ToggleSwitch
-                  isOn={defaultToggle}
+                  isOn={ToggleNotification}
                   onColor="#38B124"
                   offColor="#ecf0f1"
                   onToggle={() => {
-                    defaultToggle
-                      ? setDefaultToggle(false)
-                      : setDefaultToggle(true);
+                    ToggleNotification
+                      ? setToggleNotification(false)
+                      : setToggleNotification(true);
                   }}
                 />
               </View>
