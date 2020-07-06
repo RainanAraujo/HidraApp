@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 export default function Contact(props) {
-  const [currentContact, setCurrentContact] = useState(true);
+  const [currentContact, setCurrentContact] = useState(false);
   return (
     <Modal animationType="slide" visible={true} statusBarTranslucent={true}>
       <StatusBar barStyle="dark-content" />
@@ -42,6 +42,9 @@ export default function Contact(props) {
               <View style={styles.butons}>
                 <TouchableOpacity style={styles.butonAcept}>
                   <Text style={styles.textButonAccept}>Adicionar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.butonRemove}>
+                  <Text style={styles.textButonAccept}>Apenas remover</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.butonCancel}
