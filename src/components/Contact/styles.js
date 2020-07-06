@@ -31,7 +31,7 @@ export default styles = StyleSheet.create({
   butonAcept: {
     backgroundColor: '#519918',
     height: 50,
-    width: '100%',
+    width: '70%',
     borderRadius: 50,
     paddingHorizontal: 20,
     alignItems: 'center',
@@ -87,21 +87,36 @@ export default styles = StyleSheet.create({
   },
   textWarning: {
     textAlign: 'center',
-    color: '#484D55',
+    color: 'red',
     fontFamily: 'Nunito-Regular',
     fontSize: 15,
     marginHorizontal: 30,
     marginBottom: 10,
   },
-  currentContact: {
+  contactEnabled: {
     margin: 10,
     alignSelf: 'center',
-    backgroundColor: '#519918',
+    borderColor: '#519918',
+    borderWidth: 1,
     borderRadius: 10,
+    paddingHorizontal: 10,
+    flexDirection: 'column',
   },
-  textCurrentContact: {
+  contactEnabledContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  textContactEnabled: {
     padding: 10,
     paddingHorizontal: 20,
-    color: '#fff',
+    color: '#519918',
+  },
+  iconView: {
+    alignSelf: 'center',
+    backgroundColor: 'red',
+    flexDirection: 'column',
+    width: 40,
+    height: 40,
   },
 });
