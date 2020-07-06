@@ -64,7 +64,7 @@ export default function Settings({navigation}) {
                 onPress={() => setModalContactVisible(true)}>
                 <View style={styles.iconAdjustWithName}>
                   <Icon name="phone" size={20} />
-                  <Text style={styles.textButton}>Adicionar contato</Text>
+                  <Text style={styles.textButton}>Contato</Text>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity

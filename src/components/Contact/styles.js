@@ -38,6 +38,16 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
   },
+  butonRemove: {
+    backgroundColor: '#D10E29',
+    height: 50,
+    width: '100%',
+    borderRadius: 50,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
   modalContainer: {
     backgroundColor: '#ffffff75',
     flex: 1,
