@@ -1,6 +1,5 @@
 export const LOGOUT_ERROR = 'Erro ao realizar logout';
 export const CHANGE_PASSWORD_ERROR = 'Erro ao Trocar Senha';
-export const WRONG_PASSWORD_ERROR = 'Senha Incorreta';
 export const NETWORK_REQUEST_ERROR = 'Erro na Rede';
 export const INVALID_LOGIN_ERROR = 'Login Inválido';
 export const INVALID_EMAIL_ERROR = 'Email Inválido';
