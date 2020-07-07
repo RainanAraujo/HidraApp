@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import styles from './styles';
 import IconButton from '../../components/IconButton';
-export default function Contact(props) {
+export default function Contact({visible, onClose}) {
   const [contactEnabled, setcontactEnabled] = useState(true);
   return (
-    <Modal animationType="slide" visible={true} statusBarTranslucent={true}>
+    <Modal animationType="slide" visible={visible} statusBarTranslucent={true}>
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
         <>
@@ -69,9 +69,7 @@ export default function Contact(props) {
             <View style={styles.butons}>
               <TouchableOpacity
                 style={styles.butonCancel}
-                onPress={() => {
-                  props.onClose();
-                }}>
+                onPress={() => onClose()}>
                 <Text style={styles.textButonClose}>Cancelar</Text>
               </TouchableOpacity>
             </View>

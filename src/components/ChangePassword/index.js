@@ -8,9 +8,9 @@ import {
   StatusBar,
 } from 'react-native';
 import styles from './styles';
-export default function ChangePassword(props) {
+export default function ChangePassword({visible, onClose}) {
   return (
-    <Modal animationType="slide" visible={true} statusBarTranslucent={true}>
+    <Modal animationType="slide" visible={visible} statusBarTranslucent={true}>
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
         <Text style={styles.textTitle}>Altere sua Senha</Text>
@@ -42,7 +42,7 @@ export default function ChangePassword(props) {
             <TouchableOpacity
               style={styles.butonCancel}
               onPress={() => {
-                props.onClose();
+                onClose();
               }}>
               <Text style={styles.textButonClose}>Cancelar</Text>
             </TouchableOpacity>
