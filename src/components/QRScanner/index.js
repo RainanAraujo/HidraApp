@@ -3,6 +3,7 @@ import {Text, View, TouchableOpacity, Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {getUserData} from '../../services/store';
+import {INVALID_QRCODE_ERROR} from '../../utils/errorTypes';
 import styles from './styles';
 import Card from '../Card';
 
@@ -11,8 +12,12 @@ export default function QRScanner({onError, onClose}) {
 
   const onScan = async (data) => {
     try {
-      let res = await getUserData(data);
-      setScaneedData(res);
+      if (data.match(/^[0-9a-zA-Z]+$/) && data.length === 28) {
+        let res = await getUserData(data);
+        setScaneedData(res);
+      } else {
+        throw new Error(INVALID_QRCODE_ERROR);
+      }
     } catch (error) {
       onError(error.message);
       onClose();
