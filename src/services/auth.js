@@ -1,4 +1,9 @@
 import auth from '@react-native-firebase/auth';
+import {
+  LOGOUT_ERROR,
+  INVALID_LOGIN_ERROR,
+  getFirebaseError,
+} from '../utils/errorTypes';
 
 export const getCurrentUser = () => auth().currentUser;
 
@@ -7,32 +12,24 @@ export const signOut = () => {
     auth()
       .signOut()
       .then(() => {
-        //auth().currentUser.delete();
-        resolve();
+        resolve(['success', 'Sucesso', 'Logout concluído']);
       })
-      .catch(() => {
-        reject(new Error('Erro ao realizar logout'));
-      });
+      .catch(() => reject(new Error(LOGOUT_ERROR)));
   });
 };
 
 export const changePassword = (oldPassword, newPassword) => {
   return new Promise((resolve, reject) => {
-    this.reauthenticate(oldPassword)
+    auth()
+      .sendPasswordResetEmail(auth().currentUser.email)
       .then(() => {
-        var user = firebase.auth().currentUser;
-        user
-          .updatePassword(newPassword)
-          .then(() => {
-            resolve();
-          })
-          .catch((error) => {
-            reject(new Error('Erro ao Trocar Senha'));
-          });
+        resolve([
+          'success',
+          'Sucesso',
+          'Email de redefinição de senha foi enviado',
+        ]);
       })
-      .catch((error) => {
-        reject(new Error('Senha Incorreta'));
-      });
+      .catch((error) => reject(getFirebaseError(error.code)));
   });
 };
 
@@ -44,17 +41,9 @@ export const signIn = (email, pass) => {
         .then((res) => {
           resolve(res.user.uid);
         })
-        .catch((error) => {
-          if (error.code == 'auth/network-request-failed') {
-            reject(new Error('Erro na Rede'));
-          } else if (error.code == 'auth/invalid-email') {
-            reject(new Error('Email Inválido'));
-          } else {
-            reject(new Error('Login Inválido'));
-          }
-        });
+        .catch((error) => reject(getFirebaseError(error.code)));
     } else {
-      reject(new Error('Login Inválido'));
+      reject(new Error(INVALID_LOGIN_ERROR));
     }
   });
 };
