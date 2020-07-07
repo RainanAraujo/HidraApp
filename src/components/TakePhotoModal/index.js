@@ -20,10 +20,10 @@ export default function TakePhotoModal({visible, onClose}) {
       const options = {
         quality: 0.5,
         base64: true,
-        exif: true,
+        mirrorImage: true,
+        fixOrientation: true,
       };
       const data = await camera.takePictureAsync(options);
-      data.exif.Orientation = '180deg';
       setPicture(data);
     }
   };
