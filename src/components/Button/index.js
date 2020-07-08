@@ -9,6 +9,7 @@ export default function Button({
   iconName,
   loading,
   style,
+  styleText,
 }) {
   return (
     <>
@@ -24,7 +25,7 @@ export default function Button({
           />
         ) : (
           <>
-            <Text style={styles.text}>{text}</Text>
+            <Text style={{...styles.text, ...styleText}}>{text}</Text>
             {iconName ? (
               <Icon name={iconName} color={styles.iconColor.color} size={20} />
             ) : (
