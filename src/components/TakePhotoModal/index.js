@@ -7,6 +7,7 @@ import {
   View,
   Modal,
   StatusBar,
+  Image,
 } from 'react-native';
 import {Avatar, Divider} from 'react-native-elements';
 import styles from './styles';
@@ -15,6 +16,7 @@ import Button from '../../components/Button';
 export default function TakePhotoModal({visible, onClose}) {
   const [camera, setCamera] = useState();
   const [picture, setPicture] = useState();
+
   const takePicture = async () => {
     if (camera) {
       const options = {
@@ -22,6 +24,7 @@ export default function TakePhotoModal({visible, onClose}) {
         base64: true,
         mirrorImage: true,
         fixOrientation: true,
+        pauseAfterCapture: true,
       };
       const data = await camera.takePictureAsync(options);
       setPicture(data);
@@ -33,6 +36,7 @@ export default function TakePhotoModal({visible, onClose}) {
       <View style={styles.modalContainer}>
         {picture ? (
           <View>
+            <Text style={styles.textTitle}>Sua foto :)</Text>
             <View
               style={{
                 flex: 7,
@@ -45,6 +49,12 @@ export default function TakePhotoModal({visible, onClose}) {
                 source={picture}
                 activeOpacity={0.7}
               />
+              <Text style={styles.textName}>Rainan Carneiro Araújo</Text>
+
+              <Text style={styles.textSubTitle}>
+                Essa foto será visível em sua carteira virtual e lista de
+                membros da atlética.
+              </Text>
             </View>
 
             <View
@@ -55,13 +65,17 @@ export default function TakePhotoModal({visible, onClose}) {
                 alignItems: 'center',
               }}>
               <Button
-                text={'Voltar'}
-                style={styles.buttonCancel}
+                text={'Repetir'}
+                style={styles.buttonCancelAndRetry}
                 styleText={styles.textButton}
                 onPress={() => setPicture(null)}
               />
 
-              <Button text={'Continuar'} style={styles.buttonContinue} />
+              <Button
+                text={'Continuar'}
+                style={styles.buttonContinue}
+                onPress={() => onClose()}
+              />
             </View>
           </View>
         ) : (
@@ -101,7 +115,7 @@ export default function TakePhotoModal({visible, onClose}) {
               }}>
               <Button
                 text={'Cancelar'}
-                style={styles.buttonCancel}
+                style={styles.buttonCancelAndRetry}
                 styleText={styles.textButton}
                 onPress={() => onClose()}
               />

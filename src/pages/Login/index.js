@@ -122,6 +122,11 @@ export default function Login({navigation}) {
               }}>
               Olá!
             </Animated.Text>
+            <Button
+              text="Steps TESTE"
+              style={styles.buttonLogin}
+              onPress={() => navigation.navigate('Steps')}
+            />
             <AppPresentation translateY={translateY} />
             <PanGestureHandler
               onGestureEvent={animatedEvent}

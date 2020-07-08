@@ -10,6 +10,7 @@ export default styles = StyleSheet.create({
   },
   camera: {
     flex: 7,
+    width: '100%',
   },
   capture: {
     width: 70,
@@ -23,10 +24,10 @@ export default styles = StyleSheet.create({
   captureText: {
     color: '#fff',
   },
-  buttonCancel: {
+  buttonCancelAndRetry: {
     borderColor: '#FF4646',
     borderWidth: 1,
-    width: 160,
+    width: 140,
     margin: 10,
   },
   buttonContinue: {
@@ -36,5 +37,29 @@ export default styles = StyleSheet.create({
   },
   textButton: {
     color: '#FF4646',
+  },
+  textName: {
+    fontSize: 20,
+    margin: 10,
+    color: '#484D55',
+    fontFamily: 'Nunito-SemiBold',
+  },
+  textTitle: {
+    color: '#484D55',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 25,
+    marginTop: 30,
+    alignSelf: 'center',
+    textAlign: 'center',
+  },
+
+  textSubTitle: {
+    textAlign: 'center',
+    color: '#484D55',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 15,
+    marginHorizontal: 30,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
