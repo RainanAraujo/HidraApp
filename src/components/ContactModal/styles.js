@@ -1,44 +1,32 @@
 import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
-  butons: {
+  buttons: {
+    flex: 1,
     width: '70%',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  textButonAccept: {
-    color: '#fff',
+  textButtonAdd: {
+    color: '#519918',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 20,
+    marginHorizontal: 20,
+    alignSelf: 'center',
+  },
+  textButtonClose: {
+    color: 'white',
     fontFamily: 'Nunito-Regular',
     fontSize: 20,
     alignSelf: 'center',
   },
-  textButonClose: {
-    color: '#D10E29',
+  textButtonSave: {
+    color: 'white',
     fontFamily: 'Nunito-Regular',
     fontSize: 20,
     alignSelf: 'center',
   },
-  butonCancel: {
-    height: 50,
-    width: '100%',
-    borderRadius: 50,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#D10E29',
-  },
-  butonAcept: {
-    backgroundColor: '#519918',
-    height: 50,
-    width: '70%',
-    borderRadius: 50,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
-  butonRemove: {
+  buttonCancel: {
     backgroundColor: '#D10E29',
     height: 50,
     width: '100%',
@@ -46,7 +34,27 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    margin: '2%',
+  },
+  buttonAdd: {
+    height: '100%',
+    width: '100%',
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#519918',
+    flexDirection: 'row',
+  },
+  buttonSave: {
+    backgroundColor: '#519918',
+    height: 50,
+    width: '100%',
+    borderRadius: 50,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '2%',
   },
   modalContainer: {
     backgroundColor: '#ffffff75',
@@ -65,15 +73,17 @@ export default styles = StyleSheet.create({
   },
   Input: {
     backgroundColor: '#EDF6FF',
-    height: 50,
-    width: 300,
-    borderRadius: 50,
+    width: '80%',
+    height: '100%',
+    borderBottomLeftRadius: 50,
+    borderTopLeftRadius: 50,
     paddingHorizontal: 20,
-    marginBottom: 20,
   },
   form: {
+    justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    height: '60%',
     alignSelf: 'center',
   },
   textSubTitle: {
@@ -102,10 +112,13 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'column',
   },
-  contactEnabledContainer: {
+  contactContainer: {
+    aspectRatio: 10 / 2,
+    width: '80%',
+    height: undefined,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    margin: '10%',
   },
   textContactEnabled: {
     padding: 10,
@@ -113,10 +126,13 @@ export default styles = StyleSheet.create({
     color: '#519918',
   },
   iconView: {
-    alignSelf: 'center',
     backgroundColor: 'red',
+    alignSelf: 'center',
     flexDirection: 'column',
-    width: 40,
-    height: 40,
+    width: '20%',
+    aspectRatio: 1,
+    borderBottomRightRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 0,
   },
 });

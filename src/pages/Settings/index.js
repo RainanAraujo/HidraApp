@@ -7,31 +7,48 @@ import {
   SafeAreaView,
 } from 'react-native';
 import ChangePasswordModal from '../../components/ChangePassword';
-import Contact from '../../components/Contact';
 import TakePhotoModal from '../../components/TakePhotoModal';
-import ToggleSwitch from 'toggle-switch-react-native';
 import Icon from 'react-native-vector-icons/dist/Feather';
+import ContactModal from '../../components/ContactModal';
+import ToggleSwitch from 'toggle-switch-react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {getUserData, updateContact} from '../../services/store';
 import {signOut} from '../../services/auth';
-import {getUserData} from '../../services/store';
+import Alerts from '../../utils/alerts';
 import styles from './styles';
-import {useDispatch} from 'react-redux';
 
 export default function Settings({navigation}) {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData);
+
   const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
   const [modalContactVisible, setModalContactVisible] = useState(false);
   const [modalTakePhoto, setModalTakePhoto] = useState(false);
   const [ToggleDarkMode, setToggleDarkMode] = useState(false);
   const [ToggleNotification, setToggleNotification] = useState(false);
 
+  const changeContact = async (contact) => {
+    console.log(userData.uid);
+    try {
+      Alerts.getDropDown().alertWithType(
+        ...(await updateContact(userData.uid, contact)),
+      );
+      let newUserData = {...(await getUserData(uid)), uid: uid};
+      dispatch({type: 'SET_USER_DATA', data: newUserData});
+    } catch (error) {
+      Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      {}
 
-      <Contact
+      <ContactModal
+        contactValue={userData.contact}
         visible={modalContactVisible}
         onClose={() => setModalContactVisible(false)}
+        onSave={changeContact}
       />
       <ChangePasswordModal
         visible={modalPasswordVisible}

@@ -7,7 +7,7 @@ function reducer(state = INITIAL_STATE, action) {
     case 'SET_USER_DATA':
       return {...state, userData: action.data};
     case 'RESET_USER_DATA':
-      return {...state, userData: {}};
+      return {};
     default:
       return state;
   }

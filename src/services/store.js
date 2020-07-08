@@ -22,13 +22,20 @@ export const getUserData = (userID) => {
   });
 };
 
-export const addContact = (userID, newContact) => {
-  firestore()
-    .collection('users')
-    .doc(userID)
-    .update({contact, newContact})
-    .then(() => {
-      resolve(['success', 'Sucesso', 'Contato adicionado com sucesso']);
-    })
-    .catch(() => reject(new Error(CHANGE_DATA_ERROR)));
+export const updateContact = (userID, newContact) => {
+  console.log(userID);
+  return new Promise((resolve, reject) => {
+    firestore()
+      .collection('users')
+      .doc(userID)
+      .update({contact: newContact})
+      .then(() => {
+        resolve(['success', 'Sucesso', 'Contato adicionado com sucesso']);
+      })
+      .catch((error) => {
+        console.log(Object.keys(error));
+        console.log(error);
+        return reject(new Error(error));
+      });
+  });
 };
