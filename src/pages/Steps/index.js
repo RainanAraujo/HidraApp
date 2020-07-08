@@ -24,7 +24,7 @@ export default function Steps({visible, onClose}) {
         </>,
       );
     }
-    return <View>{steps}</View>;
+    return <View style={styles.stepsConteiner}>{steps}</View>;
   };
   return (
     <View style={styles.container}>
@@ -36,10 +36,8 @@ export default function Steps({visible, onClose}) {
           style={styles.buttonContinue}
         />
       </View>
-      <View style={styles.stepsConteiner}>
-        <Step focused={true} />
-        <Step focused={false} />
-        <Step focused={false} />
+      <View>
+        <Step focused={false} stepCount={3} />
       </View>
     </View>
   );

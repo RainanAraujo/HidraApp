@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   stepsConteiner: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    marginBottom: 10,
   },
   content: {
     flex: 13,
