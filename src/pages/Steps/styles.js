@@ -6,21 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
   },
-  steps: {
-    backgroundColor: '#D2D2D2',
-    width: 15,
-    height: 15,
-    borderRadius: 10,
-    margin: 2,
-  },
-  stepsFocused: {
-    backgroundColor: '#D2D2D2',
-    width: 35,
-    height: 15,
-    borderRadius: 10,
-    margin: 2,
-  },
-  stepsConteiner: {
+  stepsContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: 10,

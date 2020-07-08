@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -9,35 +9,41 @@ import {
 } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
-export default function Steps({visible, onClose}) {
-  const [focused, setFocused] = useState();
-  const Step = ({focused, stepCount}) => {
-    let steps = [];
-    for (let position = 0; position < stepCount; position++) {
-      steps.push(
-        <>
-          {focused ? (
-            <View style={styles.stepsFocused}></View>
-          ) : (
-            <View style={styles.steps}></View>
-          )}
-        </>,
-      );
-    }
-    return <View style={styles.stepsConteiner}>{steps}</View>;
-  };
+import StepsPoints from '../../components/StepsPoints';
+import ContactModal from '../../components/ContactModal';
+
+export default function Steps({navegation}) {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStepView, setCurrentStepView] = useState(<View></View>);
+
+  const steps = [
+    <Text>{currentStep + 1}</Text>,
+    <Text>{currentStep + 2}</Text>,
+    <Text>{currentStep + 3}</Text>,
+    <Text>{currentStep + 4}</Text>,
+    <Text>{currentStep + 5}</Text>,
+  ];
+
+  useEffect(() => {
+    setCurrentStepView(steps[currentStep]);
+  }, [currentStep]);
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <View style={styles.content}>
+        {currentStepView}
         <Button
           text={'Continuar'}
           iconName={'arrow-right'}
           style={styles.buttonContinue}
+          onPress={() => {
+            setCurrentStep(currentStep + 1);
+          }}
         />
       </View>
-      <View>
-        <Step focused={false} stepCount={3} />
+      <View style={styles.stepsContainer}>
+        <StepsPoints stepCount={steps.length} currentStep={currentStep} />
       </View>
     </View>
   );
