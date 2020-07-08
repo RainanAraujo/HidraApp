@@ -10,6 +10,7 @@ export const LOAD_USER_DATA_ERROR =
 export const INVALID_QRCODE_ERROR = 'QR Code inválido';
 export const CHANGE_DATA_ERROR = 'Não foi possivel alterar os dados';
 export const DEFAULT_AUTH_ERROR = 'Erro desconhecido';
+export const INVALID_CONTACT_ERROR = 'Contato Inválido';
 
 export const getFirebaseError = (errorCode) => {
   if (errorCode == 'auth/network-request-failed') {

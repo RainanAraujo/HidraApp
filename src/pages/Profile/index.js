@@ -18,7 +18,7 @@ import Button from '../../components/Button';
 
 export default function Profile() {
   const [scanQrVisible, setScanQrVisible] = useState(false);
-  const userData = useSelector((state) => state);
+  const userData = useSelector((state) => state.userData);
   const [modalVisible, setModalVisible] = useState(false);
   const [alert, setAlert] = useState({});
 
@@ -40,7 +40,7 @@ export default function Profile() {
             <View>
               <Card
                 avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
-                data={userData.userData}
+                data={userData}
               />
               <View>
                 <TouchableOpacity
