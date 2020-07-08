@@ -17,11 +17,11 @@ export default function Steps({navegation}) {
   const [currentStepView, setCurrentStepView] = useState(<View></View>);
 
   const steps = [
-    <Text>{currentStep + 1}</Text>,
-    <Text>{currentStep + 2}</Text>,
-    <Text>{currentStep + 3}</Text>,
-    <Text>{currentStep + 4}</Text>,
-    <Text>{currentStep + 5}</Text>,
+    <Text>{currentStep}</Text>,
+    <Text>{currentStep}</Text>,
+    <Text>{currentStep}</Text>,
+    <Text>{currentStep}</Text>,
+    <Text>{currentStep}</Text>,
   ];
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Steps({navegation}) {
           iconName={'arrow-right'}
           style={styles.buttonContinue}
           onPress={() => {
-            setCurrentStep(currentStep + 1);
+            if (steps.length > currentStep + 1) setCurrentStep(currentStep + 1);
           }}
         />
       </View>
