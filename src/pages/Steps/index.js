@@ -1,13 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Modal,
-  TextInput,
-  StatusBar,
-  Animated,
-} from 'react-native';
+import {View, Dimensions, StatusBar, Animated} from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
 import StepsPoints from '../../components/StepsPoints';
@@ -18,47 +10,80 @@ import Cadastro from '../../components/Cadastro';
 export default function Steps({navegation}) {
   const [currentStep, setCurrentStep] = useState(0);
   const [currentStepBack, setCurrentStepBack] = useState(false);
-  const [currentStepView, setCurrentStepView] = useState(<View></View>);
+  const screenWidth = Math.round(Dimensions.get('window').width);
+  const slideAnim = useRef(new Animated.Value(0)).current;
+
   const steps = [
-    <WelcomeStep
-      index={0}
-      currentStep={currentStep}
-      currentStepBack={currentStepBack}
-    />,
-    <Cadastro
-      index={1}
-      currentStep={currentStep}
-      currentStepBack={currentStepBack}
-    />,
-    <TakePhoto
-      index={2}
-      currentStep={currentStep}
-      currentStepBack={currentStepBack}
-    />,
+    <View
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'red',
+      }}></View>,
+    <View
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'blue',
+      }}></View>,
+    <View
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'green',
+      }}></View>,
   ];
 
-  useEffect(() => {
-    setCurrentStepView(steps[currentStep]);
-  }, [currentStep]);
+  const previousStep = () => {
+    if (currentStep > 0) {
+      let targetValue = (currentStep - 1) * screenWidth;
+      Animated.timing(slideAnim, {
+        toValue: -targetValue,
+        duration: 300,
+      }).start();
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const nextStep = () => {
+    if (currentStep + 1 < steps.length) {
+      let targetValue = (currentStep + 1) * screenWidth;
+      Animated.timing(slideAnim, {
+        toValue: -targetValue,
+        duration: 300,
+      }).start();
+      setCurrentStep(currentStep + 1);
+    } else if (currentStep + 1 == steps.length) {
+    }
+  };
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <View style={styles.content}>
-        {currentStepView}
+        <Animated.View
+          style={{
+            width: steps.length * 100 + '%',
+            height: '100%',
+            translateX: slideAnim,
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            backgroundColor: 'red',
+          }}>
+          {steps.map((step) => (
+            <View style={{width: 100 / steps.length + '%', height: '100%'}}>
+              {step}
+            </View>
+          ))}
+        </Animated.View>
         <View style={styles.buttonsContainer}>
-          {currentStep > 0 ? (
+          {currentStep > 0 && (
             <Button
               text={'Voltar'}
               style={styles.buttonBack}
               styleText={styles.textButtonBack}
-              onPress={() => {
-                setCurrentStepBack(true);
-                setCurrentStep(currentStep - 1);
-              }}
+              onPress={previousStep}
             />
-          ) : (
-            <></>
           )}
 
           <Button
@@ -66,10 +91,7 @@ export default function Steps({navegation}) {
             iconName={'arrow-right'}
             style={styles.buttonContinue}
             styleIcon={styles.buttonContinue.color}
-            onPress={() => {
-              setCurrentStepBack(false);
-              setCurrentStep(currentStep + 1);
-            }}
+            onPress={nextStep}
           />
         </View>
       </View>

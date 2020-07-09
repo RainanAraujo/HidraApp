@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   content: {
-    flex: 13,
+    width: '100%',
     justifyContent: 'flex-end',
     paddingVertical: 20,
   },

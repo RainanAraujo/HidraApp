@@ -12,7 +12,7 @@ import styles from './styles';
 import Button from '../Button';
 import Icon from 'react-native-vector-icons/dist/Feather';
 export default function WelcomeStep({index, currentStep, currentStepBack}) {
-  const slideAnim = useRef(
+  /*const slideAnim = useRef(
     new Animated.Value(
       index == currentStep && currentStepBack == false ? 390 : -390,
     ),
@@ -30,9 +30,9 @@ export default function WelcomeStep({index, currentStep, currentStepBack}) {
       }).start();
     }
   }, [currentStep]);
-
+*/
   return (
-    <Animated.View style={{...styles.container, translateX: slideAnim}}>
+    <Animated.View style={{...styles.container}}>
       <Icon name={'smile'} size={100} color={styles.iconUser.color} />
       <Text style={styles.textTitle}>Bem-Vindo ao seu primeiro acesso!</Text>
       <Text style={styles.textSubTitle}>
