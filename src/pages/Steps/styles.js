@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
   },
   stepsContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    margin: '4%',
   },
   navigationContent: {
     justifyContent: 'center',

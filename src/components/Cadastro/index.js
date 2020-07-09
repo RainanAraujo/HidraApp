@@ -1,12 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Picker} from '@react-native-community/picker';
-import {Text, View, ScrollView} from 'react-native';
+import {Text, View, ScrollView, KeyboardAvoidingView} from 'react-native';
 import styles from './styles';
 import Input from '../../components/TextInput';
-
 export default function Cadastro() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.titleContent}>
         <Text style={styles.textTitle}>Cadastro</Text>
         <Text style={styles.textSubTitle}>
@@ -49,7 +48,7 @@ export default function Cadastro() {
             <Picker.Item label="25" value="25" />
             <Picker.Item label="26" value="26" />
             <Picker.Item label="27" value="27" />
-            <Picker.Item label="28" value="28" />
+            <Picker.Item label="28" value="" />
             <Picker.Item label="29" value="29" />
             <Picker.Item label="30" value="30" />
             <Picker.Item label="31" value="31" />
@@ -103,7 +102,6 @@ export default function Cadastro() {
           </Picker>
         </View>
       </View>
-      <View></View>
-    </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
