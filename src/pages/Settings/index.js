@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
+  Modal,
 } from 'react-native';
 import ChangePasswordModal from '../../components/ChangePassword';
 import TakePhoto from '../../components/TakePhoto';
@@ -54,10 +55,13 @@ export default function Settings({navigation}) {
         visible={modalPasswordVisible}
         onClose={() => setModalPasswordVisible(false)}
       />
-      <TakePhoto
+      <Modal
         visible={modalTakePhoto}
-        onClose={() => setModalTakePhoto(false)}
-      />
+        statusBarTranslucent={true}
+        animationType="slide">
+        <TakePhoto onClose={() => setModalTakePhoto(false)} />
+      </Modal>
+
       <View style={styles.titleContent}>
         <Text style={styles.textTitle}>Ajustes</Text>
         <Text style={styles.textSubTitle}>Isso é auto-explicativo.</Text>

@@ -151,6 +151,8 @@ export default function Login({navigation}) {
                     text={'Escanear Híbrido'}
                     iconName={'camera'}
                     style={styles.buttonScan}
+                    styleIcon={'#2343A9'}
+                    styleText={styles.textButtonScan}
                     onPress={() => setScanQrVisible(true)}
                   />
                 </LoginFormBar>

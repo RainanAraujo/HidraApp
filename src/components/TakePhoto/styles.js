@@ -1,15 +1,16 @@
 import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
-  modalContainer: {
+  container: {
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
     paddingTop: 70,
   },
   camera: {
-    flex: 7,
+    marginTop: 20,
     width: '100%',
+    height: '80%',
   },
   capture: {
     width: 70,
@@ -23,20 +24,17 @@ export default styles = StyleSheet.create({
   captureText: {
     color: '#fff',
   },
-  buttonCancelAndRetry: {
-    borderColor: '#FF4646',
-    borderWidth: 1,
-    width: 140,
+  buttonRetry: {
+    backgroundColor: '#FF4646',
+
     margin: 10,
   },
   buttonContinue: {
-    backgroundColor: '#519918',
+    backgroundColor: '#2343A9',
     width: 160,
     margin: 10,
   },
-  textButton: {
-    color: '#FF4646',
-  },
+
   textName: {
     fontSize: 20,
     margin: 10,
@@ -46,20 +44,22 @@ export default styles = StyleSheet.create({
   textTitle: {
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
-    fontSize: 25,
-    marginTop: 30,
+    fontSize: 24,
     alignSelf: 'center',
     textAlign: 'center',
+    paddingHorizontal: 60,
+    letterSpacing: 0,
   },
 
   textSubTitle: {
     textAlign: 'center',
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
-    fontSize: 15,
+    fontSize: 16,
     marginHorizontal: 30,
     marginTop: 10,
     marginBottom: 10,
+    letterSpacing: 0.15,
   },
   iconUser: {
     color: '#484D55',
@@ -68,10 +68,11 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     color: '#484D55',
     fontFamily: 'Nunito-SemiBold',
-    fontSize: 20,
-    marginHorizontal: 30,
+    fontSize: 14,
+    marginHorizontal: 40,
     marginTop: 10,
     marginBottom: 10,
+    letterSpacing: 0.1,
   },
   iconView: {
     borderColor: '#484D55',
@@ -82,10 +83,10 @@ export default styles = StyleSheet.create({
   buttonTake: {
     width: 240,
     borderWidth: 1,
-    borderColor: '#519918',
-    margin: 3,
+    borderColor: '#2343A9',
+    margin: 10,
   },
   textButtonTake: {
-    color: '#519918',
+    color: '#2343A9',
   },
 });

@@ -27,9 +27,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   closeButton: {
-    backgroundColor: 'red',
+    margin: 20,
+    backgroundColor: '#FF4646',
   },
   downloadButton: {
+    margin: 20,
     backgroundColor: '#38B124',
   },
 });

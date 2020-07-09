@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/dist/Feather';
-export default function IconButton({iconName, style, onPress}) {
+export default function IconButton({iconName, style, onPress, iconColor}) {
   return (
     <>
       <TouchableOpacity

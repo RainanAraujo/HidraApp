@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import {View, Dimensions, StatusBar, Animated} from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
@@ -7,32 +7,14 @@ import ContactModal from '../../components/ContactModal';
 import WelcomeStep from '../../components/WelcomeSteps';
 import TakePhoto from '../../components/TakePhoto';
 import Cadastro from '../../components/Cadastro';
-export default function Steps({navegation}) {
+import {debug} from 'react-native-reanimated';
+export default function Steps({navigation}) {
   const [currentStep, setCurrentStep] = useState(0);
   const [currentStepBack, setCurrentStepBack] = useState(false);
   const screenWidth = Math.round(Dimensions.get('window').width);
   const slideAnim = useRef(new Animated.Value(0)).current;
 
-  const steps = [
-    <View
-      style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'red',
-      }}></View>,
-    <View
-      style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'blue',
-      }}></View>,
-    <View
-      style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'green',
-      }}></View>,
-  ];
+  const steps = [<WelcomeStep />, <Cadastro />, <TakePhoto />];
 
   const previousStep = () => {
     if (currentStep > 0) {
@@ -67,7 +49,7 @@ export default function Steps({navegation}) {
           translateX: slideAnim,
           flexDirection: 'row',
           justifyContent: 'flex-start',
-          backgroundColor: 'red',
+          alignSelf: 'flex-start',
         }}>
         {steps.map((step) => (
           <View style={{width: 100 / steps.length + '%', height: '100%'}}>
@@ -86,13 +68,22 @@ export default function Steps({navegation}) {
               onPress={previousStep}
             />
           )}
-          <Button
-            text={'Continuar'}
-            iconName={'arrow-right'}
-            style={styles.buttonContinue}
-            styleIcon={styles.buttonContinue.color}
-            onPress={nextStep}
-          />
+          {currentStep == steps.length - 1 ? (
+            <Button
+              text={'Concluir'}
+              style={styles.buttonContinue}
+              styleIcon={styles.buttonContinue.color}
+              onPress={() => navigation.replace('Home')}
+            />
+          ) : (
+            <Button
+              text={'Continuar'}
+              iconName={'arrow-right'}
+              style={styles.buttonContinue}
+              styleIcon={styles.buttonContinue.color}
+              onPress={nextStep}
+            />
+          )}
         </View>
         <View style={styles.stepsContainer}>
           <StepsPoints stepCount={steps.length} currentStep={currentStep} />

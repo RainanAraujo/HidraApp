@@ -29,7 +29,7 @@ export default styles = StyleSheet.create({
     borderColor: '#D10E29',
   },
   butonAcept: {
-    backgroundColor: '#519918',
+    backgroundColor: '#2343A9',
     height: 50,
     width: '100%',
     borderRadius: 50,

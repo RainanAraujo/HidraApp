@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
   buttons: {
-    flex: 1,
     width: '70%',
     justifyContent: 'flex-end',
     alignItems: 'center',
@@ -15,10 +14,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textButtonClose: {
-    color: 'white',
-    fontFamily: 'Nunito-Regular',
-    fontSize: 20,
-    alignSelf: 'center',
+    color: '#FF4646',
   },
   textButtonSave: {
     color: 'white',
@@ -27,14 +23,15 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonCancel: {
-    backgroundColor: '#D10E29',
+    borderColor: '#FF4646',
+    borderWidth: 2,
     height: 50,
     width: '100%',
     borderRadius: 50,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: '2%',
+    margin: 3,
   },
   buttonAdd: {
     height: '100%',
@@ -43,23 +40,23 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#519918',
+    borderColor: '#2343A9',
     flexDirection: 'row',
   },
   buttonSave: {
-    backgroundColor: '#519918',
+    backgroundColor: '#2343A9',
     height: 50,
     width: '100%',
     borderRadius: 50,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: '2%',
+    margin: 3,
   },
   modalContainer: {
     backgroundColor: '#ffffff75',
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     paddingTop: 70,
   },
@@ -82,9 +79,6 @@ export default styles = StyleSheet.create({
   form: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    height: '60%',
-    alignSelf: 'center',
   },
   textSubTitle: {
     textAlign: 'center',

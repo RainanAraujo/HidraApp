@@ -55,6 +55,7 @@ export default function Profile() {
               text={'Escanear Híbrido'}
               iconName={'camera'}
               style={styles.buttonScan}
+              styleIcon={'#fff'}
               onPress={() => setScanQrVisible(true)}></Button>
           </View>
         </>

@@ -4,10 +4,11 @@ export default styles = StyleSheet.create({
   textTitle: {
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
-    fontSize: 25,
+    fontSize: 24,
     alignSelf: 'center',
     textAlign: 'center',
     paddingHorizontal: 60,
+    letterSpacing: 0,
   },
   container: {
     flex: 1,
@@ -19,10 +20,11 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
-    fontSize: 15,
+    fontSize: 16,
     marginHorizontal: 30,
     marginTop: 10,
     marginBottom: 10,
+    letterSpacing: 0.15,
   },
   iconUser: {
     color: '#484D55',
@@ -41,5 +43,20 @@ export default styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 100,
     padding: 20,
+  },
+  titleInput: {
+    color: '#2F3145',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 14,
+    marginBottom: 5,
+    marginLeft: 3,
+    letterSpacing: 0.25,
+  },
+  picker: {
+    height: 50,
+    width: 100,
+  },
+  itemPicker: {
+    color: '#2F3145',
   },
 });

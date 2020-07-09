@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonLogin: {
-    backgroundColor: '#519918',
+    backgroundColor: '#2343A9',
   },
 });
 

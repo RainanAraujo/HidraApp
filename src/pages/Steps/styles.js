@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 
   buttonContinue: {
-    backgroundColor: '#519918',
+    backgroundColor: '#2343A9',
     width: 170,
     color: '#fff',
     margin: 3,
