@@ -14,6 +14,7 @@ import StepsPoints from '../../components/StepsPoints';
 import ContactModal from '../../components/ContactModal';
 import WelcomeStep from '../../components/WelcomeSteps';
 import TakePhoto from '../../components/TakePhoto';
+import Cadastro from '../../components/Cadastro';
 export default function Steps({navegation}) {
   const [currentStep, setCurrentStep] = useState(0);
   const [currentStepBack, setCurrentStepBack] = useState(false);
@@ -24,8 +25,13 @@ export default function Steps({navegation}) {
       currentStep={currentStep}
       currentStepBack={currentStepBack}
     />,
-    <TakePhoto
+    <Cadastro
       index={1}
+      currentStep={currentStep}
+      currentStepBack={currentStepBack}
+    />,
+    <TakePhoto
+      index={2}
       currentStep={currentStep}
       currentStepBack={currentStepBack}
     />,

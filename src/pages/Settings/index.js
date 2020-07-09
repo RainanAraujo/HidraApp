@@ -54,7 +54,7 @@ export default function Settings({navigation}) {
         visible={modalPasswordVisible}
         onClose={() => setModalPasswordVisible(false)}
       />
-      <TakePhotoModal
+      <TakePhoto
         visible={modalTakePhoto}
         onClose={() => setModalTakePhoto(false)}
       />
