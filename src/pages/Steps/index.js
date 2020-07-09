@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   Text,
   View,
@@ -6,22 +6,29 @@ import {
   Modal,
   TextInput,
   StatusBar,
+  Animated,
 } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
 import StepsPoints from '../../components/StepsPoints';
 import ContactModal from '../../components/ContactModal';
-
+import WelcomeStep from '../../components/WelcomeSteps';
+import TakePhoto from '../../components/TakePhoto';
 export default function Steps({navegation}) {
   const [currentStep, setCurrentStep] = useState(0);
+  const [currentStepBack, setCurrentStepBack] = useState(false);
   const [currentStepView, setCurrentStepView] = useState(<View></View>);
-
   const steps = [
-    <Text>{currentStep + 1}</Text>,
-    <Text>{currentStep + 2}</Text>,
-    <Text>{currentStep + 3}</Text>,
-    <Text>{currentStep + 4}</Text>,
-    <Text>{currentStep + 5}</Text>,
+    <WelcomeStep
+      index={0}
+      currentStep={currentStep}
+      currentStepBack={currentStepBack}
+    />,
+    <TakePhoto
+      index={1}
+      currentStep={currentStep}
+      currentStepBack={currentStepBack}
+    />,
   ];
 
   useEffect(() => {
@@ -33,14 +40,32 @@ export default function Steps({navegation}) {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <View style={styles.content}>
         {currentStepView}
-        <Button
-          text={'Continuar'}
-          iconName={'arrow-right'}
-          style={styles.buttonContinue}
-          onPress={() => {
-            setCurrentStep(currentStep + 1);
-          }}
-        />
+        <View style={styles.buttonsContainer}>
+          {currentStep > 0 ? (
+            <Button
+              text={'Voltar'}
+              style={styles.buttonBack}
+              styleText={styles.textButtonBack}
+              onPress={() => {
+                setCurrentStepBack(true);
+                setCurrentStep(currentStep - 1);
+              }}
+            />
+          ) : (
+            <></>
+          )}
+
+          <Button
+            text={'Continuar'}
+            iconName={'arrow-right'}
+            style={styles.buttonContinue}
+            styleIcon={styles.buttonContinue.color}
+            onPress={() => {
+              setCurrentStepBack(false);
+              setCurrentStep(currentStep + 1);
+            }}
+          />
+        </View>
       </View>
       <View style={styles.stepsContainer}>
         <StepsPoints stepCount={steps.length} currentStep={currentStep} />
