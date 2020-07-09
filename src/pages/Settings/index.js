@@ -7,7 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import ChangePasswordModal from '../../components/ChangePassword';
-import TakePhotoModal from '../../components/TakePhotoModal';
+import TakePhoto from '../../components/TakePhoto';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import ContactModal from '../../components/ContactModal';
 import ToggleSwitch from 'toggle-switch-react-native';

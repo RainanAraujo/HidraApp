@@ -18,7 +18,23 @@ const styles = StyleSheet.create({
   },
   buttonContinue: {
     backgroundColor: '#519918',
-    width: 180,
+    width: 170,
+    color: '#fff',
+    margin: 3,
+  },
+  buttonBack: {
+    width: 170,
+    borderWidth: 1,
+    borderColor: '#D10E29',
+    margin: 3,
+  },
+  textButtonBack: {
+    color: '#D10E29',
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

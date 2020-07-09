@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: '#ffffff75',
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -61,5 +60,32 @@ export default styles = StyleSheet.create({
     marginHorizontal: 30,
     marginTop: 10,
     marginBottom: 10,
+  },
+  iconUser: {
+    color: '#484D55',
+  },
+  textIcon: {
+    textAlign: 'center',
+    color: '#484D55',
+    fontFamily: 'Nunito-SemiBold',
+    fontSize: 20,
+    marginHorizontal: 30,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  iconView: {
+    borderColor: '#484D55',
+    borderWidth: 2,
+    borderRadius: 100,
+    padding: 20,
+  },
+  buttonTake: {
+    width: 240,
+    borderWidth: 1,
+    borderColor: '#519918',
+    margin: 3,
+  },
+  textButtonTake: {
+    color: '#519918',
   },
 });
