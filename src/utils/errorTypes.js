@@ -6,11 +6,13 @@ export const INVALID_EMAIL_ERROR = 'Email Inválido';
 export const WRONG_PASSWORD_ERROR = 'Senha Incorreta';
 export const NOT_FOUND_USER_ERROR = 'Usuário não foi encontrado';
 export const LOAD_USER_DATA_ERROR =
-  'Não foi possivel carregar dados do usuário';
+  'Não foi possível carregar dados do usuário';
 export const INVALID_QRCODE_ERROR = 'QR Code inválido';
-export const CHANGE_DATA_ERROR = 'Não foi possivel alterar os dados';
+export const CHANGE_DATA_ERROR = 'Não foi possível alterar os dados';
 export const DEFAULT_AUTH_ERROR = 'Erro desconhecido';
 export const INVALID_CONTACT_ERROR = 'Contato Inválido';
+export const LOAD_PIC_ERROR = 'Não foi possível carregar a foto do usuário';
+export const UPDATE_PIC_ERROR = 'Não foi possível atualizar a foto do usuário';
 
 export const getFirebaseError = (errorCode) => {
   if (errorCode == 'auth/network-request-failed') {

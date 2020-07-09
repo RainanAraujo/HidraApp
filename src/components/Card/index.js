@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {Text, View, ImageBackground} from 'react-native';
 
@@ -7,9 +7,13 @@ import NoobCard from '../../assets/images/noobCard.png';
 import VeteranCard from '../../assets/images/veteranCard.png';
 import MonitorCard from '../../assets/images/monitorCard.png';
 import MainCard from '../../assets/images/mainCard.png';
+import {getProfilePic} from '../../services/storage';
+import Alerts from '../../utils/alerts';
 import styles from './styles';
 
-export default function Card(props) {
+export default function Card({user, onError}) {
+  const [userPic, setUserPic] = useState('');
+
   function getPostStyle(since, post) {
     var postStyle = {};
 
@@ -32,37 +36,48 @@ export default function Card(props) {
     return postStyle;
   }
 
+  useEffect(() => {
+    (async () => {
+      try {
+        let picURL = await getProfilePic(user.uid);
+        setUserPic(picURL);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [user]);
+
   return (
     <View style={styles.card}>
       <ImageBackground
-        source={getPostStyle(props.data.since, props.data.post).card}
+        source={getPostStyle(user.since, user.post).card}
         style={styles.cardBackground}
         resizeMode="contain">
         <Avatar
           rounded
           style={{
             ...styles.avatar,
-            borderColor: getPostStyle(props.data.since, props.data.post).color,
+            borderColor: getPostStyle(user.since, user.post).color,
           }}
           source={{
-            uri: props.avatar,
+            uri: userPic,
           }}
           size={123}
         />
         <View style={styles.infoBox}>
-          <Text style={styles.nameText}>{props.data.name}</Text>
+          <Text style={styles.nameText}>{user.name}</Text>
           <View style={{flex: 1}}>
             <Text style={styles.titleText}>Curso:</Text>
-            <Text style={styles.subTitleText}>{props.data.course}</Text>
+            <Text style={styles.subTitleText}>{user.course}</Text>
           </View>
           <View style={styles.inforCardRow}>
             <View style={{flex: 2}}>
               <Text style={styles.titleText}>Ano de associação:</Text>
-              <Text style={styles.subTitleText}>{props.data.since}</Text>
+              <Text style={styles.subTitleText}>{user.since}</Text>
             </View>
             <View style={{flex: 1}}>
               <Text style={styles.titleText}>Idade:</Text>
-              <Text style={styles.subTitleText}>{props.data.age} Anos</Text>
+              <Text style={styles.subTitleText}>{user.age} Anos</Text>
             </View>
           </View>
         </View>

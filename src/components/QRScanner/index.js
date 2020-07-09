@@ -13,8 +13,8 @@ export default function QRScanner({onError, onClose}) {
   const onScan = async (data) => {
     try {
       if (data.match(/^[0-9a-zA-Z]+$/) && data.length === 28) {
-        let res = await getUserData(data);
-        setScaneedData(res);
+        let userData = await getUserData(data);
+        setScaneedData(userData);
       } else {
         throw new Error(INVALID_QRCODE_ERROR);
       }
@@ -30,10 +30,7 @@ export default function QRScanner({onError, onClose}) {
         <Modal animationType="fade" visible={true} statusBarTranslucent={true}>
           <View style={styles.modalContainer}>
             <Text style={styles.textTitle}>ASSOCIADO</Text>
-            <Card
-              avatar="https://avatars2.githubusercontent.com/u/48322946?s=460&u=b6afd31c4b3184d5b11d6a0615ab104876ef824a&v=4"
-              data={scannedData}
-            />
+            <Card user={scannedData} />
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.scanClose}

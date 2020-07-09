@@ -12,7 +12,7 @@ export default StepsPoints = ({stepCount, currentStep}) => {
           toValue: 35,
           duration: 300,
         }).start();
-      } else {
+      } else if (width != 15) {
         Animated.timing(width, {
           toValue: 15,
           duration: 300,

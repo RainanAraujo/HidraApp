@@ -60,7 +60,7 @@ export default function Login({navigation}) {
   }
 
   const loadProfileData = async (uid) => {
-    let newUserData = {...(await getUserData(uid)), uid: uid};
+    let newUserData = await getUserData(uid);
     dispatch({type: 'SET_USER_DATA', data: newUserData});
     navigation.replace('Home');
   };
