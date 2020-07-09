@@ -1,5 +1,11 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
-import {View, Dimensions, StatusBar, Animated} from 'react-native';
+import {
+  View,
+  Dimensions,
+  StatusBar,
+  Animated,
+  SafeAreaView,
+} from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
 import StepsPoints from '../../components/StepsPoints';
@@ -8,6 +14,7 @@ import WelcomeStep from '../../components/WelcomeSteps';
 import TakePhoto from '../../components/TakePhoto';
 import Cadastro from '../../components/Cadastro';
 import {debug} from 'react-native-reanimated';
+import {ScrollView} from 'react-native-gesture-handler';
 export default function Steps({navigation}) {
   const [currentStep, setCurrentStep] = useState(0);
   const [currentStepBack, setCurrentStepBack] = useState(false);
@@ -40,55 +47,57 @@ export default function Steps({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <Animated.View
-        style={{
-          width: steps.length * 100 + '%',
-          height: '87%',
-          translateX: slideAnim,
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignSelf: 'flex-start',
-        }}>
-        {steps.map((step) => (
-          <View style={{width: 100 / steps.length + '%', height: '100%'}}>
-            {step}
-          </View>
-        ))}
-      </Animated.View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+        <Animated.View
+          style={{
+            width: steps.length * 100 + '%',
+            height: '87%',
+            translateX: slideAnim,
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignSelf: 'flex-start',
+          }}>
+          {steps.map((step) => (
+            <View style={{width: 100 / steps.length + '%', height: '100%'}}>
+              {step}
+            </View>
+          ))}
+        </Animated.View>
 
-      <View style={styles.navigationContent}>
-        <View style={styles.buttonsContainer}>
-          {currentStep > 0 && (
-            <Button
-              text={'Voltar'}
-              style={styles.buttonBack}
-              styleText={styles.textButtonBack}
-              onPress={previousStep}
-            />
-          )}
-          {currentStep == steps.length - 1 ? (
-            <Button
-              text={'Concluir'}
-              style={styles.buttonContinue}
-              styleIcon={styles.buttonContinue.color}
-              onPress={() => navigation.replace('Home')}
-            />
-          ) : (
-            <Button
-              text={'Continuar'}
-              iconName={'arrow-right'}
-              style={styles.buttonContinue}
-              styleIcon={styles.buttonContinue.color}
-              onPress={nextStep}
-            />
-          )}
+        <View style={styles.navigationContent}>
+          <View style={styles.buttonsContainer}>
+            {currentStep > 0 && (
+              <Button
+                text={'Voltar'}
+                style={styles.buttonBack}
+                styleText={styles.textButtonBack}
+                onPress={previousStep}
+              />
+            )}
+            {currentStep == steps.length - 1 ? (
+              <Button
+                text={'Concluir'}
+                style={styles.buttonContinue}
+                styleIcon={styles.buttonContinue.color}
+                onPress={() => navigation.replace('Home')}
+              />
+            ) : (
+              <Button
+                text={'Continuar'}
+                iconName={'arrow-right'}
+                style={styles.buttonContinue}
+                styleIcon={styles.buttonContinue.color}
+                onPress={nextStep}
+              />
+            )}
+          </View>
+          <View style={styles.stepsContainer}>
+            <StepsPoints stepCount={steps.length} currentStep={currentStep} />
+          </View>
         </View>
-        <View style={styles.stepsContainer}>
-          <StepsPoints stepCount={steps.length} currentStep={currentStep} />
-        </View>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
