@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, Modal} from 'react-native';
+import {Text, View, TouchableOpacity, Modal, StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {getUserData} from '../../services/store';
 import {INVALID_QRCODE_ERROR} from '../../utils/errorTypes';
 import styles from './styles';
 import Card from '../Card';
+import Button from '../Button';
 
 export default function QRScanner({onError, onClose}) {
   const [scannedData, setScaneedData] = useState({});
@@ -25,37 +26,35 @@ export default function QRScanner({onError, onClose}) {
   };
 
   return (
-    <>
+    <Modal animationType="fade" visible={true}>
       {Object.keys(scannedData).length ? (
-        <Modal animationType="fade" visible={true} statusBarTranslucent={true}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.textTitle}>ASSOCIADO</Text>
-            <Card user={scannedData} />
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={styles.scanClose}
-              onPress={() => {
-                setScaneedData({});
-              }}>
-              <Icon name="x" color={styles.icons.color} size={17} />
-            </TouchableOpacity>
-          </View>
-        </Modal>
+        <View style={styles.modalContainer}>
+          <Text style={styles.textTitle}>Híbrido detectado</Text>
+          <Card user={scannedData} />
+          <Button
+            activeOpacity={0.7}
+            style={styles.scanClose}
+            text={'Cancelar'}
+            onPress={() => onClose()}
+            styleText={{color: '#D10E29'}}
+          />
+        </View>
       ) : (
         <QRCodeScanner
           onRead={(e) => onScan(e.data)}
           showMarker={true}
           reactivate={false}
           bottomContent={
-            <TouchableOpacity
+            <Button
               activeOpacity={0.7}
               style={styles.scanClose}
-              onPress={() => onClose()}>
-              <Icon name="x" color={styles.icons.color} size={17} />
-            </TouchableOpacity>
+              text={'Cancelar'}
+              onPress={() => onClose()}
+              styleText={{color: '#D10E29'}}
+            />
           }
         />
       )}
-    </>
+    </Modal>
   );
 }
