@@ -48,7 +48,7 @@ export default function Steps({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <StatusBar barStyle="dark-content" backgroundColor="#fff" />
         <Animated.View
           style={{

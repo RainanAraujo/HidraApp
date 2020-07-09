@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
   },
 
   textSubTitle: {

@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
   },
+  scrollView: {
+    flex: 1,
+  },
   stepsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
