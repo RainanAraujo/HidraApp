@@ -9,13 +9,14 @@ const styles = StyleSheet.create({
   stepsContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginBottom: 10,
+    alignItems: 'center',
+    marginTop: 10,
   },
-  content: {
-    width: '100%',
-    justifyContent: 'flex-end',
-    paddingVertical: 20,
+  navigationContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+
   buttonContinue: {
     backgroundColor: '#519918',
     width: 170,

@@ -60,22 +60,23 @@ export default function Steps({navegation}) {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <View style={styles.content}>
-        <Animated.View
-          style={{
-            width: steps.length * 100 + '%',
-            height: '100%',
-            translateX: slideAnim,
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            backgroundColor: 'red',
-          }}>
-          {steps.map((step) => (
-            <View style={{width: 100 / steps.length + '%', height: '100%'}}>
-              {step}
-            </View>
-          ))}
-        </Animated.View>
+      <Animated.View
+        style={{
+          width: steps.length * 100 + '%',
+          height: '87%',
+          translateX: slideAnim,
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          backgroundColor: 'red',
+        }}>
+        {steps.map((step) => (
+          <View style={{width: 100 / steps.length + '%', height: '100%'}}>
+            {step}
+          </View>
+        ))}
+      </Animated.View>
+
+      <View style={styles.navigationContent}>
         <View style={styles.buttonsContainer}>
           {currentStep > 0 && (
             <Button
@@ -85,7 +86,6 @@ export default function Steps({navegation}) {
               onPress={previousStep}
             />
           )}
-
           <Button
             text={'Continuar'}
             iconName={'arrow-right'}
@@ -94,9 +94,9 @@ export default function Steps({navegation}) {
             onPress={nextStep}
           />
         </View>
-      </View>
-      <View style={styles.stepsContainer}>
-        <StepsPoints stepCount={steps.length} currentStep={currentStep} />
+        <View style={styles.stepsContainer}>
+          <StepsPoints stepCount={steps.length} currentStep={currentStep} />
+        </View>
       </View>
     </View>
   );
