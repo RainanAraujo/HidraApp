@@ -7,10 +7,10 @@ import {INVALID_QRCODE_ERROR} from '../../utils/errorTypes';
 import styles from './styles';
 import Card from '../Card';
 import Button from '../Button';
-
+import {RNCamera} from 'react-native-camera';
 export default function QRScanner({onError, onClose}) {
   const [scannedData, setScaneedData] = useState({});
-
+  const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
   const onScan = async (data) => {
     try {
       if (data.match(/^[0-9a-zA-Z]+$/) && data.length === 28) {
@@ -44,6 +44,29 @@ export default function QRScanner({onError, onClose}) {
           onRead={(e) => onScan(e.data)}
           showMarker={true}
           reactivate={false}
+          flashMode={flash}
+          topContent={
+            <TouchableOpacity
+              onPress={() => {
+                flash == RNCamera.Constants.FlashMode.off
+                  ? setFlash(RNCamera.Constants.FlashMode.torch)
+                  : setFlash(RNCamera.Constants.FlashMode.off);
+              }}>
+              <View
+                style={{
+                  borderWidth: 2,
+                  borderColor: '#484D55',
+                  borderRadius: 20,
+                  padding: 3,
+                }}>
+                {flash ? (
+                  <Icon name={'zap-off'} size={24} />
+                ) : (
+                  <Icon name={'zap'} size={24} />
+                )}
+              </View>
+            </TouchableOpacity>
+          }
           bottomContent={
             <Button
               activeOpacity={0.7}

@@ -55,8 +55,8 @@ export default function TakePhoto({visible}) {
             />
 
             <Text style={styles.textSubTitle}>
-              Essa foto será visível em sua carteira virtual e lista de membros
-              da atlética.
+              Essa foto será visível em sua carteira virtual e na lista de
+              membros da atlética.
             </Text>
             <Button
               style={styles.buttonRetry}
@@ -66,7 +66,7 @@ export default function TakePhoto({visible}) {
           </View>
         </View>
       ) : (
-        <Modal style={styles.container}>
+        <Modal style={styles.container} animationType="fade">
           <RNCamera
             ref={(ref) => {
               setCamera(ref);

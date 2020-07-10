@@ -11,7 +11,7 @@ export default function Cadastro() {
       <View style={styles.titleContent}>
         <Text style={styles.textTitle}>Cadastro</Text>
         <Text style={styles.textSubTitle}>
-          Adicione suas informações para conhecer-mos melhor sobre você :)
+          Adicione suas informações para nos conhecer melhor :)
         </Text>
       </View>
       <View>
