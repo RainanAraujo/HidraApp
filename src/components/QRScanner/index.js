@@ -43,10 +43,16 @@ export default function QRScanner({onError, onClose}) {
         <QRCodeScanner
           onRead={(e) => onScan(e.data)}
           showMarker={true}
+          cameraStyle={{height: '50%'}}
           reactivate={false}
           flashMode={flash}
           topContent={
             <TouchableOpacity
+              style={{
+                flex: 1,
+                alignContent: 'center',
+                justifyContent: 'center',
+              }}
               onPress={() => {
                 flash == RNCamera.Constants.FlashMode.off
                   ? setFlash(RNCamera.Constants.FlashMode.torch)
