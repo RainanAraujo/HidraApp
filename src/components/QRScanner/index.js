@@ -47,29 +47,6 @@ export default function QRScanner({onError, onClose}) {
             reactivate={false}
             flashMode={flash}
             markerStyle={{borderRadius: 10}}
-            topContent={
-              <TouchableOpacity
-                onPress={() => {
-                  flash == RNCamera.Constants.FlashMode.off
-                    ? setFlash(RNCamera.Constants.FlashMode.torch)
-                    : setFlash(RNCamera.Constants.FlashMode.off);
-                }}>
-                <View
-                  style={{
-                    borderWidth: 2,
-                    borderColor: '#484D55',
-                    borderRadius: 20,
-                    padding: 3,
-                    marginBottom: '5%',
-                  }}>
-                  {flash ? (
-                    <Icon name={'zap-off'} size={24} />
-                  ) : (
-                    <Icon name={'zap'} size={24} />
-                  )}
-                </View>
-              </TouchableOpacity>
-            }
           />
           <Button
             activeOpacity={0.7}
@@ -78,6 +55,27 @@ export default function QRScanner({onError, onClose}) {
             onPress={() => onClose()}
             styleText={{color: '#D10E29'}}
           />
+          <TouchableOpacity
+            onPress={() => {
+              flash == RNCamera.Constants.FlashMode.off
+                ? setFlash(RNCamera.Constants.FlashMode.torch)
+                : setFlash(RNCamera.Constants.FlashMode.off);
+            }}>
+            <View
+              style={{
+                borderWidth: 2,
+                borderColor: '#484D55',
+                borderRadius: 20,
+                padding: 3,
+                marginBottom: '5%',
+              }}>
+              {flash ? (
+                <Icon name={'zap-off'} size={24} />
+              ) : (
+                <Icon name={'zap'} size={24} />
+              )}
+            </View>
+          </TouchableOpacity>
         </View>
       )}
     </Modal>

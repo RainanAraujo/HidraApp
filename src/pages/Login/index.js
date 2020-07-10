@@ -2,7 +2,13 @@ import React, {useState, useEffect} from 'react';
 
 import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
-import {View, Animated, StatusBar, SafeAreaView} from 'react-native';
+import {
+  View,
+  Animated,
+  StatusBar,
+  SafeAreaView,
+  PermissionsAndroid,
+} from 'react-native';
 import AppPresentation from '../../components/AppPresentation';
 import {getCurrentUser, signIn} from '../../services/auth';
 import LoginFormBar from '../../components/LoginFormBar';
@@ -80,21 +86,41 @@ export default function Login({navigation}) {
     }
   };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        if (getCurrentUser() != null) {
-          setLoading(true);
-          let uid = await getCurrentUser().uid;
-          await loadProfileData(uid);
-        } else {
-          setLoading(false);
-        }
-      } catch (error) {
-        Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
+  const autoSignIn = async () => {
+    try {
+      if (getCurrentUser() != null) {
+        setLoading(true);
+        let uid = await getCurrentUser().uid;
+        await loadProfileData(uid);
+      } else {
         setLoading(false);
       }
-    })();
+    } catch (error) {
+      Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
+      setLoading(false);
+    }
+  };
+
+  const getAllPermissions = async () => {
+    try {
+      if (
+        PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA) &&
+        PermissionsAndroid.check(
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        )
+      ) {
+        const reponse = PermissionsAndroid.requestMultiple([
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        ]);
+      }
+    } catch (error) {}
+    console.log('teste');
+  };
+
+  useEffect(() => {
+    getAllPermissions();
+    autoSignIn();
   }, []);
 
   return (
