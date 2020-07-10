@@ -7,31 +7,6 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 70,
   },
-  camera: {
-    flex: 1,
-  },
-  capture: {
-    width: 70,
-    height: 70,
-    backgroundColor: '#FF4646',
-    borderRadius: 50,
-    borderWidth: 4,
-    borderColor: '#FFF',
-    marginBottom: 10,
-  },
-  captureText: {
-    color: '#fff',
-  },
-  buttonRetry: {
-    backgroundColor: '#FF4646',
-
-    margin: 10,
-  },
-  buttonContinue: {
-    backgroundColor: '#2343A9',
-    width: 160,
-    margin: 10,
-  },
 
   textName: {
     fontSize: 20,

@@ -16,12 +16,7 @@ import {RNCamera} from 'react-native-camera';
 import Button from '../Button';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import {check} from 'react-native-permissions';
-export default function TakePhoto({
-  onClose,
-  index,
-  currentStep,
-  currentStepBack,
-}) {
+export default function TakePhoto({visible}) {
   const [camera, setCamera] = useState();
   const [goTakePhoto, setGoTakePhoto] = useState();
   const [picture, setPicture] = useState();
@@ -41,10 +36,10 @@ export default function TakePhoto({
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <StatusBar barStyle="dark-content" />
       {picture ? (
-        <View>
+        <View style={styles.container}>
           <Text style={styles.textTitle}>Sua foto :)</Text>
           <View
             style={{
@@ -71,82 +66,35 @@ export default function TakePhoto({
           </View>
         </View>
       ) : (
-        <>
-          {goTakePhoto ? (
-            <>
-              <Text style={styles.textTitle}>Ajuste seu rosto ao centro</Text>
-              <RNCamera
-                ref={(ref) => {
-                  setCamera(ref);
-                }}
-                zoom={0.1}
-                style={styles.camera}
-                type={RNCamera.Constants.Type.front}
-                autoFocus={RNCamera.Constants.AutoFocus.on}
-                permissionDialogTitle={'Autorização pasa uso de câmera'}
-                permissionDialogMessage={
-                  'Precisamos de sua autorização para acessar sua câmera.'
-                }>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    justifyContent: 'flex-end',
-                    alignItems: 'center',
-                    paddingBottom: 10,
-                  }}>
-                  <TouchableOpacity
-                    onPress={() => takePicture(camera)}
-                    style={styles.capture}
-                  />
-                </View>
-              </RNCamera>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}></View>
-            </>
-          ) : (
-            <>
-              <Text style={styles.textTitle}>Foto de perfil</Text>
-              <Text style={styles.textSubTitle}>
-                Sua foto de perfil é importante para sua identificação.
-              </Text>
-              <View
-                style={{
-                  flex: 7,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <View style={styles.iconView}>
-                  <Icon
-                    name={'user'}
-                    size={100}
-                    color={styles.iconUser.color}
-                  />
-                </View>
-
-                <Text style={styles.textIcon}>
-                  Ao inserir sua foto, você so poderá altera-la após 3 mases.
-                </Text>
-                <Button
-                  text={'Adicionar Foto'}
-                  style={styles.buttonTake}
-                  styleText={styles.textButtonTake}
-                  iconName={'camera'}
-                  styleIcon={styles.textButtonTake.color}
-                  onPress={() => {
-                    setGoTakePhoto(true);
-                  }}
-                />
-              </View>
-            </>
-          )}
-        </>
+        <Modal style={styles.container}>
+          <RNCamera
+            ref={(ref) => {
+              setCamera(ref);
+            }}
+            zoom={0.1}
+            style={styles.camera}
+            type={RNCamera.Constants.Type.front}
+            autoFocus={RNCamera.Constants.AutoFocus.on}
+            permissionDialogTitle={'Autorização pasa uso de câmera'}
+            permissionDialogMessage={
+              'Precisamos de sua autorização para acessar sua câmera.'
+            }>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                paddingBottom: 10,
+              }}>
+              <TouchableOpacity
+                onPress={() => takePicture(camera)}
+                style={styles.capture}
+              />
+            </View>
+          </RNCamera>
+        </Modal>
       )}
-    </View>
+    </>
   );
 }
