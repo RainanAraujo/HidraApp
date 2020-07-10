@@ -62,7 +62,7 @@ export default function Cadastro() {
           </Picker>
           <Picker
             selectedValue={currentclass}
-            onValueChange={(value) => setClass(value)}
+            onValueChange={(value) => setCurrentClass(value)}
             mode="dropdown"
             style={{height: 50, width: 130}}>
             {[...Array(classCount[course]).keys()].map((index) => {
