@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
+  Dimensions,
   Text,
   TouchableOpacity,
   View,
   Modal,
   StatusBar,
-  Image,
-  Animated,
 } from 'react-native';
 import {Avatar, Divider} from 'react-native-elements';
 import styles from './styles';
@@ -19,6 +16,7 @@ import {check} from 'react-native-permissions';
 export default function TakePhoto({visible}) {
   const [camera, setCamera] = useState();
   const [goTakePhoto, setGoTakePhoto] = useState();
+  const screenWidth = Math.round(Dimensions.get('window').width);
   const [picture, setPicture] = useState();
 
   const takePicture = async () => {
@@ -49,7 +47,7 @@ export default function TakePhoto({visible}) {
             }}>
             <Avatar
               rounded
-              size="xlarge"
+              size={screenWidth * 0.6}
               source={picture}
               activeOpacity={0.7}
             />
