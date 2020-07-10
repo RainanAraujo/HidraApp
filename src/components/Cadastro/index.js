@@ -26,8 +26,8 @@ export default function Cadastro() {
           date={date}
           placeholder="Selecione"
           format="DD-MM-YYYY"
-          minDate="2016-05-01"
-          maxDate="2016-06-01"
+          minDate="01-01-1990"
+          maxDate="12-12-2005"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{

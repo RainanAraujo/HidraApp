@@ -11,7 +11,7 @@ import Button from '../../components/Button';
 import StepsPoints from '../../components/StepsPoints';
 import ContactModal from '../../components/ContactModal';
 import WelcomeStep from '../../components/WelcomeSteps';
-import TakePhoto from '../../components/TakePhoto';
+import TakePhotoStep from '../../components/TakePhotoStep';
 import Cadastro from '../../components/Cadastro';
 import {debug} from 'react-native-reanimated';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -21,7 +21,7 @@ export default function Steps({navigation}) {
   const screenWidth = Math.round(Dimensions.get('window').width);
   const slideAnim = useRef(new Animated.Value(0)).current;
 
-  const steps = [<WelcomeStep />, <Cadastro />, <TakePhoto />];
+  const steps = [<WelcomeStep />, <Cadastro />, <TakePhotoStep />];
 
   const previousStep = () => {
     if (currentStep > 0) {
