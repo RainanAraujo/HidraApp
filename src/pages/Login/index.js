@@ -62,7 +62,11 @@ export default function Login({navigation}) {
   const loadProfileData = async (uid) => {
     let newUserData = await getUserData(uid);
     dispatch({type: 'SET_USER_DATA', data: newUserData});
-    navigation.replace('Home');
+    if (newUserData.name != null) {
+      navigation.replace('Home');
+    } else {
+      navigation.replace('Steps');
+    }
   };
 
   const onSubmitForm = async (email, pass) => {
