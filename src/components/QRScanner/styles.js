@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
   scanClose: {
-    marginTop: 30,
     borderWidth: 2,
     borderColor: '#D10E29',
   },
@@ -16,7 +15,7 @@ export default styles = StyleSheet.create({
   },
   contentScan: {
     flex: 1,
-    marginBottom: 20,
+    marginBottom: '8%',
     alignItems: 'center',
   },
   textTitle: {

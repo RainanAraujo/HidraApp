@@ -60,7 +60,7 @@ export default function QRScanner({onError, onClose}) {
                     borderColor: '#484D55',
                     borderRadius: 20,
                     padding: 3,
-                    marginBottom: 30,
+                    marginBottom: '5%',
                   }}>
                   {flash ? (
                     <Icon name={'zap-off'} size={24} />
