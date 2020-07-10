@@ -14,7 +14,11 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 22,
   },
-
+  contentScan: {
+    flex: 1,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
   textTitle: {
     backgroundColor: '#519918',
     borderRadius: 30,

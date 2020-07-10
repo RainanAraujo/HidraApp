@@ -40,43 +40,45 @@ export default function QRScanner({onError, onClose}) {
           />
         </View>
       ) : (
-        <QRCodeScanner
-          onRead={(e) => onScan(e.data)}
-          showMarker={true}
-          reactivate={false}
-          flashMode={flash}
-          topContent={
-            <TouchableOpacity
-              onPress={() => {
-                flash == RNCamera.Constants.FlashMode.off
-                  ? setFlash(RNCamera.Constants.FlashMode.torch)
-                  : setFlash(RNCamera.Constants.FlashMode.off);
-              }}>
-              <View
-                style={{
-                  borderWidth: 2,
-                  borderColor: '#484D55',
-                  borderRadius: 20,
-                  padding: 3,
+        <View style={styles.contentScan}>
+          <QRCodeScanner
+            onRead={(e) => onScan(e.data)}
+            showMarker={true}
+            reactivate={false}
+            flashMode={flash}
+            markerStyle={{borderRadius: 10}}
+            topContent={
+              <TouchableOpacity
+                onPress={() => {
+                  flash == RNCamera.Constants.FlashMode.off
+                    ? setFlash(RNCamera.Constants.FlashMode.torch)
+                    : setFlash(RNCamera.Constants.FlashMode.off);
                 }}>
-                {flash ? (
-                  <Icon name={'zap-off'} size={24} />
-                ) : (
-                  <Icon name={'zap'} size={24} />
-                )}
-              </View>
-            </TouchableOpacity>
-          }
-          bottomContent={
-            <Button
-              activeOpacity={0.7}
-              style={styles.scanClose}
-              text={'Cancelar'}
-              onPress={() => onClose()}
-              styleText={{color: '#D10E29'}}
-            />
-          }
-        />
+                <View
+                  style={{
+                    borderWidth: 2,
+                    borderColor: '#484D55',
+                    borderRadius: 20,
+                    padding: 3,
+                    marginBottom: 30,
+                  }}>
+                  {flash ? (
+                    <Icon name={'zap-off'} size={24} />
+                  ) : (
+                    <Icon name={'zap'} size={24} />
+                  )}
+                </View>
+              </TouchableOpacity>
+            }
+          />
+          <Button
+            activeOpacity={0.7}
+            style={styles.scanClose}
+            text={'Cancelar'}
+            onPress={() => onClose()}
+            styleText={{color: '#D10E29'}}
+          />
+        </View>
       )}
     </Modal>
   );
