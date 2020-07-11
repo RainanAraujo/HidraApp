@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/dist/Feather';
+import Ripple from 'react-native-material-ripple';
 export default function Button({
   disabled,
   onPress,
@@ -14,8 +15,9 @@ export default function Button({
 }) {
   return (
     <>
-      <TouchableOpacity
-        activeOpacity={0.7}
+      <Ripple
+        rippleCentered={true}
+        rippleOpacity={0.1}
         style={{...styles.button, ...style}}
         disabled={disabled}
         onPress={onPress}>
@@ -34,7 +36,7 @@ export default function Button({
             )}
           </>
         )}
-      </TouchableOpacity>
+      </Ripple>
     </>
   );
 }

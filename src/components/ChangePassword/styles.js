@@ -64,4 +64,14 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
+  textSubTitle: {
+    textAlign: 'center',
+    color: '#484D55',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 16,
+    marginHorizontal: 30,
+    marginTop: 10,
+    marginBottom: 10,
+    letterSpacing: 0.15,
+  },
 });

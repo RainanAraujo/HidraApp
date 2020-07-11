@@ -1,5 +1,4 @@
-import {StyleSheet} from 'react-native';
-
+import {StyleSheet, Dimensions} from 'react-native';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -8,7 +7,7 @@ export default styles = StyleSheet.create({
     paddingTop: 70,
   },
   camera: {
-    flex: 1,
+    flex: 4,
   },
   capture: {
     width: 70,
