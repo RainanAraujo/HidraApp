@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -10,9 +10,10 @@ import {
 import {Avatar, Divider} from 'react-native-elements';
 import styles from './styles';
 import Ripple from 'react-native-material-ripple';
+import {useSelector} from 'react-redux';
 import {SearchBar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/dist/Feather';
-
+import {getProfilePic} from '../../services/storage';
 const DATA = [
   {
     name: 'Rainan Araújo',
@@ -64,6 +65,8 @@ const DATA = [
 export default function Members() {
   const [search, setSearch] = useState('');
   const [dataSource, setDataSource] = useState(DATA);
+  const userData = useSelector((state) => state.userData);
+
   const SearchFilterFunction = (search) => {
     const newData = DATA.filter(function (item) {
       const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
@@ -129,7 +132,7 @@ export default function Members() {
                 }}
                 onPress={() =>
                   Linking.openURL(
-                    'https://api.whatsapp.com/send?phone=5599988179097',
+                    'https://api.whatsapp.com/send?phone=55' + userData.contact,
                   )
                 }>
                 <Icon name={'send'} color="#fff" />
