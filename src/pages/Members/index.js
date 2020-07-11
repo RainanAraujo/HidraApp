@@ -62,7 +62,18 @@ const DATA = [
 ];
 
 export default function Members() {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState('');
+  const [dataSource, setDataSource] = useState([]);
+  const SearchFilterFunction = (search) => {
+    const newData = DATA.filter(function (item) {
+      const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+      const searchData = search.toUpperCase();
+      return itemData.indexOf(searchData) > -1;
+    });
+    setDataSource(newData);
+    setSearch(search);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -75,7 +86,7 @@ export default function Members() {
         <View style={styles.searchBar}>
           <SearchBar
             placeholder="Buscar Membro"
-            onChangeText={setSearch}
+            onChangeText={SearchFilterFunction}
             value={search}
             platform="android"
             round={true}
@@ -85,7 +96,7 @@ export default function Members() {
 
       <FlatList
         ItemSeparatorComponent={() => <Divider style={styles.divider} />}
-        data={DATA}
+        data={dataSource}
         renderItem={({item}) => (
           <>
             <View style={styles.grid}>
