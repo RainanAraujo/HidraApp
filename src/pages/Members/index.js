@@ -63,7 +63,7 @@ const DATA = [
 
 export default function Members() {
   const [search, setSearch] = useState('');
-  const [dataSource, setDataSource] = useState([]);
+  const [dataSource, setDataSource] = useState(DATA);
   const SearchFilterFunction = (search) => {
     const newData = DATA.filter(function (item) {
       const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
