@@ -1,8 +1,18 @@
 import React, {useState} from 'react';
-import {Text, View, StatusBar, SafeAreaView, FlatList} from 'react-native';
+import {
+  Text,
+  View,
+  StatusBar,
+  SafeAreaView,
+  FlatList,
+  Linking,
+} from 'react-native';
 import {Avatar, Divider} from 'react-native-elements';
 import styles from './styles';
+import Ripple from 'react-native-material-ripple';
 import {SearchBar} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/dist/Feather';
+
 const DATA = [
   {
     name: 'Rainan Araújo',
@@ -97,7 +107,22 @@ export default function Members() {
                   </Text>
                 </View>
               </View>
-              <View style={{...styles.post, backgroundColor: item.post}} />
+
+              <Ripple
+                rippleCentered={true}
+                rippleOpacity={0.1}
+                style={{
+                  backgroundColor: item.post,
+                  padding: 10,
+                  borderRadius: 20,
+                }}
+                onPress={() =>
+                  Linking.openURL(
+                    'https://api.whatsapp.com/send?phone=5599988179097',
+                  )
+                }>
+                <Icon name={'send'} color="#fff" />
+              </Ripple>
             </View>
           </>
         )}

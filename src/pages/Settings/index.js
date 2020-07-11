@@ -55,8 +55,9 @@ export default function Settings({navigation}) {
         visible={modalPasswordVisible}
         onClose={() => setModalPasswordVisible(false)}
       />
-
-      <TakePhoto />
+      <Modal visible={modalTakePhoto}>
+        <TakePhoto />
+      </Modal>
 
       <View style={styles.titleContent}>
         <Text style={styles.textTitle}>Ajustes</Text>
