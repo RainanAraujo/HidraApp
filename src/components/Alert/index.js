@@ -32,13 +32,13 @@ export const SendAlert = (type, msg) => {
 const AlertQueue = forwardRef((props, ref) => {
   const [config, setConfig] = useState({
     type: AlertTypes.ERROR,
-    msg: '',
+    msg: null,
   });
   const slide = useRef(new Animated.Value(0)).current;
 
   useImperativeHandle(ref, () => ({
     SendAlert: (type, msg) => {
-      if (config.msg == '') {
+      if (!config.msg) {
         setConfig({
           type,
           msg,
@@ -48,7 +48,7 @@ const AlertQueue = forwardRef((props, ref) => {
   }));
 
   useEffect(() => {
-    if (config.msg != '') {
+    if (config.msg) {
       Animated.timing(slide, {
         toValue: 1,
         duration: 300,
@@ -61,12 +61,8 @@ const AlertQueue = forwardRef((props, ref) => {
           easing: Easing.bezier(0, 0.5, 0.5, 1),
         }).start(() => {
           setConfig({
-            type: {
-              title: '',
-              color: 'red',
-              icon: 'x',
-            },
-            msg: '',
+            type: AlertTypes.ERROR,
+            msg: null,
           });
         });
       });
@@ -76,29 +72,18 @@ const AlertQueue = forwardRef((props, ref) => {
   return (
     <Animated.View
       style={{
-        position: 'absolute',
-        flexDirection: 'row',
-        elevation: 1,
-        zIndex: 1,
-        width: '90%',
+        ...styles.container,
         height: props.height,
-        marginHorizontal: '5%',
         padding: props.height / 8,
         marginTop: props.height / 4,
-        borderRadius: 999,
+        borderRadius: props.height / 2,
         translateY: slide.interpolate({
           inputRange: [0, 1],
           outputRange: [-props.height - props.height / 4, 0],
         }),
         backgroundColor: config.type.color,
       }}>
-      <View
-        style={{
-          height: '100%',
-          aspectRatio: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={styles.iconContainer}>
         <Icon
           name={config.type.icon}
           color="white"
@@ -109,12 +94,8 @@ const AlertQueue = forwardRef((props, ref) => {
         />
       </View>
       <View>
-        <Text style={{flex: 2, fontSize: 20, color: 'white'}}>
-          {config.type.title}
-        </Text>
-        <Text style={{flex: 3, fontSize: 15, color: 'white'}}>
-          {config.msg}
-        </Text>
+        <Text style={styles.titleContainer}>{config.type.title}</Text>
+        <Text style={styles.msgContainer}>{config.msg}</Text>
       </View>
     </Animated.View>
   );

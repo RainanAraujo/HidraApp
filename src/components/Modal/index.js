@@ -8,6 +8,11 @@ import React, {
 } from 'react';
 import {View, Animated, Dimensions, Easing} from 'react-native';
 import MaskedView from '@react-native-community/masked-view';
+import {
+  screenWidth,
+  screenHeight,
+  diagonalScreenSize,
+} from '../../utils/dimensions';
 import styles from './styles';
 
 const rootRef = createRef();
@@ -26,9 +31,8 @@ export const Modal = forwardRef((props, ref) => {
 });
 
 const ModalAnimated = forwardRef((props, ref) => {
-  const dimensions = Dimensions.get('window');
   const expand = useRef(new Animated.Value(0)).current;
-  const opacity = useRef(new Animated.Value(0)).current;
+  const opacity = useRef(new Animated.Value(1)).current;
   const [anim, setAnim] = useState({});
 
   useImperativeHandle(ref, () => ({
@@ -51,6 +55,7 @@ const ModalAnimated = forwardRef((props, ref) => {
       Animated.timing(expand, {
         toValue: 1,
         duration: 500,
+        easing: Easing.in(Easing.ease),
         extrapolate: 'clamp',
       }).start();
     } else if (anim.action == 'hide') {
@@ -65,6 +70,15 @@ const ModalAnimated = forwardRef((props, ref) => {
     }
   }, [anim]);
 
+  calculateDiameter = (x, y) => {
+    if (!(x && y)) return 0;
+    const clickHypot = Math.hypot(
+      Math.abs(x - screenWidth),
+      Math.abs(y - screenHeight),
+    );
+    return 2 * Math.abs(clickHypot - diagonalScreenSize);
+  };
+
   return (
     <>
       {props.children}
@@ -72,40 +86,26 @@ const ModalAnimated = forwardRef((props, ref) => {
         <MaskedView
           style={{
             ...styles.container,
-            width: '100%',
-            height: '100%',
           }}
           maskElement={
             <View
               style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                position: 'absolute',
-                width: 0,
-                height: 0,
+                ...styles.masked,
                 left: anim.x,
                 top: anim.y,
               }}>
               <Animated.View
                 style={{
                   ...styles.circle,
-                  opacity: opacity.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, 1],
-                  }),
+                  borderRadius: calculateDiameter(anim.x, anim.y),
+                  opacity: opacity,
                   width: expand.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [
-                      0,
-                      2 * Math.hypot(dimensions.width, dimensions.height),
-                    ],
+                    outputRange: [0, calculateDiameter(anim.x, anim.y)],
                   }),
                   height: expand.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [
-                      0,
-                      2 * Math.hypot(dimensions.width, dimensions.height),
-                    ],
+                    outputRange: [0, calculateDiameter(anim.x, anim.y)],
                   }),
                 }}></Animated.View>
             </View>
