@@ -9,10 +9,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     flexDirection: 'row',
+    backgroundColor: '#fff',
   },
-  text: {color: '#fff', fontFamily: 'Nunito-SemiBold', fontSize: 20},
-  iconColor: {
+  default: {
+    textAlign: 'center',
     color: '#fff',
+    fontFamily: 'Nunito-SemiBold',
+    fontSize: 20,
+  },
+  outlined: {
+    backgroundColor: '#ffffff00',
+    borderWidth: 2,
   },
   ActivityIndicator: {
     color: '#fff',

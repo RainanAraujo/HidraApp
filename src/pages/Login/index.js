@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, createRef} from 'react';
 
 import CircleEffectBack from '../../assets/images/circleEffectBack.svg';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
@@ -12,17 +12,18 @@ import {
 import AppPresentation from '../../components/AppPresentation';
 import {getCurrentUser, signIn} from '../../services/auth';
 import LoginFormBar from '../../components/LoginFormBar';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import QRScanner from '../../components/QRScanner';
 import {getUserData} from '../../services/store';
 import Button from '../../components/Button';
+import {Modal} from '../../components/Modal';
 import Alerts from '../../utils/alerts';
 import styles from './styles';
 
 export default function Login({navigation}) {
   const dispatch = useDispatch();
-  const [scanQrVisible, setScanQrVisible] = useState(false);
+  const scanQrModal = createRef();
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
@@ -129,69 +130,64 @@ export default function Login({navigation}) {
         barStyle="light-content"
         backgroundColor={styles.statusBar.backgroundColor}
       />
-      {scanQrVisible ? (
+      <Modal ref={scanQrModal}>
         <QRScanner
           onError={(msg) =>
             Alerts.getDropDown().alertWithType('error', 'Erro', msg)
           }
-          onClose={() => setScanQrVisible(false)}
+          onClose={() => scanQrModal.current.Hide()}
         />
-      ) : (
-        <>
-          <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
-
-          <View style={styles.loginContainer}>
-            <Animated.Text
-              style={{
-                ...styles.textHeader,
-                opacity: translateY.interpolate({
-                  inputRange: [-230, 0, 0],
-                  outputRange: [0, 1, 1],
-                  extrapolate: 'clamp',
-                }),
-              }}>
-              Olá!
-            </Animated.Text>
-            <Button
-              text="Steps TESTE"
-              style={styles.buttonLogin}
-              onPress={() => navigation.navigate('Steps')}
-            />
-            <AppPresentation translateY={translateY} />
-            <PanGestureHandler
-              onGestureEvent={animatedEvent}
-              onHandlerStateChange={onHandlerStateChange}
-              enabled={!loading}>
-              <Animated.View
-                style={{
-                  ...styles.containerPush,
-                  transform: [
-                    {
-                      translateY: translateY.interpolate({
-                        inputRange: [-230, 0, 300],
-                        outputRange: [-230, 0, 50],
-                        extrapolate: 'clamp',
-                      }),
-                    },
-                  ],
-                }}>
-                <LoginFormBar translateY={translateY} loading={loading}>
-                  <LoginForm onSubmit={onSubmitForm} loading={loading} />
-                  <Button
-                    text={'Escanear Híbrido'}
-                    iconName={'camera'}
-                    style={styles.buttonScan}
-                    styleIcon={'#2343A9'}
-                    styleText={styles.textButtonScan}
-                    onPress={() => setScanQrVisible(true)}
-                  />
-                </LoginFormBar>
-              </Animated.View>
-            </PanGestureHandler>
-            <View></View>
-          </View>
-        </>
-      )}
+      </Modal>
+      <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
+      <View style={styles.loginContainer}>
+        <Animated.Text
+          style={{
+            ...styles.textHeader,
+            opacity: translateY.interpolate({
+              inputRange: [-230, 0, 0],
+              outputRange: [0, 1, 1],
+              extrapolate: 'clamp',
+            }),
+          }}>
+          Olá!
+        </Animated.Text>
+        <Button
+          text="Steps TESTE"
+          style={styles.buttonLogin}
+          onPress={() => navigation.navigate('Steps')}
+        />
+        <AppPresentation translateY={translateY} />
+        <PanGestureHandler
+          onGestureEvent={animatedEvent}
+          onHandlerStateChange={onHandlerStateChange}
+          enabled={!loading}>
+          <Animated.View
+            style={{
+              ...styles.containerPush,
+              transform: [
+                {
+                  translateY: translateY.interpolate({
+                    inputRange: [-230, 0, 300],
+                    outputRange: [-230, 0, 50],
+                    extrapolate: 'clamp',
+                  }),
+                },
+              ],
+            }}>
+            <LoginFormBar translateY={translateY} loading={loading}>
+              <LoginForm onSubmit={onSubmitForm} loading={loading} />
+              <Button
+                outlined
+                text={'Escanear Híbrido'}
+                iconName={'camera'}
+                style={styles.buttonScan}
+                onPress={(event) => console.log(event)}
+              />
+            </LoginFormBar>
+          </Animated.View>
+        </PanGestureHandler>
+        <View></View>
+      </View>
     </SafeAreaView>
   );
 }
