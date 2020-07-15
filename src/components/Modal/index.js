@@ -70,7 +70,7 @@ const ModalAnimated = forwardRef((props, ref) => {
     }
   }, [anim]);
 
-  calculateDiameter = (x, y) => {
+  const calculateDiameter = (x, y) => {
     if (!(x && y)) return 0;
     const clickHypot = Math.hypot(
       Math.abs(x - screenWidth),

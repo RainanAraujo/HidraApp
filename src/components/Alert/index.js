@@ -101,4 +101,6 @@ const AlertQueue = forwardRef((props, ref) => {
   );
 });
 
-export const AlertRoot = (props) => <AlertQueue ref={rootRef} {...props} />;
+export const AlertRoot = ({height = 70, timeOut = 500}) => {
+  return <AlertQueue ref={rootRef} height={height} timeOut={timeOut} />;
+};

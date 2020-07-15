@@ -3,7 +3,8 @@ import Routes from './routes/main';
 import messaging from '@react-native-firebase/messaging';
 import store from './reducers';
 import {Provider} from 'react-redux';
-import DropdownAlert from 'react-native-dropdownalert';
+import {AlertRoot} from './components/Alert';
+import {ModalRoot} from './components/Modal';
 import Alerts from './utils/alerts';
 
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
@@ -13,12 +14,11 @@ messaging().setBackgroundMessageHandler(async (remoteMessage) => {
 export default function App() {
   return (
     <>
-      <DropdownAlert
-        ref={(ref) => Alerts.setDropDown(ref)}
-        closeInterval={1000}
-      />
       <Provider store={store}>
-        <Routes />
+        <AlertRoot />
+        <ModalRoot>
+          <Routes />
+        </ModalRoot>
       </Provider>
     </>
   );
