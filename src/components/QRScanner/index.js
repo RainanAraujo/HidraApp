@@ -9,13 +9,13 @@ import Card from '../Card';
 import Button from '../Button';
 import {RNCamera} from 'react-native-camera';
 export default function QRScanner({onError, onClose}) {
-  const [scannedData, setScaneedData] = useState({});
+  const [scannedData, setScannedData] = useState({});
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
   const onScan = async (data) => {
     try {
       if (data.match(/^[0-9a-zA-Z]+$/) && data.length === 28) {
         let userData = await getUserData(data);
-        setScaneedData(userData);
+        setScannedData(userData);
       } else {
         throw new Error(INVALID_QRCODE_ERROR);
       }
