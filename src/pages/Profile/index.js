@@ -31,7 +31,7 @@ export default function Profile() {
       <Modal
         animation={'slide'}
         visible={scanQRVisible}
-        loaAfterAnimation={true}
+        notAnimateContent
         backgroundColor={'white'}>
         <QRScanner
           onError={(error) => SendAlert(AlertTypes.ERROR, error.message)}

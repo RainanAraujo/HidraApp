@@ -44,23 +44,19 @@ export default function Settings({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-
       <Modal animation={'slide'} visible={modalContactVisible}>
         <Contact
           contactValue={userData.contact}
-          visible={modalContactVisible}
           onClose={() => setModalContactVisible(false)}
           onSave={changeContact}
         />
       </Modal>
-      <ChangePasswordModal
-        visible={modalPasswordVisible}
-        onClose={() => setModalPasswordVisible(false)}
-      />
+      <Modal visible={modalPasswordVisible}>
+        <ChangePassword onClose={() => setModalPasswordVisible(false)} />
+      </Modal>
       <Modal visible={modalTakePhoto}>
         <TakePhoto />
       </Modal>
-
       <View style={styles.titleContent}>
         <Text style={styles.textTitle}>Ajustes</Text>
         <Text style={styles.textSubTitle}>Isso é auto-explicativo.</Text>

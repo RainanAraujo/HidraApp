@@ -18,7 +18,7 @@ export const Modal = (
     visible = false,
     animation = 'fade',
     children,
-    loaAfterAnimation = false,
+    notAnimateContent,
     backgroundColor = 'transparent',
   },
   ref,
@@ -28,7 +28,7 @@ export const Modal = (
       rootRef.current.CreateModal(
         children,
         animation,
-        loaAfterAnimation,
+        notAnimateContent,
         backgroundColor,
       );
     } else {
@@ -46,22 +46,22 @@ const ModalAnimated = forwardRef((props, ref) => {
   const [anim, setAnim] = useState({});
 
   useImperativeHandle(ref, () => ({
-    CreateModal: (component, animation, loaAfterAnimation, backgroundColor) => {
+    CreateModal: (component, animation, notAnimateContent, backgroundColor) => {
       if (Object.keys(anim).length == 0) {
-        if (loaAfterAnimation) {
-          setLoadNow(false);
-        } else {
-          setLoadNow(true);
-        }
+        setLoadNow(!notAnimateContent);
         setAnim({
           action: animation,
           component: component,
           backgroundColor: backgroundColor,
+          animateContent: !notAnimateContent,
         });
+      } else {
+        throw new Error('There is already an active modal instance');
       }
     },
     HideModal: () => {
       if (Object.keys(anim).length != 0) {
+        setLoadNow(anim.animateContent);
         if (anim.action == 'fade') {
           fadeOut();
         } else if (anim.action == 'slide') {
@@ -99,6 +99,7 @@ const ModalAnimated = forwardRef((props, ref) => {
       toValue: 1,
       duration: 300,
       extrapolate: 'clamp',
+      easing: Easing.bezier(0, 0.5, 0.5, 1),
     }).start(() => {
       if (!loadNow) setLoadNow(true);
     });
@@ -109,6 +110,7 @@ const ModalAnimated = forwardRef((props, ref) => {
       toValue: 0,
       duration: 300,
       extrapolate: 'clamp',
+      easing: Easing.bezier(0, 0.5, 0.5, 1),
     }).start(() => {
       opacity.setValue(0);
       setAnim({});

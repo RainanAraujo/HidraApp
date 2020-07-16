@@ -1,20 +1,14 @@
 import React, {useState} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Modal,
-  TextInput,
-  StatusBar,
-} from 'react-native';
+import {Text, View, StatusBar} from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import Button from '../Button';
-export default function ChangePassword({visible, onClose}) {
+export default function ChangePassword({onClose}) {
   const [loading, setLoading] = useState();
   const [send, setSend] = useState(false);
+
   return (
-    <Modal animationType="slide" visible={visible} statusBarTranslucent={true}>
+    <>
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
         <Text style={styles.textTitle}>Altere sua Senha</Text>
@@ -61,6 +55,6 @@ export default function ChangePassword({visible, onClose}) {
         </View>
         <View />
       </View>
-    </Modal>
+    </>
   );
 }
