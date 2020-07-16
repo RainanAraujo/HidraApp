@@ -45,7 +45,10 @@ export default function Settings({navigation}) {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
 
-      <Modal animation={'slide'} visible={modalContactVisible}>
+      <Modal
+        animation={'slide'}
+        visible={modalContactVisible}
+        backgroundColor={'white'}>
         <Contact
           contactValue={userData.contact}
           visible={modalContactVisible}
@@ -53,10 +56,14 @@ export default function Settings({navigation}) {
           onSave={changeContact}
         />
       </Modal>
-      <ChangePasswordModal
+
+      <Modal
+        animation={'slide'}
         visible={modalPasswordVisible}
-        onClose={() => setModalPasswordVisible(false)}
-      />
+        backgroundColor={'white'}>
+        <ChangePasswordModal onClose={() => setModalPasswordVisible(false)} />
+      </Modal>
+
       <Modal visible={modalTakePhoto}>
         <TakePhoto />
       </Modal>

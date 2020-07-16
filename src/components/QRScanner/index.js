@@ -38,35 +38,38 @@ export default function QRScanner({onError, onClose}) {
           reactivate={false}
           flashMode={flash}
           markerStyle={{borderRadius: 10}}
-        />
-        <View
-          style={{
-            width: '100%',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-          }}>
-          <TouchableOpacity
-            onPress={() => {
-              flash == RNCamera.Constants.FlashMode.off
-                ? setFlash(RNCamera.Constants.FlashMode.torch)
-                : setFlash(RNCamera.Constants.FlashMode.off);
-            }}>
-            <View style={styles.flashButton}>
-              {flash ? (
-                <Icon name={'zap-off'} size={24} />
-              ) : (
-                <Icon name={'zap'} size={24} />
-              )}
+          bottomContent={
+            <View
+              style={{
+                marginTop: 30,
+                width: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  flash == RNCamera.Constants.FlashMode.off
+                    ? setFlash(RNCamera.Constants.FlashMode.torch)
+                    : setFlash(RNCamera.Constants.FlashMode.off);
+                }}>
+                <View style={styles.flashButton}>
+                  {flash ? (
+                    <Icon name={'zap-off'} size={24} />
+                  ) : (
+                    <Icon name={'zap'} size={24} />
+                  )}
+                </View>
+              </TouchableOpacity>
+              <Button
+                outlined
+                style={styles.scanClose}
+                text={'Cancelar'}
+                onPress={() => onClose()}
+              />
             </View>
-          </TouchableOpacity>
-          <Button
-            outlined
-            style={styles.scanClose}
-            text={'Cancelar'}
-            onPress={() => onClose()}
-          />
-        </View>
+          }
+        />
       </View>
       {scannedData.uid && (
         <View style={styles.userPopupContainer}>

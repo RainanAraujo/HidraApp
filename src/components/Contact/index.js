@@ -82,18 +82,18 @@ export default function Contact({onClose, onSave, contactValue}) {
         </View>
         <View style={styles.buttons}>
           <Button
+            outlined
+            style={styles.buttonCancel}
+            onPress={() => onClose()}
+            text={'Cancelar'}
+          />
+          <Button
             text={'Salvar'}
             style={styles.buttonSave}
             onPress={() => {
               (!contact || contact.length == 11) &&
                 (onSave(contact), onClose());
             }}
-          />
-          <Button
-            style={styles.buttonCancel}
-            onPress={() => onClose()}
-            text={'Cancelar'}
-            styleText={styles.textButtonClose}
           />
         </View>
       </View>

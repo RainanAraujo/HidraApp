@@ -1,42 +1,35 @@
 import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
-  butons: {
-    width: '70%',
-    justifyContent: 'space-around',
+  buttons: {
+    justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
-  textButonAccept: {
+  textButtonAccept: {
     color: '#fff',
     fontFamily: 'Nunito-Regular',
     fontSize: 20,
     alignSelf: 'center',
   },
-  textButonClose: {
-    color: '#D10E29',
-    fontFamily: 'Nunito-Regular',
-    fontSize: 20,
-    alignSelf: 'center',
-  },
-  butonCancel: {
+
+  buttonCancel: {
     height: 50,
-    width: '100%',
+    width: '40%',
     borderRadius: 50,
     paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#D10E29',
+
+    color: '#D10E29',
   },
-  butonAcept: {
+  buttonAcept: {
     backgroundColor: '#2343A9',
     height: 50,
-    width: '100%',
+    width: '40%',
     borderRadius: 50,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    margin: 5,
   },
   modalContainer: {
     backgroundColor: '#ffffff75',

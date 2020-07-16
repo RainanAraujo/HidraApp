@@ -2,9 +2,10 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
   buttons: {
-    width: '70%',
-    justifyContent: 'flex-end',
+    width: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   textButtonAdd: {
     color: '#519918',
@@ -23,15 +24,9 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonCancel: {
-    borderColor: '#FF4646',
-    borderWidth: 2,
-    height: 50,
-    width: '100%',
-    borderRadius: 50,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 3,
+    color: '#FF4646',
+    width: '40%',
+    margin: 5,
   },
   buttonAdd: {
     height: '100%',
@@ -46,17 +41,16 @@ export default styles = StyleSheet.create({
   buttonSave: {
     backgroundColor: '#2343A9',
     height: 50,
-    width: '100%',
+    width: '40%',
     borderRadius: 50,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 3,
+    margin: 5,
   },
   modalContainer: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#61666965',
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },

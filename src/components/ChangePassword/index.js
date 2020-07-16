@@ -14,7 +14,7 @@ export default function ChangePassword({visible, onClose}) {
   const [loading, setLoading] = useState();
   const [send, setSend] = useState(false);
   return (
-    <Modal animationType="slide" visible={visible} statusBarTranslucent={true}>
+    <>
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
         <Text style={styles.textTitle}>Altere sua Senha</Text>
@@ -36,31 +36,26 @@ export default function ChangePassword({visible, onClose}) {
           )}
         </View>
 
-        <View style={styles.form}>
-          <View style={{alignItems: 'center'}}></View>
-          <View style={styles.butons}>
-            {send ? (
-              <></>
-            ) : (
-              <Button
-                style={styles.butonAcept}
-                text={'Continuar'}
-                loading={loading}
-              />
-            )}
-
+        <View style={styles.buttons}>
+          <Button
+            outlined
+            style={styles.buttonCancel}
+            onPress={() => {
+              onClose();
+            }}
+            text={'Cancelar'}
+          />
+          {send ? (
+            <></>
+          ) : (
             <Button
-              style={styles.butonCancel}
-              onPress={() => {
-                onClose();
-              }}
-              text={'Cancelar'}
-              styleText={styles.textButonClose}
+              style={styles.buttonAcept}
+              text={'Continuar'}
+              loading={loading}
             />
-          </View>
+          )}
         </View>
-        <View />
       </View>
-    </Modal>
+    </>
   );
 }
