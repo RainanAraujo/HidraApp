@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import {AlertRoot} from './components/Alert';
 import {ModalRoot} from './components/Modal';
 import Alerts from './utils/alerts';
+import {View} from 'react-native';
 
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
   console.log('Message handled in the background!', remoteMessage);

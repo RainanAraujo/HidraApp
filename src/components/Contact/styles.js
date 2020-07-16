@@ -54,11 +54,11 @@ export default styles = StyleSheet.create({
     margin: 3,
   },
   modalContainer: {
-    backgroundColor: '#ffffff75',
-    flex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#61666965',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingTop: 70,
   },
   textTitle: {
     color: '#484D55',

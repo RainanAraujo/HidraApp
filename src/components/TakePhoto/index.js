@@ -64,34 +64,32 @@ export default function TakePhoto({visible}) {
           </View>
         </View>
       ) : (
-        <Modal style={styles.container} animationType="fade">
-          <RNCamera
-            ref={(ref) => {
-              setCamera(ref);
-            }}
-            zoom={0.1}
-            style={styles.camera}
-            type={RNCamera.Constants.Type.front}
-            autoFocus={RNCamera.Constants.AutoFocus.on}
-            permissionDialogTitle={'Autorização pasa uso de câmera'}
-            permissionDialogMessage={
-              'Precisamos de sua autorização para acessar sua câmera.'
-            }>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                paddingBottom: 10,
-              }}>
-              <TouchableOpacity
-                onPress={() => takePicture(camera)}
-                style={styles.capture}
-              />
-            </View>
-          </RNCamera>
-        </Modal>
+        <RNCamera
+          ref={(ref) => {
+            setCamera(ref);
+          }}
+          zoom={0.1}
+          style={styles.camera}
+          type={RNCamera.Constants.Type.front}
+          autoFocus={RNCamera.Constants.AutoFocus.on}
+          permissionDialogTitle={'Autorização pasa uso de câmera'}
+          permissionDialogMessage={
+            'Precisamos de sua autorização para acessar sua câmera.'
+          }>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              paddingBottom: 10,
+            }}>
+            <TouchableOpacity
+              onPress={() => takePicture(camera)}
+              style={styles.capture}
+            />
+          </View>
+        </RNCamera>
       )}
     </>
   );

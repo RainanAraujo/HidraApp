@@ -13,14 +13,14 @@ import Icon from 'react-native-vector-icons/dist/Feather';
 import {INVALID_CONTACT_ERROR} from '../../utils/errorTypes';
 import Button from '../Button';
 
-export default function Contact({visible, onClose, onSave, contactValue}) {
+export default function Contact({onClose, onSave, contactValue}) {
   const [contact, setContact] = useState(contactValue ? contactValue : '');
   const [contactEnabled, setContactEnabled] = useState(
     contactValue ? true : false,
   );
 
   return (
-    <Modal animationType="slide" visible={visible} statusBarTranslucent={true}>
+    <>
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
         <View>
@@ -96,9 +96,7 @@ export default function Contact({visible, onClose, onSave, contactValue}) {
             styleText={styles.textButtonClose}
           />
         </View>
-
-        <View />
       </View>
-    </Modal>
+    </>
   );
 }

@@ -8,110 +8,137 @@ import React, {
 } from 'react';
 import {View, Animated, Dimensions, Easing} from 'react-native';
 import MaskedView from '@react-native-community/masked-view';
-import {
-  screenWidth,
-  screenHeight,
-  diagonalScreenSize,
-} from '../../utils/dimensions';
+import {screenWidth, screenHeight} from '../../utils/dimensions';
 import styles from './styles';
 
 const rootRef = createRef();
 
-export const Modal = forwardRef((props, ref) => {
-  useImperativeHandle(ref, () => ({
-    Show: (event) => {
-      rootRef.current.CreateModal(event, props.children);
-    },
-    Hide: () => {
+export const Modal = (
+  {
+    visible = false,
+    animation = 'fade',
+    children,
+    loaAfterAnimation = false,
+    backgroundColor = 'transparent',
+  },
+  ref,
+) => {
+  useEffect(() => {
+    if (visible) {
+      rootRef.current.CreateModal(
+        children,
+        animation,
+        loaAfterAnimation,
+        backgroundColor,
+      );
+    } else {
       rootRef.current.HideModal();
-    },
-  }));
+    }
+  }, [visible]);
 
-  return;
-});
+  return null;
+};
 
 const ModalAnimated = forwardRef((props, ref) => {
-  const expand = useRef(new Animated.Value(0)).current;
-  const opacity = useRef(new Animated.Value(1)).current;
+  const slide = useRef(new Animated.Value(0)).current;
+  const opacity = useRef(new Animated.Value(0)).current;
+  const [loadNow, setLoadNow] = useState(true);
   const [anim, setAnim] = useState({});
 
   useImperativeHandle(ref, () => ({
-    CreateModal: (event, component) => {
-      setAnim({
-        action: 'show',
-        component: component,
-        x: event.nativeEvent.pageX,
-        y: event.nativeEvent.pageY,
-      });
+    CreateModal: (component, animation, loaAfterAnimation, backgroundColor) => {
+      if (Object.keys(anim).length == 0) {
+        if (loaAfterAnimation) {
+          setLoadNow(false);
+        } else {
+          setLoadNow(true);
+        }
+        setAnim({
+          action: animation,
+          component: component,
+          backgroundColor: backgroundColor,
+        });
+      }
     },
     HideModal: () => {
-      setAnim({...anim, action: 'hide'});
+      if (Object.keys(anim).length != 0) {
+        if (anim.action == 'fade') {
+          fadeOut();
+        } else if (anim.action == 'slide') {
+          slideOut();
+        }
+      }
     },
   }));
 
+  const fadeIn = () => {
+    slide.setValue(1);
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 300,
+      extrapolate: 'clamp',
+    }).start(() => {
+      if (!loadNow) setLoadNow(true);
+    });
+  };
+
+  const fadeOut = () => {
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration: 300,
+      extrapolate: 'clamp',
+    }).start(() => {
+      slide.setValue(0);
+      setAnim({});
+    });
+  };
+
+  const slideIn = () => {
+    opacity.setValue(1);
+    Animated.timing(slide, {
+      toValue: 1,
+      duration: 300,
+      extrapolate: 'clamp',
+    }).start(() => {
+      if (!loadNow) setLoadNow(true);
+    });
+  };
+
+  const slideOut = () => {
+    Animated.timing(slide, {
+      toValue: 0,
+      duration: 300,
+      extrapolate: 'clamp',
+    }).start(() => {
+      opacity.setValue(0);
+      setAnim({});
+    });
+  };
+
   useEffect(() => {
-    if (anim.action == 'show') {
-      opacity.setValue(1);
-      Animated.timing(expand, {
-        toValue: 1,
-        duration: 500,
-        easing: Easing.in(Easing.ease),
-        extrapolate: 'clamp',
-      }).start();
-    } else if (anim.action == 'hide') {
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 300,
-        extrapolate: 'clamp',
-      }).start(() => {
-        expand.setValue(0);
-        setAnim({});
-      });
+    if (anim.action == 'fade') {
+      fadeIn();
+    } else if (anim.action == 'slide') {
+      slideIn();
     }
   }, [anim]);
-
-  const calculateDiameter = (x, y) => {
-    if (!(x && y)) return 0;
-    const clickHypot = Math.hypot(
-      Math.abs(x - screenWidth),
-      Math.abs(y - screenHeight),
-    );
-    return 2 * Math.abs(clickHypot - diagonalScreenSize);
-  };
 
   return (
     <>
       {props.children}
       {anim.action && (
-        <MaskedView
+        <Animated.View
           style={{
             ...styles.container,
-          }}
-          maskElement={
-            <View
-              style={{
-                ...styles.masked,
-                left: anim.x,
-                top: anim.y,
-              }}>
-              <Animated.View
-                style={{
-                  ...styles.circle,
-                  borderRadius: calculateDiameter(anim.x, anim.y),
-                  opacity: opacity,
-                  width: expand.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, calculateDiameter(anim.x, anim.y)],
-                  }),
-                  height: expand.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, calculateDiameter(anim.x, anim.y)],
-                  }),
-                }}></Animated.View>
-            </View>
-          }>
-          {anim.component}
-        </MaskedView>
+            backgroundColor: anim.backgroundColor,
+            opacity: opacity,
+            translateX: slide.interpolate({
+              inputRange: [0, 1],
+              outputRange: [screenWidth, 0],
+            }),
+          }}>
+          {loadNow && anim.component}
+        </Animated.View>
       )}
     </>
   );

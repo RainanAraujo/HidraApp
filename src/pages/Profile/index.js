@@ -15,51 +15,58 @@ import styles from './styles';
 import QRScanner from '../../components/QRScanner';
 import QrCodeUser from '../../components/QrCodeUser';
 import Button from '../../components/Button';
+import {Modal} from '../../components/Modal';
+import {SendAlert, AlertTypes} from '../../components/Alert';
 
 export default function Profile() {
-  const [scanQrVisible, setScanQrVisible] = useState(false);
+  const [scanQRVisible, setScanQRVisible] = useState(false);
   const userData = useSelector((state) => state.userData);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [qrUserVisible, setQRUserVisible] = useState(false);
   const [alert, setAlert] = useState({});
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
       <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
-      {scanQrVisible ? (
-        <QRScanner onClose={() => setScanQrVisible(false)} />
-      ) : (
-        <>
-          <QrCodeUser
-            modalVisible={modalVisible}
-            onClose={() => setModalVisible(false)}
-          />
-
-          <View style={styles.profileContainer}>
-            <Text style={styles.textWelcome}>Olá, Híbrido</Text>
-            <View>
-              <Card user={userData} />
-              <View>
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={styles.qrCodeButton}
-                  onPress={() => {
-                    setModalVisible(true);
-                  }}>
-                  <Image source={QrCodeExemple} style={styles.qrImage} />
-                </TouchableOpacity>
-                <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
-              </View>
-            </View>
-            <Button
-              text={'Escanear Híbrido'}
-              iconName={'camera'}
-              style={styles.buttonScan}
-              styleIcon={'#fff'}
-              onPress={() => setScanQrVisible(true)}></Button>
+      <Modal
+        animation={'slide'}
+        visible={scanQRVisible}
+        loaAfterAnimation={true}
+        backgroundColor={'white'}>
+        <QRScanner
+          onError={(error) => SendAlert(AlertTypes.ERROR, error.message)}
+          onClose={() => setScanQRVisible(false)}></QRScanner>
+      </Modal>
+      <Modal visible={qrUserVisible}>
+        <QrCodeUser
+          onSuccess={(msg) => SendAlert(AlertTypes.SUCCESS, msg)}
+          onError={(error) => SendAlert(AlertTypes.ERROR, error.message)}
+          onClose={() => setQRUserVisible(false)}
+        />
+      </Modal>
+      <View style={styles.profileContainer}>
+        <Text style={styles.textWelcome}>Olá, Híbrido</Text>
+        <View>
+          <Card user={userData} />
+          <View>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.qrCodeButton}
+              onPress={() => {
+                setQRUserVisible(true);
+              }}>
+              <Image source={QrCodeExemple} style={styles.qrImage} />
+            </TouchableOpacity>
+            <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
           </View>
-        </>
-      )}
+        </View>
+        <Button
+          text={'Escanear Híbrido'}
+          iconName={'camera'}
+          style={styles.buttonScan}
+          styleIcon={'#fff'}
+          onPress={() => setScanQRVisible(true)}></Button>
+      </View>
     </SafeAreaView>
   );
 }

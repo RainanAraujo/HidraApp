@@ -7,7 +7,7 @@ import IconButton from '../../components/IconButton';
 import Alerts from '../../utils/alerts';
 import RNFS from 'react-native-fs';
 
-export default function QrCodeUser({modalVisible, onClose}) {
+export default function QrCodeUser({onClose, onError, onSuccess}) {
   const userData = useSelector((state) => state.userData);
   const [qrCode, setQRCode] = useState();
 
@@ -19,41 +19,35 @@ export default function QrCodeUser({modalVisible, onClose}) {
         'base64',
       )
         .then(() => {
-          Alerts.getDropDown().alertWithType(
-            'success',
-            'Success',
-            'Salvo em ' + RNFS.DownloadDirectoryPath + '/my-qr-code.png',
-          );
+          onSuccess('Salvo em Downloads/my-qr-code.png');
         })
         .catch((error) => {
-          Alerts.getDropDown().alertWithType('error', 'Erro', error.menssage);
+          onError(error);
         });
     });
   };
 
   return (
-    <Modal animationType="fade" transparent={true} visible={modalVisible}>
-      <View style={styles.container}>
-        <View style={styles.qrCode}>
-          <QRCode
-            getRef={(ref) => setQRCode(ref)}
-            value={userData.uid}
-            size={200}
-          />
-        </View>
-        <View style={styles.buttonOptions}>
-          <IconButton
-            iconName="x"
-            style={styles.closeButton}
-            onPress={() => onClose()}
-          />
-          <IconButton
-            onPress={saveQrToDisk}
-            iconName="download"
-            style={styles.downloadButton}
-          />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.qrCode}>
+        <QRCode
+          getRef={(ref) => setQRCode(ref)}
+          value={userData.uid}
+          size={200}
+        />
       </View>
-    </Modal>
+      <View style={styles.buttonOptions}>
+        <IconButton
+          iconName="x"
+          style={styles.closeButton}
+          onPress={() => onClose()}
+        />
+        <IconButton
+          onPress={saveQrToDisk}
+          iconName="download"
+          style={styles.downloadButton}
+        />
+      </View>
+    </View>
   );
 }

@@ -9,7 +9,7 @@ import {
 import styles from './styles';
 import Button from '../../components/Button';
 import StepsPoints from '../../components/StepsPoints';
-import ContactModal from '../../components/ContactModal';
+import Contact from '../../components/Contact';
 import WelcomeStep from '../../components/WelcomeSteps';
 import TakePhotoStep from '../../components/TakePhotoStep';
 import Cadastro from '../../components/Cadastro';

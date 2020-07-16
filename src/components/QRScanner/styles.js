@@ -10,7 +10,6 @@ export default styles = StyleSheet.create({
     borderColor: '#484D55',
     borderRadius: 20,
     padding: 3,
-    marginBottom: '5%',
   },
   userPopupContainer: {
     position: 'absolute',
@@ -24,8 +23,10 @@ export default styles = StyleSheet.create({
     marginTop: 22,
   },
   contentScan: {
-    flex: 1,
-    marginBottom: '8%',
+    backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
+    marginBottom: '5%',
     alignItems: 'center',
   },
   textTitle: {

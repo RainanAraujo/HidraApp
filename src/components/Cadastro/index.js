@@ -7,7 +7,7 @@ import Input from '../../components/TextInput';
 export default function Cadastro() {
   const [date, setDate] = useState();
   const [course, setCourse] = useState('CC');
-  const [currentclass, setCurrentClass] = useState();
+  const [currentClass, setCurrentClass] = useState();
 
   const classCount = {
     CC: new Date().getFullYear() - 2013,
@@ -61,7 +61,7 @@ export default function Cadastro() {
             <Picker.Item label="Ciências Biologicas" value="BIO" />
           </Picker>
           <Picker
-            selectedValue={currentclass}
+            selectedValue={currentClass}
             onValueChange={(value) => setCurrentClass(value)}
             mode="dropdown"
             style={{height: 50, width: 130}}>

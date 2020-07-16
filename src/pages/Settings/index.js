@@ -5,17 +5,17 @@ import {
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
-  Modal,
 } from 'react-native';
 import ChangePasswordModal from '../../components/ChangePassword';
 import TakePhoto from '../../components/TakePhoto';
 import Icon from 'react-native-vector-icons/dist/Feather';
-import ContactModal from '../../components/ContactModal';
+import Contact from '../../components/Contact';
 import ToggleSwitch from 'toggle-switch-react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {getUserData, updateContact} from '../../services/store';
 import {signOut} from '../../services/auth';
-import Alerts from '../../utils/alerts';
+import {SendAlert, AlertTypes} from '../../components/Alert';
+import {Modal} from '../../components/Modal';
 import styles from './styles';
 
 export default function Settings({navigation}) {
@@ -37,7 +37,7 @@ export default function Settings({navigation}) {
       let newUserData = {...(await getUserData(uid)), uid: uid};
       dispatch({type: 'SET_USER_DATA', data: newUserData});
     } catch (error) {
-      Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
+      SendAlert(AlertTypes.ERROR, error.message);
     }
   };
 
@@ -45,12 +45,14 @@ export default function Settings({navigation}) {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
 
-      <ContactModal
-        contactValue={userData.contact}
-        visible={modalContactVisible}
-        onClose={() => setModalContactVisible(false)}
-        onSave={changeContact}
-      />
+      <Modal animation={'slide'} visible={modalContactVisible}>
+        <Contact
+          contactValue={userData.contact}
+          visible={modalContactVisible}
+          onClose={() => setModalContactVisible(false)}
+          onSave={changeContact}
+        />
+      </Modal>
       <ChangePasswordModal
         visible={modalPasswordVisible}
         onClose={() => setModalPasswordVisible(false)}

@@ -8,6 +8,7 @@ import {
   StatusBar,
   SafeAreaView,
   PermissionsAndroid,
+  TouchableOpacity,
 } from 'react-native';
 import AppPresentation from '../../components/AppPresentation';
 import {getCurrentUser, signIn} from '../../services/auth';
@@ -15,15 +16,16 @@ import LoginFormBar from '../../components/LoginFormBar';
 import {useDispatch} from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import QRScanner from '../../components/QRScanner';
+import {RNCamera} from 'react-native-camera';
 import {getUserData} from '../../services/store';
 import Button from '../../components/Button';
 import {Modal} from '../../components/Modal';
-import Alerts from '../../utils/alerts';
+import {SendAlert, AlertTypes} from '../../components/Alert';
 import styles from './styles';
 
 export default function Login({navigation}) {
   const dispatch = useDispatch();
-  const scanQrModal = createRef();
+  const [scanQRVisible, setScanQRVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(0);
   const translateY = new Animated.Value(value);
@@ -82,7 +84,7 @@ export default function Login({navigation}) {
       let uid = await signIn(email, pass);
       await loadProfileData(uid);
     } catch (error) {
-      Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
+      SendAlert(AlertTypes.ERROR, error.message);
       setLoading(false);
     }
   };
@@ -97,7 +99,7 @@ export default function Login({navigation}) {
         setLoading(false);
       }
     } catch (error) {
-      Alerts.getDropDown().alertWithType('error', 'Erro', error.message);
+      SendAlert(AlertTypes.ERROR, error.message);
       setLoading(false);
     }
   };
@@ -115,8 +117,9 @@ export default function Login({navigation}) {
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
         ]);
       }
-    } catch (error) {}
-    console.log('teste');
+    } catch (error) {
+      SendAlert(AlertTypes.ERROR, error.message);
+    }
   };
 
   useEffect(() => {
@@ -130,13 +133,14 @@ export default function Login({navigation}) {
         barStyle="light-content"
         backgroundColor={styles.statusBar.backgroundColor}
       />
-      <Modal ref={scanQrModal}>
+      <Modal
+        animation={'slide'}
+        visible={scanQRVisible}
+        loaAfterAnimation={true}
+        backgroundColor={'white'}>
         <QRScanner
-          onError={(msg) =>
-            Alerts.getDropDown().alertWithType('error', 'Erro', msg)
-          }
-          onClose={() => scanQrModal.current.Hide()}
-        />
+          onError={(error) => SendAlert(AlertTypes.ERROR, error.message)}
+          onClose={() => setScanQRVisible(false)}></QRScanner>
       </Modal>
       <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
       <View style={styles.loginContainer}>
@@ -181,12 +185,11 @@ export default function Login({navigation}) {
                 text={'Escanear Híbrido'}
                 iconName={'camera'}
                 style={styles.buttonScan}
-                onPress={(event) => console.log(event)}
+                onPress={() => setScanQRVisible(true)}
               />
             </LoginFormBar>
           </Animated.View>
         </PanGestureHandler>
-        <View></View>
       </View>
     </SafeAreaView>
   );
