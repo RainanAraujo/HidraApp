@@ -13,10 +13,10 @@ import Icon from 'react-native-vector-icons/dist/Feather';
 import Button from '../Button';
 import {AlertTypes, SendAlert} from '../../components/Alert';
 import sendEmail from '../../assets/images/sendEmail.png';
+import {getCurrentUser} from '../../services/auth';
 export default function ChangePassword({visible, onClose}) {
   const [loading, setLoading] = useState();
   const [send, setSend] = useState(false);
-
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -36,7 +36,7 @@ export default function ChangePassword({visible, onClose}) {
               </Text>
               <View style={styles.emailUser}>
                 <Text style={styles.textEmailUser}>
-                  rainanaraaujo@gmail.com
+                  {getCurrentUser().email}
                 </Text>
               </View>
             </>

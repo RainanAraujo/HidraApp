@@ -108,7 +108,7 @@ const ModalAnimated = forwardRef((props, ref) => {
   const slideOut = () => {
     Animated.timing(slide, {
       toValue: 0,
-      duration: 200,
+      duration: 300,
       extrapolate: 'clamp',
       easing: Easing.bezier(0, 0.5, 0.5, 1),
     }).start(() => {

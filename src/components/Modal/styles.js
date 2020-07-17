@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     width: screenWidth,
-    height: screenHeight,
+    height: '100%',
     top: 0,
     left: 0,
   },

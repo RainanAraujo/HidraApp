@@ -69,7 +69,7 @@ export default function Contact({onClose, onSave, contactValue}) {
                   onPress={() => setContactEnabled(true)}>
                   <Icon
                     name="plus"
-                    color={styles.buttonAdd.borderColor}
+                    color={styles.textButtonAdd.color}
                     size={25}
                   />
                   <Text style={styles.textButtonAdd}>Adicionar</Text>

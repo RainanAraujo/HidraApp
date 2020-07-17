@@ -29,7 +29,7 @@ export default styles = StyleSheet.create({
     margin: 5,
   },
   buttonAdd: {
-    height: '100%',
+    height: '70%',
     width: '100%',
     borderRadius: 50,
     alignItems: 'center',
@@ -65,7 +65,7 @@ export default styles = StyleSheet.create({
   Input: {
     backgroundColor: '#EDF6FF',
     width: '80%',
-    height: '100%',
+    height: '80%',
     borderBottomLeftRadius: 50,
     borderTopLeftRadius: 50,
     paddingHorizontal: 20,
@@ -118,7 +118,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'column',
     width: '20%',
-    aspectRatio: 1,
+    aspectRatio: 1 / 0.8,
     borderBottomRightRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 0,
