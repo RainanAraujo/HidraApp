@@ -64,8 +64,11 @@ export default function Settings({navigation}) {
         <ChangePasswordModal onClose={() => setModalPasswordVisible(false)} />
       </Modal>
 
-      <Modal visible={modalTakePhoto}>
-        <TakePhoto />
+      <Modal
+        animation={'slide'}
+        visible={modalTakePhoto}
+        backgroundColor={'white'}>
+        <TakePhoto onClose={() => setModalTakePhoto(false)} />
       </Modal>
 
       <View style={styles.titleContent}>

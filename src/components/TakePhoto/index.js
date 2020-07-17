@@ -6,36 +6,73 @@ import {
   View,
   Modal,
   StatusBar,
+  Image,
 } from 'react-native';
 import {Avatar, Divider} from 'react-native-elements';
 import styles from './styles';
-import {RNCamera} from 'react-native-camera';
+import ImagePicker from 'react-native-image-picker';
 import Button from '../Button';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import {check} from 'react-native-permissions';
-export default function TakePhoto({visible}) {
+import profileExemple from '../../assets/images/profileExemple.png';
+export default function TakePhoto({onClose}) {
   const [camera, setCamera] = useState();
-  const [goTakePhoto, setGoTakePhoto] = useState();
+  const [photo, setPhoto] = useState();
   const screenWidth = Math.round(Dimensions.get('window').width);
   const [picture, setPicture] = useState();
 
-  const takePicture = async () => {
-    if (camera) {
-      const options = {
-        quality: 0.5,
-        base64: true,
-        mirrorImage: true,
-        fixOrientation: true,
-        pauseAfterCapture: true,
-      };
-      const data = await camera.takePictureAsync(options);
-      setPicture(data);
-    }
+  const submitPhotoGallery = () => {
+    const options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = {uri: response.uri};
+        setPhoto(source);
+        setPicture(true);
+      }
+    });
+  };
+
+  const submitPhotoCamera = () => {
+    const options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchCamera(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = {uri: response.uri};
+        setPhoto(source);
+        setPicture(true);
+      }
+    });
   };
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
+
       {picture ? (
         <View style={styles.container}>
           <Text style={styles.textTitle}>Sua foto :)</Text>
@@ -45,10 +82,17 @@ export default function TakePhoto({visible}) {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
+            <View style={styles.warning}>
+              <Icon name={'alert-triangle'} size={35} color="#fff" />
+              <Text style={styles.textWarning}>
+                Você so poderá alterar sua foto novamente após 3 meses.
+              </Text>
+            </View>
+
             <Avatar
               rounded
               size={screenWidth * 0.6}
-              source={picture}
+              source={photo}
               activeOpacity={0.7}
             />
 
@@ -56,40 +100,62 @@ export default function TakePhoto({visible}) {
               Essa foto será visível em sua carteira virtual e na lista de
               membros da atlética.
             </Text>
+
             <Button
               style={styles.buttonRetry}
               text={'Tentar Novamente'}
               onPress={() => setPicture(null)}
             />
           </View>
-        </View>
-      ) : (
-        <RNCamera
-          ref={(ref) => {
-            setCamera(ref);
-          }}
-          zoom={0.1}
-          style={styles.camera}
-          type={RNCamera.Constants.Type.front}
-          autoFocus={RNCamera.Constants.AutoFocus.on}
-          permissionDialogTitle={'Autorização pasa uso de câmera'}
-          permissionDialogMessage={
-            'Precisamos de sua autorização para acessar sua câmera.'
-          }>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'column',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              paddingBottom: 10,
-            }}>
-            <TouchableOpacity
-              onPress={() => takePicture(camera)}
-              style={styles.capture}
+          <View style={styles.buttons}>
+            <Button
+              outlined
+              style={styles.buttonCancel}
+              text={'Cancelar'}
+              onPress={onClose}
+            />
+            <Button
+              style={styles.buttonContinue}
+              text={'Confirmar'}
+              onPress={onClose}
             />
           </View>
-        </RNCamera>
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <Text style={styles.textTitle}>Altere sua foto de perfil</Text>
+          <View
+            style={{
+              flex: 7,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Image source={profileExemple} style={styles.imagePhotoExemple} />
+            <Text style={styles.textSubTitle}>
+              Lembre-se que é um documento formal. Caso sua foto não esteja de
+              acordo, ela será analisada e você deverá obrigatoriamente anexar
+              outra.
+            </Text>
+            <Button
+              style={styles.takePhoto}
+              text={'Tirar foto'}
+              onPress={() => submitPhotoCamera()}
+            />
+            <TouchableOpacity
+              style={styles.selectValery}
+              onPress={() => submitPhotoGallery()}>
+              <Text style={styles.textSelectGallery}>
+                Selecionar da Galeria
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Button
+            outlined
+            style={styles.buttonCancel}
+            text={'Cancelar'}
+            onPress={onClose}
+          />
+        </View>
       )}
     </>
   );
