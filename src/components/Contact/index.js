@@ -6,10 +6,12 @@ import {
   Modal,
   TextInput,
   StatusBar,
+  Image,
 } from 'react-native';
 import styles from './styles';
 import IconButton from '../IconButton';
 import Icon from 'react-native-vector-icons/dist/Feather';
+import sendContact from '../../assets/images/sendContact.png';
 import {INVALID_CONTACT_ERROR} from '../../utils/errorTypes';
 import Button from '../Button';
 
@@ -32,11 +34,7 @@ export default function Contact({onClose, onSave, contactValue}) {
         </View>
 
         <View style={styles.form}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Icon name="phone" color={styles.textTitle.color} size={50} />
-            <Icon name="arrow-right" color={styles.textTitle.color} size={40} />
-            <Icon name="user" color={styles.textTitle.color} size={50} />
-          </View>
+          <Image source={sendContact} style={styles.imageSendEmail} />
           <View style={styles.contactContainer}>
             {contactEnabled ? (
               <>

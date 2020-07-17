@@ -10,7 +10,7 @@ export default styles = StyleSheet.create({
 
   buttonCancel: {
     color: '#FF4646',
-    width: '40%',
+    width: '46%',
     margin: 5,
     marginBottom: 40,
   },
@@ -101,7 +101,7 @@ export default styles = StyleSheet.create({
     margin: 5,
   },
   imagePhotoExemple: {
-    width: 67 * vw,
+    width: 69 * vw,
     height: 35 * vh,
   },
 

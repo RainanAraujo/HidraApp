@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-
+import {vh, vw} from '../../utils/dimensions';
 export default styles = StyleSheet.create({
   buttons: {
     width: '100%',
@@ -25,7 +25,7 @@ export default styles = StyleSheet.create({
   },
   buttonCancel: {
     color: '#FF4646',
-    width: '40%',
+    width: '46%',
     margin: 5,
   },
   buttonAdd: {
@@ -122,5 +122,9 @@ export default styles = StyleSheet.create({
     borderBottomRightRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 0,
+  },
+  imageSendEmail: {
+    width: 67 * vw,
+    height: 35 * vh,
   },
 });
