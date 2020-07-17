@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-
+import {vh, vw} from '../../utils/dimensions';
 export default styles = StyleSheet.create({
   buttons: {
     justifyContent: 'center',
@@ -62,9 +62,25 @@ export default styles = StyleSheet.create({
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
     fontSize: 16,
-    marginHorizontal: 30,
-    marginTop: 10,
-    marginBottom: 10,
+    marginHorizontal: 50,
+    margin: 20,
+    letterSpacing: 0.15,
+  },
+  imageSendEmail: {
+    width: 67 * vw,
+    height: 35 * vh,
+  },
+  emailUser: {
+    backgroundColor: '#2343A9',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 20,
+  },
+  textEmailUser: {
+    textAlign: 'center',
+    color: '#fff',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 18,
     letterSpacing: 0.15,
   },
 });

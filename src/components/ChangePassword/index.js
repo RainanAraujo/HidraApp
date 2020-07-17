@@ -6,11 +6,13 @@ import {
   Modal,
   TextInput,
   StatusBar,
+  Image,
 } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import Button from '../Button';
 import {AlertTypes, SendAlert} from '../../components/Alert';
+import sendEmail from '../../assets/images/sendEmail.png';
 export default function ChangePassword({visible, onClose}) {
   const [loading, setLoading] = useState();
   const [send, setSend] = useState(false);
@@ -27,12 +29,15 @@ export default function ChangePassword({visible, onClose}) {
             </>
           ) : (
             <>
-              <Icon name={'mail'} size={80} color="#484D55" />
+              <Image source={sendEmail} style={styles.imageSendEmail} />
               <Text style={styles.textSubTitle}>
-                {
-                  'Será enviado um link de alteração de senha no e-mail:\n rainanaraujo@ifma.edu.br'
-                }
+                {'Será enviado um link de alteração de senha no e-mail:'}
               </Text>
+              <View style={styles.emailUser}>
+                <Text style={styles.textEmailUser}>
+                  rainanaraaujo@gmail.com
+                </Text>
+              </View>
             </>
           )}
         </View>
