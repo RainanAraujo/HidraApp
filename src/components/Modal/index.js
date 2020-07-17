@@ -75,7 +75,7 @@ const ModalAnimated = forwardRef((props, ref) => {
     slide.setValue(1);
     Animated.timing(opacity, {
       toValue: 1,
-      duration: 300,
+      duration: 200,
       extrapolate: 'clamp',
     }).start(() => {
       if (!loadNow) setLoadNow(true);
@@ -85,7 +85,7 @@ const ModalAnimated = forwardRef((props, ref) => {
   const fadeOut = () => {
     Animated.timing(opacity, {
       toValue: 0,
-      duration: 300,
+      duration: 200,
       extrapolate: 'clamp',
     }).start(() => {
       slide.setValue(0);

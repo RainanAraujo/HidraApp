@@ -19,7 +19,7 @@ export default styles = StyleSheet.create({
     borderRadius: 50,
     paddingHorizontal: 20,
 
-    color: '#D10E29',
+    color: '#FF4646',
   },
   buttonAcept: {
     backgroundColor: '#2343A9',

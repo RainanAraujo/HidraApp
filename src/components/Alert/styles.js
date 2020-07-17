@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
     elevation: 1,
     zIndex: 1,
     width: '90%',
-    marginHorizontal: '5%',
+    alignSelf: 'center',
   },
   iconContainer: {
     height: '100%',
@@ -15,6 +15,16 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  titleContainer: {flex: 1, fontSize: 20, color: 'white'},
-  msgContainer: {flex: 1, fontSize: 15, color: 'white'},
+  titleContainer: {
+    flex: 1,
+    fontSize: 20,
+    color: 'white',
+    fontFamily: 'Nunito-Regular',
+  },
+  msgContainer: {
+    flex: 1,
+    fontSize: 16,
+    color: 'white',
+    fontFamily: 'Nunito-Regular',
+  },
 });

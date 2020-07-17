@@ -10,6 +10,7 @@ import {
 import styles from './styles';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import Button from '../Button';
+import {AlertTypes, SendAlert} from '../../components/Alert';
 export default function ChangePassword({visible, onClose}) {
   const [loading, setLoading] = useState();
   const [send, setSend] = useState(false);
@@ -52,6 +53,7 @@ export default function ChangePassword({visible, onClose}) {
               style={styles.buttonAcept}
               text={'Continuar'}
               loading={loading}
+              onPress={() => SendAlert(AlertTypes.SUCCESS, 'error')}
             />
           )}
         </View>
