@@ -36,7 +36,6 @@ export default styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingTop: 70,
   },
   textTitle: {
     color: '#484D55',

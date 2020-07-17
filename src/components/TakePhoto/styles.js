@@ -11,7 +11,8 @@ export default styles = StyleSheet.create({
   buttonCancel: {
     color: '#FF4646',
     width: '40%',
-    margin: 15,
+    margin: 5,
+    marginBottom: 40,
   },
   captureText: {
     color: '#fff',
@@ -29,7 +30,8 @@ export default styles = StyleSheet.create({
   buttonContinue: {
     backgroundColor: '#2343A9',
     width: '40%',
-    margin: 15,
+    margin: 5,
+    marginBottom: 40,
   },
   buttons: {
     flexDirection: 'row',
