@@ -1,27 +1,57 @@
-import React, {useState, useEffect, useRef, useContext} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
-  Dimensions,
   StatusBar,
   Animated,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
-import styles from './styles';
-import Button from '../../components/Button';
-import StepsPoints from '../../components/StepsPoints';
-import Contact from '../../components/Contact';
-import WelcomeStep from '../../components/WelcomeSteps';
 import TakePhotoStep from '../../components/TakePhotoStep';
-import Cadastro from '../../components/Cadastro';
-import {debug} from 'react-native-reanimated';
-import {ScrollView} from 'react-native-gesture-handler';
+import WelcomeStep from '../../components/WelcomeSteps';
+import StepsPoints from '../../components/StepsPoints';
+import {updateUserData} from '../../services/store';
+import {screenWidth} from '../../utils/dimensions';
+import Register from '../../components/Register';
+import Button from '../../components/Button';
+import {SendAlert, AlertTypes} from '../../components/Alert';
+import {useSelector} from 'react-redux';
+import styles from './styles';
+
 export default function Steps({navigation}) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [currentStepBack, setCurrentStepBack] = useState(false);
-  const screenWidth = Math.round(Dimensions.get('window').width);
   const slideAnim = useRef(new Animated.Value(0)).current;
+  const [currentData, setCurrentData] = useState({});
+  const userData = useSelector((state) => state.userData);
+  const [registerStatus, setRegisterStatus] = useState(false);
+  const [photoStatus, setPhotoStatus] = useState(false);
 
-  const steps = [<WelcomeStep />, <Cadastro />, <TakePhotoStep />];
+  const steps = [
+    {
+      status: true,
+      component: <WelcomeStep />,
+    },
+    {
+      status: registerStatus,
+      component: (
+        <Register
+          onChange={(data) => {
+            if (!data) {
+              setRegisterStatus(false);
+            } else {
+              setCurrentData(data);
+              setRegisterStatus(true);
+            }
+          }}
+        />
+      ),
+    },
+    {
+      status: photoStatus,
+      component: <TakePhotoStep onSuccess={(data) => {}} />,
+    },
+  ];
+
+  useEffect(() => {}, [steps]);
 
   const previousStep = () => {
     if (currentStep > 0) {
@@ -34,8 +64,9 @@ export default function Steps({navigation}) {
     }
   };
 
-  const nextStep = () => {
-    if (currentStep + 1 < steps.length) {
+  const nextStep = async () => {
+    console.log(steps);
+    if (currentStep + 1 < steps.length && steps[currentStep].status) {
       let targetValue = (currentStep + 1) * screenWidth;
       Animated.timing(slideAnim, {
         toValue: -targetValue,
@@ -43,6 +74,12 @@ export default function Steps({navigation}) {
       }).start();
       setCurrentStep(currentStep + 1);
     } else if (currentStep + 1 == steps.length) {
+      try {
+        const msg = await updateUserData(userData.uid, currentData);
+        SendAlert(AlertTypes.SUCCESS, msg);
+      } catch (error) {
+        SendAlert(AlertTypes.ERROR, error.message);
+      }
     }
   };
 
@@ -52,7 +89,7 @@ export default function Steps({navigation}) {
         <StatusBar barStyle="dark-content" backgroundColor="#fff" />
         <Animated.View
           style={{
-            width: steps.length * 100 + '%',
+            width: steps.length * screenWidth,
             height: '85%',
             translateX: slideAnim,
             flexDirection: 'row',
@@ -60,8 +97,8 @@ export default function Steps({navigation}) {
             alignSelf: 'flex-start',
           }}>
           {steps.map((step) => (
-            <View style={{width: 100 / steps.length + '%', height: '100%'}}>
-              {step}
+            <View style={{width: screenWidth, height: '100%'}}>
+              {step.component}
             </View>
           ))}
         </Animated.View>
@@ -70,28 +107,23 @@ export default function Steps({navigation}) {
           <View style={styles.buttonsContainer}>
             {currentStep > 0 && (
               <Button
+                outlined
                 text={'Voltar'}
                 style={styles.buttonBack}
-                styleText={styles.textButtonBack}
                 onPress={previousStep}
               />
             )}
-            {currentStep == steps.length - 1 ? (
-              <Button
-                text={'Concluir'}
-                style={styles.buttonContinue}
-                styleIcon={styles.buttonContinue.color}
-                onPress={() => navigation.replace('Home')}
-              />
-            ) : (
-              <Button
-                text={'Continuar'}
-                iconName={'arrow-right'}
-                style={styles.buttonContinue}
-                styleIcon={styles.buttonContinue.color}
-                onPress={nextStep}
-              />
-            )}
+            <Button
+              text={currentStep == steps.length - 1 ? 'Concluir' : 'Continuar'}
+              iconName={'arrow-right'}
+              style={{
+                ...styles.buttonContinue,
+                backgroundColor: steps[currentStep].status
+                  ? '#2343A9'
+                  : '#d2d2d2',
+              }}
+              onPress={nextStep}
+            />
           </View>
           <View style={styles.stepsContainer}>
             <StepsPoints stepCount={steps.length} currentStep={currentStep} />

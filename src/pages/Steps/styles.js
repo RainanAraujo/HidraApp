@@ -30,9 +30,7 @@ const styles = StyleSheet.create({
   },
   buttonBack: {
     width: 170,
-    borderWidth: 1,
-    borderColor: '#D10E29',
-    margin: 3,
+    color: '#D10E29',
   },
   textButtonBack: {
     color: '#D10E29',

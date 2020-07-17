@@ -1,13 +1,8 @@
 import {Dimensions} from 'react-native';
 
-const dimensions = Dimensions.get('window');
-
-export const screenHeight = dimensions.height;
-export const screenWidth = dimensions.width;
-export const vh = dimensions.height / 100;
-export const vw = dimensions.width / 100;
-export const screenRatio = dimensions.width / dimensions.height;
-export const diagonalScreenSize = Math.hypot(
-  dimensions.width,
-  dimensions.height,
-);
+export const screenHeight = Math.round(Dimensions.get('window').height);
+export const screenWidth = Math.round(Dimensions.get('window').width);
+export const vh = screenHeight / 100;
+export const vw = screenWidth / 100;
+export const screenRatio = screenWidth / screenHeight;
+export const diagonalScreenSize = Math.hypot(screenWidth, screenHeight);

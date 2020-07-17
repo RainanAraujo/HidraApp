@@ -30,12 +30,26 @@ export const updateContact = (userID, newContact) => {
       .doc(userID)
       .update({contact: newContact})
       .then(() => {
-        resolve(['success', 'Sucesso', 'Contato adicionado com sucesso']);
+        resolve('Contato adicionado com sucesso');
       })
       .catch((error) => {
-        console.log(Object.keys(error));
-        console.log(error);
-        return reject(new Error(error));
+        return reject(new Error(CHANGE_DATA_ERROR));
+      });
+  });
+};
+
+export const updateUserData = (userID, userData) => {
+  console.log(userID);
+  return new Promise((resolve, reject) => {
+    firestore()
+      .collection('users')
+      .doc(userID)
+      .update(userData)
+      .then(() => {
+        resolve('Dados registrados com sucesso sucesso');
+      })
+      .catch((error) => {
+        return reject(new Error(CHANGE_DATA_ERROR));
       });
   });
 };

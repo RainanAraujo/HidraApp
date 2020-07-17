@@ -1,10 +1,12 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Picker} from '@react-native-community/picker';
 import DatePicker from 'react-native-datepicker';
 import {Text, View, ScrollView, KeyboardAvoidingView} from 'react-native';
 import styles from './styles';
-import Input from '../../components/TextInput';
-export default function Cadastro() {
+import Input from '../TextInput';
+export default function Register({onChange}) {
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [date, setDate] = useState();
   const [course, setCourse] = useState('CC');
   const [currentClass, setCurrentClass] = useState();
@@ -13,6 +15,24 @@ export default function Cadastro() {
     CC: new Date().getFullYear() - 2013,
     BIO: new Date().getFullYear() - 2012,
   };
+
+  useEffect(() => {
+    if (
+      name.length > 0 &&
+      lastName.length > 0 &&
+      date != null &&
+      currentClass != null
+    ) {
+      onChange({
+        name: name,
+        lastName: lastName,
+        dateBirth: date,
+        class: currentClass,
+      });
+    } else {
+      onChange(false);
+    }
+  }, [name, lastName, date, currentClass]);
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -24,18 +44,28 @@ export default function Cadastro() {
       </View>
       <View>
         <Text style={styles.titleInput}>Nome *</Text>
-        <Input keyboardType="name-phone-pad" textContentType="name" />
+        <Input
+          value={name}
+          onChangeText={(text) => setName(text)}
+          keyboardType="name-phone-pad"
+          textContentType="name"
+        />
         <Text style={styles.titleInput}>Sobrenome *</Text>
-        <Input keyboardType="name-phone-pad" textContentType="name" />
+        <Input
+          value={lastName}
+          onChangeText={(text) => setLastName(text)}
+          keyboardType="name-phone-pad"
+          textContentType="name"
+        />
         <Text style={styles.titleInput}>Nascimento *</Text>
         <DatePicker
           style={{width: 305, marginBottom: 10, marginTop: 3}}
           mode="date"
           date={date}
           placeholder="Selecione"
-          format="DD-MM-YYYY"
-          minDate="01-01-1990"
-          maxDate="12-12-2005"
+          format="DD/MM/YYYY"
+          minDate="01/01/1990"
+          maxDate={'31/12/' + (new Date().getFullYear() - 15)}
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
@@ -46,7 +76,6 @@ export default function Cadastro() {
               borderWidth: 0,
               backgroundColor: '#EDF6FF',
             },
-            // ... You can check the source to find the other keys.
           }}
           onDateChange={(date) => setDate(date)}
         />

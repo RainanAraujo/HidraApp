@@ -6,7 +6,7 @@ import {
   StatusBar,
   SafeAreaView,
 } from 'react-native';
-import ChangePasswordModal from '../../components/ChangePassword';
+import ChangePassword from '../../components/ChangePassword';
 import TakePhoto from '../../components/TakePhoto';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import Contact from '../../components/Contact';
