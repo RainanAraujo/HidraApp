@@ -1,49 +1,41 @@
 import {StyleSheet} from 'react-native';
-
+import {vh, vw} from '../../utils/dimensions';
 export default styles = StyleSheet.create({
-  butons: {
-    width: '70%',
-    justifyContent: 'space-around',
+  buttons: {
+    justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
-  textButonAccept: {
+  textButtonAccept: {
     color: '#fff',
     fontFamily: 'Nunito-Regular',
     fontSize: 20,
     alignSelf: 'center',
   },
-  textButonClose: {
-    color: '#D10E29',
-    fontFamily: 'Nunito-Regular',
-    fontSize: 20,
-    alignSelf: 'center',
-  },
-  butonCancel: {
+
+  buttonCancel: {
     height: 50,
-    width: '100%',
+    width: '40%',
     borderRadius: 50,
     paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#D10E29',
+
+    color: '#FF4646',
   },
-  butonAcept: {
+  buttonAcept: {
     backgroundColor: '#2343A9',
     height: 50,
-    width: '100%',
+    width: '40%',
     borderRadius: 50,
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    margin: 5,
   },
   modalContainer: {
     backgroundColor: '#ffffff75',
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingTop: 70,
   },
   textTitle: {
     color: '#484D55',
@@ -69,9 +61,25 @@ export default styles = StyleSheet.create({
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
     fontSize: 16,
-    marginHorizontal: 30,
-    marginTop: 10,
-    marginBottom: 10,
+    marginHorizontal: 50,
+    margin: 20,
+    letterSpacing: 0.15,
+  },
+  imageSendEmail: {
+    width: 67 * vw,
+    height: 35 * vh,
+  },
+  emailUser: {
+    backgroundColor: '#2343A9',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 20,
+  },
+  textEmailUser: {
+    textAlign: 'center',
+    color: '#fff',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 18,
     letterSpacing: 0.15,
   },
 });

@@ -13,12 +13,12 @@ import styles from './styles';
 export const AlertTypes = {
   ERROR: {
     title: 'Erro',
-    color: 'red',
+    color: '#FF4646',
     icon: 'x',
   },
   SUCCESS: {
     title: 'Sucesso',
-    color: 'green',
+    color: '#30B21B',
     icon: 'check',
   },
 };
