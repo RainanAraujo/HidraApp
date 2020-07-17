@@ -56,10 +56,12 @@ export default function ChangePassword({visible, onClose}) {
             <></>
           ) : (
             <Button
-              style={styles.buttonAcept}
+              style={styles.buttonAccept}
               text={'Continuar'}
               loading={loading}
-              onPress={() => SendAlert(AlertTypes.SUCCESS, 'error')}
+              onPress={() =>
+                SendAlert(AlertTypes.SUCCESS, 'Confira seu e-mail')
+              }
             />
           )}
         </View>

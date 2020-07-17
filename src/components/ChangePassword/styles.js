@@ -21,7 +21,7 @@ export default styles = StyleSheet.create({
 
     color: '#FF4646',
   },
-  buttonAcept: {
+  buttonAccept: {
     backgroundColor: '#2343A9',
     height: 50,
     width: '40%',

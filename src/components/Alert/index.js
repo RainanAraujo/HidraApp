@@ -75,7 +75,7 @@ const AlertQueue = forwardRef((props, ref) => {
         ...styles.container,
         height: props.height,
         padding: props.height / 8,
-        marginTop: props.height / 4,
+        marginTop: props.height / 5,
         borderRadius: props.height / 2,
         translateY: slide.interpolate({
           inputRange: [0, 1],
