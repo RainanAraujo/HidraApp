@@ -2,14 +2,16 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
   scanClose: {
-    width: 240,
-    color: '#D10E29',
+    borderWidth: 2,
+    borderColor: 'red',
+    borderRadius: 99,
+    padding: 5,
   },
   flashButton: {
     borderWidth: 2,
     borderColor: '#484D55',
-    borderRadius: 20,
-    padding: 3,
+    borderRadius: 99,
+    padding: 5,
   },
   userPopupContainer: {
     position: 'absolute',
@@ -24,9 +26,7 @@ export default styles = StyleSheet.create({
   },
   contentScan: {
     backgroundColor: 'white',
-    width: '100%',
-    height: '100%',
-    marginBottom: '5%',
+    flex: 1,
     alignItems: 'center',
   },
   textTitle: {

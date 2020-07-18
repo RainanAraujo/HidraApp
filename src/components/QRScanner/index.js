@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/dist/Feather';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {getUserData} from '../../services/store';
 import {INVALID_QRCODE_ERROR} from '../../utils/errorTypes';
+import {screenHeight, screenWidth, vw} from '../../utils/dimensions';
 import styles from './styles';
 import Card from '../Card';
 import Button from '../Button';
@@ -30,6 +31,7 @@ export default function QRScanner({onError, onClose}) {
 
   return (
     <>
+      <StatusBar backgroundColor="black" />
       <View style={styles.contentScan}>
         <QRCodeScanner
           ref={(ref) => setCameraRef(ref)}
@@ -37,41 +39,45 @@ export default function QRScanner({onError, onClose}) {
           showMarker={true}
           reactivate={false}
           flashMode={flash}
-          cameraStyle={{width: '100%'}}
-          containerStyle={{paddingBottom: 10}}
+          containerStyle={{height: '100%', backgroundColor: 'white'}}
+          cameraStyle={{
+            height: '100%',
+          }}
           markerStyle={{borderRadius: 10}}
-          bottomContent={
-            <View
-              style={{
-                marginTop: 30,
-                width: '100%',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-              }}>
-              <TouchableOpacity
-                onPress={() => {
-                  flash == RNCamera.Constants.FlashMode.off
-                    ? setFlash(RNCamera.Constants.FlashMode.torch)
-                    : setFlash(RNCamera.Constants.FlashMode.off);
-                }}>
-                <View style={styles.flashButton}>
-                  {flash ? (
-                    <Icon name={'zap-off'} size={24} />
-                  ) : (
-                    <Icon name={'zap'} size={24} />
-                  )}
-                </View>
-              </TouchableOpacity>
-              <Button
-                outlined
-                style={styles.scanClose}
-                text={'Cancelar'}
-                onPress={() => onClose()}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            borderTopLeftRadius: (screenHeight - screenWidth) / 4,
+            borderTopRightRadius: (screenHeight - screenWidth) / 4,
+            height: (screenHeight - screenWidth) / 2,
+            aspectRatio: 2,
+            bottom: 0,
+            backgroundColor: 'white',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+          }}>
+          <TouchableOpacity
+            onPress={() => {
+              flash == RNCamera.Constants.FlashMode.off
+                ? setFlash(RNCamera.Constants.FlashMode.torch)
+                : setFlash(RNCamera.Constants.FlashMode.off);
+            }}>
+            <View style={styles.flashButton}>
+              <Icon name={flash ? 'zap-off' : 'zap'} size={10 * vw} />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => onClose()}>
+            <View style={styles.scanClose}>
+              <Icon
+                name={'x'}
+                color={styles.scanClose.borderColor}
+                size={10 * vw}
               />
             </View>
-          }
-        />
+          </TouchableOpacity>
+        </View>
       </View>
       {scannedData.uid && (
         <View style={styles.userPopupContainer}>
