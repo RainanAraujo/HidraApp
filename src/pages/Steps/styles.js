@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {screenHeight, screenWidth, vh} from '../../utils/dimensions';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     margin: '4%',
   },
   navigationContent: {
-    height: '15%',
+    height: 96,
     justifyContent: 'center',
     alignItems: 'center',
   },

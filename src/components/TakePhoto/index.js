@@ -15,7 +15,7 @@ import Button from '../Button';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import {check} from 'react-native-permissions';
 import profileExemple from '../../assets/images/profileExemple.png';
-export default function TakePhoto({onClose}) {
+export default function TakePhoto({onClose, onSuccess}) {
   const [isStep, setIsStep] = useState(false);
   const [photo, setPhoto] = useState();
   const screenWidth = Math.round(Dimensions.get('window').width);
