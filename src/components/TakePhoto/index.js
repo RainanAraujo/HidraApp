@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/dist/Feather';
 import {check} from 'react-native-permissions';
 import profileExemple from '../../assets/images/profileExemple.png';
 export default function TakePhoto({onClose}) {
-  const [camera, setCamera] = useState();
+  const [isStep, setIsStep] = useState(false);
   const [photo, setPhoto] = useState();
   const screenWidth = Math.round(Dimensions.get('window').width);
   const [picture, setPicture] = useState();
@@ -109,19 +109,21 @@ export default function TakePhoto({onClose}) {
               onPress={() => setPicture(null)}
             />
           </View>
-          <View style={styles.buttons}>
-            <Button
-              outlined
-              style={styles.buttonCancel}
-              text={'Cancelar'}
-              onPress={onClose}
-            />
-            <Button
-              style={styles.buttonContinue}
-              text={'Confirmar'}
-              onPress={onClose}
-            />
-          </View>
+          {isStep && (
+            <View style={styles.buttons}>
+              <Button
+                outlined
+                style={styles.buttonCancel}
+                text={'Cancelar'}
+                onPress={onClose}
+              />
+              <Button
+                style={styles.buttonContinue}
+                text={'Confirmar'}
+                onPress={onClose}
+              />
+            </View>
+          )}
         </View>
       ) : (
         <View style={styles.container}>
@@ -151,12 +153,14 @@ export default function TakePhoto({onClose}) {
               </Text>
             </TouchableOpacity>
           </View>
-          <Button
-            outlined
-            style={styles.buttonCancel}
-            text={'Cancelar'}
-            onPress={onClose}
-          />
+          {isStep && (
+            <Button
+              outlined
+              style={styles.buttonCancel}
+              text={'Cancelar'}
+              onPress={onClose}
+            />
+          )}
         </View>
       )}
     </>

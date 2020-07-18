@@ -37,6 +37,8 @@ export default function QRScanner({onError, onClose}) {
           showMarker={true}
           reactivate={false}
           flashMode={flash}
+          cameraStyle={{width: '100%'}}
+          containerStyle={{paddingBottom: 10}}
           markerStyle={{borderRadius: 10}}
           bottomContent={
             <View
