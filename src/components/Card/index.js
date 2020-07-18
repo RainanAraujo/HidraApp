@@ -24,7 +24,6 @@ export default function Card({user, onError}) {
   }, [user]);
 
   return (
-<<<<<<< HEAD
     Object.keys(user).length > 0 && (
       <View style={styles.card}>
         <ImageBackground
@@ -47,52 +46,18 @@ export default function Card({user, onError}) {
               {user.name + ' ' + user.lastName}
             </Text>
             <View style={{flex: 1}}>
-              <Text style={styles.titleText}>Classe:</Text>
-              <Text style={styles.subTitleText}>{user.class}</Text>
+              <Text style={styles.titleText}>Curso:</Text>
+              <Text style={styles.subTitleText}>{user.course}</Text>
             </View>
             <View style={styles.infoCardRow}>
               <View style={{flex: 2}}>
-                <Text style={styles.titleText}>Ano de associação:</Text>
-                <Text style={styles.subTitleText}>{user.since}</Text>
+                <Text style={styles.titleText}>Classe:</Text>
+                <Text style={styles.subTitleText}>{user.class}</Text>
               </View>
               <View style={{flex: 1}}>
-                <Text style={styles.titleText}>Idade:</Text>
-                <Text style={styles.subTitleText}>
-                  {calculateAge(user.dateBirth)} Anos
-                </Text>
+                <Text style={styles.titleText}>Nascimento:</Text>
+                <Text style={styles.subTitleText}>{user.dateBirth}</Text>
               </View>
-=======
-    <View style={styles.card}>
-      <ImageBackground
-        source={getPostStyle(user.since, user.post).card}
-        style={styles.cardBackground}
-        resizeMode="contain">
-        <Avatar
-          rounded
-          style={{
-            ...styles.avatar,
-            borderColor: getPostStyle(user.since, user.post).color,
-          }}
-          source={{
-            uri: userPic,
-          }}
-          size={123}
-        />
-        <View style={styles.infoBox}>
-          <Text style={styles.nameText}>{user.name}</Text>
-          <View style={{flex: 1}}>
-            <Text style={styles.titleText}>Curso:</Text>
-            <Text style={styles.subTitleText}>{user.course}</Text>
-          </View>
-          <View style={styles.inforCardRow}>
-            <View style={{flex: 2}}>
-              <Text style={styles.titleText}>Turma:</Text>
-              <Text style={styles.subTitleText}>{user.class}</Text>
-            </View>
-            <View style={{flex: 1}}>
-              <Text style={styles.titleText}>Nascimento:</Text>
-              <Text style={styles.subTitleText}>{user.dateBirth}</Text>
->>>>>>> 40b0c122f8967210a402993d06a8462fcb9035d8
             </View>
           </View>
         </ImageBackground>
