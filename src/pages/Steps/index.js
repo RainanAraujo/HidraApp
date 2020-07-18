@@ -6,8 +6,9 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import TakePhotoStep from '../../components/TakePhotoStep';
+import TakePhoto from '../../components/TakePhoto';
 import WelcomeStep from '../../components/WelcomeSteps';
+import UpDateSteps from '../../components/UpDateSteps';
 import StepsPoints from '../../components/StepsPoints';
 import {updateUserData} from '../../services/store';
 import {screenWidth} from '../../utils/dimensions';
@@ -47,7 +48,11 @@ export default function Steps({navigation}) {
     },
     {
       status: photoStatus,
-      component: <TakePhotoStep onSuccess={(data) => {}} />,
+      component: <TakePhoto onSuccess={(data) => {}} />,
+    },
+    {
+      status: photoStatus,
+      component: <UpDateSteps />,
     },
   ];
 
