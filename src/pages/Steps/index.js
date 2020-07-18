@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import TakePhoto from '../../components/TakePhoto';
 import WelcomeStep from '../../components/WelcomeSteps';
-import UpDateSteps from '../../components/UpDateSteps';
+import FinishStep from '../../components/FinishStep';
 import StepsPoints from '../../components/StepsPoints';
 import {updateUserData} from '../../services/store';
 import {screenWidth, screenHeight} from '../../utils/dimensions';
@@ -52,7 +52,11 @@ export default function Steps({navigation}) {
     },
     {
       status: true,
+<<<<<<< HEAD
       component: <UpDateSteps />,
+=======
+      component: <FinishStep />,
+>>>>>>> 40b0c122f8967210a402993d06a8462fcb9035d8
     },
   ];
 

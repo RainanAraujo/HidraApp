@@ -14,17 +14,21 @@ import ImagePicker from 'react-native-image-picker';
 import Button from '../Button';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import {check} from 'react-native-permissions';
-import profileExemple from '../../assets/images/profileExemple.png';
-export default function UpDateSteps() {
+import finishStep from '../../assets/images/finishStep.png';
+export default function FinishStep() {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <View style={styles.container}>
         <Text style={styles.textTitle}>Enviar dados</Text>
-        <Text style={styles.textSubTitle}>
-          Volte, verifique se seus dados estão corretos e clique em "Concluir"
-          para finalizar o cadastro na Atlética HIDRA!
-        </Text>
+        <View>
+          <Image source={finishStep} style={styles.imagePhotoExemple} />
+          <Text style={styles.textSubTitle}>
+            Volte, verifique se seus dados estão corretos e clique em "Concluir"
+            para finalizar o cadastro na Atlética HIDRA!
+          </Text>
+        </View>
+        <View></View>
       </View>
     </>
   );
