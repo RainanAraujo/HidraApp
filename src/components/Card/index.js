@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
-
 import {Text, View, ImageBackground} from 'react-native';
-
 import {Avatar} from 'react-native-elements';
 import {getProfilePic} from '../../services/storage';
 import {calculateAge, getPostStyle} from '../../utils/tools';
@@ -45,9 +43,15 @@ export default function Card({user, onError}) {
             <Text style={styles.nameText}>
               {user.name + ' ' + user.lastName}
             </Text>
-            <View style={{flex: 1}}>
-              <Text style={styles.titleText}>Curso:</Text>
-              <Text style={styles.subTitleText}>{user.course}</Text>
+            <View style={styles.infoCardRow}>
+              <View style={{flex: 2}}>
+                <Text style={styles.titleText}>Curso:</Text>
+                <Text style={styles.subTitleText}>{user.course}</Text>
+              </View>
+              <View style={{flex: 1}}>
+                <Text style={styles.titleText}>Nascimento:</Text>
+                <Text style={styles.subTitleText}>{user.dateBirth}</Text>
+              </View>
             </View>
             <View style={styles.infoCardRow}>
               <View style={{flex: 2}}>
@@ -55,8 +59,10 @@ export default function Card({user, onError}) {
                 <Text style={styles.subTitleText}>{user.class}</Text>
               </View>
               <View style={{flex: 1}}>
-                <Text style={styles.titleText}>Nascimento:</Text>
-                <Text style={styles.subTitleText}>{user.dateBirth}</Text>
+                <Text style={styles.titleText}>Idade:</Text>
+                <Text style={styles.subTitleText}>
+                  {calculateAge(user.dateBirth)} Anos
+                </Text>
               </View>
             </View>
           </View>

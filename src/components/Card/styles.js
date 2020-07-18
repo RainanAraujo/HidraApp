@@ -43,8 +43,8 @@ export default styles = StyleSheet.create({
   },
   infoCardRow: {
     flexDirection: 'row',
-    paddingBottom: '5%',
-    paddingTop: '5%',
+    paddingBottom: '4%',
+    paddingTop: '4%',
     flex: 1,
   },
   nameText: {
@@ -52,7 +52,6 @@ export default styles = StyleSheet.create({
     fontFamily: 'Nunito-Bold',
     textAlignVertical: 'center',
     fontSize: 20,
-    marginBottom: '5%',
     flex: 1,
   },
 });

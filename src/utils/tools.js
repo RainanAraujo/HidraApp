@@ -45,7 +45,7 @@ export const getPostStyle = (user) => {
     postStyle.card = MainCard;
   } else {
     const allClasses = getAllClasses(user.class.replace(/[0-9]/g, ''));
-    if (allClasses[allClasses.length - 1] == user.class) {
+    if (allClasses[allClasses.length - 1] != user.class) {
       postStyle.color = '#2242A7';
       postStyle.card = VeteranCard;
     } else {
