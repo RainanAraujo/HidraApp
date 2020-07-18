@@ -72,12 +72,12 @@ export default function Card({user, onError}) {
           </View>
           <View style={styles.inforCardRow}>
             <View style={{flex: 2}}>
-              <Text style={styles.titleText}>Ano de associação:</Text>
-              <Text style={styles.subTitleText}>{user.since}</Text>
+              <Text style={styles.titleText}>Turma:</Text>
+              <Text style={styles.subTitleText}>{user.class}</Text>
             </View>
             <View style={{flex: 1}}>
-              <Text style={styles.titleText}>Idade:</Text>
-              <Text style={styles.subTitleText}>{user.age} Anos</Text>
+              <Text style={styles.titleText}>Nascimento:</Text>
+              <Text style={styles.subTitleText}>{user.dateBirth}</Text>
             </View>
           </View>
         </View>
