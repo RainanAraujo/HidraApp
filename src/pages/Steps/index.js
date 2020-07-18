@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import TakePhoto from '../../components/TakePhoto';
 import WelcomeStep from '../../components/WelcomeSteps';
-import UpDateSteps from '../../components/UpDateSteps';
+import FinishStep from '../../components/FinishStep';
 import StepsPoints from '../../components/StepsPoints';
 import {updateUserData} from '../../services/store';
 import {screenWidth} from '../../utils/dimensions';
@@ -51,8 +51,8 @@ export default function Steps({navigation}) {
       component: <TakePhoto onSuccess={(data) => {}} />,
     },
     {
-      status: photoStatus,
-      component: <UpDateSteps />,
+      status: true,
+      component: <FinishStep />,
     },
   ];
 
