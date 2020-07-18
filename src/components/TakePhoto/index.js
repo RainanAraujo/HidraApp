@@ -28,6 +28,7 @@ export default function TakePhoto({onClose}) {
         path: 'images',
       },
     };
+
     ImagePicker.launchImageLibrary(options, (response) => {
       console.log('Response = ', response);
 
@@ -52,6 +53,7 @@ export default function TakePhoto({onClose}) {
         path: 'images',
       },
     };
+
     ImagePicker.launchCamera(options, (response) => {
       console.log('Response = ', response);
 

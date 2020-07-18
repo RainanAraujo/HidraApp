@@ -1,20 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {Picker} from '@react-native-community/picker';
 import DatePicker from 'react-native-datepicker';
-import {Text, View, ScrollView, KeyboardAvoidingView} from 'react-native';
+import {Text, View, KeyboardAvoidingView} from 'react-native';
 import styles from './styles';
+import {getAllClasses} from '../../utils/tools';
 import Input from '../TextInput';
+
 export default function Register({onChange}) {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [date, setDate] = useState();
   const [course, setCourse] = useState('CC');
   const [currentClass, setCurrentClass] = useState();
-
-  const classCount = {
-    CC: new Date().getFullYear() - 2013,
-    BIO: new Date().getFullYear() - 2012,
-  };
 
   useEffect(() => {
     if (
@@ -28,6 +25,7 @@ export default function Register({onChange}) {
         lastName: lastName,
         dateBirth: date,
         class: currentClass,
+        post: 'member',
       });
     } else {
       onChange(false);
@@ -94,15 +92,9 @@ export default function Register({onChange}) {
             onValueChange={(value) => setCurrentClass(value)}
             mode="dropdown"
             style={{height: 50, width: 130}}>
-            {[...Array(classCount[course]).keys()].map((index) => {
-              index = index + 1;
-              if (index < 10) index = '0' + index;
-              return (
-                classCount[course] - 7 < index && (
-                  <Picker.Item label={course + index} value={course + index} />
-                )
-              );
-            })}
+            {getAllClasses(course).map((Class) => (
+              <Picker.Item label={Class} value={Class} />
+            ))}
           </Picker>
         </View>
       </View>

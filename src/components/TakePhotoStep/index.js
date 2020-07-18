@@ -40,7 +40,7 @@ export default function TakePhotoStep() {
             </View>
 
             <Text style={styles.textIcon}>
-              Ao inserir sua foto, você so poderá altera-la após 3 mases.
+              Ao inserir sua foto, você so poderá altera-la após 3 meses.
             </Text>
             <Button
               text={'Adicionar Foto'}

@@ -71,7 +71,7 @@ export default function Login({navigation}) {
   const loadProfileData = async (uid) => {
     let newUserData = await getUserData(uid);
     dispatch({type: 'SET_USER_DATA', data: newUserData});
-    if (newUserData.name != null) {
+    if (Object.keys(newUserData).length > 1) {
       navigation.replace('Home');
     } else {
       navigation.replace('Steps');
@@ -93,7 +93,7 @@ export default function Login({navigation}) {
     try {
       if (getCurrentUser() != null) {
         setLoading(true);
-        let uid = await getCurrentUser().uid;
+        let uid = getCurrentUser().uid;
         await loadProfileData(uid);
       } else {
         setLoading(false);

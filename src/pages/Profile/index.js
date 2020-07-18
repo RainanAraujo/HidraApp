@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-import QrCodeExemple from '../../assets/images/qrCodeExemple.png';
+import QrCodeExample from '../../assets/images/qrCodeExemple.png';
 import DropdownAlert from 'react-native-dropdownalert';
 import Card from '../../components/Card';
 import {useSelector} from 'react-redux';
@@ -17,6 +17,8 @@ import QrCodeUser from '../../components/QrCodeUser';
 import Button from '../../components/Button';
 import {Modal} from '../../components/Modal';
 import {SendAlert, AlertTypes} from '../../components/Alert';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
+import {getAllClasses} from '../../utils/tools';
 
 export default function Profile() {
   const [scanQRVisible, setScanQRVisible] = useState(false);
@@ -55,7 +57,7 @@ export default function Profile() {
               onPress={() => {
                 setQRUserVisible(true);
               }}>
-              <Image source={QrCodeExemple} style={styles.qrImage} />
+              <Image source={QrCodeExample} style={styles.qrImage} />
             </TouchableOpacity>
             <Text style={styles.qrCodeText}>Acesse aqui o QR CODE</Text>
           </View>

@@ -41,7 +41,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     textAlignVertical: 'center',
   },
-  inforCardRow: {
+  infoCardRow: {
     flexDirection: 'row',
     paddingBottom: '5%',
     paddingTop: '5%',
