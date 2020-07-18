@@ -36,6 +36,9 @@ export const getAllClasses = (course) => {
 };
 
 export const getPostStyle = (user) => {
+  console.log(
+    getAllClasses(user.class.replace(/[0-9]/g, ''))[getAllClasses().length - 1],
+  );
   var postStyle = {};
   if (user.post == 'monitor') {
     postStyle.color = '#2D2C2B';

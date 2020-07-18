@@ -52,11 +52,7 @@ export default function Steps({navigation}) {
     },
     {
       status: true,
-<<<<<<< HEAD
-      component: <UpDateSteps />,
-=======
       component: <FinishStep />,
->>>>>>> 40b0c122f8967210a402993d06a8462fcb9035d8
     },
   ];
 
