@@ -44,11 +44,8 @@ export const getPostStyle = (user) => {
     postStyle.color = '#97007F';
     postStyle.card = MainCard;
   } else {
-    if (
-      getAllClasses(user.class.replace(/[0-9]/g, ''))[
-        getAllClasses().length - 1
-      ] == user.class
-    ) {
+    const allClasses = getAllClasses(user.class.replace(/[0-9]/g, ''));
+    if (allClasses[allClasses.length - 1] == user.class) {
       postStyle.color = '#2242A7';
       postStyle.card = VeteranCard;
     } else {
