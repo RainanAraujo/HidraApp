@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   default: {
-    marginHorizontal: 10,
     textAlign: 'center',
     color: '#fff',
     fontFamily: 'Nunito-SemiBold',

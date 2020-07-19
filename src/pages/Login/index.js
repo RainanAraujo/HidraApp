@@ -16,10 +16,10 @@ import LoginFormBar from '../../components/LoginFormBar';
 import {useDispatch} from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import QRScanner from '../../components/QRScanner';
-import {RNCamera} from 'react-native-camera';
 import {getUserData} from '../../services/store';
 import Button from '../../components/Button';
 import {Modal} from '../../components/Modal';
+import {NOT_FOUND_USER_ERROR} from '../../utils/errorTypes';
 import {SendAlert, AlertTypes} from '../../components/Alert';
 import styles from './styles';
 
@@ -82,10 +82,15 @@ export default function Login({navigation}) {
     try {
       setLoading(true);
       let uid = await signIn(email, pass);
+      console.log(uid);
       await loadProfileData(uid);
     } catch (error) {
-      SendAlert(AlertTypes.ERROR, error.message);
       setLoading(false);
+      if (error.message == NOT_FOUND_USER_ERROR) {
+        navigation.replace('Steps');
+      } else {
+        SendAlert(AlertTypes.ERROR, error.message);
+      }
     }
   };
 
@@ -99,8 +104,12 @@ export default function Login({navigation}) {
         setLoading(false);
       }
     } catch (error) {
-      SendAlert(AlertTypes.ERROR, error.message);
       setLoading(false);
+      if (error.message == NOT_FOUND_USER_ERROR) {
+        navigation.replace('Steps');
+      } else {
+        SendAlert(AlertTypes.ERROR, error.message);
+      }
     }
   };
 

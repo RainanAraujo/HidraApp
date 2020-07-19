@@ -8,13 +8,7 @@ export const setProfilePic = async (userID, pathPhoto) => {
     profile_pictures
       .child(userID + '.png')
       .putFile(pathPhoto)
-      .then(() =>
-        resolve([
-          'success',
-          'Sucesso',
-          'A foto do usuário foi atualizada com sucesso',
-        ]),
-      )
+      .then(() => resolve('A foto do usuário foi atualizada com sucesso'))
       .catch(() => reject(new Error(UPDATE_PIC_ERROR)));
   });
 };

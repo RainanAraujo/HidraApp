@@ -5,7 +5,7 @@ import {
   getFirebaseError,
 } from '../utils/errorTypes';
 
-export const getCurrentUser = () => auth().currentUser;
+export const getCurrentUser = async () => auth().currentUser;
 
 export const signOut = () => {
   return new Promise((resolve, reject) => {
