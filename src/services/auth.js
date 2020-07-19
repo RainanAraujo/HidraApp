@@ -5,7 +5,7 @@ import {
   getFirebaseError,
 } from '../utils/errorTypes';
 
-export const getCurrentUser = async () => auth().currentUser;
+export const getCurrentUser = () => auth().currentUser;
 
 export const signOut = () => {
   return new Promise((resolve, reject) => {
@@ -23,11 +23,7 @@ export const changePassword = (oldPassword, newPassword) => {
     auth()
       .sendPasswordResetEmail(auth().currentUser.email)
       .then(() => {
-        resolve([
-          'success',
-          'Sucesso',
-          'Email de redefinição de senha foi enviado',
-        ]);
+        resolve('Email de redefinição de senha foi enviado');
       })
       .catch((error) => reject(getFirebaseError(error.code)));
   });

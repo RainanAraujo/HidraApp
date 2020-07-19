@@ -71,45 +71,54 @@ export default function Login({navigation}) {
   const loadProfileData = async (uid) => {
     let newUserData = await getUserData(uid);
     dispatch({type: 'SET_USER_DATA', data: newUserData});
-    if (Object.keys(newUserData).length > 1) {
-      navigation.replace('Home');
-    } else {
-      navigation.replace('Steps');
-    }
+    setLoading(false);
+    navigation.replace('Home');
   };
 
   const onSubmitForm = async (email, pass) => {
+    var uid;
+    setLoading(true);
     try {
-      setLoading(true);
-      let uid = await signIn(email, pass);
-      console.log(uid);
-      await loadProfileData(uid);
+      uid = await signIn(email, pass);
     } catch (error) {
       setLoading(false);
-      if (error.message == NOT_FOUND_USER_ERROR) {
-        navigation.replace('Steps');
-      } else {
-        SendAlert(AlertTypes.ERROR, error.message);
+      SendAlert(AlertTypes.ERROR, error.message);
+    }
+    console.log(uid);
+    if (uid) {
+      try {
+        await loadProfileData(uid);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+        if (error.message == NOT_FOUND_USER_ERROR) {
+          dispatch({type: 'SET_USER_DATA', data: {uid: uid}});
+          navigation.replace('Steps');
+        } else {
+          SendAlert(AlertTypes.ERROR, error.message);
+        }
       }
     }
   };
 
   const autoSignIn = async () => {
-    try {
-      if (getCurrentUser() != null) {
-        setLoading(true);
-        let uid = getCurrentUser().uid;
+    var uid;
+    if (getCurrentUser() != null) {
+      setLoading(true);
+      try {
+        uid = getCurrentUser().uid;
         await loadProfileData(uid);
-      } else {
+      } catch (error) {
         setLoading(false);
+        if (error.message == NOT_FOUND_USER_ERROR) {
+          dispatch({type: 'SET_USER_DATA', data: {uid: uid}});
+          navigation.replace('Steps');
+        } else {
+          SendAlert(AlertTypes.ERROR, error.message);
+        }
       }
-    } catch (error) {
+    } else {
       setLoading(false);
-      if (error.message == NOT_FOUND_USER_ERROR) {
-        navigation.replace('Steps');
-      } else {
-        SendAlert(AlertTypes.ERROR, error.message);
-      }
     }
   };
 
@@ -121,7 +130,7 @@ export default function Login({navigation}) {
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
         )
       ) {
-        const reponse = PermissionsAndroid.requestMultiple([
+        const response = PermissionsAndroid.requestMultiple([
           PermissionsAndroid.PERMISSIONS.CAMERA,
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
         ]);

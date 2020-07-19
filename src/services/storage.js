@@ -4,12 +4,16 @@ import {UPDATE_PIC_ERROR, LOAD_PIC_ERROR} from '../utils/errorTypes';
 const profile_pictures = storage().ref('profile_pictures');
 
 export const setProfilePic = async (userID, pathPhoto) => {
+  console.log(pathPhoto);
   return new Promise((resolve, reject) => {
     profile_pictures
       .child(userID + '.png')
-      .putFile(pathPhoto)
+      .putFile('file:/' + pathPhoto)
       .then(() => resolve('A foto do usuário foi atualizada com sucesso'))
-      .catch(() => reject(new Error(UPDATE_PIC_ERROR)));
+      .catch((error) => {
+        console.log(error);
+        reject(new Error(UPDATE_PIC_ERROR));
+      });
   });
 };
 

@@ -39,7 +39,7 @@ export default function TakePhoto({onClose, onSubmit, onChange}) {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = {uri: response.uri};
+        const source = {uri: response.uri, path: response.path};
         setPhoto(source);
         setPicture(true);
       }
@@ -64,7 +64,7 @@ export default function TakePhoto({onClose, onSubmit, onChange}) {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = {uri: response.uri};
+        const source = {uri: response.uri, path: response.path};
         setPhoto(source);
         setPicture(true);
       }
@@ -73,8 +73,8 @@ export default function TakePhoto({onClose, onSubmit, onChange}) {
 
   useEffect(() => {
     if (onChange != null) {
-      if (picture != null) {
-        onChange(picture);
+      if (picture) {
+        onChange(photo.path);
       } else {
         onChange(false);
       }

@@ -10,7 +10,7 @@ import TakePhoto from '../../components/TakePhoto';
 import WelcomeStep from '../../components/WelcomeSteps';
 import FinishStep from '../../components/FinishStep';
 import StepsPoints from '../../components/StepsPoints';
-import {updateUserData} from '../../services/store';
+import {registerUserData} from '../../services/store';
 import {setProfilePic} from '../../services/storage';
 import {getCurrentUser} from '../../services/auth';
 import {screenWidth, screenHeight} from '../../utils/dimensions';
@@ -82,7 +82,7 @@ export default function Steps({navigation}) {
   };
 
   const nextStep = async () => {
-    console.log(await getCurrentUser().uid);
+    console.log(userData);
     if (currentStep + 1 < steps.length && steps[currentStep].status) {
       let targetValue = (currentStep + 1) * screenWidth;
       Animated.timing(slideAnim, {
@@ -92,10 +92,11 @@ export default function Steps({navigation}) {
       setCurrentStep(currentStep + 1);
     } else if (currentStep + 1 == steps.length) {
       try {
-        const msgData = await updateUserData(getCurrentUser().uid, currentData);
+        const msgData = await registerUserData(userData.uid, currentData);
         const msgPic = await setProfilePic(userData.uid, currentPhoto);
         SendAlert(AlertTypes.SUCCESS, msg);
       } catch (error) {
+        console.log(error + ' - error');
         SendAlert(AlertTypes.ERROR, error.message);
       }
     }
