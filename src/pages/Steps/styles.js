@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     margin: '4%',
   },
   navigationContent: {
-    height: 96,
+    height: '15%',
     justifyContent: 'center',
     alignItems: 'center',
   },
