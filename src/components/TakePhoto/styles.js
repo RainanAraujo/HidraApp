@@ -2,39 +2,41 @@ import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../utils/dimensions';
 export default styles = StyleSheet.create({
   container: {
+    padding: '5%',
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingTop: 30,
   },
 
   buttonCancel: {
+    fontSize: 5 * vw,
     color: '#FF4646',
-    width: '46%',
-    margin: 5,
-    marginBottom: 40,
+    width: '45%',
+    marginHorizontal: '2.5%',
   },
   captureText: {
     color: '#fff',
   },
   buttonRetry: {
     backgroundColor: '#2343A9',
-
-    margin: 15,
+    margin: 'auto',
   },
   takePhoto: {
     backgroundColor: '#2343A9',
-
-    margin: 10,
+    margin: '5%',
   },
   buttonContinue: {
+    fontSize: 5 * vw,
     backgroundColor: '#2343A9',
-    width: '40%',
-    margin: 5,
-    marginBottom: 40,
+    width: '45%',
+    marginHorizontal: '2.5%',
   },
   buttons: {
+    height: '15%',
+    marginHorizontal: '5%',
+    justifyContent: 'center',
     flexDirection: 'row',
+    alignItems: 'center',
   },
 
   textName: {
@@ -44,13 +46,12 @@ export default styles = StyleSheet.create({
     fontFamily: 'Nunito-SemiBold',
   },
   textTitle: {
+    height: '10%',
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
-    fontSize: 24,
+    fontSize: 7 * vw,
     alignSelf: 'center',
     textAlign: 'center',
-    paddingHorizontal: 60,
-    letterSpacing: 0,
   },
 
   textSubTitle: {
@@ -58,9 +59,7 @@ export default styles = StyleSheet.create({
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
     fontSize: 16,
-    marginHorizontal: 30,
-    marginTop: 10,
-    marginBottom: 10,
+    margin: '5%',
     letterSpacing: 0.15,
   },
 
@@ -98,20 +97,18 @@ export default styles = StyleSheet.create({
     fontFamily: 'Nunito-SemiBold',
   },
   selectValery: {
-    margin: 5,
+    margin: '5%',
   },
-  imagePhotoExemple: {
-    width: 69 * vw,
-    height: 35 * vh,
+  imagePhotoExample: {
+    height: '40%',
+    aspectRatio: 1,
   },
 
   warning: {
     backgroundColor: '#F3AE27',
     borderRadius: 10,
-    padding: 10,
-    paddingHorizontal: 20,
-    marginHorizontal: 40,
-    marginBottom: 30,
+    padding: '4%',
+    margin: '5%',
     flexDirection: 'row',
     alignItems: 'center',
   },

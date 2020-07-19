@@ -11,6 +11,8 @@ import WelcomeStep from '../../components/WelcomeSteps';
 import FinishStep from '../../components/FinishStep';
 import StepsPoints from '../../components/StepsPoints';
 import {updateUserData} from '../../services/store';
+import {setProfilePic} from '../../services/storage';
+import {getCurrentUser} from '../../services/auth';
 import {screenWidth, screenHeight} from '../../utils/dimensions';
 import Register from '../../components/Register';
 import Button from '../../components/Button';
@@ -19,12 +21,13 @@ import {useSelector} from 'react-redux';
 import styles from './styles';
 
 export default function Steps({navigation}) {
+  const userData = useSelector((state) => state.userData);
   const [currentStep, setCurrentStep] = useState(0);
   const slideAnim = useRef(new Animated.Value(0)).current;
   const [currentData, setCurrentData] = useState({});
-  const userData = useSelector((state) => state.userData);
   const [registerStatus, setRegisterStatus] = useState(false);
   const [photoStatus, setPhotoStatus] = useState(false);
+  const [currentPhoto, setCurrentPhoto] = useState();
 
   const steps = [
     {
@@ -48,7 +51,18 @@ export default function Steps({navigation}) {
     },
     {
       status: photoStatus,
-      component: <TakePhoto onSuccess={(data) => {}} />,
+      component: (
+        <TakePhoto
+          onChange={(data) => {
+            if (!data) {
+              setPhotoStatus(false);
+            } else {
+              setCurrentPhoto(data);
+              setPhotoStatus(true);
+            }
+          }}
+        />
+      ),
     },
     {
       status: true,
@@ -68,7 +82,7 @@ export default function Steps({navigation}) {
   };
 
   const nextStep = async () => {
-    console.log(currentStep, steps.length);
+    console.log(await getCurrentUser().uid);
     if (currentStep + 1 < steps.length && steps[currentStep].status) {
       let targetValue = (currentStep + 1) * screenWidth;
       Animated.timing(slideAnim, {
@@ -78,7 +92,8 @@ export default function Steps({navigation}) {
       setCurrentStep(currentStep + 1);
     } else if (currentStep + 1 == steps.length) {
       try {
-        const msg = await updateUserData(userData.uid, currentData);
+        const msgData = await updateUserData(getCurrentUser().uid, currentData);
+        const msgPic = await setProfilePic(userData.uid, currentPhoto);
         SendAlert(AlertTypes.SUCCESS, msg);
       } catch (error) {
         SendAlert(AlertTypes.ERROR, error.message);

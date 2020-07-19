@@ -39,9 +39,21 @@ export const updateContact = (userID, newContact) => {
 };
 
 export const updateUserData = (userID, userData) => {
-  console.log(userID);
   return new Promise((resolve, reject) => {
+    console.log(firestore().collection('users').doc(userID).path);
     firestore()
+      .collection('users')
+      .doc(userID)
+      .set(userData)
+      .then(() => {
+        resolve('Dados registrados com sucesso sucesso');
+      })
+      .catch((error) => {
+        console.log(error);
+        return reject(new Error(CHANGE_DATA_ERROR));
+      });
+  });
+  /*firestore()
       .collection('users')
       .doc(userID)
       .update(userData)
@@ -49,7 +61,8 @@ export const updateUserData = (userID, userData) => {
         resolve('Dados registrados com sucesso sucesso');
       })
       .catch((error) => {
+        console.log(error);
         return reject(new Error(CHANGE_DATA_ERROR));
       });
-  });
+  });*/
 };

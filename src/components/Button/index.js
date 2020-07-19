@@ -39,7 +39,12 @@ export default function Button({
           <Text
             style={{
               ...styles.default,
-              ...(style.color && {color: style.color}),
+              ...(style.color && {
+                color: style.color,
+              }),
+              ...(style.fontSize && {
+                fontSize: style.fontSize,
+              }),
             }}>
             {text}
           </Text>

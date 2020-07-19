@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Dimensions,
   Text,
@@ -13,12 +13,12 @@ import styles from './styles';
 import ImagePicker from 'react-native-image-picker';
 import Button from '../Button';
 import Icon from 'react-native-vector-icons/dist/Feather';
-import {check} from 'react-native-permissions';
 import profileExemple from '../../assets/images/profileExemple.png';
-export default function TakePhoto({onClose, onSuccess}) {
+import {vw} from '../../utils/dimensions';
+
+export default function TakePhoto({onClose, onSubmit, onChange}) {
   const [isStep, setIsStep] = useState(false);
   const [photo, setPhoto] = useState();
-  const screenWidth = Math.round(Dimensions.get('window').width);
   const [picture, setPicture] = useState();
 
   const submitPhotoGallery = () => {
@@ -71,93 +71,80 @@ export default function TakePhoto({onClose, onSuccess}) {
     });
   };
 
+  useEffect(() => {
+    if (onChange != null) {
+      if (picture != null) {
+        onChange(picture);
+      } else {
+        onChange(false);
+      }
+    }
+  }, [picture]);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
-
       {picture ? (
         <View style={styles.container}>
           <Text style={styles.textTitle}>Sua foto :)</Text>
-          <View
-            style={{
-              flex: 7,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View style={styles.warning}>
-              <Icon name={'alert-triangle'} size={35} color="#fff" />
-              <Text style={styles.textWarning}>
-                Você so poderá alterar sua foto novamente após 3 meses.
-              </Text>
-            </View>
-
-            <Avatar
-              rounded
-              size={screenWidth * 0.6}
-              source={photo}
-              activeOpacity={0.7}
-            />
-
-            <Text style={styles.textSubTitle}>
-              Essa foto será visível em sua carteira virtual e na lista de
-              membros da atlética.
+          <View style={styles.warning}>
+            <Icon name={'alert-triangle'} size={35} color="#fff" />
+            <Text style={styles.textWarning}>
+              Você so poderá alterar sua foto novamente após 3 meses.
             </Text>
-
-            <Button
-              style={styles.buttonRetry}
-              text={'Tentar Novamente'}
-              onPress={() => setPicture(null)}
-            />
           </View>
-          {isStep && (
-            <View style={styles.buttons}>
-              <Button
-                outlined
-                style={styles.buttonCancel}
-                text={'Cancelar'}
-                onPress={onClose}
-              />
-              <Button
-                style={styles.buttonContinue}
-                text={'Confirmar'}
-                onPress={onClose}
-              />
-            </View>
-          )}
+
+          <Image
+            style={{...styles.imagePhotoExample, borderRadius: 999}}
+            source={photo}
+          />
+
+          <Text style={styles.textSubTitle}>
+            Essa foto será visível em sua carteira virtual e na lista de membros
+            da atlética.
+          </Text>
+
+          <Button
+            style={styles.buttonRetry}
+            text={'Tentar Novamente'}
+            onPress={() => setPicture(null)}
+          />
         </View>
       ) : (
         <View style={styles.container}>
           <Text style={styles.textTitle}>Altere sua foto de perfil</Text>
-          <View
-            style={{
-              flex: 7,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Image source={profileExemple} style={styles.imagePhotoExemple} />
-            <Text style={styles.textSubTitle}>
-              Lembre-se que é um documento formal. Caso sua foto não esteja de
-              acordo, ela será analisada e você deverá obrigatoriamente anexar
-              outra.
-            </Text>
-            <Button
-              style={styles.takePhoto}
-              text={'Tirar foto'}
-              onPress={() => submitPhotoCamera()}
-            />
-            <TouchableOpacity
-              style={styles.selectValery}
-              onPress={() => submitPhotoGallery()}>
-              <Text style={styles.textSelectGallery}>
-                Selecionar da Galeria
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {isStep && (
+          <Image source={profileExemple} style={styles.imagePhotoExample} />
+          <Text style={styles.textSubTitle}>
+            Lembre-se que é um documento formal. Caso sua foto não esteja de
+            acordo, ela será analisada e você deverá obrigatoriamente anexar
+            outra.
+          </Text>
+          <Button
+            style={styles.takePhoto}
+            text={'Tirar foto'}
+            onPress={() => submitPhotoCamera()}
+          />
+          <TouchableOpacity
+            style={styles.selectValery}
+            onPress={() => submitPhotoGallery()}>
+            <Text style={styles.textSelectGallery}>Selecionar da Galeria</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {(onClose || onSubmit) && (
+        <View style={styles.buttons}>
+          {onClose && (
             <Button
               outlined
               style={styles.buttonCancel}
               text={'Cancelar'}
+              onPress={onClose}
+            />
+          )}
+          {picture && (
+            <Button
+              style={styles.buttonContinue}
+              text={'Confirmar'}
               onPress={onClose}
             />
           )}
