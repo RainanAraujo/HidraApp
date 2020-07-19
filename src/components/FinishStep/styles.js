@@ -30,8 +30,8 @@ export default styles = StyleSheet.create({
   },
 
   imagePhotoExemple: {
-    width: 69 * vw,
-    height: 36 * vh,
+    height: '59%',
+    aspectRatio: 0.96,
     alignSelf: 'center',
   },
 });

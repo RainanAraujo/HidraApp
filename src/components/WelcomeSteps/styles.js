@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
 
   textSubTitle: {
@@ -43,5 +43,9 @@ export default styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 100,
     padding: 20,
+  },
+  imageWelcome: {
+    height: '45%',
+    aspectRatio: 1,
   },
 });

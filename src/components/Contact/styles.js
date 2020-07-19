@@ -124,7 +124,7 @@ export default styles = StyleSheet.create({
     borderRadius: 0,
   },
   imageSendEmail: {
-    width: 67 * vw,
-    height: 35 * vh,
+    height: '51%',
+    aspectRatio: 0.97,
   },
 });
