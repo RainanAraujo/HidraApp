@@ -43,22 +43,7 @@ export const updateUserData = (userID, userData) => {
     firestore()
       .collection('users')
       .doc(userID)
-      .update(userData)
-      .then(() => {
-        resolve('Dados registrados com sucesso sucesso');
-      })
-      .catch((error) => {
-        return reject(new Error(CHANGE_DATA_ERROR));
-      });
-  });
-};
-
-export const registerUserData = (userID, userData) => {
-  return new Promise((resolve, reject) => {
-    firestore()
-      .collection('users')
-      .doc(userID)
-      .set(userData)
+      .set(userData, {merge: true})
       .then(() => {
         resolve('Dados registrados com sucesso sucesso');
       })

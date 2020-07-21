@@ -10,17 +10,21 @@ import TakePhoto from '../../components/TakePhoto';
 import WelcomeStep from '../../components/WelcomeSteps';
 import FinishStep from '../../components/FinishStep';
 import StepsPoints from '../../components/StepsPoints';
-import {registerUserData} from '../../services/store';
+import {
+  registerUserData,
+  getUserData,
+  updateUserData,
+} from '../../services/store';
 import {setProfilePic} from '../../services/storage';
-import {getCurrentUser} from '../../services/auth';
 import {screenWidth, screenHeight} from '../../utils/dimensions';
 import Register from '../../components/Register';
 import Button from '../../components/Button';
 import {SendAlert, AlertTypes} from '../../components/Alert';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import styles from './styles';
 
 export default function Steps({navigation}) {
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
   const [currentStep, setCurrentStep] = useState(0);
   const slideAnim = useRef(new Animated.Value(0)).current;
@@ -82,7 +86,6 @@ export default function Steps({navigation}) {
   };
 
   const nextStep = async () => {
-    console.log(currentPhoto + ' - ');
     if (currentStep + 1 < steps.length && steps[currentStep].status) {
       let targetValue = (currentStep + 1) * screenWidth;
       Animated.timing(slideAnim, {
@@ -92,13 +95,16 @@ export default function Steps({navigation}) {
       setCurrentStep(currentStep + 1);
     } else if (currentStep + 1 == steps.length) {
       try {
-        const msgData = await registerUserData(userData.uid, currentData);
-        SendAlert(AlertTypes.SUCCESS, msgData);
-        const msgPic = await setProfilePic(userData.uid, currentPhoto);
-        SendAlert(AlertTypes.SUCCESS, msgPic);
+        const picUrl = await setProfilePic(userData.uid, currentPhoto);
+        await updateUserData(userData.uid, {currentData, pic: picUrl});
+        dispatch({
+          type: 'SET_USER_DATA',
+          data: await getUserData(userData.uid),
+        });
+        SendAlert(AlertTypes.SUCCESS, 'Dados registrados');
         navigation.replace('Home');
       } catch (error) {
-        console.log(error + ' - error');
+        console.log(error);
         SendAlert(AlertTypes.ERROR, error.message);
       }
     }

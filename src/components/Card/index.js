@@ -35,7 +35,7 @@ export default function Card({user, onError}) {
               borderColor: getPostStyle(user).color,
             }}
             source={{
-              uri: userPic,
+              uri: user.pic,
             }}
             size={123}
           />
