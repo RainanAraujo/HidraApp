@@ -13,6 +13,7 @@ import Contact from '../../components/Contact';
 import ToggleSwitch from 'toggle-switch-react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {getUserData, updateContact} from '../../services/store';
+import {setProfilePic} from '../../services/storage';
 import {signOut} from '../../services/auth';
 import {SendAlert, AlertTypes} from '../../components/Alert';
 import {Modal} from '../../components/Modal';
@@ -29,13 +30,23 @@ export default function Settings({navigation}) {
   const [ToggleNotification, setToggleNotification] = useState(false);
 
   const changeContact = async (contact) => {
-    console.log(userData.uid);
     try {
-      Alerts.getDropDown().alertWithType(
+      SendAlert(
+        AlertTypes.SUCCESS,
         ...(await updateContact(userData.uid, contact)),
       );
-      let newUserData = {...(await getUserData(uid)), uid: uid};
+      const newUserData = await getUserData(uid);
       dispatch({type: 'SET_USER_DATA', data: newUserData});
+    } catch (error) {
+      SendAlert(AlertTypes.ERROR, error.message);
+    }
+  };
+
+  const changePic = async (path) => {
+    console.log(path);
+    try {
+      const msgPic = await setProfilePic(userData.uid, path);
+      SendAlert(AlertTypes.SUCCESS, msgPic);
     } catch (error) {
       SendAlert(AlertTypes.ERROR, error.message);
     }
@@ -67,7 +78,10 @@ export default function Settings({navigation}) {
         animation={'slide'}
         visible={modalTakePhoto}
         backgroundColor={'white'}>
-        <TakePhoto onClose={() => setModalTakePhoto(false)} />
+        <TakePhoto
+          onClose={() => setModalTakePhoto(false)}
+          onSubmit={changePic}
+        />
       </Modal>
       <View style={styles.titleContent}>
         <Text style={styles.textTitle}>Ajustes</Text>

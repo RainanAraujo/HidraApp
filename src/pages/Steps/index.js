@@ -82,7 +82,7 @@ export default function Steps({navigation}) {
   };
 
   const nextStep = async () => {
-    console.log(userData);
+    console.log(currentPhoto + ' - ');
     if (currentStep + 1 < steps.length && steps[currentStep].status) {
       let targetValue = (currentStep + 1) * screenWidth;
       Animated.timing(slideAnim, {
@@ -93,8 +93,10 @@ export default function Steps({navigation}) {
     } else if (currentStep + 1 == steps.length) {
       try {
         const msgData = await registerUserData(userData.uid, currentData);
+        SendAlert(AlertTypes.SUCCESS, msgData);
         const msgPic = await setProfilePic(userData.uid, currentPhoto);
-        SendAlert(AlertTypes.SUCCESS, msg);
+        SendAlert(AlertTypes.SUCCESS, msgPic);
+        navigation.replace('Home');
       } catch (error) {
         console.log(error + ' - error');
         SendAlert(AlertTypes.ERROR, error.message);

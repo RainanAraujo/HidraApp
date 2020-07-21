@@ -48,7 +48,6 @@ export const updateUserData = (userID, userData) => {
         resolve('Dados registrados com sucesso sucesso');
       })
       .catch((error) => {
-        console.log(error);
         return reject(new Error(CHANGE_DATA_ERROR));
       });
   });
@@ -64,8 +63,24 @@ export const registerUserData = (userID, userData) => {
         resolve('Dados registrados com sucesso sucesso');
       })
       .catch((error) => {
-        console.log(error);
         return reject(new Error(CHANGE_DATA_ERROR));
+      });
+  });
+};
+
+export const getAllUserData = () => {
+  return new Promise((resolve, reject) => {
+    firestore()
+      .collection('users')
+      .get()
+      .then((data) => {
+        const allUserData = data.docs.map((doc) => {
+          return {...doc.data(), uid: doc.id};
+        });
+        resolve(allUserData);
+      })
+      .catch((error) => {
+        return reject(new Error(LOAD_USER_DATA_ERROR));
       });
   });
 };

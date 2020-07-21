@@ -13,6 +13,7 @@ import Ripple from 'react-native-material-ripple';
 import {useSelector} from 'react-redux';
 import {SearchBar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/dist/Feather';
+import {getAllUserData} from '../../services/store';
 import {getProfilePic} from '../../services/storage';
 const DATA = [
   {
@@ -61,14 +62,15 @@ const DATA = [
     post: '#38B124',
   },
 ];
-
 export default function Members() {
   const [search, setSearch] = useState('');
-  const [dataSource, setDataSource] = useState(DATA);
+  const [dataSource, setDataSource] = useState([]);
+  const [data, setData] = useState([]);
   const userData = useSelector((state) => state.userData);
 
-  const SearchFilterFunction = (search) => {
-    const newData = DATA.filter(function (item) {
+  const searchFilterFunction = (search) => {
+    console.log(data);
+    const newData = data.filter(function (item) {
       const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
       const searchData = search.toUpperCase();
       return itemData.indexOf(searchData) > -1;
@@ -76,6 +78,20 @@ export default function Members() {
     setDataSource(newData);
     setSearch(search);
   };
+
+  useEffect(() => {
+    (async () => {
+      const allUserData = await Promise.all(
+        (await getAllUserData()).map(async (data) => ({
+          ...data,
+          pic: await getProfilePic(data.uid),
+        })),
+      );
+      console.log(allUserData);
+      setData(allUserData);
+      setDataSource(allUserData);
+    })();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -89,7 +105,7 @@ export default function Members() {
         <View style={styles.searchBar}>
           <SearchBar
             placeholder="Buscar Membro"
-            onChangeText={SearchFilterFunction}
+            onChangeText={searchFilterFunction}
             value={search}
             platform="android"
             round={true}
@@ -104,21 +120,10 @@ export default function Members() {
           <>
             <View style={styles.grid}>
               <View style={styles.avatar}>
-                <Avatar
-                  rounded
-                  source={{
-                    uri:
-                      'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
-                  }}
-                  size="medium"
-                />
+                <Avatar rounded source={{uri: item.pic}} size="medium" />
                 <View>
                   <Text style={styles.textName}>{item.name}</Text>
-                  <Text style={styles.textPersonalTitle}>
-                    {'<'}
-                    {item.personalTitle}
-                    {'>'}
-                  </Text>
+                  <Text style={styles.textPersonalTitle}>{item.class}</Text>
                 </View>
               </View>
 

@@ -141,11 +141,14 @@ export default function TakePhoto({onClose, onSubmit, onChange}) {
               onPress={onClose}
             />
           )}
-          {picture && (
+          {picture && onSubmit && (
             <Button
               style={styles.buttonContinue}
               text={'Confirmar'}
-              onPress={onClose}
+              onPress={() => {
+                onSubmit(photo.path);
+                onClose();
+              }}
             />
           )}
         </View>
