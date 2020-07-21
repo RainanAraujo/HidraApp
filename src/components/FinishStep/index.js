@@ -28,7 +28,6 @@ export default function FinishStep() {
             para finalizar o cadastro na Atlética HIDRA!
           </Text>
         </View>
-        <View></View>
       </View>
     </>
   );

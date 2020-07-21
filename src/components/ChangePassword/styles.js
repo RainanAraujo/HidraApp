@@ -66,8 +66,8 @@ export default styles = StyleSheet.create({
     letterSpacing: 0.15,
   },
   imageSendEmail: {
-    width: 67 * vw,
-    height: 35 * vh,
+    height: '50%',
+    aspectRatio: 0.99,
   },
   emailUser: {
     backgroundColor: '#2343A9',

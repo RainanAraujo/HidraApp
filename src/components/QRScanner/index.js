@@ -48,12 +48,8 @@ export default function QRScanner({onError, onClose}) {
         <View
           style={{
             position: 'absolute',
-            borderTopLeftRadius: (screenHeight - screenWidth) / 4,
-            borderTopRightRadius: (screenHeight - screenWidth) / 4,
-            height: (screenHeight - screenWidth) / 2,
-            aspectRatio: 2,
-            bottom: 0,
-            backgroundColor: 'white',
+            bottom: '2%',
+            width: '80%',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-around',
@@ -65,16 +61,16 @@ export default function QRScanner({onError, onClose}) {
                 : setFlash(RNCamera.Constants.FlashMode.off);
             }}>
             <View style={styles.flashButton}>
-              <Icon name={flash ? 'zap-off' : 'zap'} size={10 * vw} />
+              <Icon
+                name={flash ? 'zap-off' : 'zap'}
+                size={9 * vw}
+                color="#fff"
+              />
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onClose()}>
             <View style={styles.scanClose}>
-              <Icon
-                name={'x'}
-                color={styles.scanClose.borderColor}
-                size={10 * vw}
-              />
+              <Icon name={'x'} color="#fff" size={9 * vw} />
             </View>
           </TouchableOpacity>
         </View>

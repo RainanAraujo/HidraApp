@@ -2,16 +2,14 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
   scanClose: {
-    borderWidth: 2,
-    borderColor: 'red',
+    backgroundColor: '#FF4646',
     borderRadius: 99,
-    padding: 5,
+    padding: 10,
   },
   flashButton: {
-    borderWidth: 2,
-    borderColor: '#484D55',
+    backgroundColor: '#171818',
     borderRadius: 99,
-    padding: 5,
+    padding: 10,
   },
   userPopupContainer: {
     position: 'absolute',

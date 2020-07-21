@@ -22,7 +22,7 @@ export default function ChangePassword({visible, onClose}) {
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
         <Text style={styles.textTitle}>Altere sua Senha</Text>
-        <View style={{alignItems: 'center'}}>
+        <View style={{alignItems: 'center', justifyContent: 'center'}}>
           {send ? (
             <>
               <Icon name={'send'} size={80} color="#484D55" />

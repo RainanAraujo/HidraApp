@@ -23,7 +23,7 @@ export default styles = StyleSheet.create({
   },
   takePhoto: {
     backgroundColor: '#2343A9',
-    margin: '5%',
+    margin: '2%',
   },
   buttonContinue: {
     fontSize: 5 * vw,
@@ -96,7 +96,7 @@ export default styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Nunito-SemiBold',
   },
-  selectValery: {
+  selectGallery: {
     margin: '5%',
   },
   imagePhotoExample: {

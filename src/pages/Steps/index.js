@@ -112,7 +112,7 @@ export default function Steps({navigation}) {
           <Animated.View
             style={{
               width: steps.length * screenWidth,
-              height: 520,
+              height: '85%',
               translateX: slideAnim,
               flexDirection: 'row',
               justifyContent: 'flex-start',
