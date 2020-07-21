@@ -14,6 +14,7 @@ import {useSelector} from 'react-redux';
 import {SearchBar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import {getAllUserData} from '../../services/store';
+import {getPostStyle} from '../../utils/tools';
 import {getProfilePic} from '../../services/storage';
 const DATA = [
   {
@@ -123,25 +124,29 @@ export default function Members() {
                 <Avatar rounded source={{uri: item.pic}} size="medium" />
                 <View>
                   <Text style={styles.textName}>{item.name}</Text>
-                  <Text style={styles.textPersonalTitle}>{item.class}</Text>
+                  <Text style={styles.textPersonalTitle}>
+                    {item.personalTitle ? item.personalTitle : item.class}
+                  </Text>
                 </View>
               </View>
 
-              <Ripple
-                rippleCentered={true}
-                rippleOpacity={0.1}
-                style={{
-                  backgroundColor: item.post,
-                  padding: 10,
-                  borderRadius: 20,
-                }}
-                onPress={() =>
-                  Linking.openURL(
-                    'https://api.whatsapp.com/send?phone=55' + userData.contact,
-                  )
-                }>
-                <Icon name={'send'} color="#fff" />
-              </Ripple>
+              {item.contact && (
+                <Ripple
+                  rippleCentered={true}
+                  rippleOpacity={0.1}
+                  style={{
+                    backgroundColor: getPostStyle(item).color,
+                    padding: 10,
+                    borderRadius: 20,
+                  }}
+                  onPress={() =>
+                    Linking.openURL(
+                      'https://api.whatsapp.com/send?phone=55' + item.contact,
+                    )
+                  }>
+                  <Icon name={'send'} color="#fff" />
+                </Ripple>
+              )}
             </View>
           </>
         )}
