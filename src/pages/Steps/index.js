@@ -96,7 +96,7 @@ export default function Steps({navigation}) {
     } else if (currentStep + 1 == steps.length) {
       try {
         const picUrl = await setProfilePic(userData.uid, currentPhoto);
-        await updateUserData(userData.uid, {currentData, pic: picUrl});
+        await updateUserData(userData.uid, {...currentData, pic: picUrl});
         dispatch({
           type: 'SET_USER_DATA',
           data: await getUserData(userData.uid),

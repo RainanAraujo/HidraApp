@@ -37,7 +37,6 @@ export const getAllClasses = (course) => {
 
 export const getPostStyle = (user) => {
   var postStyle = {};
-  console.log(user.currentData);
   if (user.post == 'monitor') {
     postStyle.color = '#2D2C2B';
     postStyle.card = MonitorCard;
