@@ -13,7 +13,7 @@ export const getUserData = (userID) => {
       .get()
       .then((data) => {
         if (data.exists) {
-          resolve({...data.data(), uid: userID});
+          resolve({...data.data().currentData, uid: userID});
         } else {
           reject(new Error(NOT_FOUND_USER_ERROR));
         }

@@ -24,12 +24,10 @@ export default function Profile() {
   const [scanQRVisible, setScanQRVisible] = useState(false);
   const userData = useSelector((state) => state.userData);
   const [qrUserVisible, setQRUserVisible] = useState(false);
-  const [alert, setAlert] = useState({});
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <DropdownAlert closeInterval={1000} ref={(ref) => setAlert(ref)} />
       <Modal
         animation={'slide'}
         visible={scanQRVisible}
