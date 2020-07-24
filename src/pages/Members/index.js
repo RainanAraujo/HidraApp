@@ -36,12 +36,7 @@ export default function Members() {
 
   useEffect(() => {
     (async () => {
-      const allUserData = await Promise.all(
-        (await getAllUserData()).map(async (data) => ({
-          ...data,
-          pic: await getProfilePic(data.uid),
-        })),
-      );
+      const allUserData = await getAllUserData();
       console.log(allUserData);
       setData(allUserData);
       setDataSource(allUserData);
