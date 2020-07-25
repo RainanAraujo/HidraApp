@@ -21,8 +21,8 @@ import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 import {getAllClasses} from '../../utils/tools';
 
 export default function Profile() {
-  const [scanQRVisible, setScanQRVisible] = useState(false);
   const userData = useSelector((state) => state.userData);
+  const [scanQRVisible, setScanQRVisible] = useState(false);
   const [qrUserVisible, setQRUserVisible] = useState(false);
 
   return (

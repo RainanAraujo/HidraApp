@@ -14,8 +14,10 @@ import {SearchBar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import {getAllUserData} from '../../services/store';
 import {getPostStyle} from '../../utils/tools';
+import {useSelector} from 'react-redux';
 
 export default function Members() {
+  const userData = useSelector((state) => state.userData);
   const [search, setSearch] = useState('');
   const [dataSource, setDataSource] = useState([]);
   const [data, setData] = useState([]);
@@ -38,7 +40,7 @@ export default function Members() {
       setData(allUserData);
       setDataSource(allUserData);
     })();
-  }, []);
+  }, [userData]);
 
   return (
     <SafeAreaView style={styles.container}>
