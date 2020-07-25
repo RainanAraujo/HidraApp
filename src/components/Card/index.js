@@ -5,6 +5,14 @@ import {calculateAge, getPostStyle} from '../../utils/tools';
 import styles from './styles';
 
 export default function Card({user, onError}) {
+  function CourseUser(classType) {
+    if (classType.charAt(0) == 'C') {
+      return 'Ciência da Computação';
+    } else {
+      return 'Ciências Biológicas';
+    }
+  }
+
   return (
     Object.keys(user).length > 0 && (
       <View style={styles.card}>
@@ -24,13 +32,13 @@ export default function Card({user, onError}) {
             size={123}
           />
           <View style={styles.infoBox}>
-            <Text style={styles.nameText}>
-              {user.name + ' ' + user.lastName}
-            </Text>
+            <Text style={styles.nameText}>{user.name}</Text>
             <View style={styles.infoCardRow}>
               <View style={{flex: 2}}>
                 <Text style={styles.titleText}>Curso:</Text>
-                <Text style={styles.subTitleText}>{user.course}</Text>
+                <Text style={styles.subTitleText}>
+                  {CourseUser(user.class)}
+                </Text>
               </View>
               <View style={{flex: 1}}>
                 <Text style={styles.titleText}>Nascimento:</Text>
