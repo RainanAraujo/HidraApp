@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 10,
     alignItems: 'center',
+    justifyContent: 'center',
   },
 
   pricesContent: {
@@ -71,6 +72,15 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginBottom: 15,
     marginRight: 10,
+  },
+  avatarProfile: {
+    alignSelf: 'center',
+    borderRadius: 999,
+    height: '80%',
+    aspectRatio: 1,
+  },
+  textLoading: {
+    aspectRatio: 3,
   },
 });
 

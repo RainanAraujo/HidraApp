@@ -16,7 +16,6 @@ import Icon from 'react-native-vector-icons/dist/Feather';
 import {getAllUserData} from '../../services/store';
 import {getPostStyle} from '../../utils/tools';
 import {getProfilePic} from '../../services/storage';
-
 export default function Members() {
   const [search, setSearch] = useState('');
   const [dataSource, setDataSource] = useState([]);
@@ -39,6 +38,7 @@ export default function Members() {
       const allUserData = await getAllUserData();
       console.log(allUserData);
       setData(allUserData);
+
       setDataSource(allUserData);
     })();
   }, []);

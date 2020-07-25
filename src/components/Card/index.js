@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, ImageBackground} from 'react-native';
+import {Text, View, ImageBackground, Image} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {getProfilePic} from '../../services/storage';
 import {calculateAge, getPostStyle} from '../../utils/tools';
