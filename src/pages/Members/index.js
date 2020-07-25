@@ -10,17 +10,16 @@ import {
 import {Avatar, Divider} from 'react-native-elements';
 import styles from './styles';
 import Ripple from 'react-native-material-ripple';
-import {useSelector} from 'react-redux';
 import {SearchBar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import {getAllUserData} from '../../services/store';
 import {getPostStyle} from '../../utils/tools';
 import {getProfilePic} from '../../services/storage';
+
 export default function Members() {
   const [search, setSearch] = useState('');
   const [dataSource, setDataSource] = useState([]);
   const [data, setData] = useState([]);
-  const userData = useSelector((state) => state.userData);
 
   const searchFilterFunction = (search) => {
     console.log(data);
