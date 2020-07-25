@@ -17,7 +17,6 @@ import profileExemple from '../../assets/images/profileExemple.png';
 import {vw} from '../../utils/dimensions';
 
 export default function TakePhoto({onClose, onSubmit, onChange}) {
-  const [isStep, setIsStep] = useState(false);
   const [photo, setPhoto] = useState();
   const [picture, setPicture] = useState();
 

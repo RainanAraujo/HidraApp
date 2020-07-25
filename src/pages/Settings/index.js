@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/dist/Feather';
 import Contact from '../../components/Contact';
 import ToggleSwitch from 'toggle-switch-react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {getUserData, updateContact} from '../../services/store';
+import {getUserData, updateContact, updateUserData} from '../../services/store';
 import {setProfilePic} from '../../services/storage';
 import {signOut} from '../../services/auth';
 import {SendAlert, AlertTypes} from '../../components/Alert';
@@ -43,10 +43,12 @@ export default function Settings({navigation}) {
   };
 
   const changePic = async (path) => {
-    console.log(path);
     try {
-      const msgPic = await setProfilePic(userData.uid, path);
-      SendAlert(AlertTypes.SUCCESS, msgPic);
+      const url = await setProfilePic(userData.uid, path);
+      await updateUserData(userData.uid, {pic: url});
+      const newUserData = await getUserData(userData.uid);
+      dispatch({type: 'SET_USER_DATA', data: newUserData});
+      SendAlert(AlertTypes.SUCCESS, 'Foto de perfil alterado');
     } catch (error) {
       SendAlert(AlertTypes.ERROR, error.message);
     }
