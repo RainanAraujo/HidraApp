@@ -89,8 +89,13 @@ export default function Contact({onClose, onSave, contactValue}) {
             text={'Salvar'}
             style={styles.buttonSave}
             onPress={() => {
-              (!contact || contact.length == 11) &&
-                (onSave(contact), onClose());
+              if (!contact) {
+                onSave(null);
+                onClose();
+              } else if (contact.length == 11) {
+                onSave(contact);
+                onClose();
+              }
             }}
           />
         </View>

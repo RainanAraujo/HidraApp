@@ -22,22 +22,6 @@ export const getUserData = (userID) => {
   });
 };
 
-export const updateContact = (userID, newContact) => {
-  console.log(userID);
-  return new Promise((resolve, reject) => {
-    firestore()
-      .collection('users')
-      .doc(userID)
-      .update({contact: newContact})
-      .then(() => {
-        resolve('Contato adicionado com sucesso');
-      })
-      .catch((error) => {
-        return reject(new Error(CHANGE_DATA_ERROR));
-      });
-  });
-};
-
 export const updateUserData = (userID, userData) => {
   return new Promise((resolve, reject) => {
     firestore()

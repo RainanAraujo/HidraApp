@@ -10,11 +10,7 @@ import TakePhoto from '../../components/TakePhoto';
 import WelcomeStep from '../../components/WelcomeSteps';
 import FinishStep from '../../components/FinishStep';
 import StepsPoints from '../../components/StepsPoints';
-import {
-  registerUserData,
-  getUserData,
-  updateUserData,
-} from '../../services/store';
+import {getUserData, updateUserData} from '../../services/store';
 import {setProfilePic} from '../../services/storage';
 import {screenWidth, screenHeight} from '../../utils/dimensions';
 import Register from '../../components/Register';

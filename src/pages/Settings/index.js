@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/dist/Feather';
 import Contact from '../../components/Contact';
 import ToggleSwitch from 'toggle-switch-react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {getUserData, updateContact, updateUserData} from '../../services/store';
+import {getUserData, updateUserData} from '../../services/store';
 import {setProfilePic} from '../../services/storage';
 import {signOut} from '../../services/auth';
 import {SendAlert, AlertTypes} from '../../components/Alert';
@@ -30,12 +30,13 @@ export default function Settings({navigation}) {
   const [ToggleNotification, setToggleNotification] = useState(false);
 
   const changeContact = async (contact) => {
+    console.log(contact);
     try {
       SendAlert(
         AlertTypes.SUCCESS,
-        ...(await updateContact(userData.uid, contact)),
+        await updateUserData(userData.uid, {contact: contact}),
       );
-      const newUserData = await getUserData(uid);
+      const newUserData = await getUserData(userData.uid);
       dispatch({type: 'SET_USER_DATA', data: newUserData});
     } catch (error) {
       SendAlert(AlertTypes.ERROR, error.message);
