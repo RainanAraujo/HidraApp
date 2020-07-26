@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-
+import {screenHeight, screenWidth} from '../../utils/dimensions';
 export default styles = StyleSheet.create({
   modalContainer: {
     justifyContent: 'space-evenly',
@@ -7,8 +7,8 @@ export default styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    width: '90%',
-    height: '90%',
+    width: screenWidth - 40,
+    height: screenHeight - 60,
     borderRadius: 20,
     backgroundColor: '#fff',
     justifyContent: 'space-evenly',

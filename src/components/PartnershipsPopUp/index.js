@@ -11,6 +11,7 @@ import {
 import styles from './styles';
 import Button from '../Button';
 import Maps from '../../components/Maps';
+import {Avatar} from 'react-native-elements';
 export default function PhotoRequired({onPress, onClose}) {
   const [currentCoordinate, setCurrentCoordinate] = useState({
     latitude: 37.78825,
@@ -21,15 +22,26 @@ export default function PhotoRequired({onPress, onClose}) {
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
         <View style={styles.content}>
-          <Text style={styles.textTitle}>JR Cabelos</Text>
+          <View style={{alignItems: 'center'}}>
+            <Avatar
+              rounded
+              source={{
+                uri:
+                  'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
+              }}
+              size="large"
+            />
+            <Text style={styles.textTitle}>JR Cabelos - Cabeleleiro</Text>
+          </View>
+
           <Text style={styles.textSubTitle}>
-            Inforsaaaaaaaaaaaaaaaaaasmações
+            Desconto de 10% se der a bunda pro ADM
           </Text>
           <View>
             <Maps
               style={{
                 height: 400,
-                width: 300,
+                width: 320,
                 justifyContent: 'flex-end',
                 alignItems: 'center',
               }}

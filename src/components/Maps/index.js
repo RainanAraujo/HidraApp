@@ -24,10 +24,8 @@ export default function Maps({style}) {
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('permissão concedida');
         setHasLocationPermission(true);
       } else {
-        console.error('permissão negada');
         setHasLocationPermission(false);
       }
     } catch (err) {
@@ -44,14 +42,13 @@ export default function Maps({style}) {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
-          console.log({currentUserCoordinate});
         },
         (error) => {
           console.log(error.code, error.message);
         },
       );
     }
-  }, []);
+  }, [hasLocationPermission]);
 
   return (
     <>
@@ -75,7 +72,7 @@ export default function Maps({style}) {
               currentUserCoordinate.latitude -
                 currentDestinationCoordinate.latitude,
             ) *
-              0.1,
+              0.4,
           longitudeDelta:
             Math.abs(
               currentUserCoordinate.longitude -
@@ -85,7 +82,7 @@ export default function Maps({style}) {
               currentUserCoordinate.longitude -
                 currentDestinationCoordinate.longitude,
             ) *
-              0.1,
+              0.4,
         }}
         showsUserLocation
         loadingEnabled>
