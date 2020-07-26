@@ -22,10 +22,7 @@ export default function Profile() {
         backgroundColor={styles.statusBar.backgroundColor}
       />
       <View style={styles.titleContent}>
-        <Modal
-          animation={'slide'}
-          visible={false}
-          backgroundColor={'#C4C4C442'}>
+        <Modal animation={'slide'} visible={true} backgroundColor={'#C4C4C442'}>
           <PartnershipsPopUp />
         </Modal>
 

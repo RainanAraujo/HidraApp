@@ -38,14 +38,7 @@ export default function PhotoRequired({onPress, onClose}) {
             Desconto de 10% se der a bunda pro ADM
           </Text>
           <View>
-            <Maps
-              style={{
-                height: 400,
-                width: 320,
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-              }}
-            />
+            <Maps style={styles.maps} />
           </View>
 
           <Button
