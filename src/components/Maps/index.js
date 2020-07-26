@@ -7,8 +7,8 @@ export default function Maps({style}) {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyAcwr4_LgPkCGOEYlaUpLuEKpW4k6gfvU4';
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
   const [currentUserCoordinate, setCurrentUserCoordinate] = useState({
-    latitude: -0.0,
-    longitude: -0.0,
+    latitude: -4.8878324,
+    longitude: -44.887622,
   });
   const [
     currentDestinationCoordinate,

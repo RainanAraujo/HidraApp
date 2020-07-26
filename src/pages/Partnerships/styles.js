@@ -7,24 +7,19 @@ const styles = StyleSheet.create({
   },
   grid: {
     flexDirection: 'row',
-    marginHorizontal: 10,
-    marginBottom: 10,
-    height: 100,
-    width: 350,
+    marginTop: 10,
+    paddingVertical: 10,
+    width: '100%',
+    paddingHorizontal: 20,
     justifyContent: 'space-between',
     alignSelf: 'center',
     borderRadius: 10,
-    margin: 20,
     backgroundColor: 'white',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.25,
-    shadowRadius: 2.84,
-    elevation: 2,
   },
   avatar: {
     flexDirection: 'row',
-    marginLeft: 10,
+
     alignItems: 'center',
   },
   textInfo: {
@@ -44,9 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   pricesContent: {
-    alignSelf: 'flex-end',
-    marginRight: 10,
-    marginBottom: 10,
+    alignSelf: 'center',
   },
   statusBar: {
     backgroundColor: '#fff',
@@ -65,6 +58,23 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: 'flex-start',
     marginLeft: 20,
+  },
+  divider: {
+    backgroundColor: '#DBDBDB',
+    height: 1,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  textButtonMoreInfo: {
+    color: '#484D55',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 17,
+  },
+  buttonMoreInfo: {
+    width: '100%',
+    paddingVertical: 10,
+    alignItems: 'center',
+    marginBottom: 10,
   },
 });
 
