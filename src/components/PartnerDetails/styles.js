@@ -13,6 +13,11 @@ export default styles = StyleSheet.create({
     flex: 1,
   },
   content: {
+    height: 80 * vh,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  boxContainer: {
     width: 90 * vw,
     height: 80 * vh,
     marginTop: 8 * vh,
@@ -20,17 +25,12 @@ export default styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 10,
   },
   avatar: {
-    position: 'absolute',
-    zIndex: 1,
-    top: 6 * vh,
-    height: 16 * vh,
-    aspectRatio: 1,
     alignSelf: 'center',
   },
   textBox: {
-    marginTop: 8 * vh,
     height: '15%',
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
@@ -58,13 +58,13 @@ export default styles = StyleSheet.create({
 
   buttonCancel: {
     color: '#FF4646',
-    height: '10%',
+    height: '7%',
     width: '50%',
     margin: '2.5%',
   },
   maps: {
     width: 80 * vw,
     height: '60%',
-    alignItems: 'center',
+    alignSelf: 'center',
   },
 });
