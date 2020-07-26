@@ -44,16 +44,17 @@ export default styles = StyleSheet.create({
     fontFamily: 'Nunito-Regular',
     fontSize: 6 * vw,
     alignSelf: 'center',
+    justifyContent: 'center',
   },
   textSubTitle: {
     height: '60%',
-    textAlign: 'center',
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
     fontSize: 4 * vw,
     marginHorizontal: 5 * vw,
     letterSpacing: 0.15,
     lineHeight: 23,
+    textAlign: 'center',
   },
 
   buttonCancel: {
@@ -64,7 +65,7 @@ export default styles = StyleSheet.create({
   },
   maps: {
     width: 80 * vw,
-    height: '60%',
+    height: '40%',
     alignItems: 'center',
   },
 });

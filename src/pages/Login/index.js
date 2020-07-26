@@ -128,11 +128,15 @@ export default function Login({navigation}) {
         PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA) &&
         PermissionsAndroid.check(
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        ) &&
+        PermissionsAndroid.check(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         )
       ) {
         const response = PermissionsAndroid.requestMultiple([
           PermissionsAndroid.PERMISSIONS.CAMERA,
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         ]);
       }
     } catch (error) {

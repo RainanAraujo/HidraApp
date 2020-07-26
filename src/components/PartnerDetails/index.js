@@ -3,7 +3,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Modal,
+  Linking,
   TextInput,
   StatusBar,
   Image,
@@ -14,11 +14,14 @@ import Maps from '../../components/Maps';
 import {Avatar} from 'react-native-elements';
 import {vw, vh} from '../../utils/dimensions';
 
-export default function PartnerDetails({onPress, onClose}) {
+export default function PartnerDetails({onPress, onClose, partnerData}) {
   const [currentCoordinate, setCurrentCoordinate] = useState({
     latitude: 37.78825,
     longitude: -122.4324,
   });
+
+  console.log(partnerData);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -27,20 +30,35 @@ export default function PartnerDetails({onPress, onClose}) {
           <Avatar
             rounded
             source={{
-              uri:
-                'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
+              uri: partnerData.pic,
             }}
             size={16 * vh}
           />
         </View>
         <View style={styles.content}>
           <View style={styles.textBox}>
-            <Text style={styles.textTitle}>JR Cabelos - Cabeleireiro</Text>
+            <Text style={styles.textTitle}>{partnerData.name}</Text>
             <Text style={styles.textSubTitle}>
-              Desconto de 10% se der a bunda pro ADM
+              {partnerData.discountDescription}
             </Text>
           </View>
-          <Maps style={styles.maps} />
+          <Maps
+            destination={{
+              latitude: partnerData.location.latitude,
+              longitude: partnerData.location.longitude,
+            }}
+            style={styles.maps}
+          />
+          <Button
+            outlined
+            style={styles.buttonCancel}
+            onPress={() => {
+              Linking.openURL(
+                `geo:0,0?q=${partnerData.location.latitude}${partnerData.location.longitude}(${partnerData.name})`,
+              );
+            }}
+            text={'Maps'}
+          />
           <Button
             outlined
             style={styles.buttonCancel}

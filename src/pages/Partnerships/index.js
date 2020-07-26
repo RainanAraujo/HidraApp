@@ -14,7 +14,8 @@ import PartnerDetails from '../../components/PartnerDetails';
 import {getAllPartnerships} from '../../services/store';
 
 export default function Partnerships() {
-  const [isMoreInfo, setMoreInfo] = useState(false);
+  const [detailsVisible, setDetailsVisible] = useState(false);
+  const [detailsData, setDetailsData] = useState({});
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -33,9 +34,12 @@ export default function Partnerships() {
         <Modal
           notAnimateContent
           animation={'fade'}
-          visible={isMoreInfo}
+          visible={detailsVisible}
           backgroundColor={'#C4C4C442'}>
-          <PartnerDetails onClose={() => setMoreInfo(false)} />
+          <PartnerDetails
+            partnerData={detailsData}
+            onClose={() => setDetailsVisible(false)}
+          />
         </Modal>
         <Text style={styles.textTitle}>Parcerias</Text>
         <Text style={styles.textSubTitle}>
@@ -71,7 +75,10 @@ export default function Partnerships() {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => setMoreInfo(true)}
+              onPress={() => {
+                setDetailsData(item);
+                setDetailsVisible(true);
+              }}
               style={styles.buttonMoreInfo}>
               <Text style={styles.textButtonMoreInfo}> Mais Informações</Text>
             </TouchableOpacity>
