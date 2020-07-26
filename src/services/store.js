@@ -60,7 +60,7 @@ export const getAllPartnerships = () => {
       .collection('partnerships')
       .get()
       .then((data) => {
-        resolve(data.docs.map((doc) => doc.data()));
+        resolve(data.docs.map((item) => item.data()));
       })
       .catch((error) => {
         return reject(new Error(error.message));
