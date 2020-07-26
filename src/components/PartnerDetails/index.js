@@ -7,6 +7,7 @@ import {
   TextInput,
   StatusBar,
   Image,
+  ScrollView,
 } from 'react-native';
 import styles from './styles';
 import Button from '../Button';
@@ -26,39 +27,33 @@ export default function PartnerDetails({onPress, onClose, partnerData}) {
     <>
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
-        <View style={styles.avatar}>
-          <Avatar
-            rounded
-            source={{
-              uri: partnerData.pic,
-            }}
-            size={16 * vh}
-          />
-        </View>
-        <View style={styles.content}>
-          <View style={styles.textBox}>
-            <Text style={styles.textTitle}>{partnerData.name}</Text>
-            <Text style={styles.textSubTitle}>
-              {partnerData.discountDescription}
-            </Text>
-          </View>
-          <Maps
-            destination={{
-              latitude: partnerData.location.latitude,
-              longitude: partnerData.location.longitude,
-            }}
-            style={styles.maps}
-          />
-          <Button
-            outlined
-            style={styles.buttonCancel}
-            onPress={() => {
-              Linking.openURL(
-                `geo:0,0?q=${partnerData.location.latitude}${partnerData.location.longitude}(${partnerData.name})`,
-              );
-            }}
-            text={'Maps'}
-          />
+        <View style={styles.boxContainer}>
+          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+            <View style={styles.content}>
+              <View style={styles.avatar}>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: partnerData.pic,
+                  }}
+                  size={16 * vh}
+                />
+              </View>
+              <View style={styles.textBox}>
+                <Text style={styles.textTitle}>{partnerData.name}</Text>
+                <Text style={styles.textSubTitle}>
+                  {partnerData.discountDescription}
+                </Text>
+              </View>
+              <Maps
+                destination={{
+                  latitude: partnerData.location.latitude,
+                  longitude: partnerData.location.longitude,
+                }}
+                style={styles.maps}
+              />
+            </View>
+          </ScrollView>
           <Button
             outlined
             style={styles.buttonCancel}
