@@ -37,4 +37,10 @@ export default styles = StyleSheet.create({
     width: '46%',
     margin: 5,
   },
+  maps: {
+    aspectRatio: 0.7,
+    width: '80%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
 });

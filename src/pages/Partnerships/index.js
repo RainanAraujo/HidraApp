@@ -1,11 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import {Text, View, StatusBar, SafeAreaView, FlatList} from 'react-native';
-import {Avatar} from 'react-native-elements';
-import {getAllPartnerships} from '../../services/store';
+import React, {useState, useEffect} from 'react';
+import {
+  Text,
+  View,
+  StatusBar,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import {Avatar, Divider} from 'react-native-elements';
 import styles from './styles';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Modal} from '../../components/Modal';
+import PartnershipsPopUp from '../../components/PartnershipsPopUp';
+import {getAllPartnerships} from '../../services/store';
 
 export default function Partnerships() {
+  const [isMoreInfo, setMoreInfo] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -22,10 +31,10 @@ export default function Partnerships() {
       />
       <View style={styles.titleContent}>
         <Modal
-          animation={'slide'}
-          visible={false}
+          animation={'fade'}
+          visible={isMoreInfo}
           backgroundColor={'#C4C4C442'}>
-          <PartnershipsPopUp />
+          <PartnershipsPopUp onClose={() => setMoreInfo(false)} />
         </Modal>
 
         <Text style={styles.textTitle}>Parcerias</Text>
@@ -33,38 +42,40 @@ export default function Partnerships() {
           Confira as promoções de nossos parceiros.
         </Text>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          console.log(data);
-        }}>
-        <Text>TESTE</Text>
-      </TouchableOpacity>
       <FlatList
+        ItemSeparatorComponent={() => <Divider style={styles.divider} />}
         contentContainerStyle={{paddingTop: 20}}
         data={data}
         renderItem={({item}) => (
-          <View style={styles.grid}>
-            <View style={styles.avatar}>
-              <Avatar
-                rounded
-                source={{
-                  uri:
-                    'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
-                }}
-                size="large"
-              />
-              <View>
-                <Text style={styles.textInfo}>{item.name}</Text>
-                <Text style={styles.textInfo}>{item.neighborhood}</Text>
-                <Text style={styles.textInfo}>{item.road}</Text>
+          <>
+            <View style={styles.grid}>
+              <View style={styles.avatar}>
+                <Avatar
+                  rounded
+                  source={{
+                    uri:
+                      'https://cdn-istoe-ssl.akamaized.net/wp-content/uploads/sites/14/2019/09/nego-ney-2.jpg',
+                  }}
+                  size="large"
+                />
+                <View>
+                  <Text style={styles.textInfo}>{item.name}</Text>
+                  <Text style={styles.textInfo}>{item.neighborhood}</Text>
+                  <Text style={styles.textInfo}>{item.road}</Text>
+                </View>
               </View>
-            </View>
 
-            <View style={styles.pricesContent}>
-              <Text style={styles.textPriceBefore}> De R$ por</Text>
-              <Text style={styles.textPriceAfter}>R$</Text>
+              <View style={styles.pricesContent}>
+                <Text style={styles.textPriceBefore}> De R$ por</Text>
+                <Text style={styles.textPriceAfter}>R$</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => setMoreInfo(true)}
+                style={styles.buttonMoreInfo}>
+                <Text style={styles.textButtonMoreInfo}> Mais Informações</Text>
+              </TouchableOpacity>
             </View>
-          </View>
+          </>
         )}
         keyExtractor={(item) => item.name}
       />
