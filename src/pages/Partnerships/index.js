@@ -10,7 +10,7 @@ import {
 import {Avatar, Divider} from 'react-native-elements';
 import styles from './styles';
 import {Modal} from '../../components/Modal';
-import PartnershipsPopUp from '../../components/PartnershipsPopUp';
+import PartnerDetails from '../../components/PartnerDetails';
 import {getAllPartnerships} from '../../services/store';
 
 export default function Partnerships() {
@@ -31,12 +31,12 @@ export default function Partnerships() {
       />
       <View style={styles.titleContent}>
         <Modal
+          notAnimateContent
           animation={'fade'}
           visible={isMoreInfo}
           backgroundColor={'#C4C4C442'}>
-          <PartnershipsPopUp onClose={() => setMoreInfo(false)} />
+          <PartnerDetails onClose={() => setMoreInfo(false)} />
         </Modal>
-
         <Text style={styles.textTitle}>Parcerias</Text>
         <Text style={styles.textSubTitle}>
           Confira as promoções de nossos parceiros.
@@ -69,12 +69,12 @@ export default function Partnerships() {
                 <Text style={styles.textPriceBefore}> De R$ por</Text>
                 <Text style={styles.textPriceAfter}>R$</Text>
               </View>
-              <TouchableOpacity
-                onPress={() => setMoreInfo(true)}
-                style={styles.buttonMoreInfo}>
-                <Text style={styles.textButtonMoreInfo}> Mais Informações</Text>
-              </TouchableOpacity>
             </View>
+            <TouchableOpacity
+              onPress={() => setMoreInfo(true)}
+              style={styles.buttonMoreInfo}>
+              <Text style={styles.textButtonMoreInfo}> Mais Informações</Text>
+            </TouchableOpacity>
           </>
         )}
         keyExtractor={(item) => item.name}
