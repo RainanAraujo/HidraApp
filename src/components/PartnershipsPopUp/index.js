@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import Button from '../Button';
-import MapView, {Marker} from 'react-native-maps';
+import Maps from '../../components/Maps';
 export default function PhotoRequired({onPress, onClose}) {
   const [currentCoordinate, setCurrentCoordinate] = useState({
     latitude: 37.78825,
@@ -26,23 +26,14 @@ export default function PhotoRequired({onPress, onClose}) {
             Inforsaaaaaaaaaaaaaaaaaasmações
           </Text>
           <View>
-            <MapView
+            <Maps
               style={{
                 height: 400,
                 width: 300,
                 justifyContent: 'flex-end',
                 alignItems: 'center',
               }}
-              region={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0143,
-                longitudeDelta: 0.0134,
-              }}
-              showsUserLocation
-              loadingEnabled>
-              <Marker coordinate={currentCoordinate} title={'JR Cabelos'} />
-            </MapView>
+            />
           </View>
 
           <Button
