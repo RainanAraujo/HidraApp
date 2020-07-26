@@ -2,7 +2,8 @@ import React from 'react';
 import {Text, View, StatusBar, SafeAreaView, FlatList} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import styles from './styles';
-
+import {Modal} from '../../components/Modal';
+import PartnershipsPopUp from '../../components/PartnershipsPopUp';
 const DATA = [
   {
     name: 'JR Cabelos',
@@ -21,6 +22,10 @@ export default function Profile() {
         backgroundColor={styles.statusBar.backgroundColor}
       />
       <View style={styles.titleContent}>
+        <Modal animation={'slide'} visible={true} backgroundColor={'#C4C4C442'}>
+          <PartnershipsPopUp />
+        </Modal>
+
         <Text style={styles.textTitle}>Parcerias</Text>
         <Text style={styles.textSubTitle}>
           Confira as promoções de nossos parceiros.
