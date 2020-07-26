@@ -31,7 +31,7 @@ export default function PhotoRequired({onPress, onClose}) {
               }}
               size="large"
             />
-            <Text style={styles.textTitle}>JR Cabelos - Cabeleleiro</Text>
+            <Text style={styles.textTitle}>JR Cabelos - Cabeleireiro</Text>
           </View>
 
           <Text style={styles.textSubTitle}>

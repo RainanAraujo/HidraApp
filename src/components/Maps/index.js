@@ -85,7 +85,8 @@ export default function Maps({style}) {
               0.4,
         }}
         showsUserLocation
-        loadingEnabled>
+        loadingEnabled
+        loadingIndicatorColor={'#3251B2'}>
         <Marker
           coordinate={currentDestinationCoordinate}
           title={'JR Cabelos'}></Marker>
