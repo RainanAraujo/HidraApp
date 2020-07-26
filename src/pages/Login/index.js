@@ -162,11 +162,6 @@ export default function Login({navigation}) {
       </Modal>
       <CircleEffectBack style={styles.circleEffectBack} width={'100%'} />
       <View style={styles.loginContainer}>
-        <Button
-          text="Steps TESTE"
-          style={styles.buttonLogin}
-          onPress={() => navigation.navigate('Steps')}
-        />
         <Animated.Text
           style={{
             ...styles.textHeader,
@@ -179,6 +174,7 @@ export default function Login({navigation}) {
           Olá!
         </Animated.Text>
         <AppPresentation translateY={translateY} />
+        <View />
         <PanGestureHandler
           onGestureEvent={animatedEvent}
           onHandlerStateChange={onHandlerStateChange}

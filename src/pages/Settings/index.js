@@ -18,7 +18,7 @@ import {signOut} from '../../services/auth';
 import {SendAlert, AlertTypes} from '../../components/Alert';
 import {Modal} from '../../components/Modal';
 import styles from './styles';
-
+import PhotoRequired from '../../components/PhotoRequired';
 export default function Settings({navigation}) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
@@ -28,6 +28,7 @@ export default function Settings({navigation}) {
   const [modalTakePhoto, setModalTakePhoto] = useState(false);
   const [ToggleDarkMode, setToggleDarkMode] = useState(false);
   const [ToggleNotification, setToggleNotification] = useState(false);
+  const [isPhotoRequired, setPhotoRequired] = useState(false);
 
   const changeContact = async (contact) => {
     console.log(contact);
@@ -58,6 +59,13 @@ export default function Settings({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+
+      <Modal
+        animation={'slide'}
+        visible={isPhotoRequired}
+        backgroundColor={'white'}>
+        <PhotoRequired onPress={() => setPhotoRequired(false)} />
+      </Modal>
 
       <Modal
         animation={'slide'}

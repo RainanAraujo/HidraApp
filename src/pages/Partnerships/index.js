@@ -21,6 +21,13 @@ export default function Partnerships() {
         backgroundColor={styles.statusBar.backgroundColor}
       />
       <View style={styles.titleContent}>
+        <Modal
+          animation={'slide'}
+          visible={false}
+          backgroundColor={'#C4C4C442'}>
+          <PartnershipsPopUp />
+        </Modal>
+
         <Text style={styles.textTitle}>Parcerias</Text>
         <Text style={styles.textSubTitle}>
           Confira as promoções de nossos parceiros.
