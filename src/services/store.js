@@ -53,3 +53,17 @@ export const getAllUserData = () => {
       });
   });
 };
+
+export const getAllPartnerships = () => {
+  return new Promise((resolve, reject) => {
+    firestore()
+      .collection('partnerships')
+      .get()
+      .then((data) => {
+        resolve(data.docs.map((doc) => doc.data()));
+      })
+      .catch((error) => {
+        return reject(new Error(error.message));
+      });
+  });
+};

@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StatusBar, SafeAreaView, FlatList} from 'react-native';
 import {Avatar} from 'react-native-elements';
+import {getAllPartnerships} from '../../services/store';
 import styles from './styles';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const DATA = [
-  {
-    name: 'JR Cabelos',
-    neighborhood: 'Avenida Semfim',
-    road: 'Rua da dona Neide',
-    of: '15,00',
-    per: '10,00',
-  },
-];
+export default function Partnerships() {
+  const [data, setData] = useState([]);
 
-export default function Profile() {
+  useEffect(() => {
+    (async () => {
+      setData(await getAllPartnerships());
+    })();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -26,9 +26,15 @@ export default function Profile() {
           Confira as promoções de nossos parceiros.
         </Text>
       </View>
+      <TouchableOpacity
+        onPress={() => {
+          console.log(data);
+        }}>
+        <Text>TESTE</Text>
+      </TouchableOpacity>
       <FlatList
         contentContainerStyle={{paddingTop: 20}}
-        data={DATA}
+        data={data}
         renderItem={({item}) => (
           <View style={styles.grid}>
             <View style={styles.avatar}>
@@ -48,8 +54,8 @@ export default function Profile() {
             </View>
 
             <View style={styles.pricesContent}>
-              <Text style={styles.textPriceBefore}> De {item.of}R$ por</Text>
-              <Text style={styles.textPriceAfter}>{item.per}R$</Text>
+              <Text style={styles.textPriceBefore}> De R$ por</Text>
+              <Text style={styles.textPriceAfter}>R$</Text>
             </View>
           </View>
         )}
