@@ -28,7 +28,9 @@ export default function PartnerDetails({onPress, onClose, partnerData}) {
       <StatusBar barStyle="dark-content" />
       <View style={styles.modalContainer}>
         <View style={styles.boxContainer}>
-          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <ScrollView
+            contentContainerStyle={{flexGrow: 1}}
+            showsVerticalScrollIndicator={false}>
             <View style={styles.content}>
               <View style={styles.avatar}>
                 <Avatar
@@ -39,10 +41,12 @@ export default function PartnerDetails({onPress, onClose, partnerData}) {
                   size={16 * vh}
                 />
               </View>
+
               <View style={styles.textBox}>
                 <Text style={styles.textTitle}>{partnerData.name}</Text>
                 <Text style={styles.textSubTitle}>
-                  {partnerData.discountDescription}
+                  {partnerData.discountDescription +
+                    'asdasdasdasdasdasdaaaaaaaaaaaasdsssssssssas'}
                 </Text>
               </View>
               <Maps

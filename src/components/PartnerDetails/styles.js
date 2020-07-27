@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
   },
   content: {
     height: 80 * vh,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   boxContainer: {
@@ -31,15 +31,13 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textBox: {
-    height: '15%',
+    marginTop: 10,
+    marginBottom: 20,
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
     fontSize: 6 * vw,
-    justifyContent: 'center',
-    alignSelf: 'center',
   },
   textTitle: {
-    height: '40%',
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
     fontSize: 6 * vw,
@@ -47,7 +45,6 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textSubTitle: {
-    height: '60%',
     color: '#484D55',
     fontFamily: 'Nunito-Regular',
     fontSize: 4 * vw,
@@ -65,12 +62,8 @@ export default styles = StyleSheet.create({
   },
   maps: {
     width: 80 * vw,
-<<<<<<< HEAD
-    height: '40%',
     alignItems: 'center',
-=======
     height: '60%',
     alignSelf: 'center',
->>>>>>> 8f2c66c0626e6e33af5642ff1d259e13d226b087
   },
 });
